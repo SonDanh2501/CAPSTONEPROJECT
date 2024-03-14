@@ -19,9 +19,15 @@ const Home = () => {
 
   return (
     <>
-      <div >
+      <div className="w-full">
         <div>
           <LandingBanner></LandingBanner>
+        </div>
+        <div className="w-full my-10">
+          <FeaturePitch></FeaturePitch>
+        </div>
+        <div className="w-full my-10">
+          <DealDaily></DealDaily>
         </div>
         {/* <div className="flex flex-col gap-5 w-[30%] flex-auto">
           <Sidebar></Sidebar>
@@ -31,9 +37,7 @@ const Home = () => {
           <BestPrice></BestPrice>
         </div>
       </div>
-      <div className="w-main my-8">
-        <FeaturePitch></FeaturePitch>
-      </div>
+     
       <div className="w-full my-10">
       <DealDaily></DealDaily>
       </div>

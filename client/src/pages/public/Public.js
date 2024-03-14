@@ -23,7 +23,7 @@ const Public = () => {
       <div className="w-full  items-center flex-col">
         <Outlet></Outlet>
       </div>
-      {/* <Footer></Footer> */}
+       <Footer></Footer> 
     </div>
   );
 };
