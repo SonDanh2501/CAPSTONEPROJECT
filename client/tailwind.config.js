@@ -18,6 +18,8 @@ module.exports = {
         "dark-purple": "#081A51",
         "light-white": "rgba(255,255,255,0.18)",
         "login": "#061027",
+        "orange": "#F28123",
+        "header-bg": "#051922",
         "login-2": "#07386e"
       },
       flex: {

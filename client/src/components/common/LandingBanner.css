@@ -1,0 +1,23 @@
+.bg-banner {
+    height: 100%;
+    background-image: url("../../assets/landingbanner.png");
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+}
+
+
+.hero-area {
+    height: 100%;
+    position: relative;
+    z-index: 1;
+}
+
+.hero-area:after {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    content: "";
+    background-color: #07212e;
+    opacity: 0.6;
+}

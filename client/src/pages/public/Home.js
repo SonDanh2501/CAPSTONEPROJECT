@@ -6,6 +6,7 @@ import {
   DealDaily,
   FeaturePitch,
   CustomSlider,
+  LandingBanner,
   EventBanner,
   NewsCard,
 } from "../../components";
@@ -20,64 +21,20 @@ const Home = () => {
 
   return (
     <>
-      {/* <div className="w-main flex"> */}
-      {/* <div className="flex flex-col gap-5 w-[30%] flex-auto">
-          <Sidebar></Sidebar>
+      <div className="w-full">
+        <div>
+          <LandingBanner></LandingBanner>
+        </div>
+        <div className="w-full my-10">
+          <FeaturePitch></FeaturePitch>
+        </div>
+        <div className="w-full my-10">
           <DealDaily></DealDaily>
         </div>
-        <div className="flex flex-col gap-5 pl-5 w-[70%] flex-auto ">
-          <Banner></Banner>
-          <BestPrice></BestPrice>
+        <div className="flex flex-col gap-5 w-[30%] flex-auto">
+          <Sidebar></Sidebar>
         </div>
       </div>
-      <div className="w-main my-8">
-        <FeaturePitch></FeaturePitch>
-      </div>
-      <div className="my-8 w-main">
-        <h3 className="text-[20px] font-semibold py-[15px] border-b-2 border-blue-700">
-          NEW ARRIVALS
-        </h3>
-        <div className="mt-4 mx-[-10px]">
-          <CustomSlider pitches={newPitches}></CustomSlider>
-        </div>
-      </div>
-      <div className="my-8 w-main">
-        <h3 className="text-[20px] font-semibold py-[15px] border-b-2 border-blue-700">
-          HOT PITCHES
-        </h3>
-        <div className="flex flex-wrap gap-4 mt-4">
-          {categories
-            ?.filter((el) => el.brands.length > 0)
-            .map((el) => (
-              <div key={el._id} className="w-[680px]">
-                <div className="border flex">
-                  <img
-                    src={el?.thumb || defaultImage}
-                    alt="picture category"
-                    className="w-[250px] flex-1 h-[250px] object-cover"
-                  />
-                  <div className="flex-1 text-black-700">
-                    <h4 className="font-semibold uppercase ml-10 mt-3">
-                      {el.title}
-                    </h4>
-                    <ul className="text-sm mt-4 ml-4 ">
-                      {el?.brands?.slice(0, 9).map((item, index) => (
-                        <span key={index} className="flex gap-1 items-center">
-                          <IoIosArrowForward size={14} />
-                          <Link
-                            to={`/${el.title.toLowerCase()}/${item.toLowerCase()}`}
-                          >
-                            {item}
-                          </Link>
-                        </span>
-                      ))}
-                    </ul>
-                  </div>
-                </div>
-              </div>
-            ))}
-        </div>
-      </div> */}
 
       <div className="w-full bg-[#E7E4E4] h-full">
         <div className=" bg-red-200 w-main  h-96 ml-12 font-sans font-normal text-base tracking-tighter leading-relaxed text-blue-900 overflow-x-hidden">

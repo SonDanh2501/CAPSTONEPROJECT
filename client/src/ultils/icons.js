@@ -32,8 +32,13 @@ import {
   FaShieldAlt,
   FaCar,
   FaWifi,
+  FaArrowRight,
+  FaChevronRight,
+  FaBars,
 } from "react-icons/fa";
-
+import {
+  FaXmark
+} from "react-icons/fa6"
 import {
   AiFillHome,
   AiFillStar,
@@ -99,6 +104,10 @@ const icons = {
   AiOutlineSafety,
   IoFastFood,
   BsFillTelephoneFill,
+  FaArrowRight,
+  FaChevronRight ,
+  FaBars,
+  FaXmark
 };
 
 export default icons;
