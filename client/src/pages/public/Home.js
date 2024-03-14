@@ -6,6 +6,8 @@ import {
   DealDaily,
   FeaturePitch,
   CustomSlider,
+  EventBanner,
+  NewsCard,
 } from "../../components";
 import { useSelector } from "react-redux";
 import icons from "../../ultils/icons";
@@ -18,8 +20,8 @@ const Home = () => {
 
   return (
     <>
-      <div className="w-main flex">
-        <div className="flex flex-col gap-5 w-[30%] flex-auto">
+      {/* <div className="w-main flex"> */}
+      {/* <div className="flex flex-col gap-5 w-[30%] flex-auto">
           <Sidebar></Sidebar>
           <DealDaily></DealDaily>
         </div>
@@ -74,6 +76,18 @@ const Home = () => {
                 </div>
               </div>
             ))}
+        </div>
+      </div> */}
+
+      <div className="w-full bg-[#E7E4E4] h-full">
+        <div className=" bg-red-200 w-main  h-96 ml-12 font-sans font-normal text-base tracking-tighter leading-relaxed text-blue-900 overflow-x-hidden">
+          <EventBanner />
+        </div>
+        <h1 className="text-3xl font-bold flex items-center justify-center mb-4">
+          Our news
+        </h1>
+        <div className="flex items-center justify-center">
+          <NewsCard />
         </div>
       </div>
     </>

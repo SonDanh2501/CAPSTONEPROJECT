@@ -58,3 +58,9 @@ export { default as Barchart } from "./chart/Barchart";
 export { default as AreaChartMonth } from "./chart/AreaChartMonth";
 export { default as ChartPrice } from "./chart/ChartPrice";
 export { default as PiechartCategory } from "./chart/PiechartCategory";
+
+// Event
+export { default as EventBanner } from "./event/EventBanner";
+
+//News
+export { default as NewsCard } from "./news/NewsCard";
