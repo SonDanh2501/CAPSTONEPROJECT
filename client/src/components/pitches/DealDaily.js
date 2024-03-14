@@ -76,38 +76,42 @@ const DealDaily = () => {
   }, [second, minute, hour, expireTime]);
 
   return (
-    <div className="border w-full h-[1080px] flex flex-col gap-4">
-      <div>
-        <div className="flex items-center justify-between p-2 w-full">
-          <span className="flex-1 flex justify-center">
-            <AiFillStar size={20} color="blue"></AiFillStar>
-          </span>
-          <span className="flex-8 font-bold text-[20px] flex justify-center">
-            DEAL DAILY
-          </span>
-          <span className="flex-1"></span>
-        </div>
-        <div className="w-full flex flex-col items-center pt-8 px-4 gap-2">
+    <div className=" w-full h-[445px] bg-gray-100 flex items-center justify-center">
+      <div className="flex">
+        <div className="flex flex-col items-center pt-8 px-4 gap-2">
           <img
             src={dealdaily?.thumb || defaultt}
             alt=""
             className="w-full h-[200px] object-cover"
           ></img>
-          <span className="line-clamp-1 text-center">{dealdaily?.title}</span>
-          <span className="flex ">
-            {renderStarFromNumber(dealdaily?.totalRatings)?.map((el, index) => (
-              <span key={index}>{el}</span>
-            ))}
-          </span>
-          <span>{`${formatMoney(dealdaily?.price)} VNĐ`}</span>
         </div>
+      </div>
+      <div>
         <div className="px-4 mt-4">
+          <div className="flex flex-col">
+            <h3 className="text-[40px] font-semibold py-[5px] ">
+              <span className="text-indigo-500">Deal </span>
+              <span>of the month</span>
+            </h3>
+            <span className=" text-lg uppercase font-semibold">
+              {dealdaily?.title}
+            </span>
+            <span>{dealdaily?.address}</span>
+            {/* <span className="flex ">
+              {renderStarFromNumber(dealdaily?.totalRatings)?.map(
+                (el, index) => (
+                  <span key={index}>{el}</span>
+                )
+              )}
+            </span>
+            <span>{`${formatMoney(dealdaily?.price)} VNĐ`}</span> */}
+          </div>
           <div className="flex justify-center gap-2 items-center mb-6">
             <CountDown unit={"Hours"} number={hour}></CountDown>
             <CountDown unit={"Minutes"} number={minute}></CountDown>
             <CountDown unit={"Seconds"} number={second}></CountDown>
           </div>
-          <Button
+          {/* <Button
             type="button"
             handleOnClick={() =>
               navigate(
@@ -121,15 +125,8 @@ const DealDaily = () => {
           >
             <AiOutlineMenu></AiOutlineMenu>
             <span>Option</span>
-          </Button>
+          </Button> */}
         </div>
-      </div>
-      <div className="pt-4 ">
-        <ImageSlider
-          imageArray={imageArray}
-          intervalMinutes={0.03}
-          style="h-[546px]"
-        />
       </div>
     </div>
   );

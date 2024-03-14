@@ -71,7 +71,7 @@ const TopHeader = () => {
           <div
           >
             <span className="cursor-pointer hover:text-orange text-white"
-              onClick={() => dispatch(showOrder())}>
+              onClick={() => dispatch()}>
               <BsCart size={20} />
             </span>
           </div>

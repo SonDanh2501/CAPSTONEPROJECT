@@ -1,163 +1,95 @@
 import React, { memo } from "react";
 
-import { FaFacebookF, FaDiscord } from "react-icons/fa";
+import { FaFacebookF, FaDiscord, FaInstagram, FaYoutube,FaPaperPlane  } from "react-icons/fa";
 import { BiLogoGmail } from "react-icons/bi";
-
+import icons from "ultils/icons";
 import path from "ultils/path";
 import { useNavigate } from "react-router-dom";
+
+const { FaChevronRight } = icons;
+
 const Footer = () => {
   const navigate = useNavigate();
   return (
-    <div className="w-full">
-      <div className="h-[103px] w-full bg-blue-900 flex items-center justify-center">
-        <div className="w-main flex items-center justify-between">
-          <div className="flex flex-col flex-1">
-            <span className="text-[20px] text-gray-100">
-              SIGN UP TO BOOKING PITCHES
-            </span>
-            <small className="text-[13px] text-gray-300">
-              Receive weekly football news
-            </small>
-          </div>
-          <div className="text-3xl hover:text-yellow-500 transition duration-500 hover:scale-125 hover:-translate-x-5 cursor-pointer transform">
-            <a
-              href="https://www.facebook.com/profile.php?id=61554601046418"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              <div>
-                <FaFacebookF size={20}></FaFacebookF>
-              </div>
-            </a>
-          </div>
-        </div>
-      </div>
-      <div className="h-[250px] w-full bg-gray-800 flex items-center justify-center text-white text-[13px]">
-        <div className="w-main flex">
-          <div className="flex-2 flex flex-col gap-2">
-            <h3 className="mb-[20px] text-[15px] font-medium border-l-2 border-blue-900 pl-[15px]">
-              ABOUT US
-            </h3>
-            <span>
-              <span>Address: </span>
-              <span className="opacity-70">
-                <a
-                  href="https://www.google.com/maps/place/Tr%C6%B0%E1%BB%9Dng+%C4%90%E1%BA%A1i+h%E1%BB%8Dc+S%C6%B0+ph%E1%BA%A1m+K%E1%BB%B9+thu%E1%BA%ADt+Th%C3%A0nh+ph%E1%BB%91+H%E1%BB%93+Ch%C3%AD+Minh/@10.8506376,106.7670422,17z/data=!3m1!4b1!4m6!3m5!1s0x31752763f23816ab:0x282f711441b6916f!8m2!3d10.8506324!4d106.7719131!16s%2Fm%2F02pz17z?hl=vi-VN&entry=ttu"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  1 Vo Van Ngan Street, Thu Duc District
-                </a>
-              </span>
-            </span>
-            <span>
-              <span>Phone: </span>
-              <span className="opacity-70">(+84) 0909 0909 09</span>
-            </span>
-            <span>
-              <span>Mail: </span>
-              <span className="opacity-70">debugboy@gmail.com</span>
-            </span>
-            <div className="flex gap-4">
-              <a
-                href="https://www.facebook.com/profile.php?id=61554601046418"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <div className="h-[50px] w-[50px] bg-[#3d3c3c] rounded-md  flex items-center justify-center text-white">
-                  <FaFacebookF size={20}></FaFacebookF>
-                </div>
-              </a>
-              <a
-                href="https://discord.gg/wHRUjCBt"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <div className="h-[50px] w-[50px] bg-[#3d3c3c] rounded-md flex items-center justify-center text-white">
-                  <FaDiscord size={18}></FaDiscord>
-                </div>
-              </a>
-
-              <a
-                href="mailto:debugboy@gmail.com"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <div className="h-[50px] w-[50px] bg-[#3d3c3c] rounded-md flex items-center justify-center text-white">
-                  <BiLogoGmail size={18}></BiLogoGmail>
-                </div>
-              </a>
-            </div>
-          </div>
-          <div className="flex-1 flex flex-col gap-2">
-            <h3 className="mb-[20px] text-[15px] font-medium border-l-2 border-blue-900 pl-[15px]">
-              INFORMATION
-            </h3>
-            <span
-              className="cursor-pointer"
-              onClick={() => navigate(`/${path.PITCHES}`)}
-            >
-              Gallery
-            </span>
-            {/* <span className="cursor-pointer">Store Location</span> */}
-            <span
-              className="cursor-pointer"
-              onClick={() => {
-                navigate(`/${path.HOME}`);
-                window.scrollTo(350, 350);
-              }}
-            >
-              Today's Deals
-            </span>
-          </div>
-          <div className="flex-1 flex flex-col gap-2">
-            <h3 className="mb-[20px] text-[15px] font-medium border-l-2 border-blue-900 pl-[15px]">
-              WHO WE ARE
-            </h3>
-            {/* <span
-              className="cursor-pointer"
-              onClick={() => navigate(`/${path.FAQ}`)}
-            >
-              Help
-            </span> */}
-            <span
-              className="cursor-pointer"
-              onClick={() => {
-                window.scrollTo(0, 0);
-                navigate(`/${path.FAQ}`);
-              }}
-            >
-              FAQs
-            </span>
-            <span
-              className="cursor-pointer"
-              onClick={() => {
-                window.scrollTo(850, 850);
-                navigate(`/${path.FAQ}`);
-              }}
-            >
-              Contact
-            </span>
-          </div>
-          <div className="flex-1">
-            <h3 className="mb-[20px] text-[15px] font-medium border-l-2 border-blue-900 pl-[15px]">
-              #BOOKINGPITCHESWEBSITE
-            </h3>
-            <p className="text-justify">
-              Welcome to BookingPitches Website. We are passionate about
-              providing a seamless and enjoyable experience for all football
-              enthusiasts. Our state-of-the-art facilities and user-friendly
-              platform make it easy for you to reserve the perfect pitch for
-              your game.
+   <>
+    <div className="p-10 bg-gradient-to-r from-gray-900 to-blue-900 text-gray-200 w-full">
+      <div className="max-w-7xl mx-auto">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-2">
+          <div className="mb-5">
+            <h4 className="text-2xl pb-4">Company</h4>
+            <p className="text-gray-500">
+              1 Vo Van Ngan <br />
+              Viet Nam <br />
+              <br />
+              <strong>Phone:</strong> +84 0837440017 <br />
+              <strong>Email:</strong> sondanhwork2501@gmail.com
+              <br />
             </p>
-            <p className="mt-2 text-justify">
-              Get in touch with us for any inquiries or assistance. We're here
-              to enhance your football experience!
-            </p>
+          </div>
+          <div className="mb-5">
+            <h4 className="text-2xl pb-4">Pages</h4>
+            <ul className="text-gray-500">
+              <li className="pb-2 flex items-center gap-1">
+                <FaChevronRight className="text-blue-500"/>
+                <a href="#" className="hover:text-blue-500/50 duration-300">Home</a>
+              </li>
+              <li className="pb-2 flex items-center gap-1">
+                <FaChevronRight className="text-blue-500"/>
+                <a href="#" className="hover:text-blue-500/50 duration-300">FAQs</a>
+              </li>
+              <li className="pb-2 flex items-center gap-1">
+                <FaChevronRight className="text-blue-500"/>
+                <a href="#" className="hover:text-blue-500/50 duration-300">Privacy policy</a>
+              </li>
+            </ul>
+          </div>
+          <div className="mb-5">
+            <h4 className="text-2xl pb-4">Our Services</h4>
+            <ul className="text-gray-500">
+            <li className="pb-2 flex items-center gap-1">
+                <FaChevronRight className="text-blue-500"/>
+                <a href="#" className="hover:text-blue-500/50 duration-300">Booking Pitches</a>
+              </li>
+              <li className="pb-2 flex items-center gap-1">
+                <FaChevronRight className="text-blue-500"/>
+                <a href="#" className="hover:text-blue-500/50 duration-300">News</a>
+              </li>
+            </ul>
+          </div>
+          <div className="mb-5">
+            <h4 className="pb-4">Join with our community</h4>
+            <p className="text-gray-500 pb-2">Join and never miss sport news and booking pitches to play</p>
+            <form className="flex gap-1">
+              <input type="text" className="text-white focus:border-white bg-gray-700 rounded-md border-white outline-none" placeholder="email@example.com"></input>
+              <button className="bg-blue-500 text-white hover:bg-blue-700 rounded-md px-5 py-2"><FaPaperPlane /></button>
+            </form>
           </div>
         </div>
       </div>
     </div>
+    <div className="w-full bg-gradient-to-r from-gray-900 to-blue-900 text-gray-500 px-10 border-t-2 border-gray-400">
+      <div className="max-w-7xl flex flex-col md:flex-row py-4 mx-auto justify-between items-center gap-4">
+        <div className="text-center">
+          <div>
+            Copyright <strong><span>company</span></strong>. All Rights Reserve
+          </div>
+          <div className="flex gap-1">
+            Designed by:
+            <span className="text-blue-500">Danh Truong Son,</span>
+            <span className="text-blue-600">Dang Thanh Tuyen,</span>
+            <span className="text-blue-700">Dang Phuoc Truong Tai</span>
+
+          </div>
+        </div>
+        <div className="text-center flex">
+          <a href="#" className="w-10 h-10 flex items-center justify-center rounded-full bg-blue-500 hover:bg-blue-700 mx-1 text-white transition duration-300 hover:scale-125 cursor-pointer transform"><FaFacebookF/></a>
+          <a href="#" className="w-10 h-10 flex items-center justify-center rounded-full bg-gray-500 hover:bg-gray-700 mx-1 text-white transition duration-500 hover:scale-125 cursor-pointer transform"><FaDiscord/></a>
+          <a href="#" className="w-10 h-10 flex items-center justify-center rounded-full bg-pink-600 hover:bg-pink-700 mx-1 text-white transition duration-500 hover:scale-125 cursor-pointer transform"><FaInstagram/></a>
+          <a href="#" className="w-10 h-10 flex items-center justify-center rounded-full bg-red-600 hover:bg-red-700 mx-1 text-white transition duration-500 hover:scale-125 cursor-pointer transform"><FaYoutube/></a>
+        </div>
+      </div>
+    </div>
+    </>
   );
 };
 
