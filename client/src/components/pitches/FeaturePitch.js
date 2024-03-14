@@ -11,7 +11,7 @@ const FeaturePitch = () => {
 
   const fetchPitches = async () => {
     const response = await apiGetPitches({
-      limit: 6,
+      limit: 3, // number of pitches maximum to display
       totalRatings: 5,
       page: Math.round(Math.random() * 1),
     });
@@ -23,10 +23,13 @@ const FeaturePitch = () => {
 
   return (
     <div className="w-full">
-      <h3 className="text-[20px] font-semibold py-[15px] border-b-2 border-blue-700">
-        FEATURED PITCHES
+      <h3 className="text-[40px] font-semibold py-[15px] text-center">
+        <span className="text-indigo-500">Our</span>
+        <span> P</span>
+        <span className="border-b-2 border-indigo-500">ro</span>
+        <span>ducts</span>
       </h3>
-      <div className="flex flex-wrap mt-[15px] mx-[-20px]">
+      <div className="flex flex-col lg:flex-row mt-[15px] justify-center items-center gap-20 "> 
         {pitches?.map((el) => (
           <PitchCard
             key={el._id}
@@ -40,7 +43,7 @@ const FeaturePitch = () => {
           ></PitchCard>
         ))}
       </div>
-      <div className="flex justify-between">
+      {/* <div className="flex justify-between">
         <img src={banner5} className="w-[40%] h-[380px]"></img>
 
         <div className="flex flex-col justify-between h-full w-[24%]">
@@ -51,7 +54,7 @@ const FeaturePitch = () => {
           ></img>
         </div>
         <img src={banner6} className="w-[35%] h-[380px]"></img>
-      </div>
+      </div> */}
     </div>
   );
 };

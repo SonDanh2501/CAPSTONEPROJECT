@@ -21,7 +21,6 @@ const Home = () => {
       <div className="w-main flex">
         <div className="flex flex-col gap-5 w-[30%] flex-auto">
           <Sidebar></Sidebar>
-          <DealDaily></DealDaily>
         </div>
         <div className="flex flex-col gap-5 pl-5 w-[70%] flex-auto ">
           <Banner></Banner>
@@ -30,6 +29,9 @@ const Home = () => {
       </div>
       <div className="w-main my-8">
         <FeaturePitch></FeaturePitch>
+      </div>
+      <div className="w-full my-10">
+      <DealDaily></DealDaily>
       </div>
       <div className="my-8 w-main">
         <h3 className="text-[20px] font-semibold py-[15px] border-b-2 border-blue-700">
