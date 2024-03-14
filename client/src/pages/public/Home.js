@@ -6,6 +6,7 @@ import {
   DealDaily,
   FeaturePitch,
   CustomSlider,
+  LandingBanner,
 } from "../../components";
 import { useSelector } from "react-redux";
 import icons from "../../ultils/icons";
@@ -18,8 +19,11 @@ const Home = () => {
 
   return (
     <>
-      <div className="w-main flex">
-        <div className="flex flex-col gap-5 w-[30%] flex-auto">
+      <div >
+        <div>
+          <LandingBanner></LandingBanner>
+        </div>
+        {/* <div className="flex flex-col gap-5 w-[30%] flex-auto">
           <Sidebar></Sidebar>
           <DealDaily></DealDaily>
         </div>
@@ -74,7 +78,7 @@ const Home = () => {
                 </div>
               </div>
             ))}
-        </div>
+        </div> */}
       </div>
     </>
   );
