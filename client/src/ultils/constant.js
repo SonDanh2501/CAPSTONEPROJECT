@@ -12,19 +12,19 @@ export const navigation = [
     value: "PITCHES",
     path: `/${path.PITCHES}`,
   },
-  // {
-  //     id: 3,
-  //     value: 'BLOGS',
-  //     path: `/${path.BLOGS}`
-  // },
-  // {
-  //     id: 4,
-  //     value: 'OUR SERVICES',
-  //     path: `/${path.OUR_SERVICE}`
-  // },
   {
     id: 3,
     value: "FAQs",
+    path: `/${path.FAQ}`,
+  },
+  {
+    id: 4,
+    value: "NEWS",
+    path: `/${path.FAQ}`,
+  },
+  {
+    id: 5,
+    value: "CONTACT",
     path: `/${path.FAQ}`,
   },
 ];
