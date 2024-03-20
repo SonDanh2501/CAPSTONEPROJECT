@@ -13,7 +13,7 @@ export { default as Paypal } from "./common/Paypal";
 export { default as Congratulation } from "./common/Congratulation";
 export { default as Map } from "./common/Map";
 export { default as BrandRating } from "./common/BrandRating";
-export {default as LandingBanner} from "./common/LandingBanner"
+export { default as LandingBanner } from "./common/LandingBanner";
 // Pitches
 export { default as BestPrice } from "./pitches/BestPrice";
 export { default as Pitch } from "./pitches/Pitch";
@@ -59,3 +59,10 @@ export { default as Barchart } from "./chart/Barchart";
 export { default as AreaChartMonth } from "./chart/AreaChartMonth";
 export { default as ChartPrice } from "./chart/ChartPrice";
 export { default as PiechartCategory } from "./chart/PiechartCategory";
+
+// Event
+export { default as EventBanner } from "./event/EventBanner";
+
+//News
+export { default as NewsCard } from "./news/NewsCard";
+export { default as News } from "./news/News";

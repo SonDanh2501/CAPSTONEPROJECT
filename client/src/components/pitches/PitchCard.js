@@ -5,7 +5,7 @@ import { renderStarFromNumber } from "ultils/helper";
 import icons from "ultils/icons";
 import SelectOption from "components/search/SelectOption";
 
-const {  BsFillSuitHeartFill,AiFillEye,FaArrowRight } = icons;
+const { BsFillSuitHeartFill, AiFillEye, FaArrowRight } = icons;
 
 const PitchCard = ({
   price,
@@ -89,7 +89,9 @@ const PitchCard = ({
             }
           >
             <span className="relative">View details</span>
-            <span className="relative"><FaArrowRight/></span>
+            <span className="relative">
+              <FaArrowRight />
+            </span>
           </button>
           <button
             className="relative flex flex-grow items-center justify-center rounded-3xl

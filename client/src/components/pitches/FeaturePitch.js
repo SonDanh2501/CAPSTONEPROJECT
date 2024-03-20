@@ -20,7 +20,7 @@ const FeaturePitch = () => {
           slidesToShow: 2,
           slidesToScroll: 1,
           initialSlide: 0,
-        }
+        },
       },
       {
         breakpoint: 800,
@@ -30,7 +30,7 @@ const FeaturePitch = () => {
           slidesToShow: 1,
           slidesToScroll: 1,
           initialSlide: 0,
-        }
+        },
       },
     ],
   };
@@ -56,6 +56,7 @@ const FeaturePitch = () => {
         <span className="border-b-2 border-indigo-500">ro</span>
         <span>ducts</span>
       </h3>
+
       <div className="w-3/4	m-auto">
         <Slider className="custom-slider" {...settings}>
           {pitches?.map((el) => (
@@ -71,8 +72,7 @@ const FeaturePitch = () => {
             ></PitchCard>
           ))}
         </Slider>
-      </div>
-      {/* <div className="flex justify-between">
+        {/* <div className="flex justify-between">
         <img src={banner5} className="w-[40%] h-[380px]"></img>
 
         <div className="flex flex-col justify-between h-full w-[24%]">
@@ -84,6 +84,7 @@ const FeaturePitch = () => {
         </div>
         <img src={banner6} className="w-[35%] h-[380px]"></img>
       </div> */}
+      </div>
     </div>
   );
 };
