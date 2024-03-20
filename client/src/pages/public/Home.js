@@ -8,7 +8,7 @@ import {
   CustomSlider,
   LandingBanner,
   EventBanner,
-  NewsCard,
+  News,
 } from "../../components";
 import { useSelector } from "react-redux";
 import icons from "../../ultils/icons";
@@ -31,21 +31,25 @@ const Home = () => {
         <div className="w-full my-10">
           <DealDaily></DealDaily>
         </div>
-        <div className="flex flex-col gap-5 w-[30%] flex-auto">
+        {/* <div className="flex flex-col gap-5 w-[30%] flex-auto">
           <Sidebar></Sidebar>
-        </div>
+        </div> */}
       </div>
 
-      <div className="w-full bg-[#E7E4E4] h-full">
-        <div className=" bg-red-200 w-main  h-96 ml-12 font-sans font-normal text-base tracking-tighter leading-relaxed text-blue-900 overflow-x-hidden">
+      <div className="w-full bg-[#E7E4E4]">
+        <div className="  ">
           <EventBanner />
         </div>
-        <h1 className="text-3xl font-bold flex items-center justify-center mb-4">
-          Our news
-        </h1>
-        <div className="flex items-center justify-center">
-          <NewsCard />
+        <h3 className="text-[40px] font-semibold py-[15px] text-center">
+          <span className="text-indigo-500">Ou</span>
+          <span className="border-b-2 text-indigo-500">r</span>
+          <span className="border-b-2 border-indigo-500"> N</span>
+          <span>ews</span>
+        </h3>
+        <div className="flex items-center justify-center mb-8 mt-8">
+          <News />
         </div>
+        <div className="h-[500px]"></div>
       </div>
     </>
   );
