@@ -6,7 +6,7 @@ module.exports = {
   ],
   theme: {
     fontFamily: {
-      main: ['Poppins', 'sans-serif;']
+      main: ['Poppins', 'Liberation Mono']
     },
     extend: {
       width: {

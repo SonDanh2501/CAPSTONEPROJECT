@@ -10,6 +10,8 @@ import path from "ultils/path";
 import { navigation } from "ultils/constant";
 import { NavLink } from "react-router-dom";
 import avatar from "assets/avatarwhite.jpg";
+import { showOrder } from "store/app/appSlice";
+
 
 const { AiOutlineLogout } = icons;
 const { BsCart } = icons;
@@ -71,7 +73,7 @@ const TopHeader = () => {
           <div
           >
             <span className="cursor-pointer hover:text-orange text-white"
-              onClick={() => dispatch()}>
+              onClick={() => dispatch(showOrder())}>
               <BsCart size={20} />
             </span>
           </div>

@@ -19,7 +19,7 @@ const PitchCard = ({
   const navigate = useNavigate();
 
   return (
-    <div className="bg-gradient-to-r from-white to-gray-100 text-gray-700 w-72 min-h-[10rem] shadow-lg rounded-md overflow-hidden border-2 hover:shadow-2xl hover:border-0 hover:shadow-gray-500 ">
+    <div className="bg-gradient-to-r from-white to-gray-100 text-gray-700  min-h-[10rem] shadow-lg rounded-md overflow-hidden border-2 hover:shadow-2xl hover:border-0 hover:shadow-gray-500">
       <img
         src={image}
         alt="pitches"
@@ -82,6 +82,11 @@ const PitchCard = ({
           hover:shadow-blue-400 
             hover:before:left-0 
             hover:before:w-full"
+            onClick={(e) =>
+              navigate(
+                `/${category.toLowerCase()}/${brand.toLowerCase()}/${pid}/${title}`
+              )
+            }
           >
             <span className="relative">View details</span>
             <span className="relative">

@@ -3,22 +3,26 @@
 @tailwind utilities;
 
 
+.custom-slider .slick-slide > div {
+    margin: 0 50px;
+}
+/* .custom-slider .slick-list {
+    margin: 0 -10px;
+} */
 .custom-slider button.slick-next {
-    right  : 70px;
-    z-index: 10;
+   margin: 0 10px;
 }
 
 .custom-slider button.slick-prev {
-    left   : 0px;
-    z-index: 10;
-}
+    margin: 0 -10px;
 
+}
 .custom-slider button.slick-next::before {
     color           : gray;
     content         : '\276F';
-    background-color: #b8b5b5;
-    width           : 80px;
-    height          : 80px;
+    /* background-color: #b8b5b5; */
+    width           : 30px;
+    height          : 50px;
     font-size       : 30px;
     display         : flex;
     justify-content : center;
@@ -28,22 +32,23 @@
 .custom-slider button.slick-prev::before {
     color           : gray;
     content         : '\276E';
-    background-color: #b8b5b5;
-    width           : 80px;
-    height          : 80px;
+    /* background-color: #b8b5b5; */
+    width           : 30px;
+    height          : 50px;
     font-size       : 30px;
     display         : flex;
     justify-content : center;
     align-items     : center;
 }
 
+/* .custom-slider Pic
 .image-slider button.slick-next {
-    right  : 20px;
+    right  : 50px;
     z-index: 10;
 }
 
 .image-slider button.slick-prev {
-    left   : 0px;
+    left   : 100px;
     z-index: 10;
 
 }
@@ -70,7 +75,7 @@
     display         : flex;
     justify-content : center;
     align-items     : center;
-}
+} */
 
 .my-masonry-grid_column>div {
     /* change div to reference your elements you put in <Masonry> */
