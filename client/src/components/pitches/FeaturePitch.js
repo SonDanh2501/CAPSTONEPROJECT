@@ -29,7 +29,7 @@ const FeaturePitch = () => {
         <span className="border-b-2 border-indigo-500">ro</span>
         <span>ducts</span>
       </h3>
-      <div className="flex flex-col lg:flex-row mt-[15px] justify-center items-center gap-20 "> 
+      <div className="flex flex-col lg:flex-row mt-[15px] justify-center items-center gap-20 ">
         {pitches?.map((el) => (
           <PitchCard
             key={el._id}
