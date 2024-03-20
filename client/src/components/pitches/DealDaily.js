@@ -16,7 +16,7 @@ import poster06 from "assets/poster06.jpg";
 import { useNavigate } from "react-router-dom";
 
 import Button from "components/buttons/Button";
-const { AiFillStar, AiOutlineMenu } = icons;
+const { AiFillStar, AiOutlineMenu, BsCart } = icons;
 let idInterval;
 const imageArray = [poster01, poster02, poster03, poster04, poster05, poster06];
 
@@ -76,15 +76,13 @@ const DealDaily = () => {
   }, [second, minute, hour, expireTime]);
 
   return (
-    <div className=" w-full h-[445px] bg-gray-100 flex items-center justify-center">
-      <div className="flex">
-        <div className="flex flex-col items-center pt-8 px-4 gap-2">
-          <img
-            src={dealdaily?.thumb || defaultt}
-            alt=""
-            className="w-full h-[200px] object-cover"
-          ></img>
-        </div>
+    <div className=" w-full h-[553px] bg-gray-200 flex items-center justify-center">
+      <div className="mr-3">
+        <img
+          src={dealdaily?.thumb || defaultt}
+          alt=""
+          className="w-[550px] h-[350px] object-fit rounded-2xl"
+        ></img>
       </div>
       <div>
         <div className="px-4 mt-4">
@@ -93,10 +91,10 @@ const DealDaily = () => {
               <span className="text-indigo-500">Deal </span>
               <span>of the month</span>
             </h3>
-            <span className=" text-lg uppercase font-semibold">
+            <span className=" text-lg uppercase font-semibold ">
               {dealdaily?.title}
             </span>
-            <span>{dealdaily?.address}</span>
+            <span className="py-2">{dealdaily?.address}</span>
             {/* <span className="flex ">
               {renderStarFromNumber(dealdaily?.totalRatings)?.map(
                 (el, index) => (
@@ -106,11 +104,40 @@ const DealDaily = () => {
             </span>
             <span>{`${formatMoney(dealdaily?.price)} VNĐ`}</span> */}
           </div>
-          <div className="flex justify-center gap-2 items-center mb-6">
+          <div className="flex gap-1 py-5">
             <CountDown unit={"Hours"} number={hour}></CountDown>
             <CountDown unit={"Minutes"} number={minute}></CountDown>
             <CountDown unit={"Seconds"} number={second}></CountDown>
           </div>
+          <button
+            className="flex 
+            items-center 
+          justify-center 
+          bg-indigo-500 
+          py-3 px-5 
+          rounded-3xl 
+          gap-2 
+          text-white 
+          shadow-lg
+          shadow-blue-500/50 
+          relative  
+            overflow-hidden  
+            transition-all
+            before:absolute 
+            before:h-0 
+            before:w-0 
+            before:rounded-full 
+           before:bg-red-500 
+           before:duration-500 
+           before:ease-out 
+           hover:shadow-red-400
+           hover:text-white
+           hover:before:h-56 
+           hover:before:w-56"
+          >
+            <BsCart className="relative"></BsCart>
+            <span className="relative">Check Now</span>
+          </button>
           {/* <Button
             type="button"
             handleOnClick={() =>
@@ -120,8 +147,7 @@ const DealDaily = () => {
                 }/${dealdaily?.title}`
               )
             }
-            style="flex w-full gap-2 items-center justify-center  bg-gradient-to-r from-blue-400 via-blue-500 to-blue-600 shadow-md
-                        shadow-indigo-800/100 hover:shadow-indigo-700/80 text-white font-medium py-2 rounded-md"
+            style="flex"
           >
             <AiOutlineMenu></AiOutlineMenu>
             <span>Option</span>
