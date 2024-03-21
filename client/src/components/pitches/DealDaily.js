@@ -76,7 +76,7 @@ const DealDaily = () => {
   }, [second, minute, hour, expireTime]);
 
   return (
-    <div className=" w-full h-[553px] bg-gray-200 flex items-center justify-center">
+    <div className=" w-full h-[553px] bg-gray-200 flex items-center justify-center dark:bg-medium">
       <div className="mr-3">
         <img
           src={dealdaily?.thumb || defaultt}
@@ -89,12 +89,12 @@ const DealDaily = () => {
           <div className="flex flex-col">
             <h3 className="text-[40px] font-semibold py-[5px] ">
               <span className="text-indigo-500">Deal </span>
-              <span>of the month</span>
+              <span className="dark:text-white">of the month</span>
             </h3>
-            <span className=" text-lg uppercase font-semibold ">
+            <span className=" text-lg uppercase font-semibold dark:text-white ">
               {dealdaily?.title}
             </span>
-            <span className="py-2">{dealdaily?.address}</span>
+            <span className="py-2 dark:text-white">{dealdaily?.address}</span>
             {/* <span className="flex ">
               {renderStarFromNumber(dealdaily?.totalRatings)?.map(
                 (el, index) => (
