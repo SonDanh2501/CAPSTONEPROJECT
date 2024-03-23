@@ -24,16 +24,14 @@ const DashboardOwner = () => {
   }, []);
   return (
     <div>
-      <div className="w-full flex flex-col items-center ">
-        <div></div>
-
-        <div className="flex-1 bg-gray-700">
+      <div className="w-full flex flex-col items-center bg-dash-board ">
+        <div className="flex-1 bg-white">
           <AreaChartMonth order={order} />
         </div>
-        <div className="flex-1 bg-gray-700">
+        <div className="flex-1 bg-white mt-5">
           <ChartPrice order={order} />
         </div>
-        <div>
+        <div className="mt-5">
           <span>Total Profit: </span>
           <span className="text-main text-3xl font-semibold">
             {formatMoney(

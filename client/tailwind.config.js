@@ -23,7 +23,13 @@ module.exports = {
         "login": "#061027",
         "orange": "#F28123",
         "header-bg": "#051922",
-        "login-2": "#07386e"
+        "login-2": "#07386e",
+        "dash-board": "#F1F5F9",
+        "io1": "#DBEAFE",
+        "io2": "#F3E8FF",
+        "io3": "#D2F4EE",
+        "io4": "#FEE2E2"
+
       },
       flex: {
         '2': '2 2 0%',

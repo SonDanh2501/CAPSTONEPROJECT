@@ -52,14 +52,10 @@ const ChartPrice = ({ order }) => {
         <CartesianGrid strokeDasharray="3 3" />
         <XAxis
           dataKey="month"
-          style={{
-            fill: "rgba(255,255,255)",
-          }}
+
         />
         <YAxis
-          style={{
-            fill: "rgba(255,255,255)",
-          }}
+
         />
         <Tooltip />
         <Legend />
