@@ -34,37 +34,50 @@ const Dashboard = () => {
   }, []);
 
   return (
-    <div className="w-full px-4 ">
-      <div>
-        <NewDashBoard />
+    <div className="w-full bg-dash-board px-4 ">
+      <div className="flex justify-center gap-8">
+        <div>
+          <NewDashBoard />
+          <div className="flex-1 mt-5 bg-white">
+            <AreaChartMonth order={order} />
+          </div>
+          <div className="flex-1 mt-3 bg-white">
+            <ChartPrice order={order} />
+          </div>
+        </div>
+        <div className="w-1/3 justify-center gap-10 py-2">
+          <div className=" bg-white mb-5">
+            <Piechart />
+          </div>
+          <div className=" bg-white">
+            <PiechartCategory />
+          </div>
+        </div>
       </div>
-      <div className="w-full flex items-center justify-center gap-2 py-2">
-        <div className="flex-1 bg-gray-700">
+      <div className=" bg-white">
+        <Barchart brand={brand} />
+      </div>
+      {/* <div className="w-full flex items-center justify-center gap-2 py-2">
+        <div className="flex-1 bg-white">
           <Piechart />
         </div>
-        <div className="flex-1 bg-gray-700">
+        <div className="flex-1 bg-white">
           <PiechartCategory />
         </div>
       </div>
       <div className="w-full flex items-center justify-center gap-2 py-2">
-        <div className="flex-1 bg-gray-700">
+        <div className="flex-1 bg-white">
           <AreaChartMonth order={order} />
         </div>
-        <div className="flex-1 bg-gray-700">
+        <div className="flex-1 bg-white">
           <ChartPrice order={order} />
         </div>
       </div>
-      <div className="w-full flex items-center justify-center py-2 bg-gray-700">
-        <Barchart brand={brand} />
-      </div>
-      <div className="flex justify-end items-center py-4">
-        <span className="font-bold mt-2 mr-2">Total Profit: </span>
-        <span className="text-main text-3xl font-semibold">
-          {formatMoney(
-            formatPrice(order?.reduce((sum, el) => sum + Number(el.total), 0))
-          ) + "VND"}
-        </span>
-      </div>
+      <div className="w-full flex items-center justify-center py-2">
+        <div className=" bg-white">
+          <Barchart brand={brand} />
+        </div>
+      </div> */}
     </div>
   );
 };
