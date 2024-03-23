@@ -4,6 +4,7 @@ module.exports = {
     "./src/**/*.{html,js}",
     "./public/index.html"
   ],
+  darkMode: 'class',
   theme: {
     fontFamily: {
       main: ['Poppins', 'Liberation Mono']
@@ -15,6 +16,8 @@ module.exports = {
       colors: {
         main: '#ee3131',
         overlay: 'rgba(0,0,0,0.7)',
+        "dark": '#232A3C',
+        "medium": '#293245',
         "dark-purple": "#081A51",
         "light-white": "rgba(255,255,255,0.18)",
         "login": "#061027",
