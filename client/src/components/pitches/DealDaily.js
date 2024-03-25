@@ -76,27 +76,26 @@ const DealDaily = () => {
   }, [second, minute, hour, expireTime]);
 
   return (
-    <div className=" w-full h-[564px] bg-gray-200 flex items-center justify-center">
-      <div className="flex flex-col md:flex-row">
-        <div className="flex flex-col items-center md:items-start pt-8 px-5 gap-2 ">
-          <img
-            src={dealdaily?.thumb || defaultt}
-            alt=""
-            className="w-[432px] h-[200px] object-cover lg:h-[350px]"
-          ></img>
-        </div>
-        <div>
-          <div className="px-4 mt-4">
-            <div className="flex flex-col">
-              <h3 className="text-[40px] font-semibold py-[5px] ">
-                <span className="text-indigo-500">Deal </span>
-                <span>of the month</span>
-              </h3>
-              <span className=" text-lg uppercase font-semibold ">
-                {dealdaily?.title}
-              </span>
-              <span className="py-2">{dealdaily?.address}</span>
-              {/* <span className="flex ">
+    <div className=" w-full h-[553px] bg-gray-200 flex items-center justify-center dark:bg-medium">
+      <div className="mr-3">
+        <img
+          src={dealdaily?.thumb || defaultt}
+          alt=""
+          className="w-[550px] h-[350px] object-fit rounded-2xl"
+        ></img>
+      </div>
+      <div>
+        <div className="px-4 mt-4">
+          <div className="flex flex-col">
+            <h3 className="text-[40px] font-semibold py-[5px] ">
+              <span className="text-indigo-500">Deal </span>
+              <span className="dark:text-white">of the month</span>
+            </h3>
+            <span className=" text-lg uppercase font-semibold dark:text-white ">
+              {dealdaily?.title}
+            </span>
+            <span className="py-2 dark:text-white">{dealdaily?.address}</span>
+            {/* <span className="flex ">
               {renderStarFromNumber(dealdaily?.totalRatings)?.map(
                 (el, index) => (
                   <span key={index}>{el}</span>
@@ -156,7 +155,6 @@ const DealDaily = () => {
           </div>
         </div>
       </div>
-    </div>
   );
 };
 

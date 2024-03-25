@@ -14,7 +14,7 @@ const Barchart = ({ brand }) => {
   return (
     <div>
       <div className="w-full">
-        <ResponsiveContainer width={1210} height={400}>
+        <ResponsiveContainer width={1500} height={400}>
           <BarChart
             width={100}
             height={40}
@@ -29,15 +29,12 @@ const Barchart = ({ brand }) => {
             <XAxis
               dataKey="title"
               style={{
-                fontSize: "0.45rem",
-                fill: "rgba(255,255,255)",
+                fontSize: "0.6rem",
               }}
             />
             <YAxis
               dataKey="totalPitch"
-              style={{
-                fill: "rgba(255,255,255)",
-              }}
+
             />
             <Bar dataKey={"totalPitch"} fill="#8884d8" />
             <Tooltip />

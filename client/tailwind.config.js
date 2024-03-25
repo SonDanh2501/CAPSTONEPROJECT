@@ -4,6 +4,7 @@ module.exports = {
     "./src/**/*.{html,js}",
     "./public/index.html"
   ],
+  darkMode: 'class',
   theme: {
     fontFamily: {
       main: ['Segoe UI Symbol']
@@ -14,13 +15,21 @@ module.exports = {
       },
       colors: {
         main: '#ee3131',
-        overlay: 'rgba(100,100,100,0.3)',
+        overlay: 'rgba(0,0,0,0.7)',
+        "dark": '#232A3C',
+        "medium": '#293245',
         "dark-purple": "#081A51",
         "light-white": "rgba(255,255,255,0.18)",
         "login": "#061027",
         "orange": "#F28123",
         "header-bg": "#051922",
-        "login-2": "#07386e"
+        "login-2": "#07386e",
+        "dash-board": "#F1F5F9",
+        "io1": "#DBEAFE",
+        "io2": "#F3E8FF",
+        "io3": "#D2F4EE",
+        "io4": "#FEE2E2"
+
       },
       flex: {
         '2': '2 2 0%',

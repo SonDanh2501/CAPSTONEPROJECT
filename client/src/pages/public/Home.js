@@ -25,7 +25,7 @@ const Home = () => {
         <div>
           <LandingBanner></LandingBanner>
         </div>
-        <div className="w-full my-10">
+        <div className="w-full my-10 ">
           <FeaturePitch></FeaturePitch>
         </div>
         <div className="w-full my-10">
@@ -38,10 +38,10 @@ const Home = () => {
         <div className="  ">
           <EventBanner />
         </div>
-        <div className="flex items-center justify-center">
+
+        <div className="flex items-center justify-center my-10">
           <News />
         </div>
-
       </div>
       {/* <div className="w-full bg-[#E7E4E4]">
 

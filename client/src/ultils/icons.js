@@ -35,6 +35,7 @@ import {
   FaArrowRight,
   FaChevronRight,
   FaBars,
+  FaMoon,
 } from "react-icons/fa";
 import {
   FaXmark
@@ -57,6 +58,7 @@ import {
   BsReplyFill,
   BsShieldShaded,
   BsFillTelephoneFill,
+  BsSunFill,
 } from "react-icons/bs";
 
 const icons = {
@@ -105,9 +107,11 @@ const icons = {
   IoFastFood,
   BsFillTelephoneFill,
   FaArrowRight,
-  FaChevronRight ,
+  FaChevronRight,
   FaBars,
-  FaXmark
+  FaXmark,
+  FaMoon,
+  BsSunFill
 };
 
 export default icons;

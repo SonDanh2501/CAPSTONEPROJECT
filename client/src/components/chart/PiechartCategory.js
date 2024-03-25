@@ -49,7 +49,7 @@ const PiechartCategory = () => {
 
   return (
     <div className="w-full h-[22rem]  p-4 rounded-sm border border-gray-200 flex flex-col">
-      <strong className="text-white font-bold text-center">
+      <strong className="text-black font-bold text-center">
         Number of Pitches by Category
       </strong>
       <div className="mt-3 w-full flex-1 text-xs">

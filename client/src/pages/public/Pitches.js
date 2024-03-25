@@ -27,7 +27,6 @@ const Pitches = () => {
 
   const fetchProductsByCategory = async (queries) => {
     if (category && category !== "pitches") queries.category = category;
-    queries.limit = 8;
     const response = await apiGetPitches(queries);
     if (response.success) setpitches(response);
   };
@@ -83,12 +82,11 @@ const Pitches = () => {
 
   useEffect(() => {
     const queries = Object.fromEntries([...params]);
-
     delete queries?.q;
     if (searching) {
       navigate({
         pathname: `/${category}`,
-        search: createSearchParams({ q: searching, ...queries }).toString(),
+        search: createSearchParams({ q: searching,...queries}).toString(),
       });
     } else {
       navigate({
@@ -98,7 +96,6 @@ const Pitches = () => {
     }
   }, [searching, params]);
 
-console.log(pitches)
   return (
     <div className="w-full">
       <div className="h-[81px] flex justify-center items-center bg-gray-100">
