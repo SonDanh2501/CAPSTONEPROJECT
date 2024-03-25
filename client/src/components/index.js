@@ -47,6 +47,7 @@ export { default as Navigation } from "./navigations/Navigation";
 export { default as Footer } from "./footer/Footer";
 // Button
 export { default as Button } from "./buttons/Button";
+export { default as ThemeToggle } from "./buttons/ThemeToggle";
 // Vote
 export { default as Votebar } from "./vote/Votebar";
 export { default as VoteOption } from "./vote/VoteOption";

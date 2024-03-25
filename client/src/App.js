@@ -67,14 +67,24 @@ function App() {
         pauseOnHover
         theme="colored"
       />
-      {isShowOrder && (
+      {/* {isShowOrder && (
         <div
           onClick={() => dispatch(showOrder())}
           className="absolute inset-0 bg-overlay z-50 flex justify-end"
         >
           <Order />
         </div>
-      )}
+      )} */}
+      <div
+        onClick={() => dispatch(showOrder())}
+        className={`fixed top-0 bottom-0 left-auto z-50 flex transform duration-500 ${
+          isShowOrder
+            ? "right-0 "
+            : "-right-[420px]"
+        }`}
+      >
+        <Order />
+      </div>
       {isShowModal && <Modal>{modalChildren}</Modal>}
       <Routes>
         {/*Public Route*/}

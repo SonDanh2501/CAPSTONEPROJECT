@@ -50,13 +50,13 @@ const News = () => {
   ];
 
   return (
-    <div className="w-full">
-      {/* <h3 className="text-[40px] font-semibold py-[15px] text-center">
-        <span className="text-indigo-500">Our</span>
-        <span> P</span>
-        <span className="border-b-2 border-indigo-500">ro</span>
-        <span>ducts</span>
-      </h3> */}
+    <div className="w-full dark:bg-medium pb-10">
+      <h3 className="text-[40px] font-semibold py-[15px] text-center">
+        <span className="text-indigo-500">Ou</span>
+        <span className="border-b-2 text-indigo-500">r</span>
+        <span className="border-b-2 border-indigo-500 dark:text-white"> N</span>
+        <span className="dark:text-white">ews</span>
+      </h3>
       <div className="flex flex-col lg:flex-row mt-[15px] justify-center items-center gap-20 ">
         {data?.map((el) => (
           <NewsCard

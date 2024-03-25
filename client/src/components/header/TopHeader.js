@@ -11,7 +11,7 @@ import { navigation } from "ultils/constant";
 import { NavLink } from "react-router-dom";
 import avatar from "assets/avatarwhite.jpg";
 import { showOrder } from "store/app/appSlice";
-
+import ThemeToggle from "components/buttons/ThemeToggle"
 
 const { AiOutlineLogout } = icons;
 const { BsCart } = icons;
@@ -46,13 +46,13 @@ const TopHeader = () => {
     setisOpen(!isOpen)
   }
   return (
-    <div className="w-full bg-header-bg flex h-full items-center flex-wrap justify-between ">
+    <div className="w-full bg-header-bg flex h-full items-center flex-wrap justify-between dark:bg-dark">
       <div className="ml-[50px] pt-3 pb-3">
         <Link to={`/${path.HOME}`}>
           <img src={logo} alt="logo" className="w-[234px] object-contain" />
         </Link>
       </div>
-      <div className="h-[48px] text-sm items-center hidden lg:flex">
+      <div className="h-[48px] ml-48 text-sm items-center hidden lg:flex">
         {navigation.map((el) => (
           <NavLink
             to={el.path}
@@ -156,6 +156,7 @@ const TopHeader = () => {
           ))}</div>
       )
       }
+      <div className="mr-2 max-[1183px]:hidden"><ThemeToggle></ThemeToggle></div>
     </div>
 
   );
