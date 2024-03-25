@@ -15,28 +15,31 @@ const Pagination = ({ totalCount, type = "pitches" }) => {
   };
   return (
     <div className={`flex w-full items-center justify-between`}>
-      {!+params.get("page") ? (
-        <span className="text-sm italic">
-          {/*
+      <div className="md:flex hidden">
+        {!+params.get("page") ? (
+          <span className="text-sm italic ">
+            {/*
                     Math.min để tránh trường hợp totalCount nhỏ hơn LIMIT, vd: Show pitchs 1 - 6 of 3   
                     */}
-          {totalCount > 0
-            ? `Show ${type} 1 - ${
-                Math.min(+process.env.REACT_APP_PITCH_LIMIT, totalCount) || 6
-              } of ${totalCount}`
-            : `Show ${type} 0 - 0 of 0`}
-        </span>
-      ) : (
-        ""
-      )}
-      {+params.get("page") ? (
-        <span className="text-sm italic">
-          {`Show ${type} ${calculatePitch()} of ${totalCount}`}
-        </span>
-      ) : (
-        ""
-      )}
-      <div className={`flex items-center`}>
+            {totalCount > 0
+              ? `Show ${type} 1 - ${
+                  Math.min(+process.env.REACT_APP_PITCH_LIMIT, totalCount) || 6
+                } of ${totalCount}`
+              : `Show ${type} 0 - 0 of 0`}
+          </span>
+        ) : (
+          ""
+        )}
+        {+params.get("page") ? (
+          <span className="text-sm italic">
+            {`Show ${type} ${calculatePitch()} of ${totalCount}`}
+          </span>
+        ) : (
+          ""
+        )}
+      </div>
+
+      <div className={`flex items-center `}>
         {pagination?.map((el) => (
           <PaginationItem key={el}>{el}</PaginationItem>
         ))}

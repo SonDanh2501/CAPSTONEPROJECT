@@ -338,7 +338,7 @@ const News = () => {
                   </div>
                 ))}
               </div>
-              <div className=" my-4 flex items-center">
+              <div className=" flex items-center mt-4  justify-center">
                 <Pagination totalCount={20} type="news" />
               </div>
             </div>
