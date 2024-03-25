@@ -1,68 +1,120 @@
-import React, { useEffect, useRef } from "react";
-import Swal from "sweetalert2";
-import banner4 from "assets/banner4.jpg";
-import emailjs from "@emailjs/browser";
+import React, { useState } from "react";
+import { HeaderBanner } from "components";
+import { FaChevronDown } from "react-icons/fa";
+import { MdNavigateNext } from "react-icons/md";
 
 const FAQ = () => {
-  const form = useRef();
+  const data = [
+    {
+      id: 1,
+      title: "title 1",
+      content: [
+        "No. Unfortunately, GitHub doesn't provide this functionality, so we cannot make a refund. However, every",
+        "plan has a 14-day free trial that can be canceled at any time and should give you plenty of time to try",
+        "Mockend.",
+      ],
+    },
+    {
+      id: 2,
+      title: "title 2",
+      content: [
+        "No. Only mockend.com is related to this project. We are not related to any other project that has mockend in their name.",
+        "If you have not yet done so, visit the Verifications section of your Dashboard to upload your photo ID in your dashboard.",
+      ],
+    },
+    {
+      id: 3,
+      title: "title 3",
+      content: [
+        "No. Unfortunately, GitHub doesn't provide this functionality, so we cannot make a refund. However, every",
+        "plan has a 14-day free trial that can be canceled at any time and should give you plenty of time to try",
+        "Mockend.",
+      ],
+    },
+    {
+      id: 4,
+      title: "title 4",
+      content: [
+        "Maybe. We are constantly adding new features to Mockend. If you have a feature request, please write",
+        "us at contact@mockend.com.",
+      ],
+    },
+    {
+      id: 5,
+      title: "title 5",
+      content: [
+        "Maybe. We are constantly adding new features to Mockend. If you have a feature request, please write",
+        "us at contact@mockend.com.",
+      ],
+    },
+    {
+      id: 6,
+      title: "title 6",
+      content: [
+        "Maybe. We are constantly adding new features to Mockend. If you have a feature request, please write",
+        "us at contact@mockend.com.",
+      ],
+    },
+  ];
 
-  const sendEmail = (e) => {
-    e.preventDefault();
+  const [openQuestionId, setOpenQuestionId] = useState("");
 
-    emailjs
-      .sendForm(
-        "service_phheaon",
-        "template_clxxagd",
-        form.current,
-        "6UCB_Dfir_suWH3gL"
-      )
-      .then(
-        (result) => {
-          e.target.reset();
-          Swal.fire("Congratulation", result.text, "success");
-        },
-        (error) => {
-          Swal.fire("Oops!", error.text, "error");
-        }
-      );
+  const onOpen = (questionId) => {
+    setOpenQuestionId(questionId === openQuestionId ? "" : questionId);
   };
-  useEffect(() => {
-    window.scrollTo(450, 450);
-  }, []);
+
   return (
-    <div className="p-8 bg-white rounded-md min-w-[500px]">
-      <img src={banner4} className="w-full h-[500px] object-cover" />
-      <div className="h-[81px] flex justify-center items-center bg-gray-100 mt-6">
-        <div className="w-main">
-          <h3 className="font-semibold">
-            If you have any questions, please contact us using the form below:
+    <>
+      <div className="w-full">
+        <div>
+          <HeaderBanner title="WEBSITE INFORMATION" subtitle="FAQ" />
+        </div>
+
+        <div className="flex items-center justify-start p-14 pb-4">
+          <h1 className="text-black text-2xl font-bold ">
+            Frequently Asked Questions
+          </h1>
+        </div>
+
+        <div className="md:p-14 md:pt-0 p-4">
+          {data.map((e) => (
+            <div className="border-top border-bottom pt-4" key={e.id}>
+              <hr className="pb-4" />
+              <div className="flex text-xl font-semibold justify-between items-center">
+                <span>{e.title}</span>
+                <FaChevronDown
+                  className={`text-lg mr-4 cursor-pointer hover:text-zinc-300 ${
+                    openQuestionId === e.id ? "transform rotate-180" : ""
+                  }`}
+                  onClick={() => onOpen(e.id)}
+                />
+              </div>
+              {openQuestionId === e.id && (
+                <div className="flex">
+                  <MdNavigateNext className="mt-3 text-md" />
+                  <div className="flex flex-col pt-2 text-lg">
+                    {e.content.map((el, i) => (
+                      <span key={i}>{el}</span>
+                    ))}
+                  </div>
+                </div>
+              )}
+            </div>
+          ))}
+        </div>
+        <div className="flex flex-col items-center justify-center pb-14">
+          <h1 className="font-bold text-black mt-8 gap-4 text-2xl  p-2">
+            DON'T SEE YOUR QUESTION HERE? DROP US A LINE
+          </h1>
+          <h3 className="text-2xl p-2 pt-1">
+            Check out our FAQ or contact us below
           </h3>
+          <span className="text-lg pt-1 p-2">debugboy@gmail.com</span>
+          <span className="text-lg">Chat with us</span>
+          <span className="text-lg">Monday-Sunday 9am - 5pm EST</span>
         </div>
       </div>
-      <div className="flex flex-col items-center ">
-        <h1 className="text-[25px] font-semibold text-main mb-6 mt-6">
-          Contact by email
-        </h1>
-        <form
-          className="flex flex-col w-[500px] "
-          ref={form}
-          onSubmit={sendEmail}
-        >
-          <label className="mt-2">Name</label>
-          <input className="rounded" type="text" name="user_name" />
-          <label className="mt-2">Email</label>
-          <input className="rounded" type="email" name="user_email" />
-          <label className="mt-2">Message</label>
-          <textarea className="rounded" name="message" />
-          <input
-            className="bg-blue-500 mt-2 cursor-pointer text-white h-[40px]"
-            background
-            type="submit"
-            value="Send"
-          />
-        </form>
-      </div>
-    </div>
+    </>
   );
 };
 

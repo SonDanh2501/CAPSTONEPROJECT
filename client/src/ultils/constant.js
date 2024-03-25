@@ -20,7 +20,7 @@ export const navigation = [
   {
     id: 4,
     value: "NEWS",
-    path: `/${path.FAQ}`,
+    path: `/${path.NEWS}`,
   },
   {
     id: 5,
