@@ -14,7 +14,7 @@ const Pagination = ({ totalCount, type = "pitches" }) => {
     return `${start} - ${end}`;
   };
   return (
-    <div className="flex w-full justify-between items-center">
+    <div className={`flex w-full items-center justify-between`}>
       {!+params.get("page") ? (
         <span className="text-sm italic">
           {/*
@@ -36,7 +36,7 @@ const Pagination = ({ totalCount, type = "pitches" }) => {
       ) : (
         ""
       )}
-      <div className="flex items-center">
+      <div className={`flex items-center`}>
         {pagination?.map((el) => (
           <PaginationItem key={el}>{el}</PaginationItem>
         ))}

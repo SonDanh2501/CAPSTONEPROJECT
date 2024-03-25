@@ -12,6 +12,7 @@ import {
   FinalRegister,
   ResetPassword,
   DetailBrand,
+  News,
 } from "pages/public";
 import {
   AdminLayout,
@@ -80,7 +81,7 @@ function App() {
         <Route path={path.CHECKOUT} element={<Checkout />} />
         <Route path={path.PUBLIC} element={<Public />}>
           <Route path={path.HOME} element={<Home />} />
-          <Route path={path.BLOGS} element={<Blog />} />
+          <Route path={path.NEWS} element={<News />} />
           <Route
             path={path.DETAIL_PITCH__CATEGORY__BRAND__PITCHID__TITLE}
             element={<DetailPitches />}
