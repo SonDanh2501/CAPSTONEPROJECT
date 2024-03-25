@@ -30,57 +30,67 @@ const Order = () => {
   };
   useEffect(() => {
     fetchPitchData();
-  }, []);
+  }, [order]);
   return (
     <div
       onClick={(e) => e.stopPropagation()}
-      className="w-[420px] max-h-screen overflow-y-auto bg-black grid grid-rows-10 text-white p-6"
+      className="w-[420px] h-screen overflow-y-auto bg-white text-black shadow-2xl flex flex-col"
     >
-      <header className=" border-b border-gray-500 flex justify-between row-span-1 h-full items-center font-bold text-2xl">
-        <span>Your Order </span>
-        <span
-          onClick={() => dispatch(showOrder())}
-          className="p-2 cursor-pointer"
-        >
+      <div className="p-4 flex justify-between items-center font-bold text-xl border-b-2 border-gray-300">
+        <span>Your Order</span>
+        <span onClick={() => dispatch(showOrder())} className=" cursor-pointer">
           <IoMdClose />
         </span>
-      </header>
-      <section className="row-span-5 flex flex-col gap-3 h-full max-h-full overflow-y-auto py-3">
+      </div>
+
+      <div className="h-4/6 flex flex-col gap-3 overflow-y-auto py-3">
         {(!order || order.length === 0) && (
-          <span className="text-xs italic">Your Order is Empty</span>
+          <span className="flex justify-center text-sm italic ">
+            Your Order is Empty
+          </span>
         )}
         {order &&
           order?.map((el) => (
-            <div className="flex justify-between items-center" key={el._id}>
-              <div className="flex gap-2">
-                <img
-                  src={el.pitch?.thumb || defaultImage}
-                  alt="thumb"
-                  className="w-16 h-16 object-cover"
-                />
-                <div className="flex flex-col">
-                  <span className="text-main text-[15px]">
-                    {el.pitch?.name}
-                  </span>
-                  <span className="text-base ">
+            <div className="mx-3" key={el._id}>
+              <div className="flex justify-between items-center border-b">
+                <div className="flex gap-2 p-4 items-center tracking-wide">
+                  <img
+                    src={el.pitch?.thumb || defaultImage}
+                    alt="thumb"
+                    className="w-14 h-14 object-cover "
+                  />
+                  <div className="flex flex-col">
+                    <div className="flex items-center gap-1">
+                      <span className="flex gap-1 font-bold text-md">
+                        {el.pitch?.title}
+                      </span>
+                      <span className="text-xs">({el.pitch?.category})</span>
+                    </div>
+                    <span className="text-xs">
+                      {shifts.find((s) => s.value === +el.shift)?.time}
+                    </span>
+                    <div
+                      className="flex items-center cursor-pointer "
+                      onClick={() => updateOrder(el._id)}
+                    >
+                      <span className="h-5 w-5 flex items-center duration-500 text-green-500 hover:text-red-600 ">
+                        <MdDeleteForever size={16} />
+                      </span>
+                      <span className="text-xs hover:text-red-600">Remove</span>
+                    </div>
+                  </div>
+                </div>
+                <div className="font-bold tracking-wider">
+                  <span className="text-sm">
                     {formatMoney(el.pitch?.price) + ` VND`}
-                  </span>
-                  <span className="text-xs">
-                    {shifts.find((s) => s.value === +el.shift)?.time}
                   </span>
                 </div>
               </div>
-              <span
-                onClick={() => updateOrder(el._id)}
-                className="h-8 w-8 rounded-full flex items-center hover:bg-gray-700 cursor-pointer"
-              >
-                <MdDeleteForever size={16} />
-              </span>
             </div>
           ))}
-      </section>
-      <div className="row-span-2 flex flex-col justify-between h-full">
-        <div className="flex items-center m-4 justify-between pt-4 border-t">
+      </div>
+      <div className="h-2/6 flex flex-col justify-between pt-8 border-t-2">
+        <div className="flex items-center mx-4 justify-between">
           <span> Subtotal:</span>
           <span>
             {formatMoney(
@@ -88,10 +98,26 @@ const Order = () => {
             ) + ` VND`}
           </span>
         </div>
-        <span className="text-center text-gray-700 italic">
+        <div className="flex items-center mx-4 justify-between">
+          <span> Discount:</span>
+          <span>
+            {formatMoney(
+              order?.reduce((sum, el) => sum + Number(el.pitch?.price), 0)
+            ) + ` VND`}
+          </span>
+        </div>
+        <div className="flex items-center mx-4 justify-between font-bold">
+          <span> Total:</span>
+          <span>
+            {formatMoney(
+              order?.reduce((sum, el) => sum + Number(el.pitch?.price), 0)
+            ) + ` VND`}
+          </span>
+        </div>
+        {/* <span className="text-center text-gray-700 italic">
           Taxes and Discount calculated at checkout
-        </span>
-        <Button
+        </span> */}
+        {/* <Button
           handleOnClick={() => {
             dispatch(showOrder());
             navigate(`${path.DETAIL_ORDER}`);
@@ -99,7 +125,26 @@ const Order = () => {
           style="rounded-none w-full bg-main py-3"
         >
           Check out Detail
-        </Button>
+        </Button> */}
+        <div className="flex justify-center gap-4 w-full ">
+          <button
+            onClick={() => {
+              dispatch(showOrder());
+            }}
+            className="my-4 ml-4 py-2 w-1/2 bg-gray-500 rounded-md text-white hover:bg-gray-600 duration-300"
+          >
+            <span>Continue Shopping</span>
+          </button>
+          <button
+            onClick={() => {
+              dispatch(showOrder());
+              navigate(`${path.DETAIL_ORDER}`);
+            }}
+            className="my-4 mr-4 py-2 w-1/2 bg-red-500 rounded-md text-white hover:bg-red-600 duration-300"
+          >
+            <span>Checkout</span>
+          </button>
+        </div>
       </div>
     </div>
   );

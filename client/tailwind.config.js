@@ -7,7 +7,7 @@ module.exports = {
   darkMode: 'class',
   theme: {
     fontFamily: {
-      main: ['Poppins', 'Liberation Mono']
+      main: ['Segoe UI Symbol']
     },
     extend: {
       width: {

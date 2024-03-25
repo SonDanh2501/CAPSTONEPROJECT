@@ -34,9 +34,7 @@ const Home = () => {
         {/* <div className="flex flex-col gap-5 w-[30%] flex-auto">
           <Sidebar></Sidebar>
         </div> */}
-      </div>
 
-      <div className="w-full bg-[#E7E4E4]">
         <div className="  ">
           <EventBanner />
         </div>
@@ -45,6 +43,11 @@ const Home = () => {
           <News />
         </div>
       </div>
+      {/* <div className="w-full bg-[#E7E4E4]">
+
+        
+        <div className="h-[500px]"></div>
+      </div> */}
     </>
   );
 };

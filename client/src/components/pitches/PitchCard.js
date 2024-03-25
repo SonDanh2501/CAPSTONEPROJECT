@@ -19,7 +19,7 @@ const PitchCard = ({
   const navigate = useNavigate();
 
   return (
-    <div className="bg-gradient-to-r from-white to-gray-100 text-gray-700  min-h-[10rem] shadow-lg rounded-md overflow-hidden border-2 hover:shadow-2xl hover:border-0 hover:shadow-gray-500">
+    <div className="my-4 bg-gradient-to-r from-white to-gray-100 text-gray-700 shadow-lg rounded-md overflow-hidden hover:shadow-2xl hover:shadow-gray-500 duration-300">
       <img
         src={image}
         alt="pitches"
@@ -27,10 +27,10 @@ const PitchCard = ({
       />
       <div className="p-5 flex flex-col gap-3">
         <div className="flex items-center gap-2">
-          <span className="px-3 py-1 rounded-full text-xs bg-gray-300">
+          <span className="px-3 py-1 rounded-full text-xs bg-gray-300 whitespace-nowrap">
             {category}
           </span>
-          <span className="px-3 py-1 rounded-full text-xs bg-gray-300">
+          <span className="px-3 py-1 rounded-full text-xs bg-gray-300 whitespace-nowrap">
             {brand}
           </span>
         </div>
