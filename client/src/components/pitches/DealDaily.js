@@ -76,26 +76,27 @@ const DealDaily = () => {
   }, [second, minute, hour, expireTime]);
 
   return (
-    <div className=" w-full h-[553px] bg-gray-200 flex items-center justify-center">
-      <div className="mr-3">
-        <img
-          src={dealdaily?.thumb || defaultt}
-          alt=""
-          className="w-[550px] h-[350px] object-fit rounded-2xl"
-        ></img>
-      </div>
-      <div>
-        <div className="px-4 mt-4">
-          <div className="flex flex-col">
-            <h3 className="text-[40px] font-semibold py-[5px] ">
-              <span className="text-indigo-500">Deal </span>
-              <span>of the month</span>
-            </h3>
-            <span className=" text-lg uppercase font-semibold ">
-              {dealdaily?.title}
-            </span>
-            <span className="py-2">{dealdaily?.address}</span>
-            {/* <span className="flex ">
+    <div className=" w-full h-[564px] bg-gray-200 flex items-center justify-center">
+      <div className="flex flex-col md:flex-row">
+        <div className="flex flex-col items-center md:items-start pt-8 px-5 gap-2 ">
+          <img
+            src={dealdaily?.thumb || defaultt}
+            alt=""
+            className="w-[432px] h-[200px] object-cover lg:h-[350px]"
+          ></img>
+        </div>
+        <div>
+          <div className="px-4 mt-4">
+            <div className="flex flex-col">
+              <h3 className="text-[40px] font-semibold py-[5px] ">
+                <span className="text-indigo-500">Deal </span>
+                <span>of the month</span>
+              </h3>
+              <span className=" text-lg uppercase font-semibold ">
+                {dealdaily?.title}
+              </span>
+              <span className="py-2">{dealdaily?.address}</span>
+              {/* <span className="flex ">
               {renderStarFromNumber(dealdaily?.totalRatings)?.map(
                 (el, index) => (
                   <span key={index}>{el}</span>
@@ -103,14 +104,14 @@ const DealDaily = () => {
               )}
             </span>
             <span>{`${formatMoney(dealdaily?.price)} VNĐ`}</span> */}
-          </div>
-          <div className="flex gap-1 py-5">
-            <CountDown unit={"Hours"} number={hour}></CountDown>
-            <CountDown unit={"Minutes"} number={minute}></CountDown>
-            <CountDown unit={"Seconds"} number={second}></CountDown>
-          </div>
-          <button
-            className="flex 
+            </div>
+            <div className="flex gap-1 py-3">
+              <CountDown unit={"Hours"} number={hour}></CountDown>
+              <CountDown unit={"Minutes"} number={minute}></CountDown>
+              <CountDown unit={"Seconds"} number={second}></CountDown>
+            </div>
+            <button
+              className="flex 
             items-center 
           justify-center 
           bg-indigo-500 
@@ -134,11 +135,11 @@ const DealDaily = () => {
            hover:text-white
            hover:before:h-56 
            hover:before:w-56"
-          >
-            <BsCart className="relative"></BsCart>
-            <span className="relative">Check Now</span>
-          </button>
-          {/* <Button
+            >
+              <BsCart className="relative"></BsCart>
+              <span className="relative">Check Now</span>
+            </button>
+            {/* <Button
             type="button"
             handleOnClick={() =>
               navigate(
@@ -152,6 +153,7 @@ const DealDaily = () => {
             <AiOutlineMenu></AiOutlineMenu>
             <span>Option</span>
           </Button> */}
+          </div>
         </div>
       </div>
     </div>

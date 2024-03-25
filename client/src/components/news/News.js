@@ -50,7 +50,13 @@ const News = () => {
   ];
 
   return (
-    <div className="w-full">
+    <div className="w-full bg-gray-200 pb-4">
+      <h3 className="text-[40px] font-semibold py-[15px] text-center">
+        <span className="text-indigo-500">Ou</span>
+        <span className="text-indigo-500 border-b-2 border-indigo-500">r</span>
+        <span className="border-b-2 border-indigo-500"> N</span>
+        <span className="">ews</span>
+      </h3>
       {/* <h3 className="text-[40px] font-semibold py-[15px] text-center">
         <span className="text-indigo-500">Our</span>
         <span> P</span>

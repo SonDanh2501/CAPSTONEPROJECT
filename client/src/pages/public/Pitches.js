@@ -27,9 +27,11 @@ const Pitches = () => {
 
   const fetchProductsByCategory = async (queries) => {
     if (category && category !== "pitches") queries.category = category;
+    queries.limit = 8;
     const response = await apiGetPitches(queries);
     if (response.success) setpitches(response);
   };
+
 
   useEffect(() => {
     const queries = Object.fromEntries([...params]);
@@ -96,7 +98,7 @@ const Pitches = () => {
     }
   }, [searching, params]);
 
-
+console.log(pitches)
   return (
     <div className="w-full">
       <div className="h-[81px] flex justify-center items-center bg-gray-100">
@@ -145,8 +147,8 @@ const Pitches = () => {
       </div>
       <div className="mt-8 w-main m-auto">
         <Masonry
-          breakpointCols={3}
-          className="my-masonry-grid flex mx-[-10px] pl-3"
+          breakpointCols={4}
+          className="my-masonry-grid flex gap-16 m-auto"
           columnClassName="my-masonry-grid_column"
         >
           {pitches?.pitches?.map((el) => (

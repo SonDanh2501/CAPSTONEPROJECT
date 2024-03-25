@@ -4,11 +4,13 @@ import icons from "ultils/icons";
 const { FaArrowRight } = icons;
 const EventBanner = () => {
   return (
-    <div className="w-full h-[553px] bg-white flex items-center justify-center">
+    <div className="w-full h-[564px] bg-white flex items-center justify-center">
       <div className="flex flex-col md:flex-row">
+
         <div className="flex flex-col items-center md:items-start pt-8 px-4 gap-2">
           <img src={ball} alt="" className="w-full h-[200px] object-cover" />
         </div>
+        
         <div className="px-4 mt-4">
           <div className="flex flex-col">
             <h1 className="text-4xl font-semibold py-2 md:py-5">

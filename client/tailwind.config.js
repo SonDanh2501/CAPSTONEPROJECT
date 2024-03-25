@@ -6,7 +6,7 @@ module.exports = {
   ],
   theme: {
     fontFamily: {
-      main: ['Poppins', 'Liberation Mono']
+      main: ['Segoe UI Symbol']
     },
     extend: {
       width: {
@@ -14,7 +14,7 @@ module.exports = {
       },
       colors: {
         main: '#ee3131',
-        overlay: 'rgba(0,0,0,0.7)',
+        overlay: 'rgba(100,100,100,0.3)',
         "dark-purple": "#081A51",
         "light-white": "rgba(255,255,255,0.18)",
         "login": "#061027",
