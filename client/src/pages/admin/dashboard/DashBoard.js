@@ -38,10 +38,10 @@ const Dashboard = () => {
       <div className="flex justify-center gap-8">
         <div>
           <NewDashBoard />
-          <div className="flex-1 mt-5 bg-white">
+          <div className="flex-1 pl-72 mt-5 bg-white ">
             <AreaChartMonth order={order} />
           </div>
-          <div className="flex-1 mt-3 bg-white">
+          <div className="flex-1 items-center justify-center pl-72 mt-3 bg-white">
             <ChartPrice order={order} />
           </div>
         </div>
@@ -54,7 +54,7 @@ const Dashboard = () => {
           </div>
         </div>
       </div>
-      <div className=" bg-white">
+      <div className="my-5 pl-48 bg-white">
         <Barchart brand={brand} />
       </div>
       {/* <div className="w-full flex items-center justify-center gap-2 py-2">
