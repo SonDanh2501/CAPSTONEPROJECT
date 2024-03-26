@@ -24,6 +24,7 @@ const Pitches = () => {
   const [sort, setSort] = useState("");
   const { category } = useParams();
   const [searching, setSearching] = useState("");
+  const [searchingFlag, setSearchingFlag] = useState(true);
 
   const fetchProductsByCategory = async (queries) => {
     if (category && category !== "pitches") queries.category = category;
@@ -69,26 +70,23 @@ const Pitches = () => {
     [sort]
   );
 
-  useEffect(() => {
-    const queries = Object.fromEntries([...params]);
-    delete queries?.sort;
-    if (sort) {
-      navigate({
-        pathname: `/${category}`,
-        search: createSearchParams({ sort, ...queries }).toString(),
-      });
-    }
-  }, [sort]);
-
+ 
   useEffect(() => {
     const queries = Object.fromEntries([...params]);
     delete queries?.q;
+
+    if (searchingFlag && searching) {
+      queries.page = 1;
+    }
     if (searching) {
+      setSearchingFlag(false);
       navigate({
         pathname: `/${category}`,
         search: createSearchParams({ q: searching,...queries}).toString(),
       });
-    } else {
+    } 
+    else {
+      setSearchingFlag(true);
       navigate({
         pathname: `/${category}`,
         search: createSearchParams({ ...queries }).toString(),

@@ -34,12 +34,10 @@ const Home = () => {
         {/* <div className="flex flex-col gap-5 w-[30%] flex-auto">
           <Sidebar></Sidebar>
         </div> */}
-
-        <div className="  ">
+        <div className="w-full my-10">
           <EventBanner />
         </div>
-
-        <div className="flex items-center justify-center my-10">
+        <div className="w-full">
           <News />
         </div>
       </div>

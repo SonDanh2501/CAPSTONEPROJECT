@@ -52,9 +52,8 @@ const FeaturePitch = () => {
     <div className="w-full dark:bg-medium pb-10">
       <h3 className="text-[40px] font-semibold py-[15px] text-center">
         <span className="text-indigo-500 ">Our</span>
-        <span className="dark:text-white"> P</span>
-        <span className="border-b-2 border-indigo-500 dark:text-white">ro</span>
-        <span className="dark:text-white">ducts</span>
+        <span className="border-b-2 border-indigo-500 dark:text-white"> Pit</span>
+        <span className="dark:text-white">ches</span>
       </h3>
 
       <div className="w-3/4	m-auto">
