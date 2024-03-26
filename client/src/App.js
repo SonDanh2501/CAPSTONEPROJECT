@@ -5,9 +5,8 @@ import {
   Home,
   Public,
   FAQ,
-  Services,
+  Contact,
   DetailPitches,
-  Blog,
   Pitches,
   FinalRegister,
   ResetPassword,
@@ -78,9 +77,7 @@ function App() {
       <div
         onClick={() => dispatch(showOrder())}
         className={`fixed top-0 bottom-0 left-auto z-50 flex transform duration-500 ${
-          isShowOrder
-            ? "right-0 "
-            : "-right-[420px]"
+          isShowOrder ? "right-0 " : "-right-[420px]"
         }`}
       >
         <Order />
@@ -97,7 +94,8 @@ function App() {
             element={<DetailPitches />}
           />
           <Route path={path.FAQ} element={<FAQ />} />
-          <Route path={path.OUR_SERVICE} element={<Services />} />
+          <Route path={path.CONTACT} element={<Contact />} />
+
           <Route path={path.PITCHES__CATEGORY} element={<Pitches />} />
           <Route path={path.DETAIL_ORDER} element={<DetailOrder />} />
           <Route path={path.RESET_PASSWORD} element={<ResetPassword />} />
