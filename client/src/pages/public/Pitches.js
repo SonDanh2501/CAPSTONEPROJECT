@@ -17,6 +17,11 @@ import Masonry from "react-masonry-css";
 import { sorts } from "ultils/constant";
 
 const Pitches = () => {
+  const breakpointColumnsObj = {
+    default: 3,
+    1200: 2,
+    700: 1,
+  };
   const navigate = useNavigate();
   const [pitches, setpitches] = useState(null);
   const [activeClick, setactiveClick] = useState(null);
@@ -142,7 +147,7 @@ const Pitches = () => {
       </div>
       <div className="mt-8 w-main m-auto">
         <Masonry
-          breakpointCols={4}
+          breakpointCols={breakpointColumnsObj}
           className="my-masonry-grid flex gap-16 m-auto"
           columnClassName="my-masonry-grid_column"
         >
