@@ -57,7 +57,7 @@ const Order = () => {
                   <img
                     src={el.pitch?.thumb || defaultImage}
                     alt="thumb"
-                    className="w-14 h-14 object-cover "
+                    className="w-16 h-16 object-cover"
                   />
                   <div className="flex flex-col">
                     <div className="flex items-center gap-1">
@@ -66,18 +66,18 @@ const Order = () => {
                       </span>
                       <span className="text-xs">({el.pitch?.category})</span>
                     </div>
-                    <span className="text-xs">
+                    <span className="text-xs text-green-600">
                       {shifts.find((s) => s.value === +el.shift)?.time}
                     </span>
-                    <div
-                      className="flex items-center cursor-pointer "
+                    <button
+                      className="w-fit px-2 py-1 my-2 gap-2 flex items-center justify-center cursor-pointer border bg-red-500 rounded-md hover:bg-red-800 duration-300"
                       onClick={() => updateOrder(el._id)}
                     >
-                      <span className="h-5 w-5 flex items-center duration-500 text-green-500 hover:text-red-600 ">
+                      <span className="text-xs text-white border-r pr-2">Remove</span>
+                      <span className="h-5 w-5 flex items-center duration-500 text-white">
                         <MdDeleteForever size={16} />
                       </span>
-                      <span className="text-xs hover:text-red-600">Remove</span>
-                    </div>
+                    </button>
                   </div>
                 </div>
                 <div className="font-bold tracking-wider">

@@ -61,9 +61,8 @@ const PitchCard = ({
             items-center 
             justify-center
             gap-2
-            px-0 
-            sm:px-2
-            py-2 
+            px-1 py-2
+            md:px-2
             rounded-3xl
             relative overflow-hidden 
           bg-gray-800 
@@ -89,7 +88,7 @@ const PitchCard = ({
               )
             }
           >
-            <span className="relative hidden sm:flex ">View details</span>
+            <span className="relative hidden lg:flex">View details</span>
             <span className="relative">
               <FaArrowRight />
             </span>

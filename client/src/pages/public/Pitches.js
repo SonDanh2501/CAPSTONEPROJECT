@@ -17,6 +17,11 @@ import Masonry from "react-masonry-css";
 import { sorts } from "ultils/constant";
 
 const Pitches = () => {
+  const breakpointColumnsObj = {
+    default: 3,
+    1200: 2,
+    700: 1,
+  };
   const navigate = useNavigate();
   const [pitches, setpitches] = useState(null);
   const [activeClick, setactiveClick] = useState(null);
@@ -24,6 +29,7 @@ const Pitches = () => {
   const [sort, setSort] = useState("");
   const { category } = useParams();
   const [searching, setSearching] = useState("");
+  const [searchingFlag, setSearchingFlag] = useState(true);
 
   const fetchProductsByCategory = async (queries) => {
     if (category && category !== "pitches") queries.category = category;
@@ -69,26 +75,23 @@ const Pitches = () => {
     [sort]
   );
 
-  useEffect(() => {
-    const queries = Object.fromEntries([...params]);
-    delete queries?.sort;
-    if (sort) {
-      navigate({
-        pathname: `/${category}`,
-        search: createSearchParams({ sort, ...queries }).toString(),
-      });
-    }
-  }, [sort]);
-
+ 
   useEffect(() => {
     const queries = Object.fromEntries([...params]);
     delete queries?.q;
+
+    if (searchingFlag && searching) {
+      queries.page = 1;
+    }
     if (searching) {
+      setSearchingFlag(false);
       navigate({
         pathname: `/${category}`,
         search: createSearchParams({ q: searching,...queries}).toString(),
       });
-    } else {
+    } 
+    else {
+      setSearchingFlag(true);
       navigate({
         pathname: `/${category}`,
         search: createSearchParams({ ...queries }).toString(),
@@ -144,7 +147,7 @@ const Pitches = () => {
       </div>
       <div className="mt-8 w-main m-auto">
         <Masonry
-          breakpointCols={4}
+          breakpointCols={breakpointColumnsObj}
           className="my-masonry-grid flex gap-16 m-auto"
           columnClassName="my-masonry-grid_column"
         >
