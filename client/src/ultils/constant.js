@@ -25,7 +25,7 @@ export const navigation = [
   {
     id: 5,
     value: "CONTACT",
-    path: `/${path.FAQ}`,
+    path: `/${path.CONTACT}`,
   },
 ];
 
