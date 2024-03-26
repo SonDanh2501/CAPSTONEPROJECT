@@ -103,14 +103,14 @@ const DealDaily = () => {
               )}
             </span>
             <span>{`${formatMoney(dealdaily?.price)} VNĐ`}</span> */}
-          </div>
-          <div className="flex gap-1 py-5">
-            <CountDown unit={"Hours"} number={hour}></CountDown>
-            <CountDown unit={"Minutes"} number={minute}></CountDown>
-            <CountDown unit={"Seconds"} number={second}></CountDown>
-          </div>
-          <button
-            className="flex 
+            </div>
+            <div className="flex gap-1 py-3">
+              <CountDown unit={"Hours"} number={hour}></CountDown>
+              <CountDown unit={"Minutes"} number={minute}></CountDown>
+              <CountDown unit={"Seconds"} number={second}></CountDown>
+            </div>
+            <button
+              className="flex 
             items-center 
           justify-center 
           bg-indigo-500 
@@ -134,11 +134,11 @@ const DealDaily = () => {
            hover:text-white
            hover:before:h-56 
            hover:before:w-56"
-          >
-            <BsCart className="relative"></BsCart>
-            <span className="relative">Check Now</span>
-          </button>
-          {/* <Button
+            >
+              <BsCart className="relative"></BsCart>
+              <span className="relative">Check Now</span>
+            </button>
+            {/* <Button
             type="button"
             handleOnClick={() =>
               navigate(
@@ -152,9 +152,9 @@ const DealDaily = () => {
             <AiOutlineMenu></AiOutlineMenu>
             <span>Option</span>
           </Button> */}
+          </div>
         </div>
       </div>
-    </div>
   );
 };
 

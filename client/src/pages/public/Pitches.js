@@ -31,6 +31,7 @@ const Pitches = () => {
     if (response.success) setpitches(response);
   };
 
+
   useEffect(() => {
     const queries = Object.fromEntries([...params]);
     let priceQuery = {};
@@ -81,12 +82,11 @@ const Pitches = () => {
 
   useEffect(() => {
     const queries = Object.fromEntries([...params]);
-
     delete queries?.q;
     if (searching) {
       navigate({
         pathname: `/${category}`,
-        search: createSearchParams({ q: searching, ...queries }).toString(),
+        search: createSearchParams({ q: searching,...queries}).toString(),
       });
     } else {
       navigate({
@@ -95,7 +95,6 @@ const Pitches = () => {
       });
     }
   }, [searching, params]);
-
 
   return (
     <div className="w-full">
@@ -145,8 +144,8 @@ const Pitches = () => {
       </div>
       <div className="mt-8 w-main m-auto">
         <Masonry
-          breakpointCols={3}
-          className="my-masonry-grid flex mx-[-10px] pl-3"
+          breakpointCols={4}
+          className="my-masonry-grid flex gap-16 m-auto"
           columnClassName="my-masonry-grid_column"
         >
           {pitches?.pitches?.map((el) => (

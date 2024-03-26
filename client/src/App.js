@@ -12,6 +12,7 @@ import {
   FinalRegister,
   ResetPassword,
   DetailBrand,
+  News,
 } from "pages/public";
 import {
   AdminLayout,
@@ -66,21 +67,31 @@ function App() {
         pauseOnHover
         theme="colored"
       />
-      {isShowOrder && (
+      {/* {isShowOrder && (
         <div
           onClick={() => dispatch(showOrder())}
           className="absolute inset-0 bg-overlay z-50 flex justify-end"
         >
           <Order />
         </div>
-      )}
+      )} */}
+      <div
+        onClick={() => dispatch(showOrder())}
+        className={`fixed top-0 bottom-0 left-auto z-50 flex transform duration-500 ${
+          isShowOrder
+            ? "right-0 "
+            : "-right-[420px]"
+        }`}
+      >
+        <Order />
+      </div>
       {isShowModal && <Modal>{modalChildren}</Modal>}
       <Routes>
         {/*Public Route*/}
         <Route path={path.CHECKOUT} element={<Checkout />} />
         <Route path={path.PUBLIC} element={<Public />}>
           <Route path={path.HOME} element={<Home />} />
-          <Route path={path.BLOGS} element={<Blog />} />
+          <Route path={path.NEWS} element={<News />} />
           <Route
             path={path.DETAIL_PITCH__CATEGORY__BRAND__PITCHID__TITLE}
             element={<DetailPitches />}
