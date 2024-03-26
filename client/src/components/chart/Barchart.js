@@ -14,7 +14,7 @@ const Barchart = ({ brand }) => {
   return (
     <div>
       <div className="w-full">
-        <ResponsiveContainer width={1500} height={400}>
+        <ResponsiveContainer width={1300} height={400}>
           <BarChart
             width={100}
             height={40}
