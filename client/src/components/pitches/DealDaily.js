@@ -76,12 +76,12 @@ const DealDaily = () => {
   }, [second, minute, hour, expireTime]);
 
   return (
-    <div className=" w-full h-[553px] bg-gray-200 flex items-center justify-center dark:bg-medium">
-      <div className="mr-3">
+    <div className=" w-full h-[553px] flex flex-col md:flex-row bg-gray-200 items-center justify-center dark:bg-medium">
+      <div className="md:items-start">
         <img
           src={dealdaily?.thumb || defaultt}
           alt=""
-          className="w-[550px] h-[350px] object-fit rounded-2xl"
+          className=" w-[467px] h-[200px] px-4 object-fill md:h-[300px]"
         ></img>
       </div>
       <div>
@@ -103,24 +103,26 @@ const DealDaily = () => {
               )}
             </span>
             <span>{`${formatMoney(dealdaily?.price)} VNĐ`}</span> */}
-            </div>
-            <div className="flex gap-1 py-3">
-              <CountDown unit={"Hours"} number={hour}></CountDown>
-              <CountDown unit={"Minutes"} number={minute}></CountDown>
-              <CountDown unit={"Seconds"} number={second}></CountDown>
-            </div>
-            <button
-              className="flex 
+          </div>
+          <div className="flex gap-2 py-3 justify-center items-center sm:justify-normal">
+            <CountDown unit={"Hours"} number={hour}></CountDown>
+            <CountDown unit={"Minutes"} number={minute}></CountDown>
+            <CountDown unit={"Seconds"} number={second}></CountDown>
+          </div>
+          <button
+            className="flex 
             items-center 
-          justify-center 
-          bg-indigo-500 
-          py-3 px-5 
-          rounded-3xl 
-          gap-2 
+            justify-center 
+           bg-indigo-500 
+            py-3 px-5 
+            rounded-3xl 
+            gap-2 
+            w-full
+            md:w-fit
           text-white 
-          shadow-lg
+            shadow-lg
           shadow-blue-500/50 
-          relative  
+            relative  
             overflow-hidden  
             transition-all
             before:absolute 
@@ -134,11 +136,11 @@ const DealDaily = () => {
            hover:text-white
            hover:before:h-56 
            hover:before:w-56"
-            >
-              <BsCart className="relative"></BsCart>
-              <span className="relative">Check Now</span>
-            </button>
-            {/* <Button
+          >
+            <BsCart className="relative"></BsCart>
+            <span className="relative">Check Now</span>
+          </button>
+          {/* <Button
             type="button"
             handleOnClick={() =>
               navigate(
@@ -152,9 +154,9 @@ const DealDaily = () => {
             <AiOutlineMenu></AiOutlineMenu>
             <span>Option</span>
           </Button> */}
-          </div>
         </div>
       </div>
+    </div>
   );
 };
 

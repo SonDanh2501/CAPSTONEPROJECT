@@ -54,7 +54,7 @@ const Pitch = ({ pitchData, isNew, normal, navigate, dispatch, pid }) => {
   };
   return (
     <div
-      className="bg-gradient-to-r from-white to-gray-200 shadow-lg rounded-md overflow-hidden hover:shadow-2xl hover:shadow-gray-500 duration-300 hover:bg-gradient-to-l"
+      className="w-[400px] bg-gradient-to-r from-white to-gray-200 shadow-lg rounded-md overflow-hidden hover:shadow-2xl hover:shadow-gray-500 duration-300 hover:bg-gradient-to-l"
       onClick={(e) =>
         navigate(
           `/${pitchData?.category?.toLowerCase()}/${pitchData?.brand?.toLowerCase()}/${
