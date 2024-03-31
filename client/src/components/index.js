@@ -22,6 +22,7 @@ export { default as DealDaily } from "./pitches/DealDaily";
 export { default as FeaturePitch } from "./pitches/FeaturePitch";
 export { default as PitchCard } from "./pitches/PitchCard";
 export { default as PitchExtraInfo } from "./pitches/PitchExtraInfo";
+export { default as Skeleton } from "./pitches/Skeleton";
 export { default as PitchInformation } from "./pitches/PitchInformation";
 export { default as Order } from "./pitches/Order";
 // Seacrh

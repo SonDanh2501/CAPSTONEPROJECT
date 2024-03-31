@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { Route, Routes } from "react-router-dom";
 import {
   Login,
@@ -51,6 +51,7 @@ function App() {
   useEffect(() => {
     dispatch(getCategories());
   }, [dispatch]);
+
   return (
     <div className="font-main h-screen">
       <ToastContainer
@@ -77,10 +78,14 @@ function App() {
       <div
         onClick={() => dispatch(showOrder())}
         className={`fixed top-0 bottom-0 left-auto z-50 flex transform duration-500 ${
-          isShowOrder ? "right-0 " : "-right-[420px]"
+          isShowOrder ? "right-0" : "-right-[420px]"
         }`}
       >
-        <Order />
+        {isShowOrder && (
+          <div>
+            <Order />
+          </div>
+        )}
       </div>
       {isShowModal && <Modal>{modalChildren}</Modal>}
       <Routes>
@@ -89,13 +94,9 @@ function App() {
         <Route path={path.PUBLIC} element={<Public />}>
           <Route path={path.HOME} element={<Home />} />
           <Route path={path.NEWS} element={<News />} />
-          <Route
-            path={path.DETAIL_PITCH__CATEGORY__BRAND__PITCHID__TITLE}
-            element={<DetailPitches />}
-          />
+          <Route path={path.DETAIL_PITCH__CATEGORY__BRAND__PITCHID__TITLE} element={<DetailPitches />}/>
           <Route path={path.FAQ} element={<FAQ />} />
           <Route path={path.CONTACT} element={<Contact />} />
-
           <Route path={path.PITCHES__CATEGORY} element={<Pitches />} />
           <Route path={path.DETAIL_ORDER} element={<DetailOrder />} />
           <Route path={path.RESET_PASSWORD} element={<ResetPassword />} />

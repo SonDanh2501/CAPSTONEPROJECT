@@ -1,4 +1,4 @@
-import React, { memo, useEffect, useState } from "react";
+import React, { memo, useCallback, useEffect, useState } from "react";
 import { IoMdClose } from "react-icons/io";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
@@ -11,16 +11,17 @@ import { MdDeleteForever } from "react-icons/md";
 import { toast } from "react-toastify";
 import path from "ultils/path";
 import { showOrder } from "store/app/appSlice";
-const Order = () => {
+const Order = ({click}) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const { current } = useSelector((state) => state.user);
   const [order, setOrder] = useState(null);
   const fetchPitchData = async () => {
     const response = await apiGetUserOrderStatus(current?._id);
-    if (response.success) setOrder(response.Booking);
+    if (response.success) {
+      setOrder(response.Booking);
+    }
   };
-
   const updateOrder = async (bid) => {
     const response = await apiDeleteOrder(bid);
     if (response.success) {
@@ -30,11 +31,12 @@ const Order = () => {
   };
   useEffect(() => {
     fetchPitchData();
-  }, [order]);
+  }, []);
+
   return (
     <div
       onClick={(e) => e.stopPropagation()}
-      className="w-[420px] h-screen overflow-y-auto bg-white text-black shadow-2xl flex flex-col"
+      className="w-[420px] h-screen overflow-y-auto bg-white text-black shadow-2xl flex flex-col "
     >
       <div className="p-4 flex justify-between items-center font-bold text-xl border-b-2 border-gray-300">
         <span>Your Order</span>

@@ -244,7 +244,7 @@ const News = () => {
           <div className="flex">
             <div className="md:w-4/5 w-full">
               <div className="flex items-center ">
-                <div className="w-full  grid md:grid-cols-3  auto-rows-[250px] gap-2 ">
+                <div className="w-full grid md:grid-cols-3  auto-rows-[250px] gap-2 ">
                   {visibleNews.map((e, index) => (
                     <div
                       key={index}
