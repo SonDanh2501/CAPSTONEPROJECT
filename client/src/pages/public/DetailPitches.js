@@ -1,6 +1,6 @@
 import React, { useCallback, useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import { apiGetPitch, apiGetPitches, apiBooking, apiGetAllOrder } from "apis";
+import { apiGetPitch, apiGetPitches, apiBooking, apiGetAllOrder, apiGetUserOrderStatus } from "apis";
 import moment from "moment";
 import {
   Breadcrumb,
@@ -53,6 +53,15 @@ const DetailPitches = ({ isQuickView, data }) => {
   const { title, brand } = useParams();
   const [selectedHour, setSelectedHour] = useState([]);
   const [coords, setCoords] = useState(null);
+  const [order, setOrder] = useState(null);
+
+  const fetchPitchDataBooking = async () => {
+    const response = await apiGetUserOrderStatus(isLoggedIn?._id);
+    if (response.success) {
+      setOrder(response.Booking);
+    }
+  };
+
 
   const fetchBooking = async () => {
     const response = await apiGetAllOrder();
@@ -98,7 +107,6 @@ const DetailPitches = ({ isQuickView, data }) => {
         }
       });
     }
-
     const response = await apiBooking({
       shifts: selectedShift,
       bookedDate: selectedDate,
@@ -108,6 +116,7 @@ const DetailPitches = ({ isQuickView, data }) => {
       namePitch: pitch?.title,
     });
     if (response.success) {
+      // fetchPitchDataBooking();
       toast.success(response.message);
     } else toast.error(response.message);
   };
@@ -139,17 +148,17 @@ const DetailPitches = ({ isQuickView, data }) => {
     }
   }, [update]);
 
-  useEffect(() => {
-    if (pitch) {
-      const getCoords = async () => {
-        const result = await geocodeByAddress(pitch?.address[0]);
-        const latLng = await getLatLng(result[0]);
+  // useEffect(() => {
+  //   if (pitch) {
+  //     const getCoords = async () => {
+  //       const result = await geocodeByAddress(pitch?.address[0]);
+  //       const latLng = await getLatLng(result[0]);
 
-        setCoords(latLng);
-      };
-      pitch && getCoords();
-    }
-  }, [pitch]);
+  //       setCoords(latLng);
+  //     };
+  //     pitch && getCoords();
+  //   }
+  // }, [pitch]);
 
   useEffect(() => {
     if (data) {
@@ -311,7 +320,7 @@ const DetailPitches = ({ isQuickView, data }) => {
       {!isQuickView && (
         <div>
           <div className="w-main m-auto mt-8">
-            <Map coords={coords} address={pitch?.address[0]} />
+            {/* <Map coords={coords} address={pitch?.address[0]} /> */}
 
             <PitchInformation
               totalRatings={pitch?.totalRatings}

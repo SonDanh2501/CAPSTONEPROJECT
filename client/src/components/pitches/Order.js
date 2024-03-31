@@ -16,7 +16,8 @@ const Order = ({click}) => {
   const navigate = useNavigate();
   const { current } = useSelector((state) => state.user);
   const [order, setOrder] = useState(null);
-  const fetchPitchData = async () => {
+  
+  const fetchPitchData = async (data) => {
     const response = await apiGetUserOrderStatus(current?._id);
     if (response.success) {
       setOrder(response.Booking);
@@ -32,7 +33,6 @@ const Order = ({click}) => {
   useEffect(() => {
     fetchPitchData();
   }, []);
-
   return (
     <div
       onClick={(e) => e.stopPropagation()}
@@ -75,7 +75,9 @@ const Order = ({click}) => {
                       className="w-fit px-2 py-1 my-2 gap-2 flex items-center justify-center cursor-pointer border bg-red-500 rounded-md hover:bg-red-800 duration-300"
                       onClick={() => updateOrder(el._id)}
                     >
-                      <span className="text-xs text-white border-r pr-2">Remove</span>
+                      <span className="text-xs text-white border-r pr-2">
+                        Remove
+                      </span>
                       <span className="h-5 w-5 flex items-center duration-500 text-white">
                         <MdDeleteForever size={16} />
                       </span>
@@ -94,27 +96,27 @@ const Order = ({click}) => {
       <div className="h-2/6 flex flex-col justify-between pt-8 border-t-2">
         <div className="flex items-center mx-4 justify-between">
           <span> Subtotal:</span>
-          <span>
+          {/* <span>
             {formatMoney(
               order?.reduce((sum, el) => sum + Number(el.pitch?.price), 0)
             ) + ` VND`}
-          </span>
+          </span> */}
         </div>
         <div className="flex items-center mx-4 justify-between">
           <span> Discount:</span>
-          <span>
+          {/* <span>
             {formatMoney(
               order?.reduce((sum, el) => sum + Number(el.pitch?.price), 0)
             ) + ` VND`}
-          </span>
+          </span> */}
         </div>
         <div className="flex items-center mx-4 justify-between font-bold">
           <span> Total:</span>
-          <span>
+          {/* <span>
             {formatMoney(
               order?.reduce((sum, el) => sum + Number(el.pitch?.price), 0)
             ) + ` VND`}
-          </span>
+          </span> */}
         </div>
         {/* <span className="text-center text-gray-700 italic">
           Taxes and Discount calculated at checkout
