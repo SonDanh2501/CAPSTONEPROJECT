@@ -116,28 +116,12 @@ const News = () => {
                         className="object-cover w-full h-5/6"
                       />
                       <h1
-                        style={{ fontFamily: "Open Sans" }}
-                        className={` font-medium flex justify-center text-white hover:text-gray-200 pr-2 pl-2 ${
+                        className={`font-medium w-full flex justify-center overflow-hidden whitespace-nowrap text-white hover:text-gray-200 pr-2 pl-2 ${
                           index === 0 ? "md:text-xl text-md" : "text-md"
                         }`}
+                        style={{ fontFamily: "Open Sans" }}
                       >
-                        {index === 0 && e?.title.length > 220 ? (
-                          <>
-                            {e?.title.substring(0, 200)}
-                            <span>...</span>
-                          </>
-                        ) : (
-                          <>
-                            {e?.title.length > 80 ? (
-                              <>
-                                {e?.title.substring(0, 80)}
-                                <span>...</span>
-                              </>
-                            ) : (
-                              e?.title
-                            )}
-                          </>
-                        )}
+                        <div className="truncate">{e?.title}</div>
                       </h1>
                       {index === 0 && (
                         <div className=" hidden md:block pb-2 pl-4 pr-4">
