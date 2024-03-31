@@ -14,6 +14,7 @@ const path = {
   FINAL_REGISTER: "finalregister/:status",
   RESET_PASSWORD: "reset-password/:token",
   DETAIL_PITCH__CATEGORY__BRAND__PITCHID__TITLE: ":category/:brand/:pid/:title",
+  DETAIL_NEWS: "news/single",
   CATEGORY__BRAND: ":category/:brand",
 
   // Admin Route

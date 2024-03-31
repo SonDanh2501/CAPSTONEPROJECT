@@ -13,7 +13,7 @@ import { apiGetUserOrderStatus } from "apis";
 import { NavLink } from "react-router-dom";
 import avatar from "assets/avatarwhite.jpg";
 import { showOrder } from "store/app/appSlice";
-import ThemeToggle from "components/buttons/ThemeToggle"
+import ThemeToggle from "components/buttons/ThemeToggle";
 
 const { AiOutlineLogout } = icons;
 const { BsCart } = icons;
@@ -25,9 +25,8 @@ const TopHeader = () => {
   const navigate = useNavigate();
   const { isLoggedIn, current, mes } = useSelector((state) => state.user);
   const [isShowOption, setisShowOption] = useState(false);
-  const [isOpen, setisOpen] = useState(false)
+  const [isOpen, setisOpen] = useState(false);
   const [order, setOrder] = useState(null);
-
 
   const fetchPitchData = async () => {
     const response = await apiGetUserOrderStatus(current?._id);
@@ -52,13 +51,13 @@ const TopHeader = () => {
     }
   }, [mes]);
   const toggleNavbar = () => {
-    setisOpen(!isOpen)
-  }
+    setisOpen(!isOpen);
+  };
   useEffect(() => {
     fetchPitchData();
   }, []);
   return (
-    <div className="w-full bg-header-bg flex h-full items-center flex-wrap justify-between dark:bg-dark">
+    <div className="w-full bg-header-bg flex h-full items-center flex-wrap justify-between dark:bg-dark ">
       <div className="ml-[50px] pt-3 pb-3">
         <Link to={`/${path.HOME}`}>
           <img src={logo} alt="logo" className="w-[234px] object-contain" />
@@ -80,14 +79,16 @@ const TopHeader = () => {
         ))}
       </div>
       {isLoggedIn && current ? (
-
         <div className="flex items-center mr-8">
-          <div
-          >
-            <span className="cursor-pointer hover:text-orange text-white"
-              onClick={() => dispatch(showOrder())}>
+          <div>
+            <span
+              className="cursor-pointer hover:text-orange text-white"
+              onClick={() => dispatch(showOrder())}
+            >
               <BsCart size={20} />
-              <span class="absolute flex items-center justify-center w-[16px] h-[16px] text-xs text-white bg-red-400 border-white rounded-full top-[12px] ml-3">{(order?.length || 0)}</span>
+              <span class="absolute flex items-center justify-center w-[16px] h-[16px] text-xs text-white bg-red-400 border-white rounded-full top-[12px] ml-3">
+                {order?.length || 0}
+              </span>
             </span>
           </div>
           <div
@@ -132,7 +133,7 @@ const TopHeader = () => {
             </div>
           )}
 
-          <div className="ml-7" >
+          <div className="ml-7">
             <span
               onClick={() => dispatch(logout())}
               className="hover:rounded-full cursor-auto hover:text-orange p-2 text-white"
@@ -150,7 +151,13 @@ const TopHeader = () => {
         </Link>
       )}
       <div className="lg:hidden mr-4">
-        <button onClick={toggleNavbar}>{isOpen ? <FaXmark className="text-white" size={20}></FaXmark> : <FaBars className="text-white" size={20}></FaBars>}</button>
+        <button onClick={toggleNavbar}>
+          {isOpen ? (
+            <FaXmark className="text-white" size={20}></FaXmark>
+          ) : (
+            <FaBars className="text-white" size={20}></FaBars>
+          )}
+        </button>
       </div>
       {isOpen && (
         <div className="flex basis-full flex-col items-center mt-2 bg border">
@@ -166,12 +173,13 @@ const TopHeader = () => {
             >
               {el.value}
             </NavLink>
-          ))}</div>
-      )
-      }
-      <div className="mr-2 max-[1183px]:hidden"><ThemeToggle></ThemeToggle></div>
+          ))}
+        </div>
+      )}
+      <div className="mr-2 max-[1183px]:hidden">
+        <ThemeToggle></ThemeToggle>
+      </div>
     </div>
-
   );
 };
 

@@ -12,6 +12,7 @@ import {
   ResetPassword,
   DetailBrand,
   News,
+  DetailNews,
 } from "pages/public";
 import {
   AdminLayout,
@@ -107,6 +108,7 @@ function App() {
             path={path.DETAIL_PITCH__CATEGORY__BRAND__PITCHID__TITLE}
             element={<DetailPitches />}
           />
+          <Route path={path.DETAIL_NEWS} element={<DetailNews />} />
           <Route path={path.FAQ} element={<FAQ />} />
           <Route path={path.CONTACT} element={<Contact />} />
           <Route path={path.PITCHES__CATEGORY} element={<Pitches />} />

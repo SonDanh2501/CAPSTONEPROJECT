@@ -16,7 +16,7 @@ router.post(
   ]),
   ctrls.createPitch
 );
-// router.get('/', ctrls.getPitchs)
+
 router.get("/", ctrls.getPitches);
 router.put("/ratings", [verifyAccessToken], ctrls.ratings);
 

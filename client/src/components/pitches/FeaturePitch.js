@@ -52,7 +52,10 @@ const FeaturePitch = () => {
     <div className="w-full dark:bg-medium pb-10">
       <h3 className="text-[40px] font-semibold py-[15px] text-center">
         <span className="text-indigo-500 ">Our</span>
-        <span className="border-b-2 border-indigo-500 dark:text-white"> Pit</span>
+        <span className="border-b-2 border-indigo-500 dark:text-white">
+          {" "}
+          Pit
+        </span>
         <span className="dark:text-white">ches</span>
       </h3>
 
@@ -71,18 +74,6 @@ const FeaturePitch = () => {
             ></PitchCard>
           ))}
         </Slider>
-        {/* <div className="flex justify-between">
-        <img src={banner5} className="w-[40%] h-[380px]"></img>
-
-        <div className="flex flex-col justify-between h-full w-[24%]">
-          <img src={banner4} className="w-[100%] object-contain"></img>
-          <img
-            src={banner3}
-            className="w-[100%] h-[210px] object-contain"
-          ></img>
-        </div>
-        <img src={banner6} className="w-[35%] h-[380px]"></img>
-      </div> */}
       </div>
     </div>
   );

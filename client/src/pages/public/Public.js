@@ -16,14 +16,15 @@ const Public = () => {
   }, []);
 
   return (
-    <div className="max-h-screen flex flex-col items-center">
+    <div className="max-h-screen flex flex-col items-center ">
       <TopHeader></TopHeader>
+
       {/* <Header></Header> */}
       {/* <Navigation></Navigation> */}
       <div className="w-full  items-center flex-col">
         <Outlet></Outlet>
       </div>
-       <Footer></Footer> 
+      <Footer></Footer>
     </div>
   );
 };
