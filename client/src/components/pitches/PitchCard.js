@@ -1,4 +1,4 @@
-import React, { memo } from "react";
+import React, { memo, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { formatMoney } from "ultils/helper";
 import { renderStarFromNumber } from "ultils/helper";
@@ -17,7 +17,6 @@ const PitchCard = ({
   brand,
 }) => {
   const navigate = useNavigate();
-
   return (
     <div className="my-4 bg-gradient-to-r from-white to-gray-100 text-gray-700 shadow-lg rounded-md overflow-hidden hover:shadow-2xl hover:shadow-gray-500 duration-300">
       <img
