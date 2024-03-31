@@ -21,7 +21,7 @@ const createBooking = asyncHandler(async (req, res) => {
     const selectedCoupon = await Coupon.findById(coupon);
     total =
       Math.round((total * (1 - +selectedCoupon?.discount / 100)) / 1000) *
-        1000 || total;
+      1000 || total;
     createData.total = total;
     createData.coupon = coupon;
   }

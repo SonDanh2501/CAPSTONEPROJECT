@@ -3,6 +3,8 @@ const pitchRouter = require("./pitch");
 const pitchCategoryRouter = require("./pitchCategory");
 const brand = require("./brand");
 const bookingRouter = require("./booking");
+const couponRouter = require("./coupon");
+
 
 const { notFound, errHandler } = require("../middlewares/errorHandler");
 
@@ -11,6 +13,7 @@ const initRoutes = (app) => {
   app.use("/api/pitch", pitchRouter);
   app.use("/api/pitchcategory", pitchCategoryRouter);
   app.use("/api/brand", brand);
+  app.use("/api/coupon", couponRouter);
   app.use("/api/booking", bookingRouter);
   app.use(notFound);
   app.use(errHandler);
