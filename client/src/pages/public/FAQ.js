@@ -1,62 +1,18 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { HeaderBanner } from "components";
 import { FaChevronDown } from "react-icons/fa";
 import { MdNavigateNext } from "react-icons/md";
-
+import { apiGetFaq } from "apis";
 const FAQ = () => {
-  const data = [
-    {
-      id: 1,
-      title: "title 1",
-      content: [
-        "No. Unfortunately, GitHub doesn't provide this functionality, so we cannot make a refund. However, every",
-        "plan has a 14-day free trial that can be canceled at any time and should give you plenty of time to try",
-        "Mockend.",
-      ],
-    },
-    {
-      id: 2,
-      title: "title 2",
-      content: [
-        "No. Only mockend.com is related to this project. We are not related to any other project that has mockend in their name.",
-        "If you have not yet done so, visit the Verifications section of your Dashboard to upload your photo ID in your dashboard.",
-      ],
-    },
-    {
-      id: 3,
-      title: "title 3",
-      content: [
-        "No. Unfortunately, GitHub doesn't provide this functionality, so we cannot make a refund. However, every",
-        "plan has a 14-day free trial that can be canceled at any time and should give you plenty of time to try",
-        "Mockend.",
-      ],
-    },
-    {
-      id: 4,
-      title: "title 4",
-      content: [
-        "Maybe. We are constantly adding new features to Mockend. If you have a feature request, please write",
-        "us at contact@mockend.com.",
-      ],
-    },
-    {
-      id: 5,
-      title: "title 5",
-      content: [
-        "Maybe. We are constantly adding new features to Mockend. If you have a feature request, please write",
-        "us at contact@mockend.com.",
-      ],
-    },
-    {
-      id: 6,
-      title: "title 6",
-      content: [
-        "Maybe. We are constantly adding new features to Mockend. If you have a feature request, please write",
-        "us at contact@mockend.com.",
-      ],
-    },
-  ];
-
+  const [faq, setFaq] = useState(null);
+  const fetchFaq = async () => {
+    const response = await apiGetFaq();
+    console.log(response);
+    if (response.success) setFaq(response.faq);
+  };
+  useEffect(() => {
+    fetchFaq();
+  }, []);
   const [openQuestionId, setOpenQuestionId] = useState("");
 
   const onOpen = (questionId) => {
@@ -77,23 +33,23 @@ const FAQ = () => {
         </div>
 
         <div className="md:p-14 md:pt-0 p-4">
-          {data.map((e) => (
-            <div className="border-top border-bottom pt-4" key={e.id}>
+          {faq?.map((e) => (
+            <div className="border-top border-bottom pt-4" key={e._id}>
               <hr className="pb-4" />
               <div className="flex text-xl font-semibold justify-between items-center">
                 <span>{e.title}</span>
                 <FaChevronDown
                   className={`text-lg mr-4 cursor-pointer hover:text-zinc-300 ${
-                    openQuestionId === e.id ? "transform rotate-180" : ""
+                    openQuestionId === e._id ? "transform rotate-180" : ""
                   }`}
-                  onClick={() => onOpen(e.id)}
+                  onClick={() => onOpen(e._id)}
                 />
               </div>
-              {openQuestionId === e.id && (
+              {openQuestionId === e._id && (
                 <div className="flex">
                   <MdNavigateNext className="mt-3 text-md" />
                   <div className="flex flex-col pt-2 text-lg">
-                    {e.content.map((el, i) => (
+                    {e.description?.map((el, i) => (
                       <span key={i}>{el}</span>
                     ))}
                   </div>
