@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { Route, Routes } from "react-router-dom";
 import {
   Login,
@@ -52,6 +52,7 @@ function App() {
   useEffect(() => {
     dispatch(getCategories());
   }, [dispatch]);
+
   return (
     <div className="font-main h-screen">
       <ToastContainer
@@ -75,10 +76,23 @@ function App() {
           <Order />
         </div>
       )} */}
+      {/* <div
+        onClick={() => dispatch(showOrder())}
+        className={`fixed top-0 bottom-0 left-auto z-50 flex transform duration-500 ${
+          isShowOrder ? "right-0" : "-right-[420px]"
+        }`}
+      >
+        {isShowOrder && (
+          <div>
+            <Order />
+          </div>
+        )}
+      </div> */}
+
       <div
         onClick={() => dispatch(showOrder())}
         className={`fixed top-0 bottom-0 left-auto z-50 flex transform duration-500 ${
-          isShowOrder ? "right-0 " : "-right-[420px]"
+          isShowOrder ? "right-0" : "-right-[420px]"
         }`}
       >
         <Order />
@@ -97,7 +111,6 @@ function App() {
           <Route path={path.DETAIL_NEWS} element={<DetailNews />} />
           <Route path={path.FAQ} element={<FAQ />} />
           <Route path={path.CONTACT} element={<Contact />} />
-
           <Route path={path.PITCHES__CATEGORY} element={<Pitches />} />
           <Route path={path.DETAIL_ORDER} element={<DetailOrder />} />
           <Route path={path.RESET_PASSWORD} element={<ResetPassword />} />

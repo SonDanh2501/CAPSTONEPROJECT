@@ -21,6 +21,7 @@ const Checkout = () => {
   const [isSuccess, setIsSuccess] = useState(false);
   const [isChecked, setIsChecked] = useState(false);
   const [showCashButton, setShowCashButton] = useState(false);
+  const discount = JSON.parse(localStorage.getItem('discount')); // Accessing discount state from localStorage
 
   const fetchPitchData = async () => {
     const response = await apiGetUserOrderStatus(current?._id);
@@ -52,6 +53,7 @@ const Checkout = () => {
         });
       }, 500);
     }
+    localStorage.removeItem("discount");
   };
   useEffect(() => {
     fetchPitchData();
@@ -90,12 +92,27 @@ const Checkout = () => {
             ))}
           </tbody>
         </table>
-        <div>
-          <span className="flex items-center gap-8 text-3xl font-semibold">
+        <div className="flex flex-col gap-2">
+          <span className="flex items-center gap-20 text-3xl font-semibold">
             <span>Subtotal:</span>
             <span className="text-main text-3xl font-semibold">
               {formatMoney(
                 order?.reduce((sum, el) => sum + Number(el.pitch?.price), 0)
+              ) + ` VND`}
+            </span>
+          </span>
+          <span className="flex items-center gap-20 text-3xl font-semibold">
+            <span>Discount:</span>
+            <span className="text-main text-3xl font-semibold">
+              {discount ? formatMoney(discount.price) + ' VND' : '0 VND'}
+
+            </span>
+          </span>
+          <span className="flex items-center text-3xl font-semibold">
+            <span className="mr-32">Total:</span>
+            <span className="text-main text-3xl font-semibold">
+              {formatMoney(
+                order?.reduce((sum, el) => sum + Number(el.pitch?.price), 0) - (discount?.price || 0)
               ) + ` VND`}
             </span>
           </span>
@@ -114,7 +131,7 @@ const Checkout = () => {
             setIsSuccess={setIsSuccess}
             amount={Math.round(
               order?.reduce((sum, el) => sum + Number(el.pitch?.price), 0) /
-                23500
+              23500
             )}
           />
         </div>

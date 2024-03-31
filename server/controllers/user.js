@@ -570,22 +570,56 @@ const getWishListById = asyncHandler(async (req, res) => {
   });
 });
 const loginGG = asyncHandler(async (req, res) => {
-  const { email } = req.body;
+  console.log("CHECKING DATA: ", req.body);
+  // const { email } = req?.body?.email;
+  console.log("CHECK MAIL:", req?.body?.email);
   // const email = "20110412@student.hcmute.edu.vn";
-
-  if (!email)
+  if (!req.body?.email)
     return res.status(400).json({
       success: false,
       mes: "Missing inputs",
     });
-  //refresh token => cấp mới accesstoken .
-  //access token => xác thực người dùng , phân quyền người dùng.
+  // refresh token => cấp mới accesstoken .
+  // access token => xác thực người dùng , phân quyền người dùng.
 
-  const response = await User.findOne({ email: email });
+  const response = await User.findOne({ email: req?.body?.email });
+  // console.log("KTR RESPONSE", response);
+  if (!response) {
+    // Nếu gmail google chưa có trong db thì tiến hành tạo một account mới
+    console.log("RUN");
+    // const token = makeToken();
+    // const emailedited = btoa(email) + "@" + token;
+    //tạo accesstoken
 
-  if (response) {
+    const newUser = await User.create({
+      email: req?.body?.email,
+      password: 123456789,
+      firstname: req?.body?.family_name,
+      lastname: req?.body?.given_name,
+      role: 3,
+    });
+    const accessToken = generateAccessToken(newUser._id, newUser.role);
+    //tạo refreshtoken
+    const newrefreshToken = generateRefreshToken(newUser._id);
+    // lưu refreshtoken vào database
+    await User.findByIdAndUpdate(
+      newUser._id,
+      { refreshToken: newrefreshToken },
+      { new: true }
+    );
+    // lưu refresh token vào cookie
+    res.cookie("refreshToken", newrefreshToken, {
+      httpOnly: true,
+      maxAge: 7 * 24 * 60 * 60 * 1000,
+    });
+    return res.status(200).json({
+      success: true,
+      accessToken,
+      userData: newUser,
+    });
+  } else if (response) {
+    console.log("ĐÃ CÓ TÀI KHOẢN")
     const { role, refreshToken, ...userData } = response.toObject();
-
     //tạo accesstoken
     const accessToken = generateAccessToken(response._id, role);
     //tạo refreshtoken
@@ -627,5 +661,5 @@ module.exports = {
   BookingPitch,
   updateWishlist,
   getWishListById,
-  loginGG
+  loginGG,
 };

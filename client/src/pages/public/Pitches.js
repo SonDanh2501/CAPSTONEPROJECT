@@ -4,6 +4,7 @@ import {
   useSearchParams,
   useNavigate,
   createSearchParams,
+  NavLink,
 } from "react-router-dom";
 import {
   Breadcrumb,
@@ -11,17 +12,23 @@ import {
   SearchItem,
   InputSelect,
   Pagination,
+  Skeleton
 } from "components";
 import { apiGetPitches } from "apis";
 import Masonry from "react-masonry-css";
 import { sorts } from "ultils/constant";
+import { formattedCategory } from "ultils/helper";
+import { useSelector } from "react-redux";
 
 const Pitches = () => {
   const breakpointColumnsObj = {
-    default: 3,
-    1200: 2,
-    700: 1,
+    default: 4,
+    1400: 3,
+    1250: 2,
+    1000: 1,
   };
+  const [loading, setLoading ] = useState(true);
+  const { categories } = useSelector((state) => state.app);
   const navigate = useNavigate();
   const [pitches, setpitches] = useState(null);
   const [activeClick, setactiveClick] = useState(null);
@@ -30,12 +37,31 @@ const Pitches = () => {
   const { category } = useParams();
   const [searching, setSearching] = useState("");
   const [searchingFlag, setSearchingFlag] = useState(true);
+  const [getCategory, setGetCategory] = useState("");
+  // const [category, setCategory] = useState("");
 
   const fetchProductsByCategory = async (queries) => {
-    if (category && category !== "pitches") queries.category = category;
+    if (getCategory && getCategory.length > 0) {
+      queries.category = getCategory;
+    };
     const response = await apiGetPitches(queries);
-    if (response.success) setpitches(response);
+    if (response.success) {
+      setpitches(response);
+    };
   };
+  const changeActiveFilter = useCallback(
+    (name) => {
+      if (activeClick === name) setactiveClick(null);
+      else setactiveClick(name);
+    },
+    [activeClick]
+  );
+  const changeValue = useCallback(
+    (value) => {
+      setSort(value);
+    },
+    [sort]
+  );
 
 
   useEffect(() => {
@@ -57,25 +83,10 @@ const Pitches = () => {
     delete queries.from;
     const q = { ...priceQuery, ...queries };
     fetchProductsByCategory(q);
+    setLoading(true);
     window.scrollTo(0, 0);
-  }, [params]);
+  }, [params, getCategory]);
 
-  const changeActiveFilter = useCallback(
-    (name) => {
-      if (activeClick === name) setactiveClick(null);
-      else setactiveClick(name);
-    },
-    [activeClick]
-  );
-
-  const changeValue = useCallback(
-    (value) => {
-      setSort(value);
-    },
-    [sort]
-  );
-
- 
   useEffect(() => {
     const queries = Object.fromEntries([...params]);
     delete queries?.q;
@@ -87,10 +98,9 @@ const Pitches = () => {
       setSearchingFlag(false);
       navigate({
         pathname: `/${category}`,
-        search: createSearchParams({ q: searching,...queries}).toString(),
+        search: createSearchParams({ q: searching, ...queries }).toString(),
       });
-    } 
-    else {
+    } else {
       setSearchingFlag(true);
       navigate({
         pathname: `/${category}`,
@@ -99,16 +109,25 @@ const Pitches = () => {
     }
   }, [searching, params]);
 
+  useEffect(() => {
+    console.log("RUN")
+    setTimeout(() => {
+      setLoading(false);
+    }, 1500);
+  }, [params, getCategory]);
+
+// console.log(getCategory);
   return (
     <div className="w-full">
       <div className="h-[81px] flex justify-center items-center bg-gray-100">
         <div className="w-main">
           <h3 className="font-semibold uppercase">{category}</h3>
-          <Breadcrumb category={category}></Breadcrumb>
+          <Breadcrumb category={category}> </Breadcrumb>
         </div>
       </div>
-      <div className="w-main border p-4 flex justify-between mt-8 m-auto gap-3">
-        <div className="w-3/5 flex-auto flex flex-col gap-3">
+
+      <div className="w-full border p-4 flex justify-between mt-8 mx-auto gap-3">
+        <div className="flex flex-col gap-3 ">
           <span className="font-semibold text-sm">Filter by</span>
           <div className="flex items-center gap-4">
             <SearchItem
@@ -124,48 +143,81 @@ const Pitches = () => {
             ></SearchItem>
           </div>
         </div>
-        <div className="w-1/5 flex flex-col gap-3  ">
-          <span className="font-semibold text-sm ">Search</span>
-          <input
-            onChange={(e) => setSearching(e.target.value)}
-            type="type"
-            value={searching}
-            id="q"
-            className="form-input my-auto rounded-md w-full text-sm mb-1 "
-          />
-        </div>
-        <div className="w-1/5 flex flex-col gap-3">
-          <span className="font-semibold text-sm">Sort by</span>
-          <div className="w-full">
-            <InputSelect
-              changeValue={changeValue}
-              value={sort}
-              options={sorts}
-            ></InputSelect>
+        <div className="flex gap-3 ">
+          <div className="flex flex-col gap-3 ">
+            <span className="font-semibold text-sm">Search</span>
+            <input
+              onChange={(e) => setSearching(e.target.value)}
+              type="type"
+              value={searching}
+              id="q"
+              className="form-input my-auto rounded-md w-full text-sm mb-1 "
+            />
+          </div>
+          <div className="flex flex-col gap-3">
+            <span className="font-semibold text-sm">Sort by</span>
+            <div className="w-full">
+              <InputSelect
+                changeValue={changeValue}
+                value={sort}
+                options={sorts}
+              ></InputSelect>
+            </div>
           </div>
         </div>
       </div>
-      <div className="mt-8 w-main m-auto">
-        <Masonry
-          breakpointCols={breakpointColumnsObj}
-          className="my-masonry-grid flex gap-16 m-auto"
-          columnClassName="my-masonry-grid_column"
-        >
-          {pitches?.pitches?.map((el) => (
-            <div key={el._id} className="cursor-pointer">
-              <Pitch
-                pid={el._id}
-                pitchData={el}
-                normal={true}
-              ></Pitch>
-            </div>
+
+      <div className="mt-8 w-full m-auto">
+        <div className="flex items-center justify-center gap-4 mb-12">
+          <button
+            onClick={() => {
+              setGetCategory("");
+            }}
+            className={`w-[140px] px-3 py-4 rounded-full border-2 border-black font-bold text-center duration-300 ${
+              getCategory === ""
+                ? "text-white bg-orange border-orange"
+                : "text-black"
+            }`}
+          >
+            All
+          </button>
+          {categories?.map((el) => (
+            <button
+              onClick={() => {
+                setGetCategory(el.title);
+              }}
+              className={`w-[140px] px-3 py-4 rounded-full border-2 border-black font-bold text-center duration-300 ${
+                getCategory === el.title
+                  ? "text-white bg-orange border-orange"
+                  : "text-black"
+              }`}
+            >
+              {el.title}
+            </button>
           ))}
-        </Masonry>
+        </div>
+        <div className="">
+          <Masonry
+            breakpointCols={breakpointColumnsObj}
+            className="my-masonry-grid"
+            columnClassName="my-masonry-grid_column"
+          >
+            {pitches?.pitches?.map((el) => (
+              <div key={el._id} className="cursor-pointer">
+                {loading ? (
+                  <Skeleton />
+                ) : (
+                  <Pitch pid={el._id} pitchData={el} normal={true} />
+                )}
+              </div>
+            ))}
+          </Masonry>
+        </div>
       </div>
-      <div className="w-main m-auto my-4 flex justify-end">
+      <div className="md:w-full w-main m-auto my-4 flex justify-end">
         <Pagination totalCount={pitches?.totalCount} />
       </div>
-      <div className="w-full h-[500px]"></div>
+      {/* <div className="w-full h-[500px]"></div> */}
     </div>
   );
 };
