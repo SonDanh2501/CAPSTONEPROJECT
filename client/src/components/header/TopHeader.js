@@ -8,6 +8,8 @@ import Swal from "sweetalert2";
 import icons from "ultils/icons";
 import path from "ultils/path";
 import { navigation } from "ultils/constant";
+import { apiGetUserOrderStatus } from "apis";
+
 import { NavLink } from "react-router-dom";
 import avatar from "assets/avatarwhite.jpg";
 import { showOrder } from "store/app/appSlice";
@@ -24,6 +26,13 @@ const TopHeader = () => {
   const { isLoggedIn, current, mes } = useSelector((state) => state.user);
   const [isShowOption, setisShowOption] = useState(false);
   const [isOpen, setisOpen] = useState(false)
+  const [order, setOrder] = useState(null);
+
+
+  const fetchPitchData = async () => {
+    const response = await apiGetUserOrderStatus(current?._id);
+    if (response.success) setOrder(response.Booking);
+  };
 
   useEffect(() => {
     const setTimeoutId = setTimeout(() => {
@@ -45,6 +54,9 @@ const TopHeader = () => {
   const toggleNavbar = () => {
     setisOpen(!isOpen)
   }
+  useEffect(() => {
+    fetchPitchData();
+  }, []);
   return (
     <div className="w-full bg-header-bg flex h-full items-center flex-wrap justify-between dark:bg-dark">
       <div className="ml-[50px] pt-3 pb-3">
@@ -75,6 +87,7 @@ const TopHeader = () => {
             <span className="cursor-pointer hover:text-orange text-white"
               onClick={() => dispatch(showOrder())}>
               <BsCart size={20} />
+              <span class="absolute flex items-center justify-center w-[16px] h-[16px] text-xs text-white bg-red-400 border-white rounded-full top-[12px] ml-3">{(order?.length || 0)}</span>
             </span>
           </div>
           <div

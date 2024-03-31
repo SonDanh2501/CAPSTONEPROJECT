@@ -1,8 +1,8 @@
-import React, { memo, useCallback, useEffect, useState } from "react";
+import React, { memo, useEffect, useState, useCallback } from "react";
 import { IoMdClose } from "react-icons/io";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { apiDeleteOrder, apiGetUserOrderStatus } from "apis";
+import { apiDeleteOrder, apiGetUserOrderStatus, apiGetCoupon } from "apis";
 import defaultImage from "assets/default.png";
 import { shifts } from "ultils/constant";
 import { formatMoney } from "ultils/helper";
@@ -11,13 +11,22 @@ import { MdDeleteForever } from "react-icons/md";
 import { toast } from "react-toastify";
 import path from "ultils/path";
 import { showOrder } from "store/app/appSlice";
-const Order = ({click}) => {
+
+const Order = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const { current } = useSelector((state) => state.user);
   const [order, setOrder] = useState(null);
-  
-  const fetchPitchData = async (data) => {
+  const [title, settitle] = useState("");
+  const [discount, setdiscount] = useState(null);
+
+  useEffect(() => {
+    if (discount !== null) {
+      localStorage.setItem('discount', JSON.stringify(discount));
+    }
+  }, [discount]);
+
+  const fetchPitchData = async () => {
     const response = await apiGetUserOrderStatus(current?._id);
     if (response.success) {
       setOrder(response.Booking);
@@ -30,6 +39,16 @@ const Order = ({click}) => {
       toast.success(response.message);
     } else toast.error(response.message);
   };
+
+  const updateCoupon = async () => {
+    const response = await apiGetCoupon({ title });
+    if (response.success) {
+      setdiscount(response.coupon);
+      toast.success('Add coupon successfully');
+    } else {
+      toast.error(response.coupon);
+    }
+  }
   useEffect(() => {
     fetchPitchData();
   }, []);
@@ -94,6 +113,24 @@ const Order = ({click}) => {
           ))}
       </div>
       <div className="h-2/6 flex flex-col justify-between pt-8 border-t-2">
+        <div className="flex items-center gap-2">
+          <input
+            type="text"
+            id="title"
+            value={title}
+            className="ml-2 w-[300px] pb-2 border-b outline-none placeholder:text-sm rounded-md"
+            placeholder="Coupon"
+            onChange={(e) => settitle(e.target.value)}
+          ></input>
+          <button
+            onClick={() => {
+              updateCoupon()
+            }}
+            className="h-[40px] w-[100px] bg-red-500 rounded-md text-white hover:bg-red-600 duration-300"
+          >
+            <span>Apply</span>
+          </button>
+        </div>
         <div className="flex items-center mx-4 justify-between">
           <span> Subtotal:</span>
           {/* <span>
@@ -103,33 +140,19 @@ const Order = ({click}) => {
           </span> */}
         </div>
         <div className="flex items-center mx-4 justify-between">
-          <span> Discount:</span>
-          {/* <span>
-            {formatMoney(
-              order?.reduce((sum, el) => sum + Number(el.pitch?.price), 0)
-            ) + ` VND`}
-          </span> */}
+          <span> Discount ({discount?.title}): </span>
+          <span>
+            {discount ? formatMoney(discount.price) + ' VND' : '0 VND'}
+          </span>
         </div>
         <div className="flex items-center mx-4 justify-between font-bold">
           <span> Total:</span>
           {/* <span>
             {formatMoney(
-              order?.reduce((sum, el) => sum + Number(el.pitch?.price), 0)
+              order?.reduce((sum, el) => sum + Number(el.pitch?.price), 0) - (discount?.price || 0)
             ) + ` VND`}
           </span> */}
         </div>
-        {/* <span className="text-center text-gray-700 italic">
-          Taxes and Discount calculated at checkout
-        </span> */}
-        {/* <Button
-          handleOnClick={() => {
-            dispatch(showOrder());
-            navigate(`${path.DETAIL_ORDER}`);
-          }}
-          style="rounded-none w-full bg-main py-3"
-        >
-          Check out Detail
-        </Button> */}
         <div className="flex justify-center gap-4 w-full ">
           <button
             onClick={() => {

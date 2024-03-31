@@ -2,7 +2,7 @@ import React, { memo, useEffect, useState } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { apiGetUserOrderStatus } from "apis";
+import { apiGetUserOrderStatus, apiGetCoupon } from "apis";
 import defaultImage from "assets/default.png";
 import { shifts } from "ultils/constant";
 import { formatMoney, convertToTitleCase } from "ultils/helper";
@@ -16,6 +16,7 @@ const DetailOrder = () => {
   const { current } = useSelector((state) => state.user);
   const [order, setOrder] = useState(null);
   const [orderChanged, setOrderChanged] = useState(false);
+  const discount = JSON.parse(localStorage.getItem('discount')); // Accessing discount state from localStorage
   const fetchPitchData = async () => {
     const response = await apiGetUserOrderStatus(current?._id);
     if (response.success) {
@@ -27,7 +28,6 @@ const DetailOrder = () => {
   useEffect(() => {
     fetchPitchData();
   }, [orderChanged, order]);
-
   return (
     <div className="w-full">
       <div className="h-[81px] flex justify-center items-center bg-gray-100">
@@ -82,6 +82,20 @@ const DetailOrder = () => {
           <span className="text-main">
             {formatMoney(
               order?.reduce((sum, el) => sum + Number(el.pitch?.price), 0)
+            ) + ` VND`}
+          </span>
+        </span>
+        <span className="flex items-center gap-8 text-sm">
+          <span>Discount:</span>
+          <span className="text-main">
+            {discount ? formatMoney(discount.price) + ' VND' : '0 VND'}
+          </span>
+        </span>
+        <span className="flex items-center gap-8 text-sm">
+          <span>Total:</span>
+          <span className="text-main">
+            {formatMoney(
+              order?.reduce((sum, el) => sum + Number(el.pitch?.price), 0) - (discount?.price || 0)
             ) + ` VND`}
           </span>
         </span>
