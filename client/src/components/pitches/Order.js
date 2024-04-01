@@ -28,7 +28,9 @@ const Order = () => {
 
   const fetchPitchData = async () => {
     const response = await apiGetUserOrderStatus(current?._id);
-    if (response.success) setOrder(response.Booking);
+    if (response.success) {
+      setOrder(response.Booking);
+    }
   };
   const updateOrder = async (bid) => {
     const response = await apiDeleteOrder(bid);
@@ -53,7 +55,7 @@ const Order = () => {
   return (
     <div
       onClick={(e) => e.stopPropagation()}
-      className="w-[420px] h-screen overflow-y-auto bg-white text-black shadow-2xl flex flex-col"
+      className="w-[420px] h-screen overflow-y-auto bg-white text-black shadow-2xl flex flex-col "
     >
       <div className="p-4 flex justify-between items-center font-bold text-xl border-b-2 border-gray-300">
         <span>Your Order</span>
@@ -92,7 +94,9 @@ const Order = () => {
                       className="w-fit px-2 py-1 my-2 gap-2 flex items-center justify-center cursor-pointer border bg-red-500 rounded-md hover:bg-red-800 duration-300"
                       onClick={() => updateOrder(el._id)}
                     >
-                      <span className="text-xs text-white border-r pr-2">Remove</span>
+                      <span className="text-xs text-white border-r pr-2">
+                        Remove
+                      </span>
                       <span className="h-5 w-5 flex items-center duration-500 text-white">
                         <MdDeleteForever size={16} />
                       </span>
@@ -129,11 +133,11 @@ const Order = () => {
         </div>
         <div className="flex items-center mx-4 justify-between">
           <span> Subtotal:</span>
-          <span>
+          {/* <span>
             {formatMoney(
               order?.reduce((sum, el) => sum + Number(el.pitch?.price), 0)
             ) + ` VND`}
-          </span>
+          </span> */}
         </div>
         <div className="flex items-center mx-4 justify-between">
           <span> Discount ({discount?.title}): </span>
@@ -143,11 +147,11 @@ const Order = () => {
         </div>
         <div className="flex items-center mx-4 justify-between font-bold">
           <span> Total:</span>
-          <span>
+          {/* <span>
             {formatMoney(
               order?.reduce((sum, el) => sum + Number(el.pitch?.price), 0) - (discount?.price || 0)
             ) + ` VND`}
-          </span>
+          </span> */}
         </div>
         <div className="flex justify-center gap-4 w-full ">
           <button

@@ -9,11 +9,12 @@ const path = {
   CONTACT: "contact",
   DETAIL_ORDER: "my-order",
   CHECKOUT: "checkout",
-  PITCHES__CATEGORY: ":category",
   NEWS: "news",
+  PITCHES__CATEGORY: ":category",
   FINAL_REGISTER: "finalregister/:status",
   RESET_PASSWORD: "reset-password/:token",
   DETAIL_PITCH__CATEGORY__BRAND__PITCHID__TITLE: ":category/:brand/:pid/:title",
+  DETAIL_NEWS: "news/single",
   CATEGORY__BRAND: ":category/:brand",
 
   // Admin Route

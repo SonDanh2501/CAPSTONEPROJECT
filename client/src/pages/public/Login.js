@@ -133,34 +133,34 @@ const Login = () => {
     setisVerifiedEmail(false);
     settoken("");
   };
-  // const handleLoginGG = async (data) => {
-  //   const rs = await apiLoginGG({ email: data });
-  //   console.log(email);
-  //   if (rs.success) {
-  //     if (+rs.userData?.isBlocked === 2) {
-  //       dispatch(
-  //         login({
-  //           isLoggedIn: true,
-  //           token: rs.accessToken,
-  //           userData: rs.userData,
-  //         })
-  //       );
-  //       navigate(`/${path.HOME}`);
-  //     } else if (+rs.isBlocked === 1) {
-  //       Swal.fire({
-  //         title: " You are blocked",
-  //         text: "Account has been blocked! Go to FAQs for more information",
-  //         showCancelButton: true,
-  //       }).then(async (result) => {
-  //         if (result.isConfirmed) {
-  //           navigate(`/${path.FAQ}`);
-  //         } else navigate(`/${path.HOME}`);
-  //       });
-  //     }
-  //   } else {
-  //     Swal.fire("Oops!", rs.mes, "error");
-  //   }
-  // };
+  const handleLoginGG = async (data) => {
+    // console.log(data?.email);
+    const rs = await apiLoginGG(data);
+    if (rs.success) {
+      if (+rs.userData?.isBlocked === 2) {
+        dispatch(
+          login({
+            isLoggedIn: true,
+            token: rs.accessToken,
+            userData: rs.userData,
+          })
+        );
+        navigate(`/${path.HOME}`);
+      } else if (+rs.isBlocked === 1) {
+        Swal.fire({
+          title: " You are blocked",
+          text: "Account has been blocked! Go to FAQs for more information",
+          showCancelButton: true,
+        }).then(async (result) => {
+          if (result.isConfirmed) {
+            navigate(`/${path.FAQ}`);
+          } else navigate(`/${path.HOME}`);
+        });
+      }
+    } else {
+      Swal.fire("Oops!", rs.mes, "error");
+    }
+  };
   // useEffect(() => {
   //   handleLoginGG();
   // }, [GGlogin]);
@@ -400,15 +400,15 @@ const Login = () => {
               </>
             )}
           </div>
-          {/* <div>
+          <div>
             <GoogleOAuthProvider clientId="205458580138-ntkleug6m343o4fqjbrqeqni2kd9tfd1.apps.googleusercontent.com">
-              <GoogleLogin
+            <GoogleLogin
                 onSuccess={(credentialResponse) => {
                   const details = jwtDecode(credentialResponse.credential);
-
-                  if (details.email) {
+                  // console.log(details)
+                  if (details?.email) {
                     setemail(details.email);
-                    handleLoginGG(details.email);
+                    handleLoginGG(details);
                   }
                 }}
                 onError={() => {
@@ -417,7 +417,7 @@ const Login = () => {
               />
               ;
             </GoogleOAuthProvider>
-          </div> */}
+          </div>
         </div>
       </div>
     </div>
