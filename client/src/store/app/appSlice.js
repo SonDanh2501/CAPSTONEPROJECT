@@ -11,7 +11,6 @@ export const appSlice = createSlice({
     isShowOrder: false,
   },
   reducers: {
-    
     showModal: (state, action) => {
       state.isShowModal = action.payload.isShowModal;
       state.modalChildren = action.payload.modalChildren;

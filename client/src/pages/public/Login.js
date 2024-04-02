@@ -68,7 +68,6 @@ const Login = () => {
   }, [isRegister, isRegisterPitchOwner]);
   //SUBMIT
   const handleSubmit = useCallback(async () => {
-    console.log("RUN 1")
     if (isRegisterPitchOwner) payload.role = "2";
     else payload.role = "3";
     const { firstname, lastname, role, ...data } = payload;
@@ -77,8 +76,6 @@ const Login = () => {
       : isRegisterPitchOwner
         ? validate(payload, setinvalidFields)
         : validate(data, setinvalidFields);
-    console.log("CHECK INVALIDS", invalids)
-
     if (+invalids === 0) {
       if (isRegister || isRegisterPitchOwner) {
         dispatch(showModal({ isShowModal: true, modalChildren: <Loading /> }));
@@ -91,7 +88,7 @@ const Login = () => {
         }
       } else {
         const rs = await apiLogin(data);
-        console.log(rs)
+        console.log(rs);
         if (rs.success) {
           if (+rs?.isBlocked === 2) {
             dispatch(
