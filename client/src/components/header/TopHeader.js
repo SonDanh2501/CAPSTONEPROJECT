@@ -23,15 +23,12 @@ const { FaXmark } = icons;
 const TopHeader = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const { isLoggedIn, current, mes } = useSelector((state) => state.user);
+  const { isLoggedIn, current, mes, isUpdateCart } = useSelector(
+    (state) => state.user
+  );
   const [isShowOption, setisShowOption] = useState(false);
   const [isOpen, setisOpen] = useState(false);
   const [order, setOrder] = useState(null);
-
-  const fetchPitchData = async () => {
-    const response = await apiGetUserOrderStatus(current?._id);
-    if (response.success) setOrder(response.Booking);
-  };
 
   useEffect(() => {
     const setTimeoutId = setTimeout(() => {
@@ -42,6 +39,13 @@ const TopHeader = () => {
     };
   }, [dispatch, isLoggedIn]);
 
+  const fetchPitchData = async () => {
+    const response = await apiGetUserOrderStatus(current?._id);
+    if (response.success) {
+      setOrder(response.Booking);
+    }
+  };
+
   useEffect(() => {
     if (mes) {
       Swal.fire("Oops!", mes, "info").then(() => {
@@ -50,12 +54,23 @@ const TopHeader = () => {
       });
     }
   }, [mes]);
+
   const toggleNavbar = () => {
     setisOpen(!isOpen);
   };
+
   useEffect(() => {
-    fetchPitchData();
-  }, []);
+    // console.log("RERENDER ORDER")
+    const setTimeoutId = setTimeout(() => {
+      fetchPitchData();
+    }, 300);
+    return () => {
+      clearTimeout(setTimeoutId);
+    };
+  }, [isUpdateCart, current]);
+
+  console.log("CHECK ORDER", order);
+  console.log("CHECK", current);
   return (
     <div className="w-full bg-header-bg flex h-full items-center flex-wrap justify-between dark:bg-dark ">
       <div className="ml-[50px] pt-3 pb-3">
@@ -95,12 +110,13 @@ const TopHeader = () => {
             className="ml-5 cursor-pointer "
             onClick={() => setisShowOption((prev) => !prev)}
           >
-            <label htmlFor="file">
+            <label className="flex gap-2" htmlFor="file">
               <img
                 src={current?.avatar || avatar}
                 alt="avatar"
                 className="w-6 h-6 ml-2 object-cover rounded-full cursor-pointer"
               ></img>
+              {/* <span className="text-white">{`${current?.lastname} ${current?.firstname}`}</span> */}
             </label>
           </div>
           {isShowOption && (

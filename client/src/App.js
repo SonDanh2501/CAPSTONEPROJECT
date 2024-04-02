@@ -92,7 +92,7 @@ function App() {
       <div
         onClick={() => dispatch(showOrder())}
         className={`fixed top-0 bottom-0 left-auto z-50 flex transform duration-500 ${
-          isShowOrder ? "right-0" : "-right-[420px]"
+          isShowOrder ? "right-0" : "-right-[450px]"
         }`}
       >
         <Order />
