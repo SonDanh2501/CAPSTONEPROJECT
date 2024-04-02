@@ -59,15 +59,13 @@ const getNews = asyncHandler(async (req, res) => {
 
   if (req.query.q) {
     delete formartedQueries.q;
-    formartedQueries["$or"] = [
-      { title: { $regex: queries.q, $options: "i" } },
-      { postedDate: { $regex: queries.q, $options: "i" } },
-    ];
+    formartedQueries["$or"] = [{ title: { $regex: queries.q, $options: "i" } }];
   }
   let queryCommand = News.find(formartedQueries);
   //Sorting
-  if (req.query.sort) {
-    const sortBy = req.query.sort.split(",").join(" ");
+
+  if (req.query.queries?.sort) {
+    const sortBy = req.query.queries?.sort.split(",").join(" ");
     queryCommand = queryCommand.sort(sortBy);
   }
 
@@ -94,7 +92,7 @@ const getNews = asyncHandler(async (req, res) => {
       return res.status(200).json({
         success: response ? true : false,
         news: response ? response : "Can not get news",
-        totalcount: counts,
+        totalCount: counts,
       });
     })
     .catch((err) => {

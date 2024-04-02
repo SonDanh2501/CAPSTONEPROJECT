@@ -1,9 +1,9 @@
 import React, { memo } from "react";
 import { RiAdminFill } from "react-icons/ri";
 import { MdOutlineUpdate } from "react-icons/md";
-import image from "assets/banner.jpg";
 import { FaChevronRight } from "react-icons/fa";
 import { MdRemoveRedEye } from "react-icons/md";
+import { useNavigate } from "react-router-dom";
 const NewsCard = ({
   nid,
   title,
@@ -13,8 +13,12 @@ const NewsCard = ({
   postedDate,
   description,
 }) => {
+  const navigate = useNavigate();
   return (
-    <div className="bg-gradient-to-r from-white to-gray-100 text-gray-700  md:min-h-[10rem] ] shadow-lg rounded-md overflow-hidden border-2  hover:opacity-75 ">
+    <div
+      onClick={(e) => navigate(`/news/${nid}`)}
+      className="bg-gradient-to-r from-white to-gray-100 text-gray-700 cursor-pointer  md:min-h-[10rem] ] shadow-lg rounded-md overflow-hidden border-2  hover:opacity-75 "
+    >
       <img
         src={image}
         alt="news image"
