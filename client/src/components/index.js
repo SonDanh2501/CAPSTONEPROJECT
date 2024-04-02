@@ -69,3 +69,5 @@ export { default as EventBanner } from "./event/EventBanner";
 //News
 export { default as NewsCard } from "./news/NewsCard";
 export { default as News } from "./news/News";
+export { default as NewsCarousel } from "./news/NewsCarousel";
+export { default as NewsItem } from "./news/NewsItem";
