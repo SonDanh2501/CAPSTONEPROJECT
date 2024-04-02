@@ -8,6 +8,7 @@ export const userSlice = createSlice({
     current: null,
     token: null,
     isLoading: false,
+    isUpdateCart: false,
     mes: "",
   },
   reducers: {
@@ -22,6 +23,9 @@ export const userSlice = createSlice({
     },
     clearMessage: (state) => {
       state.mes = "";
+    },
+    updateCart: (state, action) => {
+      state.isUpdateCart = state.isUpdateCart === false ? true : false;
     },
   },
   // Code logic xử lý async action
@@ -52,6 +56,6 @@ export const userSlice = createSlice({
   },
 });
 
-export const { login, logout, clearMessage } = userSlice.actions;
+export const { login, logout, clearMessage, updateCart } = userSlice.actions;
 
 export default userSlice.reducer;

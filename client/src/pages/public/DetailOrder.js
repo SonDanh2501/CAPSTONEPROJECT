@@ -1,7 +1,7 @@
 import React, { memo, useEffect, useState } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import { Link } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import { apiGetUserOrderStatus, apiGetCoupon } from "apis";
 import defaultImage from "assets/default.png";
 import { shifts } from "ultils/constant";
@@ -10,7 +10,6 @@ import { Breadcrumb, Button } from "components";
 import path from "ultils/path";
 
 const DetailOrder = () => {
-  const dispatch = useDispatch();
   const navigate = useNavigate();
   const location = useLocation();
   const { current } = useSelector((state) => state.user);

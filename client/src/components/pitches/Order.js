@@ -11,18 +11,19 @@ import { MdDeleteForever } from "react-icons/md";
 import { toast } from "react-toastify";
 import path from "ultils/path";
 import { showOrder } from "store/app/appSlice";
+import moment from "moment";
+import { updateCart } from "store/user/userSlice";
 
 const Order = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const { current } = useSelector((state) => state.user);
+  const { current, isUpdateCart } = useSelector((state) => state.user);
   const [order, setOrder] = useState(null);
   const [title, settitle] = useState("");
   const [discount, setdiscount] = useState(null);
-
   useEffect(() => {
     if (discount !== null) {
-      localStorage.setItem('discount', JSON.stringify(discount));
+      localStorage.setItem("discount", JSON.stringify(discount));
     }
   }, [discount]);
 
@@ -34,7 +35,9 @@ const Order = () => {
   };
   const updateOrder = async (bid) => {
     const response = await apiDeleteOrder(bid);
+    
     if (response.success) {
+      dispatch(updateCart());
       fetchPitchData();
       toast.success(response.message);
     } else toast.error(response.message);
@@ -44,18 +47,26 @@ const Order = () => {
     const response = await apiGetCoupon({ title });
     if (response.success) {
       setdiscount(response.coupon);
-      toast.success('Add coupon successfully');
+      toast.success("Add coupon successfully");
     } else {
       toast.error(response.coupon);
     }
-  }
+  };
   useEffect(() => {
-    fetchPitchData();
-  }, []);
+    // console.log("RERENDER ORDER")
+    const setTimeoutId = setTimeout(() => {
+      fetchPitchData();
+    }, 300);
+    return () => {
+      clearTimeout(setTimeoutId);
+    };
+  }, [isUpdateCart]);
+  // console.log(order)
+  // console.log(isUpdateCart)
   return (
     <div
       onClick={(e) => e.stopPropagation()}
-      className="w-[420px] h-screen overflow-y-auto bg-white text-black shadow-2xl flex flex-col "
+      className="w-[450px] h-screen overflow-y-auto bg-white text-black shadow-2xl flex flex-col "
     >
       <div className="p-4 flex justify-between items-center font-bold text-xl border-b-2 border-gray-300">
         <span>Your Order</span>
@@ -78,7 +89,7 @@ const Order = () => {
                   <img
                     src={el.pitch?.thumb || defaultImage}
                     alt="thumb"
-                    className="w-16 h-16 object-cover"
+                    className="w-20 h-24 object-cover"
                   />
                   <div className="flex flex-col">
                     <div className="flex items-center gap-1">
@@ -87,6 +98,9 @@ const Order = () => {
                       </span>
                       <span className="text-xs">({el.pitch?.category})</span>
                     </div>
+                    <span className="text-xs text-yellow-500">
+                      {moment(el?.bookedDate)?.format("dddd MM YYYY")}
+                    </span>
                     <span className="text-xs text-green-600">
                       {shifts.find((s) => s.value === +el.shift)?.time}
                     </span>
@@ -104,7 +118,7 @@ const Order = () => {
                   </div>
                 </div>
                 <div className="font-bold tracking-wider">
-                  <span className="text-sm">
+                  <span className="text-sm text-red-500">
                     {formatMoney(el.pitch?.price) + ` VND`}
                   </span>
                 </div>
@@ -112,21 +126,21 @@ const Order = () => {
             </div>
           ))}
       </div>
-      <div className="h-2/6 flex flex-col justify-between pt-8 border-t-2">
-        <div className="flex items-center gap-2">
+      <div className="h-2/6 flex flex-col gap-2 pt-8 border-t-2">
+        <div className="flex items-center mx-4 justify-between gap-4">
           <input
             type="text"
             id="title"
             value={title}
-            className="ml-2 w-[300px] pb-2 border-b outline-none placeholder:text-sm rounded-md"
+            className="w-full rounded-lg"
             placeholder="Coupon"
             onChange={(e) => settitle(e.target.value)}
           ></input>
           <button
             onClick={() => {
-              updateCoupon()
+              updateCoupon();
             }}
-            className="h-[40px] w-[100px] bg-red-500 rounded-md text-white hover:bg-red-600 duration-300"
+            className=" px-6 py-2 bg-red-500 rounded-md text-white hover:bg-red-600 duration-300 border-2 border-red-500"
           >
             <span>Apply</span>
           </button>
@@ -142,7 +156,7 @@ const Order = () => {
         <div className="flex items-center mx-4 justify-between">
           <span> Discount ({discount?.title}): </span>
           <span>
-            {discount ? formatMoney(discount.price) + ' VND' : '0 VND'}
+            {discount ? formatMoney(discount.price) + " VND" : "0 VND"}
           </span>
         </div>
         <div className="flex items-center mx-4 justify-between font-bold">

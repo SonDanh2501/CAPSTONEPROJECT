@@ -22,10 +22,11 @@ import "react-datepicker/dist/react-datepicker.css";
 import { shifts } from "ultils/constant";
 import icons from "ultils/icons";
 import Swal from "sweetalert2";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import path from "ultils/path";
 import { toast } from "react-toastify";
 import { geocodeByAddress, getLatLng } from "react-google-places-autocomplete";
+import { updateCart } from "store/user/userSlice";
 
 const settings = {
   dots: false,
@@ -37,6 +38,7 @@ const settings = {
 
 const { FaCalendarAlt } = icons;
 const DetailPitches = ({ isQuickView, data }) => {
+  const dispatch = useDispatch();
   const [booking, setBooking] = useState(null);
   const [getShift, setGetShift] = useState(null);
   const navigate = useNavigate();
@@ -53,15 +55,6 @@ const DetailPitches = ({ isQuickView, data }) => {
   const { title, brand } = useParams();
   const [selectedHour, setSelectedHour] = useState([]);
   const [coords, setCoords] = useState(null);
-  const [order, setOrder] = useState(null);
-
-  const fetchPitchDataBooking = async () => {
-    const response = await apiGetUserOrderStatus(isLoggedIn?._id);
-    if (response.success) {
-      setOrder(response.Booking);
-    }
-  };
-
 
   const fetchBooking = async () => {
     const response = await apiGetAllOrder();
@@ -107,6 +100,7 @@ const DetailPitches = ({ isQuickView, data }) => {
         }
       });
     }
+    
     const response = await apiBooking({
       shifts: selectedShift,
       bookedDate: selectedDate,
@@ -116,6 +110,7 @@ const DetailPitches = ({ isQuickView, data }) => {
       namePitch: pitch?.title,
     });
     if (response.success) {
+      dispatch(updateCart());
       // fetchPitchDataBooking();
       toast.success(response.message);
     } else toast.error(response.message);
@@ -299,6 +294,11 @@ const DetailPitches = ({ isQuickView, data }) => {
             </div>
           </div>
           <div>
+            {/* <div 
+            onClick={() => {handleClickBooking(); }
+            className="bg-black text-white px-2 py-2">
+              <span className="h1">BOOKING</span>
+            </div> */}
             <Button fw handleOnClick={handleClickBooking}>
               Booking
             </Button>
