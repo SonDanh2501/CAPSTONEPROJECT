@@ -9,12 +9,16 @@ const AdminLayout = () => {
   if (!isLoggedIn || !current || +current.role !== 1)
     return <Navigate to={`/${path.LOGIN}`} replace={true} />;
   return (
-    <div className="flex w-full bg-gray-100 min-h-screen relative text-gray-800">
+    <div className="w-full bg-dash-board min-h-screen flex text-gray-800">
       <div className="top-0 bottom-0 flex-none fixed">
         <AdminSideBar open={open} setOpen={setOpen} />
       </div>
-      <div className={`duration-700 ${open ? "w-72 pr-2" : "w-20 pr-2"}`}></div>
-      <div className="flex pl-4">
+      <div className={`duration-500 mx-4 ${open ? "w-60" : "w-20"}`}>
+        <span>
+          AREAR
+        </span>
+      </div>
+      <div className="flex">
         <Outlet context={[open, setOpen]} />
       </div>
     </div>

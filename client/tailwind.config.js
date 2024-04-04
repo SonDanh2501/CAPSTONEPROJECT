@@ -28,7 +28,8 @@ module.exports = {
         "io1": "#DBEAFE",
         "io2": "#F3E8FF",
         "io3": "#D2F4EE",
-        "io4": "#FEE2E2"
+        "io4": "#FEE2E2",
+        "slidebar_active": "#EEF6FE", 
 
       },
       flex: {
