@@ -1,12 +1,13 @@
 import React, { useState, useEffect } from "react";
-import image1 from "../../assets/banner3.jpg";
+import { useNavigate, useParams } from "react-router-dom";
+
 import { RiAdminFill } from "react-icons/ri";
+import moment from "moment";
 import { MdOutlineUpdate } from "react-icons/md";
-import image from "assets/banner.jpg";
-import { FaChevronRight } from "react-icons/fa";
-import { MdRemoveRedEye } from "react-icons/md";
+
 import { MdNavigateNext } from "react-icons/md";
-import { apiGetNews } from "apis";
+import { apiGetNews, apiGetAllNews } from "apis";
+import DOMPurify, { clearConfig } from "dompurify";
 const DetailNews = () => {
   const dataNews = [
     {
@@ -35,7 +36,43 @@ const DetailNews = () => {
       title: "Video bóng đá Argentina - El Salvador",
     },
   ];
-  
+  const [news, setNews] = useState(null);
+  const navigate = useNavigate();
+  const params = useParams();
+  const [nid, setnid] = useState(null);
+
+  const fetchNewsData = async () => {
+    const response = await apiGetNews(nid);
+    if (response.success) {
+      console.log(response);
+      setNews(response.newsData);
+    }
+  };
+  useEffect(() => {
+    if (params && params.nid) {
+      setnid(params.nid);
+    }
+  }, [params]);
+  useEffect(() => {
+    if (nid) {
+      fetchNewsData();
+      // fetchNews();
+    }
+    window.scrollTo(0, 0);
+  }, [nid]);
+  // const fetchNews = async (queries) => {
+  //   const response = await apiGetAllNews(queries);
+  //   if (response.success) {
+  //     setNews(response);
+  //   }
+  // };
+
+  // useEffect(() => {
+  //   const queries = Object.fromEntries([...params]);
+  //   const q = { queries };
+  //   fetchNews(q);
+  //   // window.scrollTo(0, 0);
+  // }, [params]);
   return (
     <div className="w-full ">
       <div className="flex justify-center items-center mt-14">
@@ -44,15 +81,17 @@ const DetailNews = () => {
             style={{ fontFamily: "Open Sans" }}
             className=" md:w-2/3 pl-1 pr-1 w-full "
           >
-            <h1 className="font-bold text-2xl pb-4 pt-4">
-              Title Title TitleTitleTitleTit leTitleTitleTitleTitleTitleTitle
-            </h1>
-            <img src={image1} alt="thumb" className="object-cover w-full " />
+            <h1 className="font-bold text-2xl pb-4 pt-4">{news?.title}</h1>
+            <img
+              src={news?.image}
+              alt="image of news"
+              className="object-cover w-full "
+            />
 
             <div className="flex-row flex  gap-2 pt-4">
               <span className="font-thin text-zinc-500 flex md:justify-center items-center mr-3 gap-2">
                 <RiAdminFill className="w-4 h-4" />
-                author
+                {news?.author}
               </span>
               {/* <span className="md:ml-4 font-thin text-zinc-500 flex md:justify-center items-center mr-3 gap-2">
                 <MdRemoveRedEye className="text-md" />
@@ -60,37 +99,29 @@ const DetailNews = () => {
               </span> */}
               <span className="md:ml-4 font-thin text-zinc-500 flex md:justify-center items-center mr-3 gap-2  ">
                 <MdOutlineUpdate className="w-4 h-4" />
-                2014-23-32
+                {moment(news?.postedDate).format("DD/MM/YYYY")}
               </span>
             </div>
             <div className="pt-2 pr-1 pl-1">
-              <span className="text-black text-xl">
-                sub title sub titlesub titlesub titlesub titlesub titlesub
-                titlesub titlesub titlesub title
-              </span>
+              <span className="text-black text-xl">{news?.description}</span>
 
-              <div className="text-md pt-4">
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sint
-                soluta, similique quidem fuga vel voluptates amet doloremque
-                corrupti. Perferendis totam voluptates eius error fuga
-                cupiditate dolorum? Adipisci mollitia quod labore aut natus
-                nobis. Rerum perferendis, nobis hic adipisci vel inventore
-                facilis rem illo, tenetur ipsa voluptate dolorem, cupiditate
-                temporibus laudantium quidem recusandae expedita dicta cum eum.
-                Quae laborum repellat a ut, voluptatum ipsa eum. Culpa fugiat
-                minus laborum quia nam! Lorem ipsum dolor sit amet, consectetur
-                adipisicing elit. Et, praesentium, dicta. Dolorum inventore
-                molestias velit possimus, dolore labore aliquam aperiam
-                architecto quo reprehenderit excepturi ipsum ipsam accusantium
-                nobis ducimus laudantium. Lorem ipsum dolor sit amet,
-                consectetur adipisicing elit. Rerum est aperiam voluptatum id
-                cupiditate quae corporis ex. Molestias modi mollitia neque magni
-                voluptatum, omnis repudiandae aliquam quae veniam error!
-                Eligendi distinctio, ab eius iure atque ducimus id deleniti, vel
-                alias sint similique perspiciatis saepe necessitatibus non
-                eveniet, quo nisi soluta. Lorem ipsum dolor sit amet,
-                consectetur adipisicing elit. Incidunt beatae nemo quaerat,
-                doloribus obcaecati odio!
+              <div className="text-lg pt-4">
+                <ul className="list-square text-sm ">
+                  {news?.content?.length > 1 &&
+                    news?.content?.map((el) => (
+                      <li className="leading-6" key={el}>
+                        {el}
+                      </li>
+                    ))}
+                  {news?.content?.length === 1 && (
+                    <div
+                      className="text-lg line-clamp-[15] "
+                      dangerouslySetInnerHTML={{
+                        __html: DOMPurify.sanitize(news?.content[0]),
+                      }}
+                    ></div>
+                  )}
+                </ul>
               </div>
             </div>
           </div>
