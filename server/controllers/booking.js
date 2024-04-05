@@ -223,6 +223,26 @@ const getAllOrderByAdmin = asyncHandler(async (req, res) => {
     allOrder: response ? response : "Can not get data",
   });
 });
+const updateBookingWithCoupon = async (req, res) => {
+  const { bookingId, couponId } = req.body;
+  // Find the booking by its ID
+  const booking = await Booking.findById(bookingId);
+
+  // Update the coupon field with the provided coupon ID
+  booking.coupon = {
+    title: couponId.title, // Set the title of the coupon
+    price: couponId.price, // Set the price of the coupon
+    _id: couponId._id, // Set the ID of the coupon
+  };
+  // Save the updated booking
+  await booking.save();
+
+  return res.json({
+    success: booking ? true : false,
+  });
+
+
+};
 
 module.exports = {
   createBooking,
@@ -233,4 +253,5 @@ module.exports = {
   getUserBookingStatus,
   getBookingsOwner,
   getAllOrderByAdmin,
+  updateBookingWithCoupon,
 };

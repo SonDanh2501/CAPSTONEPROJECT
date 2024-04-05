@@ -26,6 +26,10 @@ var bookingSchema = new mongoose.Schema({
     ref: "User",
   },
   total: Number,
+  coupon: {
+    title: { type: String },
+    price: { type: Number },
+  }
 });
 
 //Export the model

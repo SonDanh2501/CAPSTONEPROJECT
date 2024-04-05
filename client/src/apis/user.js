@@ -145,3 +145,9 @@ export const apiGetOrderByAdmin = () =>
     url: "/booking/all-order/",
     method: "get",
   });
+export const apiUpdateCoupon = (bookingId, couponId) =>
+  axios({
+    url: "/booking/update",
+    method: "post",
+     data: { bookingId, couponId }
+  });
