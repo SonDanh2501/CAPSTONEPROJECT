@@ -15,28 +15,31 @@ const DetailOrder = () => {
   const { current } = useSelector((state) => state.user);
   const [order, setOrder] = useState(null);
   const [orderChanged, setOrderChanged] = useState(false);
-  const discount = JSON.parse(localStorage.getItem('discount')); // Accessing discount state from localStorage
+  // const discount = JSON.parse(localStorage.getItem('discount')); // Accessing discount state from localStorage
+  const [discount, setDiscount] = useState(null)
   const fetchPitchData = async () => {
     const response = await apiGetUserOrderStatus(current?._id);
     if (response.success) {
+      const firstOrder = response.Booking[0]; // Get the first order
+      const fetchedDiscount = firstOrder && firstOrder.coupon ? firstOrder.coupon.price : null;
+      setDiscount(fetchedDiscount);
       setOrder(response.Booking);
       setOrderChanged(false);
     }
   };
-
   useEffect(() => {
     fetchPitchData();
   }, [orderChanged, order]);
   return (
-    <div className="w-full">
-      <div className="h-[81px] flex justify-center items-center bg-gray-100">
-        <div className="w-main">
+    <div className="w-full dark:bg-medium">
+      <div className="h-[81px] flex justify-center items-center bg-gray-100 dark:bg-dark">
+        <div className="w-main dark:text-white">
           <h3 className="font-semibold uppercase">My Order </h3>
           <Breadcrumb category={convertToTitleCase(location?.pathname)} />
         </div>
       </div>
       <div className="flex flex-col border my-8 w-main mx-auto">
-        <div className="w-main mx-auto bg-gray-200  font-bold  py-3 grid grid-cols-10">
+        <div className="w-[1378px] mx-auto bg-gray-200  font-bold  py-3 grid grid-cols-10 dark:bg-dark dark:text-white">
           <span className="col-span-6 w-full text-center">Pitches </span>
           <span className="col-span-1 w-full text-center">Shift </span>
           <span className="col-span-3 w-full text-center">Price </span>
@@ -55,49 +58,58 @@ const DetailOrder = () => {
             </div>
             <span className="col-span-4 w-full flex items-center justify-center">
               <div className="flex gap-2">
-                <div className="flex flex-col gap-1 items-center justify-center">
+                <div className="flex flex-col gap-1 items-center justify-center dark:text-white">
                   <span className="text-main text-xl">{el.pitch?.title}</span>
                   <span className="text-md">{el.pitch?.category}</span>
                   <span className="text-md">{el.pitch?.address}</span>
                 </div>
               </div>
             </span>
-            <span className="col-span-3 w-full h-full flex items-center justify-center text-center">
+            <span className="col-span-3 w-full h-full flex items-center justify-center text-center dark:text-white">
               <span className="text-xl ">
                 {shifts.find((s) => s.value === +el.shift)?.time}
               </span>
             </span>
-            <span className="col-span-1 w-full h-full flex items-center justify-center text-center">
+            <span className="col-span-1 w-full h-full flex items-center justify-center text-center dark:text-white">
               <span className="text-xl ">
-                {formatMoney(el.pitch?.price) + ` VND`}
+                {formatMoney((el.pitch?.price)) + ` VND`}
               </span>
             </span>
           </div>
         ))}
       </div>
-      <div className="w-main mx-auto flex flex-col mb-12 justify-center gap-3 items-end">
-        <span className="flex items-center gap-8 text-sm">
-          <span>Subtotal:</span>
+      <div className="w-main flex flex-col mb-12 gap-3 items-end mx-auto dark:text-white">
+        <div className="flex items-center mx-4 gap-8 dark:text-white">
+          <span> Subtotal:</span>
           <span className="text-main">
             {formatMoney(
               order?.reduce((sum, el) => sum + Number(el.pitch?.price), 0)
             ) + ` VND`}
           </span>
-        </span>
-        <span className="flex items-center gap-8 text-sm">
-          <span>Discount:</span>
-          <span className="text-main">
-            {discount ? formatMoney(discount.price) + ' VND' : '0 VND'}
-          </span>
-        </span>
-        <span className="flex items-center gap-8 text-sm">
-          <span>Total:</span>
+        </div>
+        {discount !== null ? (
+          <div className="flex items-center mx-4 gap-8 dark:text-white">
+            <span>Discount: </span>
+            <span className="text-main">
+              {formatMoney(
+                (order?.reduce((sum, el) => sum + Number(el.pitch?.price), 0) *
+                  (discount / 100))
+              )} VND
+            </span>
+          </div>
+        ) : null}
+        <div className="flex items-center mx-4 gap-8 font-bold dark:text-white">
+          <span> Total:</span>
           <span className="text-main">
             {formatMoney(
-              order?.reduce((sum, el) => sum + Number(el.pitch?.price), 0) - (discount?.price || 0)
+              order?.reduce((sum, el) => sum + Number(el.pitch?.price), 0) -
+              (discount
+                ? order?.reduce((sum, el) => sum + Number(el.pitch?.price), 0) *
+                (discount / 100)
+                : 0)
             ) + ` VND`}
           </span>
-        </span>
+        </div>
         <span className="text-xs italic">
           taxes and discount calculated at check out form
         </span>

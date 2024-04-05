@@ -27,7 +27,7 @@ const Pitches = () => {
     1250: 2,
     1000: 1,
   };
-  const [loading, setLoading ] = useState(true);
+  const [loading, setLoading] = useState(true);
   const { categories } = useSelector((state) => state.app);
   const navigate = useNavigate();
   const [pitches, setpitches] = useState(null);
@@ -64,6 +64,7 @@ const Pitches = () => {
   );
 
 
+  console.log(categories)
   useEffect(() => {
     const queries = Object.fromEntries([...params]);
     let priceQuery = {};
@@ -116,11 +117,11 @@ const Pitches = () => {
     }, 1500);
   }, [params, getCategory]);
 
-// console.log(getCategory);
+  // console.log(getCategory);
   return (
-    <div className="w-full">
-      <div className="h-[81px] flex justify-center items-center bg-gray-100">
-        <div className="w-main">
+    <div className="w-full dark:bg-medium">
+      <div className="h-[81px] flex justify-center items-center bg-gray-100 dark:bg-dark">
+        <div className="w-main dark:text-white">
           <h3 className="font-semibold uppercase">{category}</h3>
           <Breadcrumb category={category}> </Breadcrumb>
         </div>
@@ -128,7 +129,7 @@ const Pitches = () => {
 
       <div className="w-full border p-4 flex justify-between mt-8 mx-auto gap-3">
         <div className="flex flex-col gap-3 ">
-          <span className="font-semibold text-sm">Filter by</span>
+          <span className="font-semibold text-sm dark:text-white">Filter by</span>
           <div className="flex items-center gap-4">
             <SearchItem
               name="Price"
@@ -145,7 +146,7 @@ const Pitches = () => {
         </div>
         <div className="flex gap-3 ">
           <div className="flex flex-col gap-3 ">
-            <span className="font-semibold text-sm">Search</span>
+            <span className="font-semibold text-sm dark:text-white">Search</span>
             <input
               onChange={(e) => setSearching(e.target.value)}
               type="type"
@@ -155,7 +156,7 @@ const Pitches = () => {
             />
           </div>
           <div className="flex flex-col gap-3">
-            <span className="font-semibold text-sm">Sort by</span>
+            <span className="font-semibold text-sm dark:text-white">Sort by</span>
             <div className="w-full">
               <InputSelect
                 changeValue={changeValue}
@@ -168,16 +169,15 @@ const Pitches = () => {
       </div>
 
       <div className="mt-8 w-full m-auto">
-        <div className="flex items-center justify-center gap-4 mb-12">
+        <div className="flex items-center justify-center gap-4 mb-12 ">
           <button
             onClick={() => {
               setGetCategory("");
             }}
-            className={`w-[140px] px-3 py-4 rounded-full border-2 border-black font-bold text-center duration-300 ${
-              getCategory === ""
-                ? "text-white bg-orange border-orange"
-                : "text-black"
-            }`}
+            className={`w-[140px] px-3 py-4 rounded-full border-2 border-black font-bold text-center duration-300 dark:text-white dark:border-white ${getCategory === ""
+              ? "text-white bg-orange border-orange"
+              : "text-black "
+              }`}
           >
             All
           </button>
@@ -186,11 +186,10 @@ const Pitches = () => {
               onClick={() => {
                 setGetCategory(el.title);
               }}
-              className={`w-[140px] px-3 py-4 rounded-full border-2 border-black font-bold text-center duration-300 ${
-                getCategory === el.title
-                  ? "text-white bg-orange border-orange"
-                  : "text-black"
-              }`}
+              className={`w-[140px] px-3 py-4 rounded-full border-2 border-black font-bold text-center duration-300 dark:text-white dark:border-white ${getCategory === el.title
+                ? "text-white bg-orange border-orange"
+                : "text-black"
+                }`}
             >
               {el.title}
             </button>

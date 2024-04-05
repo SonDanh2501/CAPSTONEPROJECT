@@ -2,7 +2,7 @@ import React, { memo, useEffect, useState, useCallback } from "react";
 import { IoMdClose } from "react-icons/io";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { apiDeleteOrder, apiGetUserOrderStatus, apiGetCoupon } from "apis";
+import { apiDeleteOrder, apiGetUserOrderStatus, apiGetCoupon, apiUpdateCoupon } from "apis";
 import defaultImage from "assets/default.png";
 import { shifts } from "ultils/constant";
 import { formatMoney } from "ultils/helper";
@@ -21,21 +21,22 @@ const Order = () => {
   const [order, setOrder] = useState(null);
   const [title, settitle] = useState("");
   const [discount, setdiscount] = useState(null);
-  useEffect(() => {
-    if (discount !== null) {
-      localStorage.setItem("discount", JSON.stringify(discount));
-    }
-  }, [discount]);
+  const [orderIds, setOrderIds] = useState([]);
+
 
   const fetchPitchData = async () => {
     const response = await apiGetUserOrderStatus(current?._id);
     if (response.success) {
+      const fetchedOrderIds = response.Booking.map(order => order._id);
+
+      // Store order IDs in state
+      setOrderIds(fetchedOrderIds);
       setOrder(response.Booking);
     }
   };
   const updateOrder = async (bid) => {
     const response = await apiDeleteOrder(bid);
-    
+
     if (response.success) {
       dispatch(updateCart());
       fetchPitchData();
@@ -48,10 +49,15 @@ const Order = () => {
     if (response.success) {
       setdiscount(response.coupon);
       toast.success("Add coupon successfully");
+      for (const orderId of orderIds) {
+        const updateBookingResponse = await apiUpdateCoupon(orderId, response.coupon);
+        // Handle update response if needed
+      }
     } else {
       toast.error(response.coupon);
     }
   };
+
   useEffect(() => {
     // console.log("RERENDER ORDER")
     const setTimeoutId = setTimeout(() => {
@@ -61,14 +67,13 @@ const Order = () => {
       clearTimeout(setTimeoutId);
     };
   }, [isUpdateCart]);
-  // console.log(order)
-  // console.log(isUpdateCart)
+  console.log(orderIds)
   return (
     <div
       onClick={(e) => e.stopPropagation()}
-      className="w-[450px] h-screen overflow-y-auto bg-white text-black shadow-2xl flex flex-col "
+      className="w-[450px] h-screen overflow-y-auto bg-white text-black shadow-2xl flex flex-col dark:bg-medium"
     >
-      <div className="p-4 flex justify-between items-center font-bold text-xl border-b-2 border-gray-300">
+      <div className="p-4 flex justify-between items-center font-bold text-xl border-b-2 border-gray-300 dark:text-white">
         <span>Your Order</span>
         <span onClick={() => dispatch(showOrder())} className=" cursor-pointer">
           <IoMdClose />
@@ -77,13 +82,13 @@ const Order = () => {
 
       <div className="h-4/6 flex flex-col gap-3 overflow-y-auto py-3">
         {(!order || order.length === 0) && (
-          <span className="flex justify-center text-sm italic ">
+          <span className="flex justify-center text-sm italic dark:text-white">
             Your Order is Empty
           </span>
         )}
         {order &&
           order?.map((el) => (
-            <div className="mx-3" key={el._id}>
+            <div className="mx-3 dark:text-white" key={el._id}>
               <div className="flex justify-between items-center border-b">
                 <div className="flex gap-2 p-4 items-center tracking-wide">
                   <img
@@ -101,7 +106,7 @@ const Order = () => {
                     <span className="text-xs text-yellow-500">
                       {moment(el?.bookedDate)?.format("dddd MM YYYY")}
                     </span>
-                    <span className="text-xs text-green-600">
+                    <span className="text-xs text-green-600 dark:text-green-800">
                       {shifts.find((s) => s.value === +el.shift)?.time}
                     </span>
                     <button
@@ -145,27 +150,35 @@ const Order = () => {
             <span>Apply</span>
           </button>
         </div>
-        <div className="flex items-center mx-4 justify-between">
+        <div className="flex items-center mx-4 justify-between dark:text-white">
           <span> Subtotal:</span>
-          {/* <span>
+          <span>
             {formatMoney(
               order?.reduce((sum, el) => sum + Number(el.pitch?.price), 0)
             ) + ` VND`}
-          </span> */}
-        </div>
-        <div className="flex items-center mx-4 justify-between">
-          <span> Discount ({discount?.title}): </span>
-          <span>
-            {discount ? formatMoney(discount.price) + " VND" : "0 VND"}
           </span>
         </div>
-        <div className="flex items-center mx-4 justify-between font-bold">
+        <div className="flex items-center mx-4 justify-between dark:text-white">
+          <span> Discount ({discount?.title}): </span>
+          <span>
+            {discount
+              ? formatMoney(
+                (order?.reduce((sum, el) => sum + Number(el.pitch?.price), 0) *
+                  (discount.price / 100))
+              ) + ` VND`
+              : "0 VND"}          </span>
+        </div>
+        <div className="flex items-center mx-4 justify-between font-bold dark:text-white">
           <span> Total:</span>
-          {/* <span>
+          <span>
             {formatMoney(
-              order?.reduce((sum, el) => sum + Number(el.pitch?.price), 0) - (discount?.price || 0)
+              order?.reduce((sum, el) => sum + Number(el.pitch?.price), 0) -
+              (discount
+                ? order?.reduce((sum, el) => sum + Number(el.pitch?.price), 0) *
+                (discount.price / 100)
+                : 0)
             ) + ` VND`}
-          </span> */}
+          </span>
         </div>
         <div className="flex justify-center gap-4 w-full ">
           <button
