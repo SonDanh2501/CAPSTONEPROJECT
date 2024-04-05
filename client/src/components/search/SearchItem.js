@@ -91,7 +91,7 @@ const SearchItems = ({
   }, [price]);
   return (
     <div
-      className="p-3 cursor-pointer text-gray-500 text-xs gap-6 relative border border-gray-800 flex justify-between items-center rounded-md"
+      className="p-3 cursor-pointer text-gray-500 text-xs gap-6 relative border border-gray-800 dark:border-white dark:text-white flex justify-between items-center rounded-md"
       onClick={() => changeActiveFilter(name)}
     >
       <span className="capitalize">{name}</span>
@@ -129,7 +129,7 @@ const SearchItems = ({
                         (selectedItem) => selectedItem === el
                       )}
                     />
-                    <label htmlFor={el} className="text-gray-700">
+                    <label htmlFor={el} className="text-gray-700 ">
                       {el}
                     </label>
                   </div>

@@ -21,27 +21,26 @@ const FAQ = () => {
 
   return (
     <>
-      <div className="w-full">
+      <div className="w-full dark:bg-medium mb-5">
         <div>
           <HeaderBanner title="WEBSITE INFORMATION" subtitle="FAQ" />
         </div>
 
         <div className="flex items-center justify-start p-14 pb-4">
-          <h1 className="text-black text-2xl font-bold ">
+          <h1 className="text-black text-2xl font-bold dark:text-white ">
             Frequently Asked Questions
           </h1>
         </div>
 
-        <div className="md:p-14 md:pt-0 p-4">
+        <div className="md:p-14 md:pt-0 p-4 dark:text-white">
           {faq?.map((e) => (
             <div className="border-top border-bottom pt-4" key={e._id}>
               <hr className="pb-4" />
               <div className="flex text-xl font-semibold justify-between items-center">
                 <span>{e.title}</span>
                 <FaChevronDown
-                  className={`text-lg mr-4 cursor-pointer hover:text-zinc-300 ${
-                    openQuestionId === e._id ? "transform rotate-180" : ""
-                  }`}
+                  className={`text-lg mr-4 cursor-pointer hover:text-zinc-300 ${openQuestionId === e._id ? "transform rotate-180" : ""
+                    }`}
                   onClick={() => onOpen(e._id)}
                 />
               </div>
@@ -58,8 +57,8 @@ const FAQ = () => {
             </div>
           ))}
         </div>
-        <div className="flex flex-col items-center justify-center pb-14">
-          <h1 className="font-bold text-black mt-8 gap-4 text-2xl  p-2">
+        <div className="flex flex-col items-center justify-center pb-14 dark:text-white">
+          <h1 className="font-bold text-black mt-8 gap-4 text-2xl  p-2 dark:text-white">
             DON'T SEE YOUR QUESTION HERE? DROP US A LINE
           </h1>
           <h3 className="text-2xl p-2 pt-1">

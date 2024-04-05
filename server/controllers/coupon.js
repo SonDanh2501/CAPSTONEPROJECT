@@ -19,7 +19,15 @@ const getCoupon = asyncHandler(async (req, res) => {
         coupon: response ? response : "Cannot add coupon",
     });
 });
+const getAllCoupon = asyncHandler(async (req, res) => {
+    const response = await Coupon.find();
+    return res.json({
+        success: response ? true : false,
+        coupon: response ? response : "Can not get data",
+    });
+});
 module.exports = {
     createCoupon,
-    getCoupon
+    getCoupon,
+    getAllCoupon
 };

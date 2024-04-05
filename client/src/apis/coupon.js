@@ -6,3 +6,9 @@ export const apiGetCoupon = (data) =>
         method: "post",
         data
     });
+export const apiGetAllCoupon = () =>
+    axios({
+        url: "/coupon/",
+        method: "get",
+
+    });

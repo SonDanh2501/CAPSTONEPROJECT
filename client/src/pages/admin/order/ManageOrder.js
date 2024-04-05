@@ -129,6 +129,8 @@ const ManageOrder = () => {
             <th className="px-4 py-2 text-center h-[60px] ">Pitch</th>
             <th className="px-4 py-2 text-center h-[60px] ">Shift</th>
             <th className="px-4 py-2 text-center h-[60px] ">Booking By</th>
+            <th className="px-4 py-2 text-center h-[60px] ">Price</th>
+            <th className="px-4 py-2 text-center h-[60px] ">Discount</th>
             <th className="px-4 py-2 text-center h-[60px] ">Total Price</th>
             <th className="px-4 py-2 text-center h-[60px] ">Status</th>
             <th className="px-4 py-2 text-center h-[60px] ">Booked At</th>
@@ -172,7 +174,16 @@ const ManageOrder = () => {
               </td>
               <td className="text-center py-2">{`${el.bookingBy?.firstname} ${el.bookingBy?.lastname} `}</td>
               <td className="text-center py-2">{`${formatMoney(
-                formatPrice(el?.total)
+                (el?.total)
+              )} VNĐ`}</td>
+              <td className="text-center py-2">
+                {el?.coupon?.price !== undefined
+                  ? `${el?.coupon?.price}%`
+                  : "0%"
+                }
+              </td>
+              <td className="text-center py-2">{`${formatMoney(
+                (el?.total) - ((el?.total) * ((el?.coupon?.price || 0) / 100))
               )} VNĐ`}</td>
               <td className="text-center py-2">{el.status}</td>
               <td className="text-center py-2">
