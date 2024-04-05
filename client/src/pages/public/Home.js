@@ -31,9 +31,9 @@ const Home = () => {
         <div className="w-full my-10">
           <DealDaily></DealDaily>
         </div>
-        <div className="flex flex-col gap-5 w-[30%] flex-auto">
+        {/* <div className="flex flex-col gap-5 w-[30%] flex-auto">
           <Sidebar></Sidebar>
-        </div>
+        </div> */}
         <div className="w-full my-10">
           <EventBanner />
         </div>

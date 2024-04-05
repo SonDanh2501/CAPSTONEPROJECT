@@ -64,6 +64,7 @@ const Pitches = () => {
   );
 
 
+  console.log(categories)
   useEffect(() => {
     const queries = Object.fromEntries([...params]);
     let priceQuery = {};

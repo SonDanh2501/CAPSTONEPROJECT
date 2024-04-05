@@ -3,10 +3,7 @@ import logo from "assets/logo.png";
 import { adminSideBar } from "ultils/constant";
 import { Link, NavLink } from "react-router-dom";
 import clsx from "clsx";
-import {
-  FaAngleRight ,
-  FaAngleDown ,
-} from "react-icons/fa";
+import { FaAngleRight, FaAngleDown } from "react-icons/fa";
 import { GoDotFill } from "react-icons/go";
 
 import { BsArrowLeftShort } from "react-icons/bs";
@@ -16,6 +13,9 @@ import { LuArrowLeftToLine } from "react-icons/lu";
 import { LuArrowRightFromLine } from "react-icons/lu";
 import { useSelector } from "react-redux";
 import avatar from "assets/avatarwhite.jpg";
+import ThemeToggle from "components/buttons/ThemeToggle";
+import { LuSun } from "react-icons/lu";
+import { FaMoon } from "react-icons/fa";
 
 const activedStyle =
   "px-4 py-2 flex items-center gap-2 bg-gradient-to-tr from-indigo-200 to-indigo-100 rounded-md text-indigo-700";
@@ -37,7 +37,7 @@ const AdminSideBar = ({ open, setOpen }) => {
       setActived((prev) => [...prev, tabID]);
     }
   };
-console.log(hover)
+  console.log(hover);
   return (
     <div
       className={`bg-white overflow-y-auto h-full py-4 border-r shadow-lg flex flex-col justify-between  ${
@@ -200,6 +200,7 @@ console.log(hover)
             </div>
           </div>
         </div>
+
         <div className="h-[40px] hover:bg-slidebar_active flex items-center rounded-md text-gray-400 hover:text-indigo-700 ">
           <Link to={path.PUBLIC}>
             <div className=" flex ml-4 items-center">
@@ -213,6 +214,23 @@ console.log(hover)
               </span>
             </div>
           </Link>
+        </div>
+        <div className="h-[40px] hover:bg-slidebar_active flex items-center rounded-md text-gray-400">
+          <div
+            className={`${
+              !open ? "ml-2" : "ml-4"
+            } flex ml-2 items-center gap-2`}
+          >
+            <span className={`text-xl ${!open && "hidden"}`}>
+              <LuSun />
+            </span>
+            <span className={`text-sm duration-300 ${!open && "hidden"}`}>
+              Light Mode
+            </span>
+            <div className={`${!open ? "" : "pl-10"}`}>
+              <ThemeToggle SideBar />
+            </div>
+          </div>
         </div>
       </div>
     </div>
