@@ -8,7 +8,7 @@ import {
 } from "react-router-dom";
 import moment from "moment";
 import { InputSelect, Pagination, NewsCarousel } from "components";
-import { apiGetNews } from "apis";
+import { apiGetAllNews } from "apis";
 import { RiAdminFill } from "react-icons/ri";
 import { MdOutlineUpdate } from "react-icons/md";
 import { MdRemoveRedEye } from "react-icons/md";
@@ -22,12 +22,6 @@ const News = () => {
   const [params] = useSearchParams();
   const [news, setNews] = useState(null);
   const [sort, setSort] = useState("");
-  const fetchNews = async (queries) => {
-    const response = await apiGetNews(queries);
-    if (response.success) {
-      setNews(response);
-    }
-  };
 
   useEffect(() => {
     const queries = Object.fromEntries([...params]);
@@ -52,6 +46,12 @@ const News = () => {
       });
     }
   }, [sort]);
+  const fetchNews = async (queries) => {
+    const response = await apiGetAllNews(queries);
+    if (response.success) {
+      setNews(response);
+    }
+  };
   return (
     <>
       <div className="w-full">
@@ -69,7 +69,6 @@ const News = () => {
                 <h1 className=" text-blue-900 font-bold text-2xl ">
                   FEATURE NEWS
                 </h1>
-
                 <div className="">
                   <InputSelect
                     changeValue={changeValue}
@@ -85,9 +84,9 @@ const News = () => {
                 {news?.news?.map((e, index) => (
                   <div
                     style={{ fontFamily: "Open Sans" }}
-                    key={e.id}
+                    key={e._id}
                     className=" w-full cursor-pointer md:flex   "
-                    onClick={(e) => navigate(`/news/${e.id}`)}
+                    onClick={() => navigate(`/news/${e._id}`)}
                   >
                     <div className="md:w-1/3 w-full h-2/3">
                       <img
@@ -141,7 +140,7 @@ const News = () => {
                     key={el.title}
                     style={{ fontFamily: "Open Sans" }}
                     className="pl-4 pr-2 pb-2 border-b border-[#E3E1DC] cursor-pointer "
-                    onClick={(e) => navigate(`/news/${el.id}`)}
+                    onClick={(e) => navigate(`/news/${el._id}`)}
                   >
                     <span className="text-md hover:text-blue-400">
                       {el.title}

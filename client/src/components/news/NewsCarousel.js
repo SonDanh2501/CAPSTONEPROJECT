@@ -18,6 +18,7 @@ const NewsCarousel = ({ data }) => {
         {data?.map((el, item) => (
           <div className="" key={item}>
             <NewsItem
+              nid={el._id}
               thumb={el.thumb}
               title={el.title}
               description={el.description}

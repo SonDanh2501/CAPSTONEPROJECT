@@ -1,6 +1,12 @@
 import React, { useCallback, useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import { apiGetPitch, apiGetPitches, apiBooking, apiGetAllOrder, apiGetUserOrderStatus } from "apis";
+import {
+  apiGetPitch,
+  apiGetPitches,
+  apiBooking,
+  apiGetAllOrder,
+  apiGetUserOrderStatus,
+} from "apis";
 import moment from "moment";
 import {
   Breadcrumb,
@@ -72,9 +78,9 @@ const DetailPitches = ({ isQuickView, data }) => {
           const isSameDay = moment(selectedDate).isSame(currentDate, "day");
           elshift.value === +el.shift &&
             new Date(el.bookedDate).getTime() ===
-            new Date(selectedDate).getTime() &&
-            pitch._id === el.pitch?._id
-            && (elshift.isDisabled = true)
+              new Date(selectedDate).getTime() &&
+            pitch._id === el.pitch?._id &&
+            (elshift.isDisabled = true);
           // : (elshift.isDisabled = false);
           if (isSameDay) {
             if (+currentHour >= +elshift.hour) {
@@ -100,7 +106,7 @@ const DetailPitches = ({ isQuickView, data }) => {
         }
       });
     }
-    
+
     const response = await apiBooking({
       shifts: selectedShift,
       bookedDate: selectedDate,
@@ -157,6 +163,7 @@ const DetailPitches = ({ isQuickView, data }) => {
 
   useEffect(() => {
     if (data) {
+      console.log(data);
       setpitchid(data.pid);
       setpitchcategory(data.category);
     } else if (params && params.pid) {
@@ -287,9 +294,9 @@ const DetailPitches = ({ isQuickView, data }) => {
                 dateFormat="dd/MM/yyyy"
                 // minDate={new Date()}
                 placeholderText="Select Date Book"
-              // showPopperArrow={false}
-              // className="w-full border-none outline-none"
-              // popperClassName="datepicker-popper"
+                // showPopperArrow={false}
+                // className="w-full border-none outline-none"
+                // popperClassName="datepicker-popper"
               />
             </div>
           </div>
