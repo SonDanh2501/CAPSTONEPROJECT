@@ -219,17 +219,17 @@ const Login = () => {
         ></img>
       </div>
       <div className="absolute top-0 bottom-0 left-1/2 right-0 items-center justify-center flex bg-gradient-to-r from-login to-login-2">
-        <div className="max-w-[400px] w-full mx-auto bg-transeparent p-8 px-8 rounded-lg">
+        <div className="max-w-[560px] w-full mx-auto bg-transeparent p-8 px-8 rounded-lg">
           <h2 className="text-4xl font-bold text-center text-white">
             {isRegister
               ? "SIGN UP"
               : isRegisterPitchOwner
-                ? "PITCH OWNER "
-                : "SIGN IN"}
+              ? "PITCH OWNER "
+              : "SIGN IN"}
           </h2>
           <div className=" flex py-1">
             {!isRegister && !isRegisterPitchOwner && (
-              <div>
+              <div className="">
                 <div className="flex">
                   <p className="mr-2 text-white">Don't have an account?</p>
                   <span
@@ -363,17 +363,39 @@ const Login = () => {
               </>
             )}
           </div>
-          <Button
-            handleOnClick={handleSubmit}
-            fw
-            style="w-full my-2 py-2 bg-gradient-to-r from-blue-400 via-blue-500 to-blue-600 shadow-lg shadow-violet-700/70 hover:shadow-violet-500/80 rounded-md"
-          >
-            {isRegister
-              ? "Register"
-              : isRegisterPitchOwner
-                ? "Register"
-                : "Login"}
-          </Button>
+          <div className="flex justify-between items-center ">
+            <div className="w-full max-w-[240px]">
+              <Button
+                handleOnClick={handleSubmit}
+                fw
+                style="w-full my-2 py-2 bg-gradient-to-r from-blue-400 via-blue-500 to-blue-600 shadow-lg shadow-violet-700/70 hover:shadow-violet-500/80 rounded-md"
+              >
+                {isRegister
+                  ? "Register"
+                  : isRegisterPitchOwner
+                  ? "Register"
+                  : "Sign In"}
+              </Button>
+            </div>
+            <div className="flex">
+              <GoogleOAuthProvider clientId="205458580138-ntkleug6m343o4fqjbrqeqni2kd9tfd1.apps.googleusercontent.com">
+                <GoogleLogin
+                  onSuccess={(credentialResponse) => {
+                    const details = jwtDecode(credentialResponse.credential);
+                    // console.log(details)
+                    if (details?.email) {
+                      setemail(details.email);
+                      handleLoginGG(details);
+                    }
+                  }}
+                  onError={() => {
+                    console.log("Login Failed");
+                  }}
+                />
+                ;
+              </GoogleOAuthProvider>
+            </div>
+          </div>
           <div className="flex items-center justify-between my-2 w-full">
             {isRegister && !isRegisterPitchOwner && (
               <>
@@ -396,24 +418,6 @@ const Login = () => {
                 </span>
               </>
             )}
-          </div>
-          <div>
-            <GoogleOAuthProvider clientId="205458580138-ntkleug6m343o4fqjbrqeqni2kd9tfd1.apps.googleusercontent.com">
-            <GoogleLogin
-                onSuccess={(credentialResponse) => {
-                  const details = jwtDecode(credentialResponse.credential);
-                  // console.log(details)
-                  if (details?.email) {
-                    setemail(details.email);
-                    handleLoginGG(details);
-                  }
-                }}
-                onError={() => {
-                  console.log("Login Failed");
-                }}
-              />
-              ;
-            </GoogleOAuthProvider>
           </div>
         </div>
       </div>

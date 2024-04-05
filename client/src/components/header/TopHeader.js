@@ -70,13 +70,17 @@ const TopHeader = () => {
   }, [isUpdateCart, current]);
 
   return (
-    <div className="w-full bg-header-bg flex h-full items-center flex-wrap justify-between dark:bg-dark ">
-      <div className="ml-[50px] pt-3 pb-3">
+    <div className="w-full min-h-[70px] bg-header-bg flex h-full items-center flex-wrap dark:bg-dark ">
+      <div className="w-1/4 px-4 ">
         <Link to={`/${path.HOME}`}>
-          <img src={logo} alt="logo" className="w-[234px] object-contain" />
+          <img
+            src={logo}
+            alt="logo"
+            className="max-w-[180px] object-contain rounded-md"
+          />
         </Link>
       </div>
-      <div className="h-[48px] ml-48 text-sm items-center hidden lg:flex">
+      <div className="w-2/4 pl-8 text-lg font-bold hidden lg:justify-center lg:flex">
         {navigation.map((el) => (
           <NavLink
             to={el.path}
@@ -92,7 +96,10 @@ const TopHeader = () => {
         ))}
       </div>
       {isLoggedIn && current ? (
-        <div className="flex items-center mr-8">
+        <div className="w-1/4 flex items-center justify-end px-4">
+          <div className="mr-2 max-[1183px]:hidden">
+            <ThemeToggle></ThemeToggle>
+          </div>
           <div>
             <span
               className="cursor-pointer hover:text-orange text-white"
@@ -117,6 +124,7 @@ const TopHeader = () => {
               {/* <span className="text-white">{`${current?.lastname} ${current?.firstname}`}</span> */}
             </label>
           </div>
+
           {isShowOption && (
             <div
               onClick={(e) => e.stopPropagation()}
@@ -157,13 +165,16 @@ const TopHeader = () => {
           </div>
         </div>
       ) : (
-        <Link
-          className="mr-6 text-lg font-bold hover:text-orange text-white"
-          to={`/${path.LOGIN}`}
-        >
-          Sign In or Sign Up
-        </Link>
+        <div className="w-1/4 flex items-center justify-end px-4">
+          <Link
+            className="mr-6 text-lg font-bold hover:text-orange text-white"
+            to={`/${path.LOGIN}`}
+          >
+            Sign In or Sign Up
+          </Link>
+        </div>
       )}
+
       <div className="lg:hidden mr-4">
         <button onClick={toggleNavbar}>
           {isOpen ? (
@@ -190,9 +201,6 @@ const TopHeader = () => {
           ))}
         </div>
       )}
-      <div className="mr-2 max-[1183px]:hidden">
-        <ThemeToggle></ThemeToggle>
-      </div>
     </div>
   );
 };
