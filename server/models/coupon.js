@@ -6,11 +6,12 @@ var couponSchema = new mongoose.Schema(
         title: {
             type: String,
             required: true,
-            unique: true,
         },
         price: {
             type: Number,
             required: true,
+            min: 0,
+            max: 100
         },
     },
 );

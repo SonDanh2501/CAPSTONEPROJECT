@@ -49,22 +49,22 @@ const Contact = () => {
   }, []);
 
   return (
-    <div className="w-full bg-gray-200">
+    <div className="w-full bg-gray-200 dark:bg-medium mb-5">
       <div>
         <HeaderBanner title="WEBSITE INFORMATION" subtitle="Contact Us" />
       </div>
 
       <div className="flex justify-center items-center mt-14 pb-6">
-        <div className="w-main flex justify-between bg-white ">
-          <div className="w-2/3 flex justify-center items-center flex-col pb-6">
-            <h1 className="text-4xl font-bold text-black p-8">Get in touch</h1>
+        <div className="w-main flex justify-between bg-white dark:bg-dark  ">
+          <div className="w-2/3 flex justify-center items-center flex-col pb-6 ">
+            <h1 className="text-4xl font-bold text-black p-8 dark:text-white">Get in touch</h1>
             <form
               className="flex flex-col w-[500px] "
               ref={form}
               onSubmit={sendEmail}
               onChange={validateForm}
             >
-              <label className="mt-2 mb-1 text-lg">Name</label>
+              <label className="mt-2 mb-1 text-lg dark:text-white">Name</label>
               <input
                 className="rounded-md text-lg"
                 type="text"
@@ -72,7 +72,7 @@ const Contact = () => {
                 placeholder="Example: john cena"
                 required
               />
-              <label className="mt-2 mb-1 text-lg">Email</label>
+              <label className="mt-2 mb-1 text-lg dark:text-white">Email</label>
               <input
                 className="rounded-md text-lg"
                 type="email"
@@ -80,7 +80,7 @@ const Contact = () => {
                 placeholder="Example: Example@gmail.com"
                 required
               />
-              <label className="mt-2 mb-1 text-lg">Message</label>
+              <label className="mt-2 mb-1 text-lg dark:text-white">Message</label>
               <textarea
                 className="rounded-md text-lg h-32"
                 name="message"
@@ -97,7 +97,8 @@ const Contact = () => {
                 md:px-2
                 rounded-3xl
                 relative overflow-hidden 
-              bg-gray-800 
+              bg-gray-800
+              dark:bg-medium
                 shadow-lg 
                 transition-all 
               hover:shadow-blue-400 
@@ -108,7 +109,7 @@ const Contact = () => {
               />
             </form>
           </div>
-          <div className="w-1/3 flex justify-center items-center flex-col pb-6 bg-blue-500  text-white">
+          <div className="w-1/3 flex justify-center items-center flex-col pb-6 bg-blue-500 dark:bg-blue-950 text-white">
             <h1 className="text-4xl font-bold pb-8">Contact us</h1>
             <span className="flex items-center gap-2 pt-8 pb-4 pr-4 pl-4">
               <FaLocationDot className="w-4 h-4 " />

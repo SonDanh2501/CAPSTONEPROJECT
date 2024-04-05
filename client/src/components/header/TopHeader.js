@@ -69,8 +69,6 @@ const TopHeader = () => {
     };
   }, [isUpdateCart, current]);
 
-  console.log("CHECK ORDER", order);
-  console.log("CHECK", current);
   return (
     <div className="w-full min-h-[70px] bg-header-bg flex h-full items-center flex-wrap dark:bg-dark ">
       <div className="w-1/4 px-4 ">
