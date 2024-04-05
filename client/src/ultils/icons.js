@@ -37,6 +37,7 @@ import {
   FaBars,
   FaMoon,
 } from "react-icons/fa";
+import { LuSun } from "react-icons/lu";
 import {
   FaXmark
 } from "react-icons/fa6"
@@ -111,7 +112,8 @@ const icons = {
   FaBars,
   FaXmark,
   FaMoon,
-  BsSunFill
+  BsSunFill,
+  LuSun
 };
 
 export default icons;

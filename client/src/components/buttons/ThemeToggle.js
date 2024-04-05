@@ -1,8 +1,8 @@
 import React, { memo, useEffect, useState } from "react";
 import icons from "../../ultils/icons";
-const { BsSunFill, FaMoon } = icons;
+const { BsSunFill, FaMoon,LuSun } = icons;
 
-const ThemeToggle = () => {
+const ThemeToggle = ({SideBar}) => {
 
     const [darkMode, setdarkMode] = useState(true)
 
@@ -28,16 +28,26 @@ const ThemeToggle = () => {
 
     return (
       <div
-        className="relative w-14 h-6 flex items-center dark:bg-black bg-teal-500 cursor-pointer rounded-full p-1"
+        className={`relative ${
+          SideBar ? "w-12 h-6" : "w-14 h-6"
+        } flex items-center dark:bg-black bg-white cursor-pointer rounded-full p-1`}
         onClick={() => setdarkMode(!darkMode)}
       >
-        <FaMoon className="text-white" size={16}></FaMoon>
+        <FaMoon
+          className={`${darkMode ? "text-white" : "text-black"}`}
+          size={SideBar ? 12 : 16}
+        ></FaMoon>
         <div
-          className={`absolute bg-white dark:bg-medium w-5 h-5 rounded-full shadow-md duration-500 ${
-            darkMode ? "left-1" : "left-8"
+          className={`absolute bg-black dark:bg-white ${
+            SideBar ? "w-4 h-4" : "w-5 h-5"
+          } rounded-full shadow-md duration-500 ${
+            darkMode ? "left-1" : `${SideBar ? "left-7" : "left-8"}`
           }`}
         ></div>
-        <BsSunFill className="ml-auto text-yellow-400" size={16}></BsSunFill>
+        <LuSun
+          className={`ml-auto ${darkMode ? "text-white" : "text-black"}`}
+          size={SideBar ? 12 : 16}
+        ></LuSun>
       </div>
     );
 };
