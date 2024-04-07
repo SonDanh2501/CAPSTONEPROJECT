@@ -56,14 +56,18 @@ const Contact = () => {
 
       <div className="flex justify-center items-center mt-14 pb-6">
         <div className="w-main flex justify-between bg-white dark:bg-dark  ">
+          {/* Fill in Form*/}
           <div className="w-2/3 flex justify-center items-center flex-col pb-6 ">
-            <h1 className="text-4xl font-bold text-black p-8 dark:text-white">Get in touch</h1>
+            <h1 className="text-4xl font-bold text-black p-8 dark:text-white">
+              Get in touch
+            </h1>
             <form
               className="flex flex-col w-[500px] "
               ref={form}
               onSubmit={sendEmail}
               onChange={validateForm}
             >
+              {/* name*/}
               <label className="mt-2 mb-1 text-lg dark:text-white">Name</label>
               <input
                 className="rounded-md text-lg"
@@ -72,6 +76,7 @@ const Contact = () => {
                 placeholder="Example: john cena"
                 required
               />
+              {/* user email*/}
               <label className="mt-2 mb-1 text-lg dark:text-white">Email</label>
               <input
                 className="rounded-md text-lg"
@@ -80,13 +85,17 @@ const Contact = () => {
                 placeholder="Example: Example@gmail.com"
                 required
               />
-              <label className="mt-2 mb-1 text-lg dark:text-white">Message</label>
+              {/* Message*/}
+              <label className="mt-2 mb-1 text-lg dark:text-white">
+                Message
+              </label>
               <textarea
                 className="rounded-md text-lg h-32"
                 name="message"
                 placeholder="Your message ..."
                 required
               />
+              {/* button send*/}
               <input
                 className={`mt-4 cursor-pointer  h-[40px] text-white
                 flex 
@@ -109,10 +118,12 @@ const Contact = () => {
               />
             </form>
           </div>
+          {/* Contact information form*/}
           <div className="w-1/3 flex justify-center items-center flex-col pb-6 bg-blue-500 dark:bg-blue-950 text-white">
             <h1 className="text-4xl font-bold pb-8">Contact us</h1>
             <span className="flex items-center gap-2 pt-8 pb-4 pr-4 pl-4">
               <FaLocationDot className="w-4 h-4 " />
+              {/* Address*/}
               <span className="font-bold text-xl">Address :</span>
               <span className="cursor-pointer text-lg">
                 1 Vo Van Ngan, Linh Trung, Thu Duc
@@ -120,15 +131,17 @@ const Contact = () => {
             </span>
             <span className="flex items-center gap-2 pt-8 pb-4 pr-4 pl-4">
               <FaPhoneAlt className="w-4 h-4 " />
-
+              {/* Phone number*/}
               <span className="font-bold  cursor-pointer text-xl">Phone :</span>
               <span className="cursor-pointer text-lg">(+84) 0900000000</span>
             </span>
             <span className="flex items-center gap-2 pt-8 pb-4 pr-4 pl-4">
               <IoIosSend className="w-4 h-4 " />
+              {/* Email*/}
               <span className="font-bold  cursor-pointer text-xl">Email :</span>
               <span className="cursor-pointer text-lg">debugBoy@gmail.com</span>
             </span>
+            {/* Discord Link*/}
             <span className="flex items-center gap-2 pt-8 pb-4 pr-4 pl-4">
               <FaDiscord className="w-4 h-4 " />
               <span className="font-bold text-xl cursor-pointer">

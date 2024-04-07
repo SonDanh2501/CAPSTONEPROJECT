@@ -1,6 +1,9 @@
 const Faq = require("../models/faq");
 const asyncHandler = require("express-async-handler");
 
+// @desc     Create FAQ
+// @route    POST /faq/
+// @access   Private/admin
 const createFaq = asyncHandler(async (req, res) => {
   const { title, description } = req.body;
 
@@ -12,7 +15,10 @@ const createFaq = asyncHandler(async (req, res) => {
     createdFaq: newFaq ? newFaq : "Can not create new faq",
   });
 });
-// update views
+
+// @desc     Get FAQ by id
+// @route    GET /faq/:fid
+// @access   Private/admin
 const getFaqById = asyncHandler(async (req, res) => {
   const { fid } = req.params;
   const faq = await Faq.findOneAndUpdate({ _id: fid });
@@ -21,9 +27,9 @@ const getFaqById = asyncHandler(async (req, res) => {
     faqData: faq ? faq : "Can not get faq",
   });
 });
-
-//filtering , sorting & pagination
-
+// @desc     user get All FAQ
+// @route    GET /faq/
+// @access   Public
 const getFaqs = asyncHandler(async (req, res) => {
   const queries = { ...req.query };
   // tách các trường đặc biệt ra khỏi query
@@ -82,7 +88,9 @@ const getFaqs = asyncHandler(async (req, res) => {
       if (err) throw new Error(err, message);
     });
 });
-
+// @desc     Update FAQ
+// @route    PUT /faq/:fid
+// @access   Private/admin
 const updateFaq = asyncHandler(async (req, res) => {
   const { fid } = req.params;
 
@@ -94,7 +102,9 @@ const updateFaq = asyncHandler(async (req, res) => {
     message: updateFaq ? "Updated" : "Can not update faq",
   });
 });
-
+// @desc     Delete FAQ
+// @route    DELETE /faq/:fid
+// @access   Private/admin
 const deleteFaq = asyncHandler(async (req, res) => {
   const { fid } = req.params;
   const deleteFaq = await Faq.findByIdAndDelete(fid);

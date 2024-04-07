@@ -40,7 +40,7 @@ const Order = () => {
     if (response.success) {
       dispatch(updateCart());
       fetchPitchData();
-      toast.success(response.message);
+      toast.success(response?.message);
     } else toast.error(response.message);
   };
 
