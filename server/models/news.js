@@ -6,10 +6,6 @@ var newsSchema = new mongoose.Schema(
     title: {
       type: String,
     },
-    author: {
-      type: String,
-      default: "Admin",
-    },
     postedDate: {
       type: Date,
       default: Date.now,

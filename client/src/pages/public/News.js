@@ -24,9 +24,7 @@ const News = () => {
   const [sort, setSort] = useState("");
 
   useEffect(() => {
-    const queries = Object.fromEntries([...params]);
-    const q = { queries };
-    fetchNews(q);
+    fetchNews();
     // window.scrollTo(0, 0);
   }, [params]);
   const changeValue = useCallback(
@@ -46,8 +44,8 @@ const News = () => {
       });
     }
   }, [sort]);
-  const fetchNews = async (queries) => {
-    const response = await apiGetAllNews(queries);
+  const fetchNews = async () => {
+    const response = await apiGetAllNews({ sort: sort });
     if (response.success) {
       setNews(response);
     }
@@ -74,6 +72,7 @@ const News = () => {
                     changeValue={changeValue}
                     value={sort}
                     options={options}
+                    defaultValue="-createdAt"
                   ></InputSelect>
                 </div>
               </div>
@@ -101,15 +100,11 @@ const News = () => {
                       </h1>
                       <div className="pt-4">
                         <div className="flex gap-2">
-                          <span className="font-thin text-zinc-500 flex justify-center items-center md:mr-3 gap-2 text-sm">
-                            <RiAdminFill className="md:w-4 md:h-4 w-3 h-3" />
-                            {e.author}
-                          </span>
-                          <span className="ml-4 text-sm font-thin text-zinc-500 flex justify-center items-center mr-3 gap-2">
+                          <span className=" text-sm font-thin text-zinc-500 flex justify-center items-center mr-3 gap-2">
                             <MdOutlineUpdate className="w-4 h-4" />
                             {moment(e.postedDate).format("DD/MM/YYYY")}
                           </span>
-                          <span className="ml-4 font-thin text-zinc-500 flex justify-center items-center mr-3 gap-2">
+                          <span className=" font-thin text-zinc-500 flex justify-center items-center mr-3 gap-2">
                             <MdRemoveRedEye className="text-md" />
                             {e.views}
                           </span>

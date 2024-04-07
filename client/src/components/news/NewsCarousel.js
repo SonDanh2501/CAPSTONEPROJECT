@@ -11,6 +11,7 @@ const NewsCarousel = ({ data }) => {
     speed: 2000,
     autoplaySpeed: 8000,
     cssEase: "linear",
+    dot: false,
   };
   return (
     <div className="slider-container">
