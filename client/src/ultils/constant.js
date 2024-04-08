@@ -158,6 +158,7 @@ const {
   AiFillLike,
   MdCategory,
   SiBrandfolder,
+  FaQq,
 } = icons;
 export const adminSideBar = [
   {
@@ -227,6 +228,22 @@ export const adminSideBar = [
       {
         text: "Manage Brands",
         path: `/${path.ADMIN}/${path.MANAGE_BRANDS}`,
+      },
+    ],
+  },
+  {
+    id: 7,
+    type: "PARENT",
+    text: "FAQ",
+    icon: <FaQq />,
+    submenu: [
+      {
+        text: "Create FAQ",
+        path: `/${path.ADMIN}/${path.CREATE_FAQ}`,
+      },
+      {
+        text: "Manage FAQ",
+        path: `/${path.ADMIN}/${path.MANAGE_FAQ}`,
       },
     ],
   },

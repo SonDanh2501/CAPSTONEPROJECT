@@ -96,8 +96,8 @@ const TopHeader = () => {
         ))}
       </div>
       {isLoggedIn && current ? (
-        <div className="w-1/4 flex items-center justify-end px-4">
-          <div className="mr-2 max-[1183px]:hidden">
+        <div className="w-1/4 flex items-center justify-end px-4 gap-4">
+          <div className="max-[1183px]:hidden">
             <ThemeToggle></ThemeToggle>
           </div>
           <div>
@@ -112,17 +112,15 @@ const TopHeader = () => {
             </span>
           </div>
           <div
-            className="ml-5 cursor-pointer "
+            className="cursor-pointer"
             onClick={() => setisShowOption((prev) => !prev)}
           >
-            <label className="flex gap-2" htmlFor="file">
               <img
                 src={current?.avatar || avatar}
                 alt="avatar"
                 className="w-6 h-6 ml-2 object-cover rounded-full cursor-pointer"
               ></img>
               {/* <span className="text-white">{`${current?.lastname} ${current?.firstname}`}</span> */}
-            </label>
           </div>
 
           {isShowOption && (
@@ -155,7 +153,7 @@ const TopHeader = () => {
             </div>
           )}
 
-          <div className="ml-7">
+          <div className="">
             <span
               onClick={() => dispatch(logout())}
               className="hover:rounded-full cursor-auto hover:text-orange p-2 text-white"

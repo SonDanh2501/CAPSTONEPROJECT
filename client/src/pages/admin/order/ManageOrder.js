@@ -11,6 +11,7 @@ import {
   createSearchParams,
   useNavigate,
   useLocation,
+  useOutletContext,
 } from "react-router-dom";
 import useDebounce from "hooks/useDebounce";
 
@@ -19,6 +20,7 @@ import { toast } from "react-toastify";
 import { MdDeleteForever } from "react-icons/md";
 
 const ManageOrder = () => {
+  const [open, setOpen] = useOutletContext();
   const navigate = useNavigate();
   const location = useLocation();
   const [params] = useSearchParams();
@@ -89,12 +91,12 @@ const ManageOrder = () => {
     });
   };
   return (
-    <div className="w-full flex flex-col gap-4 px-4 ">
-      <div className="p-4 border-b w-full flex items-center ">
-        <h1 className="text-3xl font-bold tracking-tight">Manage Order</h1>
+    <div className={`${open ? "w-[83vw]" : "w-[94vw]"} bg-dash-board pl-4`}>
+      <div className="ml-2 py-4 border-b-2 border-gray-300">
+        <h1 className="text-2xl font-bold tracking-tight">Manage User</h1>
       </div>
-      <div className="flex flex-col gap-2">
-        <div className="flex w-full justify-end items-center px-1">
+      <div className="w-full p-2">
+        <div className="px-1 pb-2">
           {/* <form className='w-[300px]' onSubmit={handleSubmit(handleManagePitch)}> */}
           <form className="w-[300px]">
             <InputForm
@@ -107,7 +109,7 @@ const ManageOrder = () => {
             />
           </form>
         </div>
-        <div className="flex w-full justify-end items-center px-1">
+        {/* <div className="px-1 pb-2">
           <form className="w-[300px]">
             <InputForm
               id="q"
@@ -118,93 +120,91 @@ const ManageOrder = () => {
               placeholder="Search status ..."
             />
           </form>
-        </div>
-      </div>
-
-      <table className="table-auto w-full ">
-        <thead className="text-md text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
-          <tr className="bg-sky-900 text-white  py-2">
-            <th className="px-4 py-2 text-center h-[60px] rounded-tl-lg">#</th>
-            <th className="px-4 py-2 text-center h-[60px] ">Thumb</th>
-            <th className="px-4 py-2 text-center h-[60px] ">Pitch</th>
-            <th className="px-4 py-2 text-center h-[60px] ">Shift</th>
-            <th className="px-4 py-2 text-center h-[60px] ">Booking By</th>
-            <th className="px-4 py-2 text-center h-[60px] ">Price</th>
-            <th className="px-4 py-2 text-center h-[60px] ">Discount</th>
-            <th className="px-4 py-2 text-center h-[60px] ">Total Price</th>
-            <th className="px-4 py-2 text-center h-[60px] ">Status</th>
-            <th className="px-4 py-2 text-center h-[60px] ">Booked At</th>
-            <th className="px-4 py-2 text-center  h-[60px] rounded-tr-lg">
-              Actions
-            </th>
-          </tr>
-        </thead>
-        <tbody>
-          {order?.map((el, index) => (
-            <tr
-              className='odd:bg-white odd:dark:bg-gray-300 even:bg-gray-50 even:dark:bg-white border-b dark:border-gray-700"'
-              key={el._id}
-            >
-              <td className="text-center px-6 py-5 ">
-                {(+params.get("page") > 1 ? +params.get("page") - 1 : 0) *
-                  process.env.REACT_APP_PITCH_LIMIT +
-                  index +
-                  1}
-              </td>
-              <td className="text-center py-2">
-                <div className="flex items-center justify-center">
-                  {el.pitch?.thumb ? (
-                    <img
-                      src={el.pitch?.thumb}
-                      alt="thumb"
-                      className="w-20 h-[70px] object-cover"
-                    />
-                  ) : (
-                    <img
-                      src={defaultt}
-                      alt="thumb"
-                      className="w-20 h-[70px] object-cover"
-                    />
-                  )}
-                </div>
-              </td>
-              <td className="text-center py-2">{el?.pitch?.title}</td>
-              <td className="text-center py-2">
-                {shifts.find((s) => +s.value === +el.shift)?.time}
-              </td>
-              <td className="text-center py-2">{`${el.bookingBy?.firstname} ${el.bookingBy?.lastname} `}</td>
-              <td className="text-center py-2">{`${formatMoney(
-                (el?.total)
-              )} VNĐ`}</td>
-              <td className="text-center py-2">
-                {el?.coupon?.price !== undefined
-                  ? `${el?.coupon?.price}%`
-                  : "0%"
-                }
-              </td>
-              <td className="text-center py-2">{`${formatMoney(
-                (el?.total) - ((el?.total) * ((el?.coupon?.price || 0) / 100))
-              )} VNĐ`}</td>
-              <td className="text-center py-2">{el.status}</td>
-              <td className="text-center py-2">
-                {moment(el.createdAt).format("DD/MM/YYYY")}
-              </td>
-              <td className="text-center py-2">
-                <div>
-                  <span
-                    onClick={() => handleDeletePitch(el._id)}
-                    className="flex items-center justify-center text-2xl text-red-500 hover:text-red-700 cursor-pointer"
-                  >
-                    <MdDeleteForever />
-                  </span>
-                </div>
-              </td>
+        </div> */}
+        <table className="table-auto w-full ">
+          <thead className="text-md  text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+            <tr className="bg-sky-900 text-white py-2">
+              <th className="text-center h-[60px] rounded-tl-lg">#</th>
+              <th className="text-center">Thumb</th>
+              <th className="text-center">Pitch</th>
+              <th className="text-center">Shift</th>
+              <th className="text-center">Booking By</th>
+              <th className="text-center">Price</th>
+              <th className="text-center">Discount</th>
+              <th className="text-center">Total Price</th>
+              <th className="text-center w-[150px]">Status</th>
+              <th className="text-center">Booked At</th>
+              <th className="text-center rounded-tr-lg">Actions</th>
             </tr>
-          ))}
-        </tbody>
-      </table>
-      <div className="w-full flex justify-end my-8">
-        <Pagination totalCount={counts} type="orders" />
+          </thead>
+          <tbody>
+            {order?.map((el, index) => (
+              <tr
+                className='odd:bg-white even:bg-gray-200/50 odd:dark:bg-gray-300 even:dark:bg-white border-b dark:border-gray-700"'
+                key={el._id}
+              >
+                <td className="px-6 py-5 text-center ">
+                  {(+params.get("page") > 1 ? +params.get("page") - 1 : 0) *
+                    process.env.REACT_APP_PITCH_LIMIT +
+                    index +
+                    1}
+                </td>
+                <td className="p-2 text-center ">
+                  <div className="flex items-center justify-center">
+                    {el.pitch?.thumb ? (
+                      <img
+                        src={el.pitch?.thumb}
+                        alt="thumb"
+                        className="w-20 h-[70px] object-cover"
+                      />
+                    ) : (
+                      <img
+                        src={defaultt}
+                        alt="thumb"
+                        className="w-20 h-[70px] object-cover"
+                      />
+                    )}
+                  </div>
+                </td>
+                <td className="px-6 py-5 text-center">{el?.pitch?.title}</td>
+                <td className="px-6 py-5 text-center">
+                  {shifts.find((s) => +s.value === +el.shift)?.time}
+                </td>
+                <td className="px-6 py-5 text-center">{`${el.bookingBy?.firstname} ${el.bookingBy?.lastname} `}</td>
+                <td className="px-6 py-5 text-center">{`${formatMoney(
+                  el?.total
+                )} VNĐ`}</td>
+                <td className="px-6 py-5 text-center">
+                  {el?.coupon?.price !== undefined
+                    ? `${el?.coupon?.price}%`
+                    : "0%"}
+                </td>
+                <td className="px-6 py-5 text-center">{`${formatMoney(
+                  el?.total - el?.total * ((el?.coupon?.price || 0) / 100)
+                )} VNĐ`}</td>
+                <td className="px-6 py-5 text-center">
+                  <span className={`${el?.status === "Pay By Cash" ? "text-blue-500 bg-blue-300/25 rounded-md p-2" : el?.status === "Success" ? "text-green-500 bg-green-300/25 rounded-md p-2" :  el?.status === "Pending" && "text-yellow-500 bg-yellow-300/25 rounded-md p-2"}`}>{el.status}</span>
+                </td>
+                <td className="px-6 py-5 text-center">
+                  {moment(el.createdAt).format("DD/MM/YYYY")}
+                </td>
+                <td className="px-6 py-5 text-center">
+                  <div>
+                    <span
+                      onClick={() => handleDeletePitch(el._id)}
+                      className="flex items-center justify-center text-2xl text-red-500 hover:text-red-700 cursor-pointer"
+                    >
+                      <MdDeleteForever />
+                    </span>
+                  </div>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+        <div className="w-full flex justify-end my-8">
+          <Pagination totalCount={counts} type="orders" />
+        </div>
       </div>
     </div>
   );

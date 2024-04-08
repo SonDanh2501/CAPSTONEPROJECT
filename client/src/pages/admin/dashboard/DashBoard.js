@@ -9,8 +9,10 @@ import {
 import { formatMoney, formatPrice } from "ultils/helper";
 import React, { useEffect, useState } from "react";
 import { apiGetOrderByAdmin, apiGetAllBrands } from "apis";
+import { useOutletContext } from "react-router-dom";
 
 const Dashboard = () => {
+  const [open, setOpen] = useOutletContext();
   const [order, setOrder] = useState(null);
   const [brand, setBrand] = useState(null);
 
@@ -34,11 +36,11 @@ const Dashboard = () => {
   }, []);
 
   return (
-    <div className="w-full bg-dash-board px-4 ">
-      <div className="flex justify-center gap-8">
-        <div>
-          
-        </div>
+    <div className={`${open ? "w-[83vw]" : "w-[94vw]"} bg-dash-board pl-4`}>
+      <div className="w-full ml-2 py-4 border-b-2 border-gray-300">
+        <h1 className="text-2xl font-bold tracking-tight">Manage User</h1>
+      </div>
+      <div className="flex gap-8 pt-2">
         <div>
           <NewDashBoard />
           <div className="flex-1 pl-72 mt-5 bg-white ">

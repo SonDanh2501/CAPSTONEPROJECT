@@ -9,3 +9,5 @@ export { default as ManageUser } from "./user/ManageUser";
 export { default as ManageCategory } from "./category/ManageCategory";
 export { default as ManageBrands } from "./brand/ManageBrands";
 export { default as UpdateBrand } from "./brand/UpdateBrand";
+export { default as CreateFAQ } from "./faq/CreateFAQ";
+export { default as ManageFAQ } from "./faq/ManageFAQ";
