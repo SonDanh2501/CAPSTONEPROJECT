@@ -60,7 +60,7 @@ const UpdateCategory = ({ editPitch, render, setEditPitch }) => {
   return (
     <div className="w-full flex flex-col gap-4 px-4 relative">
       <div className="ml-2 py-4 border-b-2 border-gray-300 flex justify-between items-center top-0 right-0">
-        <h1 className="text-2xl font-bold tracking-tight">Manage User</h1>
+        <h1 className="text-2xl font-bold tracking-tight">Update Category</h1>
         <span
           className="text-main hover:underline cursor-pointer"
           onClick={() => setEditPitch(null)}

@@ -88,7 +88,6 @@ const ManageCategory = () => {
         open ? "w-[83vw]" : "w-[94vw]"
       } bg-dash-board pl-4 relative`}
     >
-      {" "}
       {editPitch && (
         <div className="absolute inset-0 win-h-screen bg-gray-100 z-50">
           <UpdateCategory
@@ -99,7 +98,7 @@ const ManageCategory = () => {
         </div>
       )}
       <div className="ml-2 py-4 border-b-2 border-gray-300">
-        <h1 className="text-2xl font-bold tracking-tight">Manage User</h1>
+        <h1 className="text-2xl font-bold tracking-tight">Manage Category</h1>
       </div>
       <div className="w-full p-2">
         <div className="px-1 pb-2">
@@ -119,9 +118,9 @@ const ManageCategory = () => {
           <thead className="text-md text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
             <tr className="bg-sky-900 text-white  py-2">
               <th className="text-center h-[60px] rounded-tl-lg">#</th>
-              <th className="text-center h-[60px]">Thumb</th>
-              <th className="text-center h-[60px]">Title</th>
-              <th className="text-center h-[60px] rounded-tr-lg">Actions</th>
+              <th className="text-center">Thumb</th>
+              <th className="text-center">Title</th>
+              <th className="text-center rounded-tr-lg">Actions</th>
             </tr>
           </thead>
           <tbody>

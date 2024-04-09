@@ -131,7 +131,7 @@ const CreatePitch = () => {
   return (
     <div className={`${open ? "w-[83vw]" : "w-[94vw]"} bg-dash-board pl-4`}>
       <div className="ml-2 py-4 border-b-2 border-gray-300">
-        <h1 className="text-2xl font-bold tracking-tight">Manage User</h1>
+        <h1 className="text-2xl font-bold tracking-tight">Create Pitch</h1>
       </div>
       <div className="p-4">
         <form onSubmit={handleSubmit(handleCreatePitch)}>

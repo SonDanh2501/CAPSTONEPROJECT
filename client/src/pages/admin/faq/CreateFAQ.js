@@ -7,8 +7,10 @@ import { validate, getBase64 } from "ultils/helper";
 import { toast } from "react-toastify";
 import { apiCreateBrand, apiCreateFAQ, apiGetUsers } from "apis";
 import { showModal } from "store/app/appSlice";
+import { useOutletContext } from "react-router-dom";
 
 const CreateFAQ = () => {
+  const [open, setOpen] = useOutletContext();
   const dispatch = useDispatch();
   const [payload, setPayload] = useState({
     description: "",
@@ -51,9 +53,9 @@ const CreateFAQ = () => {
     [payload]
   );
   return (
-    <div className="w-full flex flex-col gap-4 px-4 ">
-      <div className="p-4 border-b w-full flex items-center ">
-        <h1 className="text-3xl font-bold tracking-tight">Create Brand</h1>
+    <div className={`${open ? "w-[83vw]" : "w-[94vw]"} bg-dash-board pl-4`}>
+      <div className="ml-2 py-4 border-b-2 border-gray-300">
+        <h1 className="text-2xl font-bold tracking-tight">Create FAQ</h1>
       </div>
       <div className="p-4">
         <form onSubmit={handleSubmit(handleCreateFAQ)}>

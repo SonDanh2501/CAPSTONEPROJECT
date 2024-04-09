@@ -21,16 +21,7 @@ const notactivedStyle =
 
 const AdminSideBar = ({ open, setOpen }) => {
   const { current } = useSelector((state) => state.user);
-  const [darkMode, setdarkMode] = useState(true)
-  useEffect(() => {
-    const theme = localStorage.getItem("theme");
-    if (theme === "dark") {
-      setdarkMode(true);
-    } else {
-      setdarkMode(false);
-    }
-  }, []);
-    const [actived, setActived] = useState([]);
+  const [actived, setActived] = useState([]);
   const [activedTab, setActivedTab] = useState([]);
   const [hover, setHover] = useState([]);
   // Check mảng nếu không có id trong mảng thì copy lại mảng và push id mới vào
@@ -43,7 +34,7 @@ const AdminSideBar = ({ open, setOpen }) => {
       setActived((prev) => [...prev, tabID]);
     }
   };
-  console.log(darkMode);
+
   return (
     <div
       className={`bg-white overflow-y-auto h-full py-4 border-r shadow-lg flex flex-col justify-between  ${
@@ -227,11 +218,8 @@ const AdminSideBar = ({ open, setOpen }) => {
               !open ? "ml-2" : "ml-4"
             } flex ml-2 items-center gap-2`}
           >
-            <span className={`text-xl ${!open && "hidden"}`}>
-              <LuSun />
-            </span>
             <span className={`text-sm duration-300 ${!open && "hidden"}`}>
-              {}
+              Mode Select
             </span>
             <div className={`${!open ? "" : "pl-10"}`}>
               <ThemeToggle SideBar />

@@ -38,7 +38,7 @@ const Dashboard = () => {
   return (
     <div className={`${open ? "w-[83vw]" : "w-[94vw]"} bg-dash-board pl-4`}>
       <div className="w-full ml-2 py-4 border-b-2 border-gray-300">
-        <h1 className="text-2xl font-bold tracking-tight">Manage User</h1>
+        <h1 className="text-2xl font-bold tracking-tight">Dash Board</h1>
       </div>
       <div className="flex gap-8 pt-2">
         <div>

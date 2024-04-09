@@ -111,8 +111,8 @@ const CreateBrand = () => {
   }, []);
   return (
     <div className="w-full flex flex-col gap-4 px-4 ">
-      <div className="p-4 border-b w-full flex items-center ">
-        <h1 className="text-3xl font-bold tracking-tight">Create Brand</h1>
+      <div className="ml-2 py-4 border-b-2 border-gray-300">
+        <h1 className="text-2xl font-bold tracking-tight">Create Brand</h1>
       </div>
       <div className="p-4">
         <form onSubmit={handleSubmit(handleCreateBrand)}>
