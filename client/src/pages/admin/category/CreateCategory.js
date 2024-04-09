@@ -6,8 +6,10 @@ import { getBase64 } from "ultils/helper";
 import { toast } from "react-toastify";
 import { apiCreateCategory } from "apis";
 import { showModal } from "store/app/appSlice";
+import { useOutletContext } from "react-router-dom";
 
 const CreateCategory = () => {
+  const [open, setOpen] = useOutletContext();
   const dispatch = useDispatch();
 
   const {
@@ -53,9 +55,9 @@ const CreateCategory = () => {
   }, [watch("thumb")]);
 
   return (
-    <div className="w-full flex flex-col gap-4 px-4 ">
-      <div className="p-4 border-b w-full flex items-center ">
-        <h1 className="text-3xl font-bold tracking-tight">Create Category</h1>
+    <div className={`${open ? "w-[83vw]" : "w-[94vw]"} bg-dash-board pl-4`}>
+      <div className="ml-2 py-4 border-b-2 border-gray-300">
+        <h1 className="text-2xl font-bold tracking-tight">Create Category</h1>
       </div>
       <div className="p-4">
         <form onSubmit={handleSubmit(handleCreatePitch)}>

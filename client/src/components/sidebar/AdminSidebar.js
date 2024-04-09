@@ -1,16 +1,13 @@
-import React, { Fragment, memo, useState } from "react";
+import React, { Fragment, memo, useEffect, useState } from "react";
 import logo from "assets/logo.png";
 import { adminSideBar } from "ultils/constant";
 import { Link, NavLink } from "react-router-dom";
 import clsx from "clsx";
 import { FaAngleRight, FaAngleDown } from "react-icons/fa";
 import { GoDotFill } from "react-icons/go";
-
-import { BsArrowLeftShort } from "react-icons/bs";
 import path from "ultils/path";
 import { BiSolidLogOut } from "react-icons/bi";
 import { LuArrowLeftToLine } from "react-icons/lu";
-import { LuArrowRightFromLine } from "react-icons/lu";
 import { useSelector } from "react-redux";
 import avatar from "assets/avatarwhite.jpg";
 import ThemeToggle from "components/buttons/ThemeToggle";
@@ -37,7 +34,7 @@ const AdminSideBar = ({ open, setOpen }) => {
       setActived((prev) => [...prev, tabID]);
     }
   };
-  console.log(hover);
+
   return (
     <div
       className={`bg-white overflow-y-auto h-full py-4 border-r shadow-lg flex flex-col justify-between  ${
@@ -185,7 +182,7 @@ const AdminSideBar = ({ open, setOpen }) => {
           <img
             src={current?.avatar || avatar}
             alt="avatar"
-            className={`w-5 h-5 rounded-md border ${!open && "ml-1 w-6 h-6"}`}
+            className={`w-8 h-8 rounded-md ${!open && "ml-1 w-6 h-6"}`}
           />
           <div
             className={`flex justify-between items-center ml-3 w-52 ${
@@ -221,11 +218,8 @@ const AdminSideBar = ({ open, setOpen }) => {
               !open ? "ml-2" : "ml-4"
             } flex ml-2 items-center gap-2`}
           >
-            <span className={`text-xl ${!open && "hidden"}`}>
-              <LuSun />
-            </span>
             <span className={`text-sm duration-300 ${!open && "hidden"}`}>
-              Light Mode
+              Mode Select
             </span>
             <div className={`${!open ? "" : "pl-10"}`}>
               <ThemeToggle SideBar />

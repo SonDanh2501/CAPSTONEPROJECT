@@ -1,8 +1,10 @@
 import React, { useCallback, useEffect, useState } from "react";
 import { InputForm, Pagination } from "components";
 import { useForm } from "react-hook-form";
-import { apiGetCategories, apiDeleteCategory } from "apis";
+import { apiGetAllBrands, apiDeleteBrand, apiGetFaq, apiDeleteFAQ } from "apis";
 import defaultt from "assets/default.png";
+import moment from "moment";
+import icons from "ultils/icons";
 import {
   useSearchParams,
   createSearchParams,
@@ -12,12 +14,14 @@ import {
 } from "react-router-dom";
 import useDebounce from "hooks/useDebounce";
 import Swal from "sweetalert2";
-import UpdateCategory from "./UpdateCategory";
 import { toast } from "react-toastify";
+// import UpdateBrand from "./UpdateBrand";
 import { FaRegEdit } from "react-icons/fa";
-import { MdDeleteForever } from "react-icons/md";
+import UpdateFAQ from "./UpdateFAQ";
+const { AiFillStar, MdDeleteForever } = icons;
 
-const ManageCategory = () => {
+
+const ManageFAQ = () => {
   const [open, setOpen] = useOutletContext();
   const navigate = useNavigate();
   const location = useLocation();
@@ -27,27 +31,28 @@ const ManageCategory = () => {
     formState: { errors },
     watch,
   } = useForm();
-  const [pitches, setPitches] = useState(null);
+  const [faqs, setFaqs] = useState(null);
   const [counts, setCounts] = useState(0);
-  const [editPitch, setEditPitch] = useState(null);
+  const [editFaq, setEditFaq] = useState(null);
   const [update, setUpdate] = useState(false);
 
   const render = useCallback(() => {
     setUpdate(!update);
   });
-  const fetchPitches = async (params) => {
-    const response = await apiGetCategories({
+  const fetchFAQ = async (params) => {
+    const response = await apiGetFaq({
       ...params,
       limit: process.env.REACT_APP_PITCH_LIMIT,
     });
+    console.log(response)
+    
     if (response.success) {
-      setPitches(response.pitchCategories);
-      setCounts(response.counts);
+      setFaqs(response.faq);
+      setCounts(response.totalCount);
     }
   };
 
   const queryDebounce = useDebounce(watch("q"), 800);
-  
 
   useEffect(() => {
     if (queryDebounce) {
@@ -64,10 +69,10 @@ const ManageCategory = () => {
 
   useEffect(() => {
     const searchParams = Object.fromEntries([...params]);
-    fetchPitches(searchParams);
+    fetchFAQ(searchParams);
   }, [params, update]);
 
-  const handleDeletePitch = (pid) => {
+  const handleDeleteFaq = (fid) => {
     Swal.fire({
       title: "Are you sure",
       text: "Sure friends ?",
@@ -75,34 +80,34 @@ const ManageCategory = () => {
       showCancelButton: true,
     }).then(async (rs) => {
       if (rs.isConfirmed) {
-        const response = await apiDeleteCategory(pid);
-        if (response.success) toast.success(response.mes);
-        else toast.error(response.mes);
+        const response = await apiDeleteFAQ(fid);
+        if (response.success) toast.success(response.message);
+        else toast.error(response.message);
         render();
       }
     });
   };
+  console.log(faqs)
   return (
     <div
       className={`${
         open ? "w-[83vw]" : "w-[94vw]"
       } bg-dash-board pl-4 relative`}
     >
-      {editPitch && (
+      {editFaq && (
         <div className="absolute inset-0 win-h-screen bg-gray-100 z-50">
-          <UpdateCategory
-            editPitch={editPitch}
+          <UpdateFAQ
+            editFaq={editFaq}
+            setEditFaq={setEditFaq}
             render={render}
-            setEditPitch={setEditPitch}
           />
         </div>
       )}
       <div className="ml-2 py-4 border-b-2 border-gray-300">
-        <h1 className="text-2xl font-bold tracking-tight">Manage Category</h1>
+        <h1 className="text-2xl font-bold tracking-tight">Manage FAQ</h1>
       </div>
       <div className="w-full p-2">
         <div className="px-1 pb-2">
-          {/* <form className='w-[300px]' onSubmit={handleSubmit(handleManagePitch)}> */}
           <form className="w-[300px]">
             <InputForm
               id="q"
@@ -110,60 +115,49 @@ const ManageCategory = () => {
               errors={errors}
               fullWidth
               transform
-              placeholder="Search products by title, description ..."
+              placeholder="Search products by title, address ..."
             />
           </form>
         </div>
         <table className="table-auto w-full ">
           <thead className="text-md text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
             <tr className="bg-sky-900 text-white  py-2">
-              <th className="text-center h-[60px] rounded-tl-lg">#</th>
-              <th className="text-center">Thumb</th>
-              <th className="text-center">Title</th>
-              <th className="text-center rounded-tr-lg">Actions</th>
+              <th className="px-4 py-2 text-center h-[60px] rounded-tl-lg">
+                #
+              </th>
+              <th className="px-4 py-2 text-center h-[60px]">Title</th>
+              <th className="px-4 py-2 text-center h-[60px]">Description</th>
+              <th className="px-4 py-2 text-center h-[60px] rounded-tr-lg">
+                Actions
+              </th>
             </tr>
           </thead>
           <tbody>
-            {pitches?.map((el, index) => (
+            {faqs?.map((el, index) => (
               <tr
                 className='odd:bg-white even:bg-gray-200/50 odd:dark:bg-gray-300 even:dark:bg-white border-b dark:border-gray-700"'
                 key={el._id}
               >
-                <td className="text-center px-6 py-5">
+                <td className="text-center p ">
                   {(+params.get("page") > 1 ? +params.get("page") - 1 : 0) *
                     process.env.REACT_APP_PITCH_LIMIT +
                     index +
                     1}
                 </td>
-                <td className="text-center px-6 py-5">
-                  <div className="flex items-center justify-center">
-                    {el.thumb ? (
-                      <img
-                        src={el.thumb}
-                        alt="thumb"
-                        className="w-[80px] h-[70px] object-cover "
-                      />
-                    ) : (
-                      <img
-                        src={defaultt}
-                        alt="thumb"
-                        className="w-[80px] h-[70px] object-cover"
-                      />
-                    )}
-                  </div>
-                </td>
-                <td className="text-center px-6 py-5">{el.title}</td>
-                <td className="text-center px-6 py-5">
-                  <div className="flex items-center justify-center">
+
+                <td className="text-center py-2">{el.title}</td>
+                <td className="text-center py-2">{el.description}</td>
+                <td className="text-center py-2 ">
+                  <div className="flex items-center justify-center ">
                     <span
-                      className="text-green-500 hover:text-green-700 cursor-pointer px-2 text-2xl"
-                      onClick={() => setEditPitch(el)}
+                      className="px-2 text-2xl text-green-500 hover:text-green-700 cursor-pointer"
+                      onClick={() => setEditFaq(el)}
                     >
                       <FaRegEdit />
                     </span>
                     <span
-                      onClick={() => handleDeletePitch(el._id)}
-                      className="text-red-500 hover:text-red-700 cursor-pointer px-2 text-2xl"
+                      onClick={() => handleDeleteFaq(el._id)}
+                      className="px-2 text-2xl text-red-500 hover:text-red-700 cursor-pointer"
                     >
                       <MdDeleteForever />
                     </span>
@@ -174,11 +168,11 @@ const ManageCategory = () => {
           </tbody>
         </table>
         <div className="w-full flex justify-end my-8">
-          <Pagination totalCount={counts} type="category" />
+          <Pagination totalCount={counts} />
         </div>
       </div>
     </div>
   );
 };
 
-export default ManageCategory;
+export default ManageFAQ

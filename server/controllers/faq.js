@@ -5,6 +5,7 @@ const asyncHandler = require("express-async-handler");
 // @route    POST /faq/
 // @access   Private/admin
 const createFaq = asyncHandler(async (req, res) => {
+  console.log(req.body);
   const { title, description } = req.body;
 
   if (!title || !description) throw new Error("Missing inputs");
@@ -93,7 +94,6 @@ const getFaqs = asyncHandler(async (req, res) => {
 // @access   Private/admin
 const updateFaq = asyncHandler(async (req, res) => {
   const { fid } = req.params;
-
   const updateFaq = await Faq.findByIdAndUpdate(fid, req.body, {
     new: true,
   });
