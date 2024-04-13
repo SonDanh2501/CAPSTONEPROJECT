@@ -4,12 +4,12 @@ import { useForm } from "react-hook-form";
 import { useSelector, useDispatch } from "react-redux";
 import { validate, getBase64 } from "ultils/helper";
 import { toast } from "react-toastify";
-import { apiUpdatePitch } from "apis";
+import { apiUpdateNews } from "apis";
 import { showModal } from "store/app/appSlice";
 
-const UpdatePitch = ({ editPitch, render, setEditPitch }) => {
+const UpdateNews = ({ editNews, render, setEditNews }) => {
   const dispatch = useDispatch();
-  const { categories } = useSelector((state) => state.app);
+
   const {
     register,
     formState: { errors },
@@ -18,43 +18,37 @@ const UpdatePitch = ({ editPitch, render, setEditPitch }) => {
     watch,
   } = useForm();
 
-  const handleUpdatePitch = async (data) => {
+  const handleUpdateNews = async (data) => {
     const invalids = validate(payload, setInvalidFields);
     if (invalids === 0) {
-      if (data.category)
-        data.category = categories?.find(
-          (el) => el.title === data.category
-        )?.title;
       const finalPayload = { ...data, ...payload };
 
       finalPayload.thumb =
         data?.thumb?.length === 0 ? preview.thumb : data.thumb[0];
+      finalPayload.image =
+        data?.image?.length === 0 ? preview.image : data.image[0];
+
       const formData = new FormData();
       for (let i of Object.entries(finalPayload)) formData.append(i[0], i[1]);
-
-      finalPayload.images =
-        data.images?.length === 0 ? preview.images : data.images;
-
-      for (let image of finalPayload.images) formData.append("images", image);
 
       dispatch(showModal({ isShowModal: true, modalChildren: <Loading /> }));
       window.scrollTo(0, 0);
 
-      const response = await apiUpdatePitch(formData, editPitch._id);
+      const response = await apiUpdateNews(formData, editNews._id);
       dispatch(showModal({ isShowModal: false, modalChildren: null }));
       if (response.success) {
-        toast.success(response.mes);
+        toast.success(response.message);
         render();
-        setEditPitch(null);
-      } else toast.error(response.mes);
+        setEditNews(null);
+      } else toast.error(response.message);
     }
   };
   const [payload, setPayload] = useState({
-    description: "",
+    content: "",
   });
   const [preview, setPreview] = useState({
     thumb: null,
-    images: [],
+    image: null,
   });
 
   const [invalidFields, setInvalidFields] = useState([]);
@@ -69,20 +63,10 @@ const UpdatePitch = ({ editPitch, render, setEditPitch }) => {
     const base64Thumb = await getBase64(file);
     setPreview((prev) => ({ ...prev, thumb: base64Thumb }));
   };
-
-  const handlePreviewImages = async (files) => {
-    const imagesPreview = [];
-    for (let file of files) {
-      if (file.type !== "image/png" && file.type !== "image/jpeg") {
-        toast.warning("File type not correct");
-        return;
-      }
-      const base64 = await getBase64(file);
-      imagesPreview.push(base64);
-    }
-    setPreview((prev) => ({ ...prev, images: imagesPreview }));
+  const handlePreviewImage = async (file) => {
+    const base64image = await getBase64(file);
+    setPreview((prev) => ({ ...prev, image: base64image }));
   };
-
   useEffect(() => {
     if (watch("thumb") instanceof FileList && watch("thumb").length > 0) {
       handlePreviewThumb(watch("thumb")[0]);
@@ -90,48 +74,46 @@ const UpdatePitch = ({ editPitch, render, setEditPitch }) => {
   }, [watch("thumb")]);
 
   useEffect(() => {
-    if (watch("images") instanceof FileList && watch("images").length > 0) {
-      handlePreviewImages(watch("images"));
+    if (watch("image") instanceof FileList && watch("image").length > 0) {
+      handlePreviewImage(watch("image")[0]);
     }
-  }, [watch("images")]);
+  }, [watch("image")]);
 
   useEffect(() => {
     reset({
-      title: editPitch?.title || "",
-      price: editPitch?.price || "",
-      address: editPitch?.address || "",
-      category: editPitch?.category || "",
-      brand: editPitch?.brand || "",
+      title: editNews?.title || "",
+      description: editNews?.description || "",
+      content: editNews?.content || "",
     });
     setPayload({
-      description:
-        typeof editPitch?.description === "object"
-          ? editPitch?.description?.join(", ")
-          : editPitch?.description,
+      content:
+        typeof editNews?.content === "object"
+          ? editNews?.content?.join(", ")
+          : editNews?.content,
     });
 
     setPreview({
       ...preview,
-      thumb: editPitch?.thumb,
-      images: editPitch?.images,
+      thumb: editNews?.thumb,
+      image: editNews?.image,
     });
-  }, [editPitch]);
+  }, [editNews]);
   return (
     <div className="w-full flex flex-col gap-4 px-4 relative">
       <div className="ml-2 py-4 border-b-2 border-gray-300 flex justify-between items-center top-0 right-0">
-        <h1 className="text-2xl font-bold tracking-tight">Update Pitch</h1>
+        <h1 className="text-2xl font-bold tracking-tight">Update News</h1>
         <span
           className="text-main hover:underline cursor-pointer"
-          onClick={() => setEditPitch(null)}
+          onClick={() => setEditNews(null)}
         >
           Cancel
         </span>
       </div>
       <div className="p-4">
-        <form onSubmit={handleSubmit(handleUpdatePitch)}>
+        <form onSubmit={handleSubmit(handleUpdateNews)}>
           <div className="w-full pt-5 pb-10">
             <InputForm
-              label="Name pitch"
+              label="Title of news"
               register={register}
               errors={errors}
               id="title"
@@ -139,56 +121,31 @@ const UpdatePitch = ({ editPitch, render, setEditPitch }) => {
                 required: "Need to be fill",
               }}
               fullWidth
-              placeholder="Name of new pitch"
+              placeholder="Title of news"
             />
           </div>
+
           <div className="w-full pt-5 pb-10 flex gap-4">
             <InputForm
-              label="Price pitch"
+              label="Description "
               register={register}
               errors={errors}
-              id="price"
+              id="description"
               validate={{
                 required: "Need to be fill",
               }}
               style="flex-1"
-              placeholder="Price of new pitch"
-              type="number"
-            />
-            <Select
-              label="Category"
-              options={categories?.map((el) => ({
-                code: el.title,
-                value: el.title,
-              }))}
-              register={register}
-              id="category"
-              validate={{ required: "Nedd to be fill" }}
-              style="flex-1"
-              errors={errors}
-            />
-          </div>
-          <div className="w-full pt-5 pb-10 flex gap-4">
-            <InputForm
-              label="Address"
-              register={register}
-              errors={errors}
-              id="address"
-              validate={{
-                required: "Need to be fill",
-              }}
-              style="flex-1"
-              placeholder="Address of new pitch"
+              placeholder="description of news"
             />
           </div>
           <div className="w-full pt-5 ">
             <MarkDownEditor
-              name="description"
+              name="content"
               changeValue={changeValue}
-              label="Description"
+              label="Content"
               invalidFields={invalidFields}
               setInvalidFields={setInvalidFields}
-              value={payload.description}
+              value={payload.content}
             />
           </div>
           <div className="flex flex-col gap-2 mt-8">
@@ -212,31 +169,28 @@ const UpdatePitch = ({ editPitch, render, setEditPitch }) => {
             </div>
           )}
           <div className="flex flex-col gap-2 mt-8">
-            <label className="font-semibold" htmlFor="pitches">
-              Upload Image Of Pitch
+            <label className="font-semibold" htmlFor="thumb">
+              Upload Image
             </label>
-            <input type="file" id="pitches" {...register("images")} multiple />
-            {errors["images"] && (
+            <input type="file" id="image" {...register("image")} />
+            {errors["image"] && (
               <small className="text-sx text-red-500">
-                {errors["images"]?.message}
+                {errors["image"]?.message}
               </small>
             )}
           </div>
-          {preview?.images?.length > 0 && (
-            <div className="my-4 flex w-full gap-3 flex-wrap">
-              {preview?.images?.map((el) => (
-                <div key={el.name} className="w-fit relative">
-                  <img
-                    src={el}
-                    alt="thumbnail"
-                    className="w-[200px] object-contain"
-                  />
-                </div>
-              ))}
+          {preview?.image && (
+            <div className="my-4">
+              <img
+                src={preview.image}
+                alt="image"
+                className="w-[200px] object-contain"
+              />
             </div>
           )}
+
           <div className="my-8">
-            <Button type="submit">Update new pitch</Button>
+            <Button type="submit">Update news</Button>
           </div>
         </form>
       </div>
@@ -244,4 +198,4 @@ const UpdatePitch = ({ editPitch, render, setEditPitch }) => {
   );
 };
 
-export default memo(UpdatePitch);
+export default memo(UpdateNews);

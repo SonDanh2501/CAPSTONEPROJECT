@@ -32,7 +32,7 @@ const InputForm = ({
           "form-input my-auto rounded-lg ",
           fullWidth && "w-full",
           txtSmall && "text-sm",
-          transform && "hover:w-[350px] hover:-translate-x-12 duration-300 "
+          transform && "hover:w-[350px]  duration-300 "
         )}
       />
       {errors[id] && (

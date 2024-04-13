@@ -115,12 +115,12 @@ const ManageUser = () => {
   }, [editUser]);
 
   return (
-    <div className="w-full flex flex-col gap-4 px-4">
-      <div className="p-4 border-b w-full flex items-center ">
-        <h1 className="text-3xl font-bold tracking-tight">Manage User</h1>
+    <div className={`${open ? "w-[83vw]" : "w-[94vw]"} bg-dash-board pl-4`}>
+      <div className="ml-2 py-4 border-b-2 border-gray-300">
+        <h1 className="text-2xl font-bold tracking-tight">Manage User</h1>
       </div>
-      <div className="w-full p-4">
-        <div className="flex w-full justify-end items-center px-1 pb-4">
+      <div className="w-full p-2">
+        <div className="px-1 pb-2">
           {/* <form className='w-[300px]' onSubmit={handleSubmit(handleManagePitch)}> */}
           <form className="w-[300px] ">
             <InputForm
@@ -136,37 +136,22 @@ const ManageUser = () => {
         <form onSubmit={handleSubmit(handleUpdate)}>
           <table className="table-auto w-full ">
             <thead className="text-md  text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
-              <tr className="bg-sky-900 text-white  py-2">
-                <th className="px-4 py-2 text-center h-[60px] w-[45px] rounded-tl-lg">
-                  #
-                </th>
-                <th className="px-4 py-2 text-center h-[60px] w-[210px]">
-                  Email
-                </th>
-                <th className="px-4 py-2 text-center h-[60px] w-[120px]">
-                  First name
-                </th>
-                <th className="px-4 py-2 text-center h-[60px] w-[120px]">
-                  Last name
-                </th>
-                <th className="px-4 py-2 text-center h-[60px] w-[130px]">
-                  Role
-                </th>
-                <th className="px-4 py-2 text-center h-[60px] w-[130px]">
-                  Status
-                </th>
-                <th className="px-4 py-2 text-center h-[60px] w-[140px]">
-                  Create At
-                </th>
-                {/* <th>Address</th> */}
-                <th className="px-4 py-2 w-[140px] rounded-tr-lg">Actions</th>
+              <tr className="bg-sky-900 text-white py-2">
+                <th className="text-center h-[60px] rounded-tl-lg">#</th>
+                <th className="text-center">Email</th>
+                <th className="text-center">First name</th>
+                <th className="text-center">Last name</th>
+                <th className="text-center">Role</th>
+                <th className="text-center">Status</th>
+                <th className="text-center">Create At</th>
+                <th className="text-center rounded-tr-lg">Actions</th>
               </tr>
             </thead>
             <tbody>
               {user?.users?.map((el, index) => (
                 <tr
                   key={el._id}
-                  className='odd:bg-white odd:dark:bg-gray-300 even:bg-gray-50 even:dark:bg-white border-b dark:border-gray-700"'
+                  className='odd:bg-white even:bg-gray-200/50 odd:dark:bg-gray-300 even:dark:bg-white border-b dark:border-gray-700"'
                 >
                   <td className="px-6 py-5 text-center">
                     {(+params.get("page") > 1 ? +params.get("page") - 1 : 0) *
@@ -244,7 +229,7 @@ const ManageUser = () => {
                       </span>
                     )}
                   </td>
-                  <td className="px-6 py-5 text-center">
+                  <td className="text-center">
                     {editUser?._id === el._id ? (
                       <Select
                         register={register}
@@ -255,7 +240,7 @@ const ManageUser = () => {
                         options={blockStatus}
                       />
                     ) : (
-                      <span>
+                      <span className={`${+el?.isBlocked === 1 ? "p-2 text-red-500 bg-red-300/25 rounded-md": "p-2 text-green-500 bg-green-300/25 rounded-md"}`}>
                         {
                           blockStatus.find(
                             (status) => status.code === +el.isBlocked
@@ -307,7 +292,6 @@ const ManageUser = () => {
             </tbody>
           </table>
         </form>
-
         <div className="w-full flex justify-end mt-2">
           <Pagination totalCount={user?.counts} type="users" />
         </div>

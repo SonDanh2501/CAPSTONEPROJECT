@@ -28,7 +28,10 @@ const path = {
   CREATE_CATEGORY: "create-category",
   MANAGE_BRANDS: "manage-brands",
   CREATE_BRANDS: "create-brands",
-
+  MANAGE_NEWS: "manage-news",
+  CREATE_NEWS: "create-news",
+  MANAGE_FAQ: "manage-faq",
+  CREATE_FAQ: "create-faq",
   // Member Route
   MEMBER: "member",
   PERSONAL: "personal",
