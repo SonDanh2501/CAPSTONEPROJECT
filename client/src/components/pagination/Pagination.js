@@ -2,13 +2,13 @@ import React, { memo } from "react";
 import usePagination from "hooks/usePagination";
 import { PaginationItem } from "components";
 import { useSearchParams } from "react-router-dom";
-const Pagination = ({ totalCount, type = "pitches" }) => {
+const Pagination = ({ totalCount, type = "pitches", perPage }) => {
   const [params] = useSearchParams();
   const pagination = usePagination(totalCount, +params.get("page") || 1);
 
   const calculatePitch = () => {
     const currentPage = +params.get("page");
-    const pageSize = +process.env.REACT_APP_PITCH_LIMIT || 6;
+    const pageSize = perPage || +process.env.REACT_APP_PITCH_LIMIT;
     const start = Math.min((currentPage - 1) * pageSize + 1, totalCount);
     const end = Math.min(currentPage * pageSize, totalCount);
     return `${start} - ${end}`;

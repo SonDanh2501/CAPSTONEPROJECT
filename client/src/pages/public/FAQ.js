@@ -3,11 +3,12 @@ import { HeaderBanner } from "components";
 import { FaChevronDown } from "react-icons/fa";
 import { MdNavigateNext } from "react-icons/md";
 import { apiGetFaq } from "apis";
+import { useNavigate } from "react-router-dom";
 const FAQ = () => {
+  const navigate = useNavigate();
   const [faq, setFaq] = useState(null);
   const fetchFaq = async () => {
     const response = await apiGetFaq();
-    console.log(response);
     if (response.success) setFaq(response.faq);
   };
   useEffect(() => {
@@ -36,17 +37,22 @@ const FAQ = () => {
           {faq?.map((e) => (
             <div className="border-top border-bottom pt-4" key={e._id}>
               <hr className="pb-4" />
+              {/* FAQ title - question*/}
               <div className="flex text-xl font-semibold justify-between items-center">
                 <span>{e.title}</span>
                 <FaChevronDown
-                  className={`text-lg mr-4 cursor-pointer hover:text-zinc-300 ${openQuestionId === e._id ? "transform rotate-180" : ""
-                    }`}
+                  className={`text-lg mr-4 cursor-pointer hover:text-zinc-300 ${
+                    openQuestionId === e._id ? "transform rotate-180" : ""
+                  }`}
                   onClick={() => onOpen(e._id)}
                 />
               </div>
               {openQuestionId === e._id && (
                 <div className="flex">
-                  <MdNavigateNext className="mt-3 text-md" />
+                  <span>
+                    <MdNavigateNext className="mt-3 text-md" />
+                  </span>
+                  {/* FAQ answer*/}
                   <div className="flex flex-col pt-2 text-lg">
                     {e.description?.map((el, i) => (
                       <span key={i}>{el}</span>
@@ -65,7 +71,12 @@ const FAQ = () => {
             Check out our FAQ or contact us below
           </h3>
           <span className="text-lg pt-1 p-2">debugboy@gmail.com</span>
-          <span className="text-lg">Chat with us</span>
+          <span
+            className="text-lg cursor-pointer hover:text-blue-500"
+            onClick={() => navigate(`/contact`)}
+          >
+            Chat with us
+          </span>
           <span className="text-lg">Monday-Sunday 9am - 5pm EST</span>
         </div>
       </div>

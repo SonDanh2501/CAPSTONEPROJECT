@@ -1,7 +1,7 @@
 import React, { useCallback, useEffect, useState } from "react";
 import { InputForm, Pagination } from "components";
 import { useForm } from "react-hook-form";
-import { apiGetAllNews, apiDeletePitch } from "apis";
+import { apiGetAllNews, apiDeleteNews } from "apis";
 import defaultt from "assets/default.png";
 import moment from "moment";
 import icons from "ultils/icons";
@@ -12,13 +12,11 @@ import {
   useLocation,
 } from "react-router-dom";
 import useDebounce from "hooks/useDebounce";
-import UpdatePitch from "pages/admin/pitch/UpdatePitch";
+import UpdateNews from "pages/admin/news/UpdateNews";
 import Swal from "sweetalert2";
 import { toast } from "react-toastify";
-import { formatMoney, formatPrice } from "ultils/helper";
 import { FaRegEdit } from "react-icons/fa";
-
-const { AiFillStar, MdEdit, MdDeleteForever } = icons;
+const { MdEdit, MdDeleteForever } = icons;
 
 const ManageNews = () => {
   const navigate = useNavigate();
@@ -31,7 +29,7 @@ const ManageNews = () => {
   } = useForm();
   const [news, setNews] = useState(null);
   const [counts, setCounts] = useState(0);
-  const [editPitch, setEditPitch] = useState(null);
+  const [editNews, setEditNews] = useState(null);
   const [update, setUpdate] = useState(false);
 
   const render = useCallback(() => {
@@ -68,7 +66,7 @@ const ManageNews = () => {
     fetchNews(searchParams);
   }, [params, update]);
 
-  const handleDeletePitch = (pid) => {
+  const handleDeletePitch = (nid) => {
     Swal.fire({
       title: "Are you sure",
       text: "Do you want to delete ?",
@@ -76,21 +74,21 @@ const ManageNews = () => {
       showCancelButton: true,
     }).then(async (rs) => {
       if (rs.isConfirmed) {
-        const response = await apiDeletePitch(pid);
-        if (response.success) toast.success(response.mes);
-        else toast.error(response.mes);
+        const response = await apiDeleteNews(nid);
+        if (response.success) toast.success(response.message);
+        else toast.error(response.message);
         render();
       }
     });
   };
   return (
     <div className="w-full flex flex-col gap-4 px-4 relative">
-      {editPitch && (
+      {editNews && (
         <div className="absolute inset-0 win-h-screen bg-gray-100 z-50">
-          <UpdatePitch
-            editPitch={editPitch}
+          <UpdateNews
+            editNews={editNews}
             render={render}
-            setEditPitch={setEditPitch}
+            setEditNews={setEditNews}
           />
         </div>
       )}
@@ -162,7 +160,7 @@ const ManageNews = () => {
               </td>
 
               <td className="text-center py-2">
-                <div className="line-clamp-1">{el.title}</div>
+                <div className="">{el.title}</div>
               </td>
               <td className="text-center py-2">
                 <div className="line-clamp-1">{el.description}</div>
@@ -176,7 +174,7 @@ const ManageNews = () => {
                 <div className="flex items-center justify-center">
                   <span
                     className="text-green-500 hover:text-green-700 cursor-pointer px-2 text-2xl"
-                    onClick={() => setEditPitch(el)}
+                    onClick={() => setEditNews(el)}
                   >
                     <FaRegEdit />
                   </span>
@@ -193,7 +191,7 @@ const ManageNews = () => {
         </tbody>
       </table>
       <div className="w-full flex justify-end my-8">
-        <Pagination totalCount={counts} />
+        <Pagination totalCount={counts} type="news" />
       </div>
     </div>
   );

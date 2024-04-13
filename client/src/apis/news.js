@@ -17,3 +17,15 @@ export const apiCreateNews = (data) =>
     method: "post",
     data,
   });
+
+export const apiDeleteNews = (nid) =>
+  axios({
+    url: "/news/" + nid,
+    method: "delete",
+  });
+export const apiUpdateNews = (data, nid) =>
+  axios({
+    url: "/news/" + nid,
+    method: "put",
+    data,
+  });

@@ -1,6 +1,9 @@
 const News = require("../models/news");
 const asyncHandler = require("express-async-handler");
 
+// @desc     Create news
+// @route    POST /news/
+// @access   Private/admin
 const createNews = asyncHandler(async (req, res) => {
   const { title, description, content } = req.body;
   const thumb = req.files.thumb[0].path;
@@ -17,7 +20,9 @@ const createNews = asyncHandler(async (req, res) => {
     createdNews: newNews ? newNews : "Can not create new News",
   });
 });
-// update views
+// @desc     Get news by id
+// @route    GET /news/:nid
+// @access   Private/admin
 const getNewsById = asyncHandler(async (req, res) => {
   const { nid } = req.params;
   const news = await News.findOneAndUpdate(
@@ -31,15 +36,9 @@ const getNewsById = asyncHandler(async (req, res) => {
   });
 });
 
-const getAllNews = asyncHandler(async (req, res) => {
-  const news = await News.find({ sysFlag: 1 });
-  return res.status(200).json({
-    success: news ? true : false,
-    newsData: news ? news : "Can not get news",
-  });
-});
-//filtering , sorting & pagination
-
+// @desc     user get All news
+// @route    GET /news/
+// @access   Public
 const getNews = asyncHandler(async (req, res) => {
   const queries = { ...req.query };
   // tách các trường đặc biệt ra khỏi query
@@ -52,7 +51,7 @@ const getNews = asyncHandler(async (req, res) => {
     (matchedEl) => `$${matchedEl}`
   );
   const formartedQueries = JSON.parse(queryString);
-
+  formartedQueries.sysFlag = 1;
   // Filtering
   if (queries?.title)
     formartedQueries.title = { $regex: queries.title, $options: "i" };
@@ -63,9 +62,8 @@ const getNews = asyncHandler(async (req, res) => {
   }
   let queryCommand = News.find(formartedQueries);
   //Sorting
-
-  if (req.query.queries?.sort) {
-    const sortBy = req.query.queries?.sort.split(",").join(" ");
+  if (req.query.sort) {
+    const sortBy = req.query.sort.split(",").join(" ");
     queryCommand = queryCommand.sort(sortBy);
   }
 
@@ -99,9 +97,12 @@ const getNews = asyncHandler(async (req, res) => {
       if (err) throw new Error(err, message);
     });
 });
-
+// @desc     Update news
+// @route    PUT /news/:nid
+// @access   Private/admin
 const updateNews = asyncHandler(async (req, res) => {
   const { nid } = req.params;
+
   const files = req?.files;
 
   if (files?.thumb) {
@@ -115,27 +116,19 @@ const updateNews = asyncHandler(async (req, res) => {
   const updateNews = await News.findByIdAndUpdate(nid, req.body, {
     new: true,
   });
+
   return res.status(200).json({
     success: updateNews ? true : false,
     message: updateNews ? "Updated" : "Can not update news",
   });
 });
 
+// @desc     Delete FAQ
+// @route    DELETE /faq/:fid
+// @access   Private/admin
 const deleteNews = asyncHandler(async (req, res) => {
   const { nid } = req.params;
   const deleteNews = await News.findByIdAndDelete(nid);
-  return res.status(200).json({
-    success: deleteNews ? true : false,
-    message: deleteNews ? "Deleted" : "Can not delete news",
-  });
-});
-const deleteNewsFlag = asyncHandler(async (req, res) => {
-  const { nid } = req.params;
-  const deleteNews = await News.findByIdAndUpdate(
-    nid,
-    { sysFlag: 0 },
-    { new: true }
-  );
   return res.status(200).json({
     success: deleteNews ? true : false,
     message: deleteNews ? "Deleted" : "Can not delete news",
@@ -147,7 +140,5 @@ module.exports = {
   getNewsById,
   updateNews,
   deleteNews,
-  deleteNewsFlag,
-  getAllNews,
   getNews,
 };
