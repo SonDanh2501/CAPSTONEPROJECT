@@ -26,7 +26,7 @@ const InputFields = ({
       <input
         type={type || "text"}
         className={clsx(
-          "pl-10 p-2 border font-display w-full rounded-lg bg-white mt-1.5 focus:border-black focus:bg-gray-200 focus:outline-none",
+          "pl-10 p-2 border font-display w-full rounded-lg bg-white mt-1.5 focus:bg-gray-300 focus:outline-none outline-none",
           style
         )}
         placeholder={
