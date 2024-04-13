@@ -11,3 +11,6 @@ export { default as ManageBrands } from "./brand/ManageBrands";
 export { default as UpdateBrand } from "./brand/UpdateBrand";
 export { default as CreateFAQ } from "./faq/CreateFAQ";
 export { default as ManageFAQ } from "./faq/ManageFAQ";
+export { default as CreateCoupon } from "./coupon/CreateCoupon";
+export { default as ManageCoupon } from "./coupon/ManageCoupon";
+

@@ -27,6 +27,9 @@ import {
   CreateCategory,
   CreateFAQ,
   ManageFAQ,
+  CreateCoupon,
+  ManageCoupon
+
 } from "pages/admin";
 import { MemberLayout, Personal, History, Wishlist } from "pages/member";
 import {
@@ -36,6 +39,8 @@ import {
   CreateOwnerBrand,
   ManageOwnerOrder,
   DashboardOwner,
+  CreateCouponOwn,
+  ManageCouponOwn,
 } from "pages/pitchowner";
 import path from "ultils/path";
 import { getCategories } from "store/app/asyncAction";
@@ -93,9 +98,8 @@ function App() {
 
       <div
         onClick={() => dispatch(showOrder())}
-        className={`fixed top-0 bottom-0 left-auto z-50 flex transform duration-500 ${
-          isShowOrder ? "right-0" : "-right-[450px]"
-        }`}
+        className={`fixed top-0 bottom-0 left-auto z-50 flex transform duration-500 ${isShowOrder ? "right-0" : "-right-[450px]"
+          }`}
       >
         <Order />
       </div>
@@ -132,6 +136,9 @@ function App() {
           <Route path={path.CREATE_BRANDS} element={<CreateBrands />} />
           <Route path={path.CREATE_FAQ} element={<CreateFAQ />} />
           <Route path={path.MANAGE_FAQ} element={<ManageFAQ />} />
+          <Route path={path.CREATE_COUPON} element={<CreateCoupon />} />
+          <Route path={path.MANAGE_COUPON} element={<ManageCoupon />} />
+
         </Route>
         {/*Member Route*/}
         <Route path={path.MEMBER} element={<MemberLayout />}>
@@ -144,6 +151,8 @@ function App() {
           <Route path={path.DASHBOARD_PITCHOWN} element={<DashboardOwner />} />
           <Route path={path.MANAGE_PITCHOWN} element={<ManagePitchOwn />} />
           <Route path={path.CREATE_PITCHOWN} element={<CreatePitchOwn />} />
+          <Route path={path.CREATE_COUPONOWN} element={<CreateCouponOwn />} />
+          <Route path={path.MANAGE_COUPONOWN} element={<ManageCouponOwn />} />
           <Route
             path={path.CREATE_BRAND_PITCHOWNER}
             element={<CreateOwnerBrand />}

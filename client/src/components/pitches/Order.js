@@ -22,18 +22,23 @@ const Order = () => {
   const [title, settitle] = useState("");
   const [discount, setdiscount] = useState(null);
   const [orderIds, setOrderIds] = useState([]);
+  const [ownerId, setOwnerId] = useState([]);
+
 
 
   const fetchPitchData = async () => {
     const response = await apiGetUserOrderStatus(current?._id);
     if (response.success) {
       const fetchedOrderIds = response.Booking.map(order => order._id);
+      const fetchedOwner = response.Booking.map(order => order.owner);
 
       // Store order IDs in state
       setOrderIds(fetchedOrderIds);
+      setOwnerId(fetchedOwner);
       setOrder(response.Booking);
     }
   };
+  console.log(orderIds)
   const updateOrder = async (bid) => {
     const response = await apiDeleteOrder(bid);
 
@@ -43,9 +48,9 @@ const Order = () => {
       toast.success(response?.message);
     } else toast.error(response.message);
   };
-
+  console.log(ownerId)
   const updateCoupon = async () => {
-    const response = await apiGetCoupon({ title });
+    const response = await apiGetCoupon({ title, ownerId });
     if (response.success) {
       setdiscount(response.coupon);
       toast.success("Add coupon successfully");
@@ -67,7 +72,6 @@ const Order = () => {
       clearTimeout(setTimeoutId);
     };
   }, [isUpdateCart]);
-  console.log(orderIds)
   return (
     <div
       onClick={(e) => e.stopPropagation()}
