@@ -25,6 +25,8 @@ import {
   ManageCategory,
   CreateBrands,
   CreateCategory,
+  CreateNews,
+  ManageNews,
 } from "pages/admin";
 import { MemberLayout, Personal, History, Wishlist } from "pages/member";
 import {
@@ -126,6 +128,8 @@ function App() {
           <Route path={path.MANAGE_USER} element={<ManageUser />} />
           <Route path={path.MANAGE_CATEGORY} element={<ManageCategory />} />
           <Route path={path.MANAGE_BRANDS} element={<ManageBrands />} />
+          <Route path={path.CREATE_NEWS} element={<CreateNews />} />
+          <Route path={path.MANAGE_NEWS} element={<ManageNews />} />
           <Route path={path.CREATE_CATEGORY} element={<CreateCategory />} />
           <Route path={path.CREATE_BRANDS} element={<CreateBrands />} />
         </Route>

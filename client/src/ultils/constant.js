@@ -230,6 +230,22 @@ export const adminSideBar = [
       },
     ],
   },
+  {
+    id: 7,
+    type: "PARENT",
+    text: "News",
+    icon: <SiBrandfolder />,
+    submenu: [
+      {
+        text: "Create News",
+        path: `/${path.ADMIN}/${path.CREATE_NEWS}`,
+      },
+      {
+        text: "Manage News",
+        path: `/${path.ADMIN}/${path.MANAGE_NEWS}`,
+      },
+    ],
+  },
 ];
 
 export const pitchOwnerSideBar = [

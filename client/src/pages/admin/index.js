@@ -9,3 +9,6 @@ export { default as ManageUser } from "./user/ManageUser";
 export { default as ManageCategory } from "./category/ManageCategory";
 export { default as ManageBrands } from "./brand/ManageBrands";
 export { default as UpdateBrand } from "./brand/UpdateBrand";
+export { default as CreateNews } from "./news/CreateNews";
+export { default as UpdateNews } from "./news/UpdateNews";
+export { default as ManageNews } from "./news/ManageNews";
