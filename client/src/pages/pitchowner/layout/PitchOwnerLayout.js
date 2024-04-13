@@ -13,7 +13,9 @@ const PitchOwnerLayout = () => {
       <div className="top-0 bottom-0 flex-none fixed">
         <PitchOwnerSidebar open={open} setOpen={setOpen} />
       </div>
-      <div className={`duration-700 ${open ? "w-72" : "w-20"}`}></div>
+      <div className={`duration-500 mx-4 ${open ? "w-60" : "w-20"}`}>
+        <span>AREAR</span>
+      </div>
       <div className="flex-auto">
         <Outlet context={[open, setOpen]} />
       </div>
