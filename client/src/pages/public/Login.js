@@ -2,7 +2,6 @@ import React, { useState, useCallback, useEffect } from "react";
 import loginpng from "assets/login.jpg";
 import { InputFields, Button, Loading } from "components";
 import { jwtDecode } from "jwt-decode";
-
 import {
   apiRegister,
   apiLogin,
@@ -11,8 +10,11 @@ import {
   apiLoginGG,
 } from "apis/user";
 import Swal from "sweetalert2";
-import { GoogleOAuthProvider } from "@react-oauth/google";
-import { GoogleLogin } from "@react-oauth/google";
+import {
+  GoogleOAuthProvider,
+  GoogleLogin,
+  useGoogleLogin,
+} from "@react-oauth/google";
 import { useNavigate } from "react-router-dom";
 import path from "ultils/path";
 import { login } from "store/user/userSlice";
@@ -21,12 +23,40 @@ import { toast } from "react-toastify";
 import { validate } from "ultils/helper";
 import { Link } from "react-router-dom";
 import { showModal } from "store/app/appSlice";
-import { FaEye, FaEyeSlash, FaUser } from "react-icons/fa";
 import { MdLock } from "react-icons/md";
-import { FaStepBackward } from "react-icons/fa";
-import { FaPen } from "react-icons/fa";
+import { FaPen, FaGoogle, FaEye, FaEyeSlash, FaUser, FaStepBackward  } from "react-icons/fa";
+import axios from "axios";
 
 const Login = () => {
+  const loginGoolge = useGoogleLogin({
+    onSuccess: async (response) => {
+      try {
+        const res = await axios.get(
+          "https://www.googleapis.com/oauth2/v3/userinfo",
+          {
+            headers: {
+              Authorization: `Bearer ${response.access_token}`,
+            },
+          }
+        );
+        console.log(res);
+        handleLoginGG(res?.data);
+      } catch (err) {
+        console.log(err);
+      }
+    },
+  });
+  // onSuccess={(credentialResponse) => {
+  //   const details = jwtDecode(credentialResponse.credential);
+  //   // console.log(details)
+  //   if (details?.email) {
+  //     setemail(details.email);
+  //     handleLoginGG(details);
+  //   }
+  // }}
+  // onError={() => {
+  //   console.log("Login Failed");
+  // }}
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const [payload, setpayload] = useState({
@@ -74,8 +104,8 @@ const Login = () => {
     const invalids = isRegister
       ? validate(payload, setinvalidFields)
       : isRegisterPitchOwner
-        ? validate(payload, setinvalidFields)
-        : validate(data, setinvalidFields);
+      ? validate(payload, setinvalidFields)
+      : validate(data, setinvalidFields);
     if (+invalids === 0) {
       if (isRegister || isRegisterPitchOwner) {
         dispatch(showModal({ isShowModal: true, modalChildren: <Loading /> }));
@@ -162,7 +192,7 @@ const Login = () => {
   //   handleLoginGG();
   // }, [GGlogin]);
   return (
-    <div className="grid grid-cols-1 sm:grid-cols-2 h-screen w-full relative">
+    <div className="grid grid-cols-1 md:grid-cols-2 h-screen w-full relative">
       {isVerifiedEmail && (
         <div className="absolute top-0 left-0 right-0 bottom-0 bg-overlay z-50 flex flex-col justify-center items-center">
           <div className="bg-white w-[500px] rounded-md p-8">
@@ -182,7 +212,6 @@ const Login = () => {
           </div>
         </div>
       )}
-
       {isForgotPassword && (
         <div className="absolute animate-slide-right top-0 left-0 bottom-0 right-0 bg-gradient-to-r from-login to-login-2 flex flex-col items-center py-8 z-50">
           <div className="flex flex-col gap-4">
@@ -211,15 +240,15 @@ const Login = () => {
           </div>
         </div>
       )}
-      <div className="hidden sm:block">
+      <div className="hidden md:block">
         <img
           src={loginpng}
           alt=""
           className="w-fit h-screen object-cover"
         ></img>
       </div>
-      <div className="absolute top-0 bottom-0 left-1/2 right-0 items-center justify-center flex bg-gradient-to-r from-login to-login-2">
-        <div className="max-w-[560px] w-full mx-auto bg-transeparent p-8 px-8 rounded-lg">
+      <div className="top-0 bottom-0 left-1/2 right-0 items-center justify-center flex bg-gradient-to-r from-login to-login-2">
+        <div className="max-w-[450px] w-full mx-auto bg-transeparent p-8 px-8 rounded-lg">
           <h2 className="text-4xl font-bold text-center text-white">
             {isRegister
               ? "SIGN UP"
@@ -363,8 +392,8 @@ const Login = () => {
               </>
             )}
           </div>
-          <div className="flex justify-between items-center ">
-            <div className="w-full max-w-[240px]">
+          <div className="flex justify-between items-center gap-4">
+            <div className="w-full">
               <Button
                 handleOnClick={handleSubmit}
                 fw
@@ -374,26 +403,33 @@ const Login = () => {
                   ? "Register"
                   : isRegisterPitchOwner
                   ? "Register"
-                  : "Sign In"}
+                  : "Log In"}
               </Button>
             </div>
-            <div className="flex">
-              <GoogleOAuthProvider clientId="205458580138-ntkleug6m343o4fqjbrqeqni2kd9tfd1.apps.googleusercontent.com">
-                <GoogleLogin
-                  onSuccess={(credentialResponse) => {
-                    const details = jwtDecode(credentialResponse.credential);
-                    // console.log(details)
-                    if (details?.email) {
-                      setemail(details.email);
-                      handleLoginGG(details);
-                    }
-                  }}
-                  onError={() => {
-                    console.log("Login Failed");
-                  }}
-                />
-                ;
-              </GoogleOAuthProvider>
+            <div className="w-full">
+              <button
+                className="w-full py-2 bg-red-500 rounded-sm flex items-center justify-center shadow-lg shadow-red-500/50 hover:shadow-red-700/50 hover:bg-red-700 duration-300"
+                onClick={() => loginGoolge()}
+              >
+                <span classname="w-1/5">
+                  <FaGoogle className="text-white" size={13}/>
+                </span>
+                <span className="text-white w-4/5 border-l ml-1 ">Google</span>
+              </button>
+              {/* <GoogleLogin
+                onSuccess={(credentialResponse) => {
+                  console.log(credentialResponse);
+                  const details = jwtDecode(credentialResponse.credential);
+                  console.log(details);
+                  if (details?.email) {
+                    setemail(details.email);
+                    handleLoginGG(details);
+                  }
+                }}
+                onError={() => {
+                  console.log("Login Failed");
+                }}
+              /> */}
             </div>
           </div>
           <div className="flex items-center justify-between my-2 w-full">

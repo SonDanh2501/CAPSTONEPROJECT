@@ -1,9 +1,7 @@
 import React, { useCallback, useEffect, useState } from "react";
 import { InputForm, Pagination } from "components";
 import { useForm } from "react-hook-form";
-import { apiGetAllBrands, apiDeleteBrand, apiGetFaq, apiDeleteFAQ } from "apis";
-import defaultt from "assets/default.png";
-import moment from "moment";
+import { apiGetFaq, apiDeleteFAQ } from "apis";
 import icons from "ultils/icons";
 import {
   useSearchParams,
@@ -15,11 +13,9 @@ import {
 import useDebounce from "hooks/useDebounce";
 import Swal from "sweetalert2";
 import { toast } from "react-toastify";
-// import UpdateBrand from "./UpdateBrand";
 import { FaRegEdit } from "react-icons/fa";
 import UpdateFAQ from "./UpdateFAQ";
-const { AiFillStar, MdDeleteForever } = icons;
-
+const { MdDeleteForever } = icons;
 
 const ManageFAQ = () => {
   const [open, setOpen] = useOutletContext();
@@ -42,10 +38,10 @@ const ManageFAQ = () => {
   const fetchFAQ = async (params) => {
     const response = await apiGetFaq({
       ...params,
-      limit: process.env.REACT_APP_PITCH_LIMIT,
+      limit: 6,
     });
-    console.log(response)
-    
+    console.log(response);
+
     if (response.success) {
       setFaqs(response.faq);
       setCounts(response.totalCount);
@@ -87,7 +83,7 @@ const ManageFAQ = () => {
       }
     });
   };
-  console.log(faqs)
+  console.log(faqs);
   return (
     <div
       className={`${
@@ -115,7 +111,7 @@ const ManageFAQ = () => {
               errors={errors}
               fullWidth
               transform
-              placeholder="Search products by title, address ..."
+              placeholder="Search FAQ by question ..."
             />
           </form>
         </div>
@@ -168,11 +164,11 @@ const ManageFAQ = () => {
           </tbody>
         </table>
         <div className="w-full flex justify-end my-8">
-          <Pagination totalCount={counts} />
+          <Pagination totalCount={counts} type="FAQ" perPage={6} />
         </div>
       </div>
     </div>
   );
 };
 
-export default ManageFAQ
+export default ManageFAQ;

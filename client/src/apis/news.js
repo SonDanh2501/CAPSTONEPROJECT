@@ -11,3 +11,21 @@ export const apiGetNews = (nid) =>
     url: "/news/" + nid,
     method: "get",
   });
+export const apiCreateNews = (data) =>
+  axios({
+    url: "/news/",
+    method: "post",
+    data,
+  });
+
+export const apiDeleteNews = (nid) =>
+  axios({
+    url: "/news/" + nid,
+    method: "delete",
+  });
+export const apiUpdateNews = (data, nid) =>
+  axios({
+    url: "/news/" + nid,
+    method: "put",
+    data,
+  });
