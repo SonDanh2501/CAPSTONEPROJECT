@@ -1,11 +1,11 @@
 import React, { useCallback, useEffect, useState } from "react";
 import { Button, InputForm, MarkDownEditor, Loading } from "components";
-import Select from "react-select";
+
 import { useForm } from "react-hook-form";
 import { useSelector, useDispatch } from "react-redux";
-import { validate, getBase64 } from "ultils/helper";
+import { validate } from "ultils/helper";
 import { toast } from "react-toastify";
-import { apiCreateBrand, apiCreateFAQ, apiGetUsers } from "apis";
+import { apiCreateFAQ } from "apis";
 import { showModal } from "store/app/appSlice";
 import { useOutletContext } from "react-router-dom";
 
@@ -15,7 +15,7 @@ const CreateFAQ = () => {
   const [payload, setPayload] = useState({
     description: "",
   });
-  const { categories } = useSelector((state) => state.app);
+
   const {
     register,
     formState: { errors },
@@ -39,7 +39,7 @@ const CreateFAQ = () => {
         setPayload({
           description: "",
         });
-        toast.success("Create Brand Success !");
+        toast.success("Create FAQ Success !");
       } else {
         toast.error("Fail!!!");
       }
@@ -61,7 +61,7 @@ const CreateFAQ = () => {
         <form onSubmit={handleSubmit(handleCreateFAQ)}>
           <div className="w-full py-5">
             <InputForm
-              label="Name Brand"
+              label="Title"
               register={register}
               errors={errors}
               id="title"
@@ -69,7 +69,7 @@ const CreateFAQ = () => {
                 required: "Required",
               }}
               fullWidth
-              placeholder="Name of Your Brand"
+              placeholder="Question"
             />
           </div>
           <div className="w-full pt-10">
@@ -84,7 +84,7 @@ const CreateFAQ = () => {
           <div className="flex justify-between">
             <div></div>
             <div className="my-8">
-              <Button type="submit">Create new Brand</Button>
+              <Button type="submit">Create new FAQ</Button>
             </div>
           </div>
         </form>
@@ -93,4 +93,4 @@ const CreateFAQ = () => {
   );
 };
 
-export default CreateFAQ
+export default CreateFAQ;
