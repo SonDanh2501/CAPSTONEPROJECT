@@ -14,3 +14,6 @@ export { default as UpdateNews } from "./news/UpdateNews";
 export { default as ManageNews } from "./news/ManageNews";
 export { default as CreateFAQ } from "./faq/CreateFAQ";
 export { default as ManageFAQ } from "./faq/ManageFAQ";
+export { default as CreateCoupon } from "./coupon/CreateCoupon";
+export { default as ManageCoupon } from "./coupon/ManageCoupon";
+
