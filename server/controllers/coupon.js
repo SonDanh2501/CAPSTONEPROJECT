@@ -28,7 +28,6 @@ const getCoupon = asyncHandler(async (req, res) => {
 
     // Find the coupon based on the role specified in the coupon document
     const coupon = await Coupon.findOne({ title });
-
     if (!coupon) {
         return res.json({
             success: false,
@@ -39,11 +38,10 @@ const getCoupon = asyncHandler(async (req, res) => {
     if (coupon.role == 1) {
         // If the coupon's role is 1, only search for coupons by title
         response = await Coupon.findOne({ title });
-    } else if (coupon.role == 2 && ownerId.length < 2) {
-        // If the coupon's role is 2 and ownerId is provided, search for coupons by both title and owner
-        response = await Coupon.findOne({ title, owner: ownerId });
+    } else if (coupon.role == 2 && ownerId.every(id => id === ownerId[0])) {
+        // If the coupon's role is 2 and ownerId is provided, and all items in ownerId are the same
+        response = await Coupon.findOne({ title, owner: ownerId[0] });
     }
-
     return res.json({
         success: response ? true : false,
         coupon: response ? response : "Cannot add coupon",
