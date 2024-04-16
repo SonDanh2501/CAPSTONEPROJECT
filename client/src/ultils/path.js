@@ -32,6 +32,8 @@ const path = {
   CREATE_NEWS: "create-news",
   MANAGE_FAQ: "manage-faq",
   CREATE_FAQ: "create-faq",
+  MANAGE_COUPON: "manage-coupon",
+  CREATE_COUPON: "create-coupon",
   // Member Route
   MEMBER: "member",
   PERSONAL: "personal",
@@ -47,5 +49,8 @@ const path = {
   MANAGE_BRAND_PITCHOWNER: "manage-pitchowner-brands",
   CREATE_BRAND_PITCHOWNER: "create-pitchowner-brands",
   MANAGE_ORDER_PITCHOWNER: "manage-pitchowner-order",
+  CREATE_COUPONOWN: "create-pitchowner-coupon",
+  MANAGE_COUPONOWN: "manage-pitchowner-coupon",
+
 };
 export default path;

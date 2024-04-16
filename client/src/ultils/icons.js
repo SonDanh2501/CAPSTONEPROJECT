@@ -37,6 +37,7 @@ import {
   FaBars,
   FaMoon,
   FaQq,
+  FaTicketAlt
 } from "react-icons/fa";
 import { LuSun } from "react-icons/lu";
 import {
@@ -116,6 +117,7 @@ const icons = {
   BsSunFill,
   LuSun,
   FaQq,
+  FaTicketAlt
 };
 
 export default icons;
