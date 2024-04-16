@@ -159,7 +159,7 @@ const {
   MdCategory,
   SiBrandfolder,
   FaQq,
-  FaNewspaper,
+  FaTicketAlt,
 } = icons;
 export const adminSideBar = [
   {
@@ -236,7 +236,7 @@ export const adminSideBar = [
     id: 7,
     type: "PARENT",
     text: "News",
-    icon: <FaNewspaper />,
+    icon: <SiBrandfolder />,
     submenu: [
       {
         text: "Create News",
@@ -265,7 +265,7 @@ export const adminSideBar = [
     ],
   },
   {
-    id: 9,
+    id: 8,
     type: "PARENT",
     text: "Coupon",
     icon: <FaTicketAlt />,
