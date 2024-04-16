@@ -42,7 +42,8 @@ import {
   FaQq,
   FaNewspaper,
   FaAngleRight,
-  FaAngleDown
+  FaAngleDown,
+  FaTicketAlt,
 } from "react-icons/fa";
 import {
   FaXmark
@@ -128,6 +129,7 @@ const icons = {
   BiSolidLogOut,
   FaAngleRight,
   FaAngleDown,
+  FaTicketAlt,
 };
 
 export default icons;
