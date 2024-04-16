@@ -87,12 +87,13 @@ const ManagePitch = () => {
   };
   return (
     <div
-      className={`${
-        open ? "w-[83vw]" : "w-[94vw]"
-      } bg-dash-board pl-4 relative`}
+      className={`
+      ${open ? "w-[83vw]" : "w-[94vw]"} 
+      ${editPitch && "relative"} 
+      bg-dash-board pl-4`}
     >
       {editPitch && (
-        <div className="absolute inset-0 win-h-screen bg-gray-100 z-50">
+        <div className="absolute inset-0 h-fit bg-gray-100 z-50">
           <UpdatePitch
             editPitch={editPitch}
             render={render}
@@ -104,7 +105,7 @@ const ManagePitch = () => {
         <h1 className="text-2xl font-bold tracking-tight">Manage Pitch</h1>
       </div>
       <div className="w-full p-2">
-        <div className="px-1 pb-2">
+        <div className="pb-2">
           {/* <form className='w-[300px]' onSubmit={handleSubmit(handleManagePitch)}> */}
           <form className="w-[300px]">
             <InputForm
@@ -138,35 +139,37 @@ const ManagePitch = () => {
                 className='odd:bg-white even:bg-gray-200/50 odd:dark:bg-gray-300 even:dark:bg-white border-b dark:border-gray-700"'
                 key={el._id}
               >
-                <td className="text-center px-6 py-5 ">
+                <td className="text-center px-4 py-4">
                   {(+params.get("page") > 1 ? +params.get("page") - 1 : 0) *
                     process.env.REACT_APP_PITCH_LIMIT +
                     index +
                     1}
                 </td>
-                <td className="text-center py-2">
+                <td className="text-center px-2 py-2">
                   <div className="flex items-center justify-center">
                     {el.thumb ? (
                       <img
                         src={el.thumb}
                         alt="thumb"
-                        className="w-[80px] h-[70px] object-fill "
+                        className="w-[80px] h-[70px] object-fill rounded-md"
                       />
                     ) : (
                       <img
                         src={defaultt}
                         alt="thumb"
-                        className="w-20 h-[70px] object-cover"
+                        className="w-20 h-[70px] object-cover rounded-md"
                       />
                     )}
                   </div>
                 </td>
-                <td className="px-6 py-5 text-center">{el.title}</td>
-                <td className="px-6 py-5 text-center">
-                  <div className="line-clamp-1" title={el.address}>{el.address}</div>
+                <td className="text-center px-2 py-2">{el.title}</td>
+                <td className="text-center px-2 py-2">
+                  <div className="line-clamp-1" title={el.address}>
+                    {el.address}
+                  </div>
                 </td>
-                <td className="px-6 py-5 text-center">{el.brand}</td>
-                <td className="px-6 py-5 text-center">
+                <td className="text-center px-2 py-2">{el.brand}</td>
+                <td className="text-center px-2 py-2">
                   <span
                     className={`${
                       el?.category === "Sân 5 Người"
