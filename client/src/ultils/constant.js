@@ -320,6 +320,22 @@ export const pitchOwnerSideBar = [
     path: `/${path.PITCHOWNER}/${path.MANAGE_ORDER_PITCHOWNER}`,
     icon: <FaMoneyBill />,
   },
+  {
+    id: 5,
+    type: "PARENT",
+    text: "Coupon",
+    icon: <FaTicketAlt />,
+    submenu: [
+      {
+        text: "Create Coupon",
+        path: `/${path.PITCHOWNER}/${path.CREATE_COUPONOWN}`,
+      },
+      {
+        text: "Manage Coupon",
+        path: `/${path.PITCHOWNER}/${path.MANAGE_COUPONOWN}`,
+      },
+    ],
+  },
 ];
 export const memberSidebar = [
   {
