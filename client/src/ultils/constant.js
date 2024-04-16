@@ -264,6 +264,22 @@ export const adminSideBar = [
       },
     ],
   },
+  {
+    id: 9,
+    type: "PARENT",
+    text: "Coupon",
+    icon: <FaTicketAlt />,
+    submenu: [
+      {
+        text: "Create Coupon",
+        path: `/${path.ADMIN}/${path.CREATE_COUPON}`,
+      },
+      {
+        text: "Manage Coupon",
+        path: `/${path.ADMIN}/${path.MANAGE_COUPON}`,
+      },
+    ],
+  },
 ];
 
 export const pitchOwnerSideBar = [
