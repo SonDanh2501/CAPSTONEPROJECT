@@ -120,7 +120,7 @@ const ManageUser = () => {
         <h1 className="text-2xl font-bold tracking-tight">Manage User</h1>
       </div>
       <div className="w-full p-2">
-        <div className="px-1 pb-2">
+        <div className="pb-2">
           {/* <form className='w-[300px]' onSubmit={handleSubmit(handleManagePitch)}> */}
           <form className="w-[300px] ">
             <InputForm
@@ -153,13 +153,13 @@ const ManageUser = () => {
                   key={el._id}
                   className='odd:bg-white even:bg-gray-200/50 odd:dark:bg-gray-300 even:dark:bg-white border-b dark:border-gray-700"'
                 >
-                  <td className="px-6 py-5 text-center">
+                  <td className="text-center px-4 py-4">
                     {(+params.get("page") > 1 ? +params.get("page") - 1 : 0) *
                       process.env.REACT_APP_PITCH_LIMIT +
                       index +
                       1}
                   </td>
-                  <td className="px-6 py-5 text-center">
+                  <td className="text-center px-2 py-2">
                     {editUser?._id === el._id ? (
                       <InputForm
                         register={register}
@@ -180,7 +180,7 @@ const ManageUser = () => {
                       <span>{el.email}</span>
                     )}
                   </td>
-                  <td className="px-6 py-5 text-center">
+                  <td className="text-center px-2 py-2">
                     {editUser?._id === el._id ? (
                       <InputForm
                         register={register}
@@ -195,7 +195,7 @@ const ManageUser = () => {
                       <span>{el.firstname}</span>
                     )}
                   </td>
-                  <td className="px-6 py-5 text-center">
+                  <td className="text-center px-2 py-2">
                     {editUser?._id === el._id ? (
                       <InputForm
                         register={register}
@@ -213,7 +213,7 @@ const ManageUser = () => {
                   {/*
                    * Tìm trong list roles (bên ultili) nếu có thì trả về object nên trỏ tiếp tới value để in
                    */}
-                  <td className="px-6 py-5 text-center">
+                  <td className="text-center px-2 py-2">
                     {editUser?._id === el._id ? (
                       <Select
                         register={register}
@@ -249,7 +249,7 @@ const ManageUser = () => {
                       </span>
                     )}
                   </td>
-                  <td className="px-6 py-5 text-center">
+                  <td className="text-center px-2 py-2">
                     {moment(el.createdAt).format("DD/MM/YYYY")}
                   </td>
                   <td className="text-center">

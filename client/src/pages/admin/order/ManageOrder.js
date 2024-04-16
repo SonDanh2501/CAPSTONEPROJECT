@@ -96,7 +96,7 @@ const ManageOrder = () => {
         <h1 className="text-2xl font-bold tracking-tight">Manage Orders</h1>
       </div>
       <div className="w-full p-2">
-        <div className="px-1 pb-2">
+        <div className="pb-2">
           {/* <form className='w-[300px]' onSubmit={handleSubmit(handleManagePitch)}> */}
           <form className="w-[300px]">
             <InputForm
@@ -143,52 +143,52 @@ const ManageOrder = () => {
                 className='odd:bg-white even:bg-gray-200/50 odd:dark:bg-gray-300 even:dark:bg-white border-b dark:border-gray-700"'
                 key={el._id}
               >
-                <td className="px-6 py-5 text-center ">
+                <td className="text-center px-4 py-4">
                   {(+params.get("page") > 1 ? +params.get("page") - 1 : 0) *
                     process.env.REACT_APP_PITCH_LIMIT +
                     index +
                     1}
                 </td>
-                <td className="p-2 text-center ">
+                <td className="text-center px-2 py-2">
                   <div className="flex items-center justify-center">
                     {el.pitch?.thumb ? (
                       <img
                         src={el.pitch?.thumb}
                         alt="thumb"
-                        className="w-20 h-[70px] object-cover"
+                        className="w-20 h-[70px] object-cover rounded-md"
                       />
                     ) : (
                       <img
                         src={defaultt}
                         alt="thumb"
-                        className="w-20 h-[70px] object-cover"
+                        className="w-20 h-[70px] object-cover rounded-md"
                       />
                     )}
                   </div>
                 </td>
-                <td className="px-6 py-5 text-center">{el?.pitch?.title}</td>
-                <td className="px-6 py-5 text-center">
+                <td className="text-center px-2 py-2">{el?.pitch?.title}</td>
+                <td className="text-center px-2 py-2">
                   {shifts.find((s) => +s.value === +el.shift)?.time}
                 </td>
-                <td className="px-6 py-5 text-center">{`${el.bookingBy?.firstname} ${el.bookingBy?.lastname} `}</td>
-                <td className="px-6 py-5 text-center">{`${formatMoney(
+                <td className="text-center px-2 py-2">{`${el.bookingBy?.firstname} ${el.bookingBy?.lastname} `}</td>
+                <td className="text-center px-2 py-2">{`${formatMoney(
                   el?.total
                 )} VNĐ`}</td>
-                <td className="px-6 py-5 text-center">
+                <td className="text-center px-2 py-2">
                   {el?.coupon?.price !== undefined
                     ? `${el?.coupon?.price}%`
                     : "0%"}
                 </td>
-                <td className="px-6 py-5 text-center">{`${formatMoney(
+                <td className="text-center px-2 py-2">{`${formatMoney(
                   el?.total - el?.total * ((el?.coupon?.price || 0) / 100)
                 )} VNĐ`}</td>
-                <td className="px-6 py-5 text-center">
+                <td className="text-center px-2 py-2">
                   <span className={`${el?.status === "Pay By Cash" ? "text-blue-500 bg-blue-300/25 rounded-md p-2" : el?.status === "Success" ? "text-green-500 bg-green-300/25 rounded-md p-2" :  el?.status === "Pending" && "text-yellow-500 bg-yellow-300/25 rounded-md p-2"}`}>{el.status}</span>
                 </td>
-                <td className="px-6 py-5 text-center">
+                <td className="text-center px-2 py-2">
                   {moment(el.createdAt).format("DD/MM/YYYY")}
                 </td>
-                <td className="px-6 py-5 text-center">
+                <td className="text-center px-2 py-2">
                   <div>
                     <span
                       onClick={() => handleDeletePitch(el._id)}

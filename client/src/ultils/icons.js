@@ -4,6 +4,9 @@ import { IoIosArrowForward } from "react-icons/io";
 import { SiBrandfolder } from "react-icons/si";
 import { BsCart } from "react-icons/bs";
 import { IoFastFood } from "react-icons/io5";
+import { GoDotFill } from "react-icons/go";
+import { BiSolidLogOut } from "react-icons/bi";
+import { LuSun, LuArrowLeftToLine } from "react-icons/lu";
 import {
   MdEmail,
   MdSpaceDashboard,
@@ -37,8 +40,10 @@ import {
   FaBars,
   FaMoon,
   FaQq,
+  FaNewspaper,
+  FaAngleRight,
+  FaAngleDown
 } from "react-icons/fa";
-import { LuSun } from "react-icons/lu";
 import {
   FaXmark
 } from "react-icons/fa6"
@@ -116,6 +121,13 @@ const icons = {
   BsSunFill,
   LuSun,
   FaQq,
+  FaNewspaper,
+  FaMoon,
+  LuArrowLeftToLine,
+  GoDotFill,
+  BiSolidLogOut,
+  FaAngleRight,
+  FaAngleDown,
 };
 
 export default icons;

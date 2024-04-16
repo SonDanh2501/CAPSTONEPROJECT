@@ -149,17 +149,17 @@ const DetailPitches = ({ isQuickView, data }) => {
     }
   }, [update]);
 
-  // useEffect(() => {
-  //   if (pitch) {
-  //     const getCoords = async () => {
-  //       const result = await geocodeByAddress(pitch?.address[0]);
-  //       const latLng = await getLatLng(result[0]);
+  useEffect(() => {
+    if (pitch) {
+      const getCoords = async () => {
+        const result = await geocodeByAddress(pitch?.address[0]);
+        const latLng = await getLatLng(result[0]);
 
-  //       setCoords(latLng);
-  //     };
-  //     pitch && getCoords();
-  //   }
-  // }, [pitch]);
+        setCoords(latLng);
+      };
+      pitch && getCoords();
+    }
+  }, [pitch]);
 
   useEffect(() => {
     if (data) {
@@ -327,7 +327,7 @@ const DetailPitches = ({ isQuickView, data }) => {
       {!isQuickView && (
         <div>
           <div className="w-main m-auto mt-8">
-            {/* <Map coords={coords} address={pitch?.address[0]} /> */}
+            <Map coords={coords} address={pitch?.address[0]} />
 
             <PitchInformation
               totalRatings={pitch?.totalRatings}
@@ -336,7 +336,7 @@ const DetailPitches = ({ isQuickView, data }) => {
               pid={pitch?._id}
               rerender={rerender}
             />
-            {/* {!isQuickView && <Map coords={coords} address={pitch?.address[0]} />} */}
+            {!isQuickView && <Map coords={coords} address={pitch?.address[0]} />}
           </div>
         </div>
       )}

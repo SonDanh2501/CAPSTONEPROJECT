@@ -81,7 +81,7 @@ const History = () => {
   return (
     <div className="w-full flex flex-col gap-4 px-4 relative">
       {editPitch && (
-        <div className="absolute inset-0 win-h-screen bg-gray-100 z-50">
+        <div className="absolute inset-0 hit-fit bg-gray-100 z-50">
           <UpdatePitch
             editPitch={editPitch}
             render={render}

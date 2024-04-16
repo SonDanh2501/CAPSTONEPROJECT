@@ -9,13 +9,13 @@ const PitchOwnerLayout = () => {
   if (!isLoggedIn || !current || +current.role !== 2)
     return <Navigate to={`/${path.LOGIN}`} replace={true} />;
   return (
-    <div className="flex w-full bg-gray-100 min-h-screen relative text-gray-800">
+    <div className="w-full bg-dash-board min-h-screen flex relative text-gray-800">
       <div className="top-0 bottom-0 flex-none fixed">
         <PitchOwnerSidebar open={open} setOpen={setOpen} />
       </div>
-      <div className={`duration-500 mx-4 ${open ? "w-60" : "w-20"}`}>
-        <span>AREAR</span>
-      </div>
+      <div
+        className={`duration-300 ${open ? "w-60" : " w-20"}`}
+      ></div>
       <div className="flex-auto">
         <Outlet context={[open, setOpen]} />
       </div>
