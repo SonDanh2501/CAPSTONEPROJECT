@@ -15,7 +15,7 @@ const Button = ({
       className={
         style
           ? style
-          : `text-white rounded-md px-5 py-2.5 text-center me-2 mb-2
+          : `text-white rounded-sm px-5 py-2.5 text-center me-2 mb-2
                 bg-gradient-to-r from-blue-400 via-blue-500 to-blue-600 shadow-lg
                 shadow-indigo-800/100 hover:shadow-indigo-700/80 
                  ${fw ? "w-full" : "w-fit"} ${size ? "text-xl" : "text-sm"}`

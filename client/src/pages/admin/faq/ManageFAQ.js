@@ -86,12 +86,13 @@ const ManageFAQ = () => {
   console.log(faqs);
   return (
     <div
-      className={`${
-        open ? "w-[83vw]" : "w-[94vw]"
-      } bg-dash-board pl-4 relative`}
+      className={`
+      ${open ? "w-[83vw]" : "w-[94vw]"} 
+      ${editFaq && "relative"} 
+      bg-dash-board pl-4`}
     >
       {editFaq && (
-        <div className="absolute inset-0 win-h-screen bg-gray-100 z-50">
+        <div className="absolute inset-0 h-fit bg-gray-100 z-50">
           <UpdateFAQ
             editFaq={editFaq}
             setEditFaq={setEditFaq}
@@ -103,7 +104,7 @@ const ManageFAQ = () => {
         <h1 className="text-2xl font-bold tracking-tight">Manage FAQ</h1>
       </div>
       <div className="w-full p-2">
-        <div className="px-1 pb-2">
+        <div className="pb-2">
           <form className="w-[300px]">
             <InputForm
               id="q"
@@ -117,7 +118,7 @@ const ManageFAQ = () => {
         </div>
         <table className="table-auto w-full ">
           <thead className="text-md text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
-            <tr className="bg-sky-900 text-white  py-2">
+            <tr className="bg-sky-900 text-white py-2">
               <th className="px-4 py-2 text-center h-[60px] rounded-tl-lg">
                 #
               </th>
@@ -134,16 +135,16 @@ const ManageFAQ = () => {
                 className='odd:bg-white even:bg-gray-200/50 odd:dark:bg-gray-300 even:dark:bg-white border-b dark:border-gray-700"'
                 key={el._id}
               >
-                <td className="text-center p ">
+                <td className="text-center px-2 py-2">
                   {(+params.get("page") > 1 ? +params.get("page") - 1 : 0) *
                     process.env.REACT_APP_PITCH_LIMIT +
                     index +
                     1}
                 </td>
 
-                <td className="text-center py-2">{el.title}</td>
-                <td className="text-center py-2">{el.description}</td>
-                <td className="text-center py-2 ">
+                <td className="text-center px-2 py-2">{el.title}</td>
+                <td className="text-center px-2 py-2">{el.description}</td>
+                <td className="text-center px-2 py-2 ">
                   <div className="flex items-center justify-center ">
                     <span
                       className="px-2 text-2xl text-green-500 hover:text-green-700 cursor-pointer"
