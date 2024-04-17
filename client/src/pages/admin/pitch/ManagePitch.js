@@ -125,8 +125,10 @@ const ManagePitch = () => {
               <th className="text-center">Title</th>
               <th className="text-center">Address</th>
               <th className="text-center">Brand</th>
-              <th className="text-center w-[170px]">Category</th>
-              <th className="text-center w-[110px]">Price</th>
+              <th className="text-center w-40">Category</th>
+              <th className="text-center w-[110px]">Price Morning</th>
+              <th className="text-center w-[110px]">Price Afternoon</th>
+              <th className="text-center w-[110px]">Price Evening</th>
               <th className="text-center">Ratings</th>
               <th className="text-center">Create At</th>
               <th className="text-center rounded-tr-lg">Actions</th>
@@ -163,7 +165,9 @@ const ManagePitch = () => {
                 </td>
                 <td className="px-6 py-5 text-center">{el.title}</td>
                 <td className="px-6 py-5 text-center">
-                  <div className="line-clamp-1" title={el.address}>{el.address}</div>
+                  <div className="line-clamp-1" title={el.address}>
+                    {el.address}
+                  </div>
                 </td>
                 <td className="px-6 py-5 text-center">{el.brand}</td>
                 <td className="px-6 py-5 text-center">
@@ -183,7 +187,13 @@ const ManagePitch = () => {
                   </span>
                 </td>
                 <td className="text-center">
-                  {`${formatMoney(formatPrice(el?.price))} VNĐ`}
+                  {`${formatMoney(formatPrice(el?.price_morning))} `}
+                </td>
+                <td className="text-center">
+                  {`${formatMoney(formatPrice(el?.price_afternoon))} `}
+                </td>
+                <td className="text-center">
+                  {`${formatMoney(formatPrice(el?.price_evening))} `}
                 </td>
                 <td className="text-center">
                   <div className="flex items-center justify-center ">
