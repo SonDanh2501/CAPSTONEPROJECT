@@ -9,6 +9,7 @@ import {
   createSearchParams,
   useNavigate,
   useLocation,
+  useOutletContext,
 } from "react-router-dom";
 import useDebounce from "hooks/useDebounce";
 import UpdatePitch from "pages/admin/pitch/UpdatePitch";
@@ -17,6 +18,7 @@ import { toast } from "react-toastify";
 import { useSelector } from "react-redux";
 
 const History = () => {
+  const [open, setOpen] = useOutletContext();
   const { current } = useSelector((state) => state.user);
   const navigate = useNavigate();
   const location = useLocation();
@@ -79,68 +81,80 @@ const History = () => {
   };
 
   return (
-    <div className="w-full flex flex-col gap-4 px-4 relative">
-      {editPitch && (
-        <div className="absolute inset-0 hit-fit bg-gray-100 z-50">
-          <UpdatePitch
-            editPitch={editPitch}
-            render={render}
-            setEditPitch={setEditPitch}
-          />
+    <div
+      className={`
+      ${open ? "w-[83vw]" : "w-[94vw]"} 
+      bg-dash-board pl-4`}
+    >
+      <div className="ml-2 py-4 border-b-2 border-gray-300">
+        <h1 className="text-2xl font-bold tracking-tight">History</h1>
+      </div>
+      <div className="w-full p-2">
+        <div className="pb-2">
+          {/* <form className='w-[300px]' onSubmit={handleSubmit(handleManagePitch)}> */}
+          <form className="w-[300px]">
+            <InputForm
+              id="q"
+              register={register}
+              errors={errors}
+              fullWidth
+              transform
+              placeholder="Search products by title, description ..."
+            />
+          </form>
         </div>
-      )}
-      <div className="p-4 border-b w-full  flex justify-between items-center ">
-        <h1 className="text-3xl font-bold tracking-tight">History</h1>
-      </div>
-      <div className="flex w-full justify-end items-center px-1">
-        {/* <form className='w-[300px]' onSubmit={handleSubmit(handleManagePitch)}> */}
-        <form className="w-[300px]">
-          <InputForm
-            id="q"
-            register={register}
-            errors={errors}
-            fullWidth
-            transform
-            placeholder="Search products by title, description ..."
-          />
-        </form>
-      </div>
-      <table className="table-auto w-full ">
-        <thead className="text-md text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
-          <tr className="bg-sky-900 text-white  py-2">
-            <th className="px-4 py-2 text-center h-[60px] rounded-tl-lg">#</th>
-            <th className="px-4 py-2 text-center h-[60px] ">Title</th>
-            <th className="px-4 py-2 text-center h-[60px] ">Total Price</th>
-            <th className="px-4 py-2 text-center h-[60px] ">Create At</th>
-            <th className="px-4 py-2 text-center h-[60px] ">Status</th>
-          </tr>
-        </thead>
-        <tbody>
-          {pitches?.map((el, index) => (
-            <tr
-              className='odd:bg-white odd:dark:bg-gray-300 even:bg-gray-50 even:dark:bg-white border-b dark:border-gray-700"'
-              key={el._id}
-            >
-              <td className="text-center px-6 py-5 ">
-                {(+params.get("page") > 1 ? +params.get("page") - 1 : 0) *
-                  process.env.REACT_APP_PITCH_LIMIT +
-                  index +
-                  1}
-              </td>
-              <td className="text-center py-2">{el.pitch.title}</td>
-              <td className="text-center py-2">{`${formatMoney(
-                formatPrice(el.pitch.price)
-              )} VNĐ`}</td>
-              <td className="text-center py-2">
-                {moment(el.bookedDate).format("DD/MM/YYYY")}
-              </td>
-              <td className="text-center py-2">{el.status}</td>
+        <table className="table-auto w-full ">
+          <thead className="text-md text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+            <tr className="bg-sky-900 text-white py-2">
+              <th className="text-center h-[60px] rounded-tl-lg">#</th>
+              <th className="text-center h-[60px] ">Title</th>
+              <th className="text-center h-[60px] ">Total Price</th>
+              <th className="text-center h-[60px] ">Create At</th>
+              <th className="text-center h-[60px] ">Status</th>
             </tr>
-          ))}
-        </tbody>
-      </table>
-      <div className="w-full flex justify-end my-8">
-        <Pagination totalCount={counts} type="orders" />
+          </thead>
+          <tbody>
+            {pitches?.map((el, index) => (
+              <tr
+                className='odd:bg-white even:bg-gray-200/50 odd:dark:bg-gray-300 even:dark:bg-white border-b dark:border-gray-700"'
+                key={el._id}
+              >
+                <td className="text-center px-4 py-4 ">
+                  {(+params.get("page") > 1 ? +params.get("page") - 1 : 0) *
+                    process.env.REACT_APP_PITCH_LIMIT +
+                    index +
+                    1}
+                </td>
+                <td className="text-center px-2 py-2">{el.pitch.title}</td>
+                <td className="text-center px-2 py-2">
+                  <span className="bg-gray-500/25 rounded-md p-2">
+                    {`${formatMoney(formatPrice(el.pitch.price))} VNĐ`}
+                  </span>
+                </td>
+                <td className="text-center px-2 py-2">
+                  {moment(el.bookedDate).format("DD/MM/YYYY")}
+                </td>
+                <td className="text-center px-2 py-2">
+                  <span
+                    className={`${
+                      el?.status === "Pay By Cash"
+                        ? "text-blue-500 bg-blue-300/25 rounded-md p-2"
+                        : el?.status === "Success"
+                        ? "text-green-500 bg-green-300/25 rounded-md p-2"
+                        : el?.status === "Pending" &&
+                          "text-yellow-500 bg-yellow-300/25 rounded-md p-2"
+                    }`}
+                  >
+                    {el.status}
+                  </span>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+        <div className="w-full flex justify-end my-8">
+          <Pagination totalCount={counts} type="orders" />
+        </div>
       </div>
     </div>
   );

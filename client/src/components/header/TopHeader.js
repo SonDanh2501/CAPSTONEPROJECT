@@ -15,10 +15,10 @@ import avatar from "assets/avatarwhite.jpg";
 import { showOrder } from "store/app/appSlice";
 import ThemeToggle from "components/buttons/ThemeToggle";
 
-const { AiOutlineLogout } = icons;
-const { BsCart } = icons;
 const { FaBars } = icons;
 const { FaXmark } = icons;
+const { IoCart, IoNotifications, IoLogOut } = icons;
+
 
 const TopHeader = () => {
   const dispatch = useDispatch();
@@ -80,14 +80,14 @@ const TopHeader = () => {
           />
         </Link>
       </div>
-      <div className="w-2/4 pl-8 text-lg font-bold hidden lg:justify-center lg:flex">
+      <div className="w-2/4 pl-8 text-lg font-bold hidden lg:justify-center lg:flex ">
         {navigation.map((el) => (
           <NavLink
             to={el.path}
             key={el.id}
             className={({ isActive }) =>
               isActive
-                ? "pr-12 hover:text-orange text-orange"
+                ? "pr-12 hover:text-orange text-orange "
                 : "pr-12 hover:text-orange text-white"
             }
           >
@@ -100,33 +100,36 @@ const TopHeader = () => {
           <div className="max-[1183px]:hidden">
             <ThemeToggle></ThemeToggle>
           </div>
-          <div>
+          <div className="hover:bg-gray-300/10 rounded-full p-1.5">
             <span
-              className="cursor-pointer hover:text-orange text-white"
+              className="cursor-pointer text-white"
               onClick={() => dispatch(showOrder())}
             >
-              <BsCart size={20} />
+              <IoCart size={20} />
               <span class="absolute flex items-center justify-center w-[16px] h-[16px] text-xs text-white bg-red-400 border-white rounded-full top-[12px] ml-3">
                 {order?.length || 0}
               </span>
             </span>
           </div>
+          {/* <div>
+            <span>hello</span>
+          </div> */}
           <div
             className="cursor-pointer"
             onClick={() => setisShowOption((prev) => !prev)}
           >
-              <img
-                src={current?.avatar || avatar}
-                alt="avatar"
-                className="w-6 h-6 ml-2 object-cover rounded-full cursor-pointer"
-              ></img>
-              {/* <span className="text-white">{`${current?.lastname} ${current?.firstname}`}</span> */}
+            <img
+              src={current?.avatar || avatar}
+              alt="avatar"
+              className="w-6 h-6 object-cover rounded-full cursor-pointer"
+            />
+            {/* <span className="text-white">{`${current?.lastname} ${current?.firstname}`}</span> */}
           </div>
 
           {isShowOption && (
             <div
               onClick={(e) => e.stopPropagation()}
-              className="absolute flex-col flex mt-[165px] bg-gray-100 border min-w-[150px] py-2 rounded-md z-10"
+              className="absolute flex-col flex mt-[165px] bg-gray-100 min-w-[200px] rounded-md z-10"
             >
               <Link
                 className="p-2 w-full hover:bg-sky-100"
@@ -152,15 +155,14 @@ const TopHeader = () => {
               )}
             </div>
           )}
-
-          <div className="">
+          {/* <div className="hover:bg-gray-300/25 rounded-full p-1.5">
             <span
               onClick={() => dispatch(logout())}
-              className="hover:rounded-full cursor-auto hover:text-orange p-2 text-white"
+              className="cursor-pointer text-white"
             >
-              <AiOutlineLogout size={20}></AiOutlineLogout>{" "}
+              <IoLogOut size={20} />
             </span>
-          </div>
+          </div> */}
         </div>
       ) : (
         <div className="w-1/4 flex items-center justify-end px-4">

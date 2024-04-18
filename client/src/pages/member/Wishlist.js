@@ -17,10 +17,10 @@ const Wishlist = () => {
 
   return (
     <div className="w-full relative px-6">
-      <header className="text-3xl font-semibold py-4 border-b border-b-blue-200">
+      <header className="ml-2 py-4 border-b-2 border-gray-300 text-2xl font-bold tracking-tight">
         Personal Wishlist
       </header>
-      <div className="w-[1192px] grid grid-cols-3 gap-4">
+      <div className="w-full grid grid-cols-4 gap-4 pt-2">
         {wishList?.rs?.wishlist?.map((el) => (
           <div key={el._id}>
             <Pitch pid={el._id} pitchData={el} normal={true} />

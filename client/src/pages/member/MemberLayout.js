@@ -5,8 +5,8 @@ import { useSelector } from "react-redux";
 import { Membersidebar } from "components";
 
 const MemberLayout = () => {
-  const { isLoggedIn, current } = useSelector((state) => state.user);
   const [open, setOpen] = useState(true);
+  const { isLoggedIn, current } = useSelector((state) => state.user);
   if (!isLoggedIn || !current)
     return <Navigate to={`/${path.LOGIN}`} replace={true} />;
   return (
@@ -16,7 +16,7 @@ const MemberLayout = () => {
       </div>
       <div className={`duration-300 ${open ? "w-60" : " w-20"}`}></div>
       <div className="flex-auto ">
-        <Outlet />
+        <Outlet context={[open, setOpen]}/>
       </div>
     </div>
   );

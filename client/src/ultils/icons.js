@@ -3,7 +3,10 @@ import { TiCancel } from "react-icons/ti";
 import { IoIosArrowForward } from "react-icons/io";
 import { SiBrandfolder } from "react-icons/si";
 import { BsCart } from "react-icons/bs";
-import { IoFastFood } from "react-icons/io5";
+import { IoFastFood, IoCart, IoNotifications, IoLogOut } from "react-icons/io5";
+import { GoDotFill } from "react-icons/go";
+import { BiSolidLogOut } from "react-icons/bi";
+import { LuSun, LuArrowLeftToLine } from "react-icons/lu";
 import {
   MdEmail,
   MdSpaceDashboard,
@@ -37,11 +40,14 @@ import {
   FaBars,
   FaMoon,
   FaQq,
-  FaTicketAlt
+  FaAngleRight,
+  FaAngleDown,
+  FaNewspaper,
+  FaTicketAlt,
 } from "react-icons/fa";
-import { LuSun } from "react-icons/lu";
 import {
-  FaXmark
+  FaXmark,
+  FaCartShopping
 } from "react-icons/fa6"
 import {
   AiFillHome,
@@ -117,7 +123,17 @@ const icons = {
   BsSunFill,
   LuSun,
   FaQq,
-  FaTicketAlt
+  FaNewspaper,
+  FaMoon,
+  LuArrowLeftToLine,
+  GoDotFill,
+  BiSolidLogOut,
+  FaAngleRight,
+  FaAngleDown,
+  FaTicketAlt,
+  IoCart,
+  IoNotifications,
+  IoLogOut,
 };
 
 export default icons;
