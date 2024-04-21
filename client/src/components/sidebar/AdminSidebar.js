@@ -19,7 +19,7 @@ const {
 } = icons;
 
 const activedStyle =
-  "px-4 py-2 flex items-center gap-2 bg-gradient-to-tr from-indigo-200 to-indigo-100 rounded-md text-indigo-700";
+  "px-4 py-2 flex items-center gap-2 bg-gradient-to-tr from-indigo-100 to-indigo-400 rounded-md text-indigo-700";
 const notactivedStyle =
   "px-4 py-2 flex items-center gap-2 hover:bg-indigo-50 hover:rounded-md hover:text-indigo-700 text-gray-400 duration-300";
 
@@ -92,7 +92,7 @@ const AdminSideBar = ({ open, setOpen }) => {
                   <span
                     className={`${
                       open
-                        ? "text-sm "
+                        ? "text-sm"
                         : `absolute left-full text-center py-2 ml-4 bg-indigo-100 rounded-md text-indigo-800 text-sm w-[110px] transition-all ${
                             hover === +el.id
                               ? "visible translate-x-0 opacity-100"
@@ -109,7 +109,7 @@ const AdminSideBar = ({ open, setOpen }) => {
                   <div
                     className={`flex items-center justify-between px-4 py-2 my-2 hover:bg-slidebar_active hover:text-indigo-700 rounded-md cursor-pointer duration-300 ${
                       activedTab === +el.id
-                        ? "bg-gradient-to-tr from-indigo-200 to-indigo-100 text-indigo-700 duration-300"
+                        ? "bg-gradient-to-tr from-indigo-100 to-indigo-400 text-indigo-700 duration-300"
                         : "text-gray-400 "
                     }`}
                     onMouseOver={() => setHover(+el.id)}
@@ -202,14 +202,14 @@ const AdminSideBar = ({ open, setOpen }) => {
           </div>
         </div>
 
-        <div className="h-[40px] hover:bg-slidebar_active flex items-center rounded-md text-gray-400 hover:text-indigo-700 ">
+        <div className="h-[40px] hover:bg-slidebar_active flex items-center rounded-md text-gray-400 hover:text-indigo-700 duration-300">
           <Link to={path.PUBLIC}>
             <div className=" flex ml-4 items-center">
               <span className={`${open ? "text-xl" : "text-3xl"}`}>
                 <BiSolidLogOut />
               </span>
               <span
-                className={`text-sm duration-300 pl-2  ${!open && "hidden"}`}
+                className={`text-sm duration-300 pl-2 ${!open && "hidden"}`}
               >
                 Back To Home Page
               </span>
@@ -217,20 +217,30 @@ const AdminSideBar = ({ open, setOpen }) => {
           </Link>
         </div>
         <div className="h-[40px] hover:bg-slidebar_active flex items-center rounded-md text-gray-400">
-          <div
-            className={`${
-              !open ? "ml-2" : "ml-4"
-            } flex ml-2 items-center gap-2`}
-          >
+          <div className={`${!open ? "ml-2" : "ml-4"} flex items-center`}>
             <span className={`text-sm duration-300 ${!open && "hidden"}`}>
               {darkModeSideBar ? (
-                <span className="flex items-center justify-center gap-2">
-                  <FaMoon /> Dark Mode
-                </span>
+                <div className=" flex items-center">
+                  <span className={`${open ? "text-xl" : "text-3xl"}`}>
+                    <FaMoon />
+                  </span>
+                  <span
+                    className={`text-sm duration-300 pl-2 ${!open && "hidden"}`}
+                  >
+                    Dark Mode
+                  </span>
+                </div>
               ) : (
-                <span className="flex items-center justify-center gap-2">
-                  <LuSun /> Light Mode
-                </span>
+                <div className=" flex items-center">
+                  <span className={`${open ? "text-xl" : "text-3xl"}`}>
+                    <LuSun />
+                  </span>
+                  <span
+                    className={`text-sm duration-300 pl-2 ${!open && "hidden"}`}
+                  >
+                    Light Mode
+                  </span>
+                </div>
               )}
             </span>
             <div className={`${open && "pl-10"}`}>

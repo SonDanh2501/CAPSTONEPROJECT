@@ -4,8 +4,21 @@ import { IoIosArrowForward } from "react-icons/io";
 import { SiBrandfolder } from "react-icons/si";
 import { BsCart } from "react-icons/bs";
 import { IoFastFood } from "react-icons/io5";
-import { LuArrowLeftToLine } from "react-icons/lu";
+// import { LuArrowLeftToLine } from "react-icons/lu";
+// import { BiSolidLogOut } from "react-icons/bi";
+import {
+  IoCartOutline,
+  IoLogOutOutline,
+  IoReaderOutline,
+  IoPersonOutline,
+  IoNotificationsOutline,
+  IoMoonOutline,
+  IoSunnyOutline,
+  IoTimeOutline,
+} from "react-icons/io5";
+import { GoDotFill } from "react-icons/go";
 import { BiSolidLogOut } from "react-icons/bi";
+import { LuSun, LuArrowLeftToLine } from "react-icons/lu";
 import {
   MdEmail,
   MdSpaceDashboard,
@@ -16,7 +29,7 @@ import {
   MdEdit,
   MdDeleteForever,
 } from "react-icons/md";
-import { FaAngleDown } from "react-icons/fa";
+// import { FaAngleDown } from "react-icons/fa";
 import {
   FaUserCircle,
   FaTty,
@@ -39,11 +52,12 @@ import {
   FaBars,
   FaMoon,
   FaQq,
-  FaTicketAlt,
   FaAngleRight,
+  FaAngleDown,
+  FaNewspaper,
+  FaTicketAlt,
 } from "react-icons/fa";
-import { LuSun } from "react-icons/lu";
-import { FaXmark } from "react-icons/fa6";
+import { FaXmark, FaCartShopping } from "react-icons/fa6";
 import {
   AiFillHome,
   AiFillStar,
@@ -64,7 +78,7 @@ import {
   BsFillTelephoneFill,
   BsSunFill,
 } from "react-icons/bs";
-import { GoDotFill } from "react-icons/go";
+// import { GoDotFill } from "react-icons/go";
 const icons = {
   RiPhoneFill,
   GoDotFill,
@@ -111,7 +125,6 @@ const icons = {
   FaCar,
   FaWifi,
   AiOutlineSafety,
-  IoFastFood,
   BsFillTelephoneFill,
   FaArrowRight,
   FaChevronRight,
@@ -122,8 +135,22 @@ const icons = {
   BsSunFill,
   LuSun,
   FaQq,
-  FaTicketAlt,
+  FaNewspaper,
+  FaMoon,
   LuArrowLeftToLine,
+  GoDotFill,
+  BiSolidLogOut,
+  FaAngleRight,
+  FaAngleDown,
+  FaTicketAlt,
+  IoCartOutline,
+  IoLogOutOutline,
+  IoReaderOutline,
+  IoPersonOutline,
+  IoNotificationsOutline,
+  IoMoonOutline,
+  IoSunnyOutline,
+  IoTimeOutline,
 };
 
 export default icons;

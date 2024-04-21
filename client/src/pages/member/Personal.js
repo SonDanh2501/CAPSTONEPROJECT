@@ -105,7 +105,7 @@ const Personal = () => {
             <img
               src={current?.avatar || avatar}
               alt="avatar"
-              className="w-20 h-20 0.object-cover border-2 border-black"
+              className="w-20 h-20 0.object-cover border-2 border-black rounded-md"
             ></img>
           </label>
           <input type="file" id="file" {...register("avatar")} hidden></input>

@@ -11,7 +11,7 @@ import icons from "ultils/icons";
 const { FaAngleRight, FaAngleDown, GoDotFill, BiSolidLogOut, LuArrowLeftToLine, LuSun, FaMoon } = icons;
 
 const activedStyle =
-  "px-4 py-2 flex items-center gap-2 bg-gradient-to-tr from-indigo-200 to-indigo-100 rounded-md text-indigo-700";
+  "px-4 py-2 flex items-center gap-2 bg-gradient-to-tr from-indigo-100 to-indigo-400 rounded-md text-indigo-700";
 const notactivedStyle =
   "px-4 py-2 flex items-center gap-2 hover:bg-indigo-50 hover:rounded-md hover:text-indigo-700 text-gray-400 duration-300";
 
@@ -102,7 +102,7 @@ const PitchOwnerSidebar = ({ open, setOpen }) => {
                   <div
                     className={`flex items-center justify-between px-4 py-2 my-2 hover:bg-slidebar_active hover:text-indigo-700 rounded-md cursor-pointer duration-300 ${
                       activedTab === +el.id
-                        ? "bg-gradient-to-tr from-indigo-200 to-indigo-100 text-indigo-700 duration-300"
+                        ? "bg-gradient-to-tr from-indigo-100 to-indigo-400 text-indigo-700 duration-300"
                         : "text-gray-400 "
                     }`}
                     onMouseOver={() => setHover(+el.id)}

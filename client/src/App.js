@@ -65,13 +65,13 @@ function App() {
   return (
     <div className="font-main h-screen">
       <ToastContainer
-        position="bottom-right"
-        autoClose={3000}
+        position="bottom-center"
+        autoClose={1000}
         hideProgressBar={false}
         newestOnTop
         closeOnClick
         rtl={false}
-        limit={3}
+        limit={4}
         pauseOnFocusLoss
         draggable
         pauseOnHover
