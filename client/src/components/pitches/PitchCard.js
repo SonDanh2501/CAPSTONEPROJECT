@@ -1,6 +1,6 @@
 import React, { memo, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { formatMoney } from "ultils/helper";
+import { formatMoney, formatPrice } from "ultils/helper";
 import { renderStarFromNumber } from "ultils/helper";
 import icons from "ultils/icons";
 import SelectOption from "components/search/SelectOption";
@@ -8,7 +8,9 @@ import SelectOption from "components/search/SelectOption";
 const { BsFillSuitHeartFill, AiFillEye, FaArrowRight } = icons;
 
 const PitchCard = ({
-  price,
+  price_morning,
+  price_afternoon,
+  price_evening,
   totalRatings,
   title,
   image,
@@ -17,6 +19,19 @@ const PitchCard = ({
   brand,
 }) => {
   const navigate = useNavigate();
+
+  const getPrice = (price_morning, price_afternoon, price_evening) => {
+    if ((price_morning === price_afternoon) === price_evening)
+      return { price: `${formatMoney(formatPrice(price_morning))}` };
+    const maxPrice = Math.max(price_morning, price_afternoon, price_evening);
+    const minPrice = Math.min(price_morning, price_afternoon, price_evening);
+    return {
+      price: `${formatMoney(formatPrice(minPrice))} - ${formatMoney(
+        formatPrice(maxPrice)
+      )}`,
+    };
+  };
+
   return (
     <div className="my-4 bg-gradient-to-r from-white to-gray-100 text-gray-700 shadow-lg rounded-md overflow-hidden hover:shadow-2xl hover:shadow-gray-500 duration-300">
       <img
@@ -41,7 +56,7 @@ const PitchCard = ({
         </h2>
         <div className="flex items-center gap-2 mt-1">
           <span className="text-xl font-bold">
-            {`${formatMoney(price)} VNĐ`}
+            {getPrice(price_morning, price_afternoon, price_evening)?.price}
           </span>
           <span className="bg-green-400 px-1.5 py-0.5 rounded-md text-xs text-white">
             Per Hour

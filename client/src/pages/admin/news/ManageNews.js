@@ -10,6 +10,7 @@ import {
   createSearchParams,
   useNavigate,
   useLocation,
+  useOutletContext,
 } from "react-router-dom";
 import useDebounce from "hooks/useDebounce";
 import UpdateNews from "pages/admin/news/UpdateNews";
@@ -19,6 +20,7 @@ import { FaRegEdit } from "react-icons/fa";
 const { MdEdit, MdDeleteForever } = icons;
 
 const ManageNews = () => {
+  const [open, setOpen] = useOutletContext();
   const navigate = useNavigate();
   const location = useLocation();
   const [params] = useSearchParams();
@@ -82,9 +84,14 @@ const ManageNews = () => {
     });
   };
   return (
-    <div className="w-full flex flex-col gap-4 px-4 relative">
+    <div
+      className={`
+      ${open ? "w-[83vw]" : "w-[94vw]"} 
+      ${editNews && "relative"} 
+      bg-dash-board pl-4`}
+    >
       {editNews && (
-        <div className="absolute inset-0 win-h-screen bg-gray-100 z-50">
+        <div className="absolute inset-0 h-fit bg-gray-100 z-50">
           <UpdateNews
             editNews={editNews}
             render={render}
@@ -92,106 +99,103 @@ const ManageNews = () => {
           />
         </div>
       )}
-      <div className="p-4 border-b w-full flex items-center ">
-        <h1 className="text-3xl font-bold tracking-tight">Manage News</h1>
+      <div className="ml-2 py-4 border-b-2 border-gray-300">
+        <h1 className="text-2xl font-bold tracking-tight">Manage News</h1>
       </div>
-      <div className="flex w-full justify-end items-center px-1">
-        {/* <form className='w-[300px]' onSubmit={handleSubmit(handleManagePitch)}> */}
-        <form className="w-[300px]">
-          <InputForm
-            id="q"
-            register={register}
-            errors={errors}
-            fullWidth
-            transform
-            placeholder="Search news by title, description ..."
-          />
-        </form>
-      </div>
-      <table className="table-auto w-full min-w-full">
-        <thead className="text-md text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
-          <tr className="bg-sky-900 text-white  py-2">
-            <th className="px-4 py-2 text-center h-[60px] w-[30px] rounded-tl-lg">
-              #
-            </th>
-            <th className="px-4 py-2 text-center h-[60px] w-32 ">Thumb</th>
-            <th className="px-4 py-2 text-center h-[60px] w-80 ">Title</th>
-            <th className="px-4 py-2 text-center h-[60px] w-64 ">
-              Description
-            </th>
-            <th className="px-4 py-2 text-center h-[60px] w-32 ">Views</th>
-
-            <th className="px-2 py-2 text-center h-[60px] w-32 ">
-              Posted Date
-            </th>
-            <th className="px-4 py-2 text-center  h-[60px] w-32 rounded-tr-lg">
-              Actions
-            </th>
-          </tr>
-        </thead>
-        <tbody>
-          {news?.map((el, index) => (
-            <tr
-              className='odd:bg-white odd:dark:bg-gray-300 even:bg-gray-50 even:dark:bg-white border-b dark:border-gray-700"'
-              key={el._id}
-            >
-              <td className="text-center px-6 py-5 ">
-                {(+params.get("page") > 1 ? +params.get("page") - 1 : 0) *
-                  process.env.REACT_APP_PITCH_LIMIT +
-                  index +
-                  1}
-              </td>
-              <td className="text-center py-2">
-                <div className="flex items-center justify-center">
-                  {el.thumb ? (
-                    <img
-                      src={el.thumb}
-                      alt="thumb"
-                      className="w-[80px] h-[70px] object-fill "
-                    />
-                  ) : (
-                    <img
-                      src={defaultt}
-                      alt="thumb"
-                      className="w-20 h-[70px] object-cover"
-                    />
-                  )}
-                </div>
-              </td>
-
-              <td className="text-center py-2">
-                <div className="">{el.title}</div>
-              </td>
-              <td className="text-center py-2">
-                <div className="line-clamp-1">{el.description}</div>
-              </td>
-              <td className="text-center py-2">{el.views}</td>
-              <td className="text-center py-2">
-                {moment(el.postedDate).format("DD/MM/YYYY")}
-              </td>
-
-              <td className="text-center py-2">
-                <div className="flex items-center justify-center">
-                  <span
-                    className="text-green-500 hover:text-green-700 cursor-pointer px-2 text-2xl"
-                    onClick={() => setEditNews(el)}
-                  >
-                    <FaRegEdit />
-                  </span>
-                  <span
-                    onClick={() => handleDeletePitch(el._id)}
-                    className="text-red-500 hover:text-red-700 cursor-pointer px-2 text-2xl"
-                  >
-                    <MdDeleteForever />
-                  </span>
-                </div>
-              </td>
+      <div className="w-full p-2">
+        <div className="pb-2">
+          {/* <form className='w-[300px]' onSubmit={handleSubmit(handleManagePitch)}> */}
+          <form className="w-[300px]">
+            <InputForm
+              id="q"
+              register={register}
+              errors={errors}
+              fullWidth
+              transform
+              placeholder="Search news by title, description ..."
+            />
+          </form>
+        </div>
+        <table className="table-auto w-full min-w-full">
+          <thead className="text-md text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+            <tr className="bg-sky-900 text-white py-2">
+              <th className="px-4 py-2 text-center h-[60px] rounded-tl-lg">
+                #
+              </th>
+              <th className="px-4 py-2 text-center h-[60px]">Thumb</th>
+              <th className="px-4 py-2 text-center h-[60px]">Title</th>
+              <th className="px-4 py-2 text-center h-[60px]">Description</th>
+              <th className="px-4 py-2 text-center h-[60px]">Views</th>
+              <th className="px-2 py-2 text-center h-[60px]">Posted Date</th>
+              <th className="px-4 py-2 text-center h-[60px] rounded-tr-lg">
+                Actions
+              </th>
             </tr>
-          ))}
-        </tbody>
-      </table>
-      <div className="w-full flex justify-end my-8">
-        <Pagination totalCount={counts} type="news" />
+          </thead>
+          <tbody>
+            {news?.map((el, index) => (
+              <tr
+                className='odd:bg-white odd:dark:bg-gray-300 even:bg-gray-50 even:dark:bg-white border-b dark:border-gray-700"'
+                key={el._id}
+              >
+                <td className="text-center px-2 py-2">
+                  {(+params.get("page") > 1 ? +params.get("page") - 1 : 0) *
+                    process.env.REACT_APP_PITCH_LIMIT +
+                    index +
+                    1}
+                </td>
+                <td className="text-center px-2 py-2">
+                  <div className="flex items-center justify-center">
+                    {el.thumb ? (
+                      <img
+                        src={el.thumb}
+                        alt="thumb"
+                        className="w-[80px] h-[70px] object-fill rounded-md"
+                      />
+                    ) : (
+                      <img
+                        src={defaultt}
+                        alt="thumb"
+                        className="w-20 h-[70px] object-cover rounded-md"
+                      />
+                    )}
+                  </div>
+                </td>
+
+                <td className="text-center px-2 py-2">
+                  <div className="">{el.title}</div>
+                </td>
+                <td className="text-center px-2 py-2">
+                  <div className="line-clamp-1">{el.description}</div>
+                </td>
+                <td className="text-center px-2 py-2">{el.views}</td>
+                <td className="text-center px-2 py-2">
+                  {moment(el.postedDate).format("DD/MM/YYYY")}
+                </td>
+
+                <td className="text-center py-2">
+                  <div className="flex items-center justify-center">
+                    <span
+                      className="text-green-500 hover:text-green-700 cursor-pointer px-2 text-2xl"
+                      onClick={() => setEditNews(el)}
+                    >
+                      <FaRegEdit />
+                    </span>
+                    <span
+                      onClick={() => handleDeletePitch(el._id)}
+                      className="text-red-500 hover:text-red-700 cursor-pointer px-2 text-2xl"
+                    >
+                      <MdDeleteForever />
+                    </span>
+                  </div>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+        <div className="w-full flex justify-end my-8">
+          <Pagination totalCount={counts} type="news" />
+        </div>
       </div>
     </div>
   );

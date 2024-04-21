@@ -115,12 +115,12 @@ const TopHeader = () => {
             className="cursor-pointer"
             onClick={() => setisShowOption((prev) => !prev)}
           >
-              <img
-                src={current?.avatar || avatar}
-                alt="avatar"
-                className="w-6 h-6 ml-2 object-cover rounded-full cursor-pointer"
-              ></img>
-              {/* <span className="text-white">{`${current?.lastname} ${current?.firstname}`}</span> */}
+            <img
+              src={current?.avatar || avatar}
+              alt="avatar"
+              className="w-6 h-6 ml-2 object-cover rounded-full cursor-pointer"
+            ></img>
+            {/* <span className="text-white">{`${current?.lastname} ${current?.firstname}`}</span> */}
           </div>
 
           {isShowOption && (

@@ -3,16 +3,20 @@ import logo from "assets/logo.png";
 import { adminSideBar } from "ultils/constant";
 import { Link, NavLink } from "react-router-dom";
 import clsx from "clsx";
-import { FaAngleRight, FaAngleDown } from "react-icons/fa";
-import { GoDotFill } from "react-icons/go";
 import path from "ultils/path";
-import { BiSolidLogOut } from "react-icons/bi";
-import { LuArrowLeftToLine } from "react-icons/lu";
 import { useSelector } from "react-redux";
 import avatar from "assets/avatarwhite.jpg";
 import ThemeToggle from "components/buttons/ThemeToggle";
-import { LuSun } from "react-icons/lu";
-import { FaMoon } from "react-icons/fa";
+import icons from "ultils/icons";
+const {
+  FaAngleRight,
+  FaAngleDown,
+  GoDotFill,
+  BiSolidLogOut,
+  LuArrowLeftToLine,
+  LuSun,
+  FaMoon,
+} = icons;
 
 const activedStyle =
   "px-4 py-2 flex items-center gap-2 bg-gradient-to-tr from-indigo-200 to-indigo-100 rounded-md text-indigo-700";
@@ -20,6 +24,7 @@ const notactivedStyle =
   "px-4 py-2 flex items-center gap-2 hover:bg-indigo-50 hover:rounded-md hover:text-indigo-700 text-gray-400 duration-300";
 
 const AdminSideBar = ({ open, setOpen }) => {
+  const [darkModeSideBar, setdarkModeSideBar] = useState(true);
   const { current } = useSelector((state) => state.user);
   const [actived, setActived] = useState([]);
   const [activedTab, setActivedTab] = useState([]);
@@ -34,7 +39,6 @@ const AdminSideBar = ({ open, setOpen }) => {
       setActived((prev) => [...prev, tabID]);
     }
   };
-
   return (
     <div
       className={`bg-white overflow-y-auto h-full py-4 border-r shadow-lg flex flex-col justify-between  ${
@@ -52,7 +56,7 @@ const AdminSideBar = ({ open, setOpen }) => {
           </Link>
           <LuArrowLeftToLine
             onClick={() => setOpen(!open)}
-            className={`  text-2xl cursor-pointer rounded-md ${
+            className={`text-2xl cursor-pointer rounded-md ${
               !open && "rotate-180 mr-2 text-3xl"
             } `}
           />
@@ -92,7 +96,7 @@ const AdminSideBar = ({ open, setOpen }) => {
                         : `absolute left-full text-center py-2 ml-4 bg-indigo-100 rounded-md text-indigo-800 text-sm w-[110px] transition-all ${
                             hover === +el.id
                               ? "visible translate-x-0 opacity-100"
-                              : " invisible -translate-x-3 opacity-20"
+                              : "invisible -translate-x-3 opacity-20"
                           }`
                     }`}
                   >
@@ -182,7 +186,7 @@ const AdminSideBar = ({ open, setOpen }) => {
           <img
             src={current?.avatar || avatar}
             alt="avatar"
-            className={`w-8 h-8 rounded-md ${!open && "ml-1 w-6 h-6"}`}
+            className={`w-8 h-8 rounded-md ${!open && "w-6 h-6"}`}
           />
           <div
             className={`flex justify-between items-center ml-3 w-52 ${
@@ -219,10 +223,18 @@ const AdminSideBar = ({ open, setOpen }) => {
             } flex ml-2 items-center gap-2`}
           >
             <span className={`text-sm duration-300 ${!open && "hidden"}`}>
-              Mode Select
+              {darkModeSideBar ? (
+                <span className="flex items-center justify-center gap-2">
+                  <FaMoon /> Dark Mode
+                </span>
+              ) : (
+                <span className="flex items-center justify-center gap-2">
+                  <LuSun /> Light Mode
+                </span>
+              )}
             </span>
-            <div className={`${!open ? "" : "pl-10"}`}>
-              <ThemeToggle SideBar />
+            <div className={`${open && "pl-10"}`}>
+              <ThemeToggle SideBar setdarkModeSideBar={setdarkModeSideBar} />
             </div>
           </div>
         </div>

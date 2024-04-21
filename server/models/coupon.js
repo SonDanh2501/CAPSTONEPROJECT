@@ -13,6 +13,14 @@ var couponSchema = new mongoose.Schema(
             min: 0,
             max: 100
         },
+        owner: {
+            type: mongoose.Types.ObjectId,
+            ref: "User",
+        },
+        role: {
+            type: String,
+        }
+
     },
 );
 

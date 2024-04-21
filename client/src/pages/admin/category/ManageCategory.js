@@ -84,12 +84,13 @@ const ManageCategory = () => {
   };
   return (
     <div
-      className={`${
-        open ? "w-[83vw]" : "w-[94vw]"
-      } bg-dash-board pl-4 relative`}
+      className={`
+      ${open ? "w-[83vw]" : "w-[94vw]"} 
+      ${editPitch && "relative"} 
+      bg-dash-board pl-4`}
     >
       {editPitch && (
-        <div className="absolute inset-0 win-h-screen bg-gray-100 z-50">
+        <div className="absolute inset-0 hit-fit bg-gray-100 z-50">
           <UpdateCategory
             editPitch={editPitch}
             render={render}
@@ -101,7 +102,7 @@ const ManageCategory = () => {
         <h1 className="text-2xl font-bold tracking-tight">Manage Category</h1>
       </div>
       <div className="w-full p-2">
-        <div className="px-1 pb-2">
+        <div className="pb-2">
           {/* <form className='w-[300px]' onSubmit={handleSubmit(handleManagePitch)}> */}
           <form className="w-[300px]">
             <InputForm
@@ -129,31 +130,31 @@ const ManageCategory = () => {
                 className='odd:bg-white even:bg-gray-200/50 odd:dark:bg-gray-300 even:dark:bg-white border-b dark:border-gray-700"'
                 key={el._id}
               >
-                <td className="text-center px-6 py-5">
+                <td className="text-center px-2 py-2">
                   {(+params.get("page") > 1 ? +params.get("page") - 1 : 0) *
                     process.env.REACT_APP_PITCH_LIMIT +
                     index +
                     1}
                 </td>
-                <td className="text-center px-6 py-5">
+                <td className="text-center px-2 py-2">
                   <div className="flex items-center justify-center">
                     {el.thumb ? (
                       <img
                         src={el.thumb}
                         alt="thumb"
-                        className="w-[80px] h-[70px] object-cover "
+                        className="w-[80px] h-[70px] object-cover rounded-md"
                       />
                     ) : (
                       <img
                         src={defaultt}
                         alt="thumb"
-                        className="w-[80px] h-[70px] object-cover"
+                        className="w-[80px] h-[70px] object-cover rounded-md"
                       />
                     )}
                   </div>
                 </td>
-                <td className="text-center px-6 py-5">{el.title}</td>
-                <td className="text-center px-6 py-5">
+                <td className="text-center px-2 py-2">{el.title}</td>
+                <td className="text-center px-2 py-2">
                   <div className="flex items-center justify-center">
                     <span
                       className="text-green-500 hover:text-green-700 cursor-pointer px-2 text-2xl"

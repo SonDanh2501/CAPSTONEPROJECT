@@ -45,12 +45,12 @@ const Personal = () => {
   };
   return (
     <div className="w-full relative px-6">
-      <header className="text-3xl font-semibold py-4 border-b border-b-blue-200">
+      <header className="text-2xl font-bold tracking-tight ml-2 py-4 border-b-2 border-gray-300">
         Personal
       </header>
       <form
         onSubmit={handleSubmit(handleUpdateInfor)}
-        className="w-4/5 mx-auto py-8 flex flex-col gap-4"
+        className="ml-2 my-2 flex flex-col gap-2"
       >
         <InputForm
           label="Firstname"
@@ -83,7 +83,7 @@ const Personal = () => {
         />
         <div className="flex items-center gap-2 mt-8">
           <span className="font-semibold">Account status:</span>
-          <span>{current?.isBlocked === 1 ? "Blocked" : "Actived"}</span>
+          <span className={`${current?.isBlocked === 1 ? "text-red-500" : "text-green-500"}`}>{current?.isBlocked === 1 ? "Blocked" : "Actived"}</span>
         </div>
         <div className="flex items-center gap-2">
           <span className="font-semibold">Role:</span>
@@ -105,7 +105,7 @@ const Personal = () => {
             <img
               src={current?.avatar || avatar}
               alt="avatar"
-              className="w-20 h-20 ml-8 object-cover rounded-full"
+              className="w-20 h-20 0.object-cover border-2 border-black"
             ></img>
           </label>
           <input type="file" id="file" {...register("avatar")} hidden></input>

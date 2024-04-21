@@ -1,5 +1,5 @@
 import React, { memo, useState } from "react";
-import { formatMoney } from "ultils/helper";
+import { formatMoney, formatPrice } from "ultils/helper";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { showModal } from "store/app/appSlice";
@@ -15,9 +15,25 @@ import { apiUpdateWishlist } from "apis";
 import { getCurrent } from "store/user/asyncAction";
 
 const { AiFillEye, AiOutlineMenu, BsFillSuitHeartFill, FaArrowRight } = icons;
+
 const Pitch = ({ pitchData, isNew, normal, navigate, dispatch, pid }) => {
   const { current } = useSelector((state) => state.user);
   const [isShowOption, setIsShowOption] = useState(false);
+  const currentTime = new Date();
+  const currentHour = currentTime.getHours();
+
+  
+
+  const getPrice = (price_morning, price_afternoon, price_evening) => {
+    if (currentHour >= 4 && currentHour < 11) {
+      return { price: price_morning };
+    } else if (currentHour >= 11 && currentHour < 16) {
+      return { price: price_afternoon };
+    } else {
+      return { price: price_evening };
+    }
+  };
+
   navigate = useNavigate();
   dispatch = useDispatch();
   const handleClickOptions = async (e, flag) => {
@@ -131,7 +147,15 @@ const Pitch = ({ pitchData, isNew, normal, navigate, dispatch, pid }) => {
         </span>
         <div className="flex items-center justify-center gap-2 mt-1 ">
           <span className="text-xl font-bold ">
-            {`${formatMoney(pitchData?.price)} VNĐ`}
+            {`${formatMoney(
+              formatPrice(
+                getPrice(
+                  pitchData?.price_morning,
+                  pitchData?.price_afternoon,
+                  pitchData?.price_evening
+                )?.price
+              )
+            )} VNĐ`}
           </span>
           <span className="bg-green-400 px-1.5 py-0.5 rounded-md text-xs text-white">
             Per Hour

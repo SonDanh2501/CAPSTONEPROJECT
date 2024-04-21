@@ -25,6 +25,8 @@ import { Link } from "react-router-dom";
 import { showModal } from "store/app/appSlice";
 import { MdLock } from "react-icons/md";
 import { FaPen, FaGoogle, FaEye, FaEyeSlash, FaUser, FaStepBackward  } from "react-icons/fa";
+import { FiLogIn } from "react-icons/fi";
+
 import axios from "axios";
 
 const Login = () => {
@@ -397,13 +399,16 @@ const Login = () => {
               <Button
                 handleOnClick={handleSubmit}
                 fw
-                style="w-full my-2 py-2 bg-gradient-to-r from-blue-400 via-blue-500 to-blue-600 shadow-lg shadow-violet-700/70 hover:shadow-violet-500/80 rounded-md"
+                style="w-full py-2 bg-blue-500 rounded-sm flex items-center justify-center shadow-lg shadow-blue-500/50 hover:shadow-blue-700/50 hover:bg-blue-700 duration-300 text-white"
               >
-                {isRegister
-                  ? "Register"
-                  : isRegisterPitchOwner
-                  ? "Register"
-                  : "Log In"}
+                <FiLogIn className="text-white mx-2" size={16} />
+                <span className="text-white w-4/5 border-l mr-5">
+                  {isRegister
+                    ? "Register"
+                    : isRegisterPitchOwner
+                    ? "Register"
+                    : "Log In"}
+                </span>
               </Button>
             </div>
             <div className="w-full">
@@ -411,10 +416,8 @@ const Login = () => {
                 className="w-full py-2 bg-red-500 rounded-sm flex items-center justify-center shadow-lg shadow-red-500/50 hover:shadow-red-700/50 hover:bg-red-700 duration-300"
                 onClick={() => loginGoolge()}
               >
-                <span classname="w-1/5">
-                  <FaGoogle className="text-white" size={13}/>
-                </span>
-                <span className="text-white w-4/5 border-l ml-1 ">Google</span>
+                <FaGoogle className="text-white mx-2" size={13} />
+                <span className="text-white w-4/5 border-l mr-5">Google</span>
               </button>
               {/* <GoogleLogin
                 onSuccess={(credentialResponse) => {

@@ -5,7 +5,7 @@ import { useSelector } from "react-redux";
 import { apiGetUserOrderStatus, apiGetCoupon } from "apis";
 import defaultImage from "assets/default.png";
 import { shifts } from "ultils/constant";
-import { formatMoney, convertToTitleCase } from "ultils/helper";
+import { formatMoney, convertToTitleCase, formatPrice } from "ultils/helper";
 import { Breadcrumb, Button } from "components";
 import path from "ultils/path";
 
@@ -16,12 +16,13 @@ const DetailOrder = () => {
   const [order, setOrder] = useState(null);
   const [orderChanged, setOrderChanged] = useState(false);
   // const discount = JSON.parse(localStorage.getItem('discount')); // Accessing discount state from localStorage
-  const [discount, setDiscount] = useState(null)
+  const [discount, setDiscount] = useState(null);
   const fetchPitchData = async () => {
     const response = await apiGetUserOrderStatus(current?._id);
     if (response.success) {
       const firstOrder = response.Booking[0]; // Get the first order
-      const fetchedDiscount = firstOrder && firstOrder.coupon ? firstOrder.coupon.price : null;
+      const fetchedDiscount =
+        firstOrder && firstOrder.coupon ? firstOrder.coupon.price : null;
       setDiscount(fetchedDiscount);
       setOrder(response.Booking);
       setOrderChanged(false);
@@ -72,7 +73,7 @@ const DetailOrder = () => {
             </span>
             <span className="col-span-1 w-full h-full flex items-center justify-center text-center dark:text-white">
               <span className="text-xl ">
-                {formatMoney((el.pitch?.price)) + ` VND`}
+                {formatMoney(formatPrice(el.total)) + ` VND`}
               </span>
             </span>
           </div>
@@ -83,7 +84,7 @@ const DetailOrder = () => {
           <span> Subtotal:</span>
           <span className="text-main">
             {formatMoney(
-              order?.reduce((sum, el) => sum + Number(el.pitch?.price), 0)
+              order?.reduce((sum, el) => sum + Number(el.total), 0)
             ) + ` VND`}
           </span>
         </div>
@@ -92,9 +93,10 @@ const DetailOrder = () => {
             <span>Discount: </span>
             <span className="text-main">
               {formatMoney(
-                (order?.reduce((sum, el) => sum + Number(el.pitch?.price), 0) *
-                  (discount / 100))
-              )} VND
+                order?.reduce((sum, el) => sum + Number(el.total), 0) *
+                  (discount / 100)
+              )}{" "}
+              VND
             </span>
           </div>
         ) : null}
@@ -102,11 +104,11 @@ const DetailOrder = () => {
           <span> Total:</span>
           <span className="text-main">
             {formatMoney(
-              order?.reduce((sum, el) => sum + Number(el.pitch?.price), 0) -
-              (discount
-                ? order?.reduce((sum, el) => sum + Number(el.pitch?.price), 0) *
-                (discount / 100)
-                : 0)
+              order?.reduce((sum, el) => sum + Number(el.total), 0) -
+                (discount
+                  ? order?.reduce((sum, el) => sum + Number(el.total), 0) *
+                    (discount / 100)
+                  : 0)
             ) + ` VND`}
           </span>
         </div>

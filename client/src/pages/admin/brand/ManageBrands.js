@@ -85,12 +85,13 @@ const ManageBrand = () => {
   };
   return (
     <div
-      className={`${
-        open ? "w-[83vw]" : "w-[94vw]"
-      } bg-dash-board pl-4 relative`}
+      className={`
+      ${open ? "w-[83vw]" : "w-[94vw]"} 
+      ${editBrand && "relative"} 
+      bg-dash-board pl-4`}
     >
       {editBrand && (
-        <div className="absolute inset-0 win-h-screen bg-gray-100 z-50">
+        <div className="absolute inset-0 hit-fit bg-gray-100 z-50">
           <UpdateBrand
             editBrand={editBrand}
             render={render}
@@ -102,7 +103,7 @@ const ManageBrand = () => {
         <h1 className="text-2xl font-bold tracking-tight">Manage Brand</h1>
       </div>
       <div className="w-full p-2">
-        <div className="px-1 pb-2">
+        <div className="pb-2">
           <form className="w-[300px]">
             <InputForm
               id="q"
@@ -135,50 +136,50 @@ const ManageBrand = () => {
                 className='odd:bg-white even:bg-gray-200/50 odd:dark:bg-gray-300 even:dark:bg-white border-b dark:border-gray-700"'
                 key={el._id}
               >
-                <td className="text-center p ">
+                <td className="text-center px-2 py-2">
                   {(+params.get("page") > 1 ? +params.get("page") - 1 : 0) *
                     process.env.REACT_APP_PITCH_LIMIT +
                     index +
                     1}
                 </td>
-                <td className="text-center">
+                <td className="text-center px-2 py-2">
                   <div className="flex items-center justify-center">
                     {el.thumb ? (
                       <img
                         src={el.thumb}
                         alt="thumb"
-                        className="w-[80px] h-[70px] object-fill "
+                        className="w-[80px] h-[70px] object-fill rounded-md"
                       />
                     ) : (
                       <img
                         src={defaultt}
                         alt="thumb"
-                        className="w-20 h-[70px] object-cover"
+                        className="w-20 h-[70px] object-cover rounded-md"
                       />
                     )}
                   </div>
                 </td>
-                <td className="text-center py-2">{el.title}</td>
-                <td className="text-center ">
+                <td className="text-center px-2 py-2">{el.title}</td>
+                <td className="text-center px-2 py-2">
                   <div className="line-clamp-1">{el.address}</div>
                 </td>
-                <td className="text-center py-2">
+                <td className="text-center px-2 py-2">
                   <div className="flex flex-col items-center justify-center">
                     {el.categories.map((category, index) => (
                       <sm key={index + 1}>{category}</sm>
                     ))}
                   </div>
                 </td>
-                <td className="text-center py-2">
+                <td className="text-center px-2 py-2">
                   <div className="flex items-center justify-center">
                     {el.totalRatings}
                     <AiFillStar className="ml-1 text-yellow-500" />
                   </div>
                 </td>
-                <td className="text-center py-2">
+                <td className="text-center px-2 py-2">
                   {moment(el.createdAt).format("DD/MM/YYYY")}
                 </td>
-                <td className="text-center py-2 ">
+                <td className="text-center px-2 py-2">
                   <div className="flex items-center justify-center ">
                     <span
                       className="px-2 text-2xl text-green-500 hover:text-green-700 cursor-pointer"

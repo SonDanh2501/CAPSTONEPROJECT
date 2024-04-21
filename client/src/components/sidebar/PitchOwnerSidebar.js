@@ -1,26 +1,22 @@
 import React, { Fragment, memo, useState } from "react";
 import avatar from "assets/defaultava.png";
 import logo from "assets/logo.png";
-import { LuArrowLeftToLine } from "react-icons/lu";
-import { FaAngleRight, FaAngleDown } from "react-icons/fa";
-import { GoDotFill } from "react-icons/go";
-import { LuSun } from "react-icons/lu";
 import ThemeToggle from "components/buttons/ThemeToggle";
-
 import { pitchOwnerSideBar } from "ultils/constant";
 import { Link, NavLink } from "react-router-dom";
 import clsx from "clsx";
 import { useSelector } from "react-redux";
-import { FaAngleDoubleDown, FaAngleDoubleRight } from "react-icons/fa";
-import { BsArrowLeftShort } from "react-icons/bs";
 import path from "ultils/path";
-import { BiSolidLogOut } from "react-icons/bi";
+import icons from "ultils/icons";
+const { FaAngleRight, FaAngleDown, GoDotFill, BiSolidLogOut, LuArrowLeftToLine, LuSun, FaMoon } = icons;
+
 const activedStyle =
   "px-4 py-2 flex items-center gap-2 bg-gradient-to-tr from-indigo-200 to-indigo-100 rounded-md text-indigo-700";
 const notactivedStyle =
   "px-4 py-2 flex items-center gap-2 hover:bg-indigo-50 hover:rounded-md hover:text-indigo-700 text-gray-400 duration-300";
 
 const PitchOwnerSidebar = ({ open, setOpen }) => {
+  const [darkModeSideBar, setdarkModeSideBar] = useState(true);
   const [actived, setActived] = useState([]);
   const { current } = useSelector((state) => state.user);
   const [activedTab, setActivedTab] = useState([]);
@@ -35,10 +31,12 @@ const PitchOwnerSidebar = ({ open, setOpen }) => {
       setActived((prev) => [...prev, tabID]);
     }
   };
+
   return (
     <div
-      className={`bg-white overflow-y-auto h-full py-4 border-r shadow-lg flex flex-col justify-between  ${open ? "w-60" : "w-20"
-        } duration-300`}
+      className={`bg-white overflow-y-auto h-full py-4 border-r shadow-lg flex flex-col justify-between  ${
+        open ? "w-60" : "w-20"
+      } duration-300`}
     >
       <div className="">
         <div className="flex items-center justify-between p-4 pb-2 ">
@@ -51,29 +49,21 @@ const PitchOwnerSidebar = ({ open, setOpen }) => {
           </Link>
           <LuArrowLeftToLine
             onClick={() => setOpen(!open)}
-            className={`  text-2xl cursor-pointer rounded-md ${!open && "rotate-180 mr-2 text-3xl"
-              } `}
+            className={`text-2xl cursor-pointer rounded-md ${
+              !open && "rotate-180 mr-2 text-3xl"
+            } `}
           />
-          {/* <div className="w-full flex flex-col items-center justify-center py-4 text-white ">
-        <img
-          src={current?.avatar || avatar}
-          alt="logo"
-          className={`${open ? "w-16 h-16" : "w-10 h-10"
-            } object-cover duration-500`}
-        />
-        <small
-          className={`duration-500 font-bold ${!open && "scale-0"}`}
-        >{`${current?.lastname} ${current?.firstname}`}</small>
-      </div>
-      <BsArrowLeftShort
-        onClick={() => setOpen(!open)}
-        className={`bg-white text-dark-purple text-3xl rounded-full absolute -right-3.5 top-9 border border-dark-purple cursor-pointer ${!open && "rotate-180"
-          } `}
-      /> */}
-        </div>
 
+          {/* <h1
+            className={`text-gray-400 font-bold text-center duration-500 ${
+              !open && "scale-0"
+            }`}
+          >
+            Admin Workspace
+          </h1> */}
+        </div>
         <div className="mx-3 mt-6">
-          {pitchOwnerSideBar.map((el) => (
+          {pitchOwnerSideBar.map((el, index) => (
             <Fragment key={el.id}>
               {el.type === "SINGLE" && (
                 <NavLink
@@ -89,40 +79,49 @@ const PitchOwnerSidebar = ({ open, setOpen }) => {
                   onMouseOver={() => setHover(+el.id)}
                   onMouseLeave={() => setHover([])}
                 >
-                  <span className={`${open ? "text-lg" : "text-2xl"}`}>{el.icon}</span>
+                  <span className={`${open ? "text-lg" : "text-2xl"}`}>
+                    {el.icon}
+                  </span>
                   <span
-                    className={`${open
-                      ? "text-sm "
-                      : `absolute left-full text-center py-2 ml-4 bg-indigo-100 rounded-md text-indigo-800 text-sm w-[110px] transition-all ${hover === +el.id
-                        ? "visible translate-x-0 opacity-100"
-                        : " invisible -translate-x-3 opacity-20"
-                      }`
-                      }`}
+                    className={`${
+                      open
+                        ? "text-sm "
+                        : `absolute left-full text-center py-2 ml-4 bg-indigo-100 rounded-md text-indigo-800 text-sm w-[110px] transition-all ${
+                            hover === +el.id
+                              ? "visible translate-x-0 opacity-100"
+                              : "invisible -translate-x-3 opacity-20"
+                          }`
+                    }`}
                   >
                     {el.text}
                   </span>
                 </NavLink>
               )}
               {el.type === "PARENT" && (
-                <div
-                  onClick={() => handleShowTabs(+el.id)}
-                >
-                  <div className={`flex items-center justify-between px-4 py-2 my-2 hover:bg-slidebar_active hover:text-indigo-700 rounded-md cursor-pointer duration-300 ${activedTab === +el.id
-                    ? "bg-gradient-to-tr from-indigo-200 to-indigo-100 text-indigo-700 duration-300"
-                    : "text-gray-400 "
+                <div onClick={() => handleShowTabs(+el.id)}>
+                  <div
+                    className={`flex items-center justify-between px-4 py-2 my-2 hover:bg-slidebar_active hover:text-indigo-700 rounded-md cursor-pointer duration-300 ${
+                      activedTab === +el.id
+                        ? "bg-gradient-to-tr from-indigo-200 to-indigo-100 text-indigo-700 duration-300"
+                        : "text-gray-400 "
                     }`}
                     onMouseOver={() => setHover(+el.id)}
-                    onMouseLeave={() => setHover([])}>
+                    onMouseLeave={() => setHover([])}
+                  >
                     <div className="flex items-center gap-2">
-                      <span className={`${open ? "text-lg" : "text-2xl"}`}>{el.icon}</span>
+                      <span className={`${open ? "text-lg" : "text-2xl"}`}>
+                        {el.icon}
+                      </span>
                       <span
-                        className={`${open
-                          ? "text-sm "
-                          : `absolute left-full text-center py-2 ml-4 bg-indigo-100 rounded-md text-indigo-800 text-sm w-[110px] transition-all ${hover === +el.id
-                            ? "visible translate-x-0 opacity-100"
-                            : " invisible -translate-x-3 opacity-20"
-                          }`
-                          }`}
+                        className={`${
+                          open
+                            ? "text-sm "
+                            : `absolute left-full text-center py-2 ml-4 bg-indigo-100 rounded-md text-indigo-800 text-sm w-[110px] transition-all ${
+                                hover === +el.id
+                                  ? "visible translate-x-0 opacity-100"
+                                  : " invisible -translate-x-3 opacity-20"
+                              }`
+                        }`}
                       >
                         {el.text}
                       </span>
@@ -132,25 +131,29 @@ const PitchOwnerSidebar = ({ open, setOpen }) => {
                         className={`text-sm ${!open && "hidden"}`}
                       />
                     ) : (
-                      <FaAngleDown
-                        className={`text-sm ${!open && "hidden"}`} />
+                      <FaAngleDown className={`text-sm ${!open && "hidden"}`} />
                     )}
                   </div>
                   {actived.some((id) => +id === +el.id) && (
                     <div
-                      className={`flex flex-col text-white ${!open && "hidden"}`}
+                      className={`flex flex-col text-white ${
+                        !open && "hidden"
+                      }`}
                     >
                       {el.submenu.map((item) => (
                         <NavLink
                           key={el.text}
                           to={item.path}
-                          onClick={(e) => e.stopPropagation()}
+                          onClick={(e) => {
+                            setActivedTab(+el.id);
+                            e.stopPropagation();
+                          }}
                           className={({ isActive }) =>
                             clsx(
                               isActive &&
-                              "px-4 py-2 flex items-center gap-2 rounded-md text-indigo-700",
+                                "px-4 py-2 flex items-center gap-2 rounded-md text-indigo-700",
                               !isActive &&
-                              "px-4 py-2 flex items-center gap-2 hover:text-blue-700 text-gray-400",
+                                "px-4 py-2 flex items-center gap-2 hover:text-blue-700 text-gray-400",
                               "px-4 py-2 my-2"
                             )
                           }
@@ -169,17 +172,19 @@ const PitchOwnerSidebar = ({ open, setOpen }) => {
           ))}
         </div>
       </div>
+
       <div className="mx-2">
         <hr className="my-3" />
         <div className="flex px-4 py-2 items-center">
           <img
             src={current?.avatar || avatar}
             alt="avatar"
-            className={`w-5 h-5 rounded-md border ${!open && "ml-1 w-6 h-6"}`}
+            className={`w-8 h-8 rounded-md ${!open && "w-6 h-6"}`}
           />
           <div
-            className={`flex justify-between items-center ml-3 w-52 ${!open && "hidden"
-              }`}
+            className={`flex justify-between items-center ml-3 w-52 ${
+              !open && "hidden"
+            }`}
           >
             <div className="leading-4">
               <h4 className="font-semibold">
@@ -189,6 +194,7 @@ const PitchOwnerSidebar = ({ open, setOpen }) => {
             </div>
           </div>
         </div>
+
         <div className="h-[40px] hover:bg-slidebar_active flex items-center rounded-md text-gray-400 hover:text-indigo-700 ">
           <Link to={path.PUBLIC}>
             <div className=" flex ml-4 items-center">
@@ -205,17 +211,23 @@ const PitchOwnerSidebar = ({ open, setOpen }) => {
         </div>
         <div className="h-[40px] hover:bg-slidebar_active flex items-center rounded-md text-gray-400">
           <div
-            className={`${!open ? "ml-2" : "ml-4"
-              } flex ml-2 items-center gap-2`}
+            className={`${
+              !open ? "ml-2" : "ml-4"
+            } flex ml-2 items-center gap-2`}
           >
-            <span className={`text-xl ${!open && "hidden"}`}>
-              <LuSun />
-            </span>
             <span className={`text-sm duration-300 ${!open && "hidden"}`}>
-              Light Mode
+              {darkModeSideBar ? (
+                <span className="flex items-center justify-center gap-2">
+                  <FaMoon /> Dark Mode
+                </span>
+              ) : (
+                <span className="flex items-center justify-center gap-2">
+                  <LuSun /> Light Mode
+                </span>
+              )}
             </span>
-            <div className={`${!open ? "" : "pl-10"}`}>
-              <ThemeToggle SideBar />
+            <div className={`${open && "pl-10"}`}>
+              <ThemeToggle SideBar setdarkModeSideBar={setdarkModeSideBar} />
             </div>
           </div>
         </div>

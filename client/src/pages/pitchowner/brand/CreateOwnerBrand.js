@@ -7,8 +7,10 @@ import { validate, getBase64 } from "ultils/helper";
 import { toast } from "react-toastify";
 import { apiCreateBrand } from "apis";
 import { showModal } from "store/app/appSlice";
+import { useOutletContext } from "react-router-dom";
 
 const CreateOwnerBrand = () => {
+  const [open, setOpen] = useOutletContext();
   const dispatch = useDispatch();
   const { categories } = useSelector((state) => state.app);
 
@@ -105,10 +107,10 @@ const CreateOwnerBrand = () => {
   }, [watch("images")]);
 
   return (
-    <div className="w-full">
-      <h1 className="h-[75px] flex justify-between items-center text-3xl font-bold px-4 border-b">
-        <span>Create Your Brand</span>
-      </h1>
+    <div className={`${open ? "w-[83vw]" : "w-[94vw]"} bg-dash-board pl-4`}>
+      <div className="ml-2 py-4 border-b-2 border-gray-300">
+        <h1 className="text-2xl font-bold tracking-tight">Create Brand</h1>
+      </div>
       <div className="p-4">
         <form onSubmit={handleSubmit(handleCreateBrand)}>
           <InputForm
