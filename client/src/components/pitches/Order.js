@@ -2,10 +2,15 @@ import React, { memo, useEffect, useState, useCallback } from "react";
 import { IoMdClose } from "react-icons/io";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { apiDeleteOrder, apiGetUserOrderStatus, apiGetCoupon, apiUpdateCoupon } from "apis";
+import {
+  apiDeleteOrder,
+  apiGetUserOrderStatus,
+  apiGetCoupon,
+  apiUpdateCoupon,
+} from "apis";
 import defaultImage from "assets/default.png";
 import { shifts } from "ultils/constant";
-import { formatMoney } from "ultils/helper";
+import { formatMoney, formatPrice } from "ultils/helper";
 import { Button } from "components";
 import { MdDeleteForever } from "react-icons/md";
 import { toast } from "react-toastify";
@@ -23,14 +28,14 @@ const Order = () => {
   const [discount, setdiscount] = useState(null);
   const [orderIds, setOrderIds] = useState([]);
   const [ownerId, setOwnerId] = useState([]);
-
-
+  const currentTime = new Date();
+  const currentHour = currentTime.getHours();
 
   const fetchPitchData = async () => {
     const response = await apiGetUserOrderStatus(current?._id);
     if (response.success) {
-      const fetchedOrderIds = response.Booking.map(order => order._id);
-      const fetchedOwner = response.Booking.map(order => order.owner);
+      const fetchedOrderIds = response.Booking.map((order) => order._id);
+      const fetchedOwner = response.Booking.map((order) => order.owner);
 
       // Store order IDs in state
       setOrderIds(fetchedOrderIds);
@@ -38,7 +43,7 @@ const Order = () => {
       setOrder(response.Booking);
     }
   };
-  console.log(orderIds)
+
   const updateOrder = async (bid) => {
     const response = await apiDeleteOrder(bid);
 
@@ -48,14 +53,17 @@ const Order = () => {
       toast.success(response?.message);
     } else toast.error(response.message);
   };
-  console.log(ownerId)
+
   const updateCoupon = async () => {
     const response = await apiGetCoupon({ title, ownerId });
     if (response.success) {
       setdiscount(response.coupon);
       toast.success("Add coupon successfully");
       for (const orderId of orderIds) {
-        const updateBookingResponse = await apiUpdateCoupon(orderId, response.coupon);
+        const updateBookingResponse = await apiUpdateCoupon(
+          orderId,
+          response.coupon
+        );
         // Handle update response if needed
       }
     } else {
@@ -85,7 +93,7 @@ const Order = () => {
       </div>
 
       <div className="h-4/6 flex flex-col gap-3 overflow-y-auto py-3">
-        {(!order || order.length === 0) && (
+        {(!order || order?.length === 0) && (
           <span className="flex justify-center text-sm italic dark:text-white">
             Your Order is Empty
           </span>
@@ -128,7 +136,7 @@ const Order = () => {
                 </div>
                 <div className="font-bold tracking-wider">
                   <span className="text-sm text-red-500">
-                    {formatMoney(el.pitch?.price) + ` VND`}
+                    {`${formatMoney(formatPrice(el.total))} VNĐ`}
                   </span>
                 </div>
               </div>
@@ -158,7 +166,7 @@ const Order = () => {
           <span> Subtotal:</span>
           <span>
             {formatMoney(
-              order?.reduce((sum, el) => sum + Number(el.pitch?.price), 0)
+              order?.reduce((sum, el) => sum + Number(el.total), 0)
             ) + ` VND`}
           </span>
         </div>
@@ -167,20 +175,24 @@ const Order = () => {
           <span>
             {discount
               ? formatMoney(
-                (order?.reduce((sum, el) => sum + Number(el.pitch?.price), 0) *
-                  (discount.price / 100))
-              ) + ` VND`
-              : "0 VND"}          </span>
+                  order?.reduce((sum, el) => sum + Number(el.total), 0) *
+                    (discount.price / 100)
+                ) + ` VND`
+              : "0 VND"}{" "}
+          </span>
         </div>
         <div className="flex items-center mx-4 justify-between font-bold dark:text-white">
           <span> Total:</span>
           <span>
             {formatMoney(
-              order?.reduce((sum, el) => sum + Number(el.pitch?.price), 0) -
-              (discount
-                ? order?.reduce((sum, el) => sum + Number(el.pitch?.price), 0) *
-                (discount.price / 100)
-                : 0)
+              order?.reduce((sum, el) => sum + Number(el.total), 0) -
+                (discount
+                  ? order?.reduce(
+                      (sum, el) => sum + Number(el.pitch?.price),
+                      0
+                    ) *
+                    (discount.price / 100)
+                  : 0)
             ) + ` VND`}
           </span>
         </div>

@@ -68,7 +68,9 @@ const FeaturePitch = () => {
               image={el.images[0]}
               title={el.title}
               totalRatings={el.totalRatings}
-              price={el.price}
+              price_morning={el.price_morning}
+              price_evening={el.price_evening}
+              price_afternoon={el.price_afternoon}
               category={el.category}
               brand={el.brand}
             ></PitchCard>

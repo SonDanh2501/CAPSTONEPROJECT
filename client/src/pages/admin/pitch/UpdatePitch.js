@@ -98,7 +98,9 @@ const UpdatePitch = ({ editPitch, render, setEditPitch }) => {
   useEffect(() => {
     reset({
       title: editPitch?.title || "",
-      price: editPitch?.price || "",
+      price_morning: editPitch?.price_morning || "",
+      price_afternoon: editPitch?.price_afternoon || "",
+      price_evening: editPitch?.price_evening || "",
       address: editPitch?.address || "",
       category: editPitch?.category || "",
       brand: editPitch?.brand || "",
@@ -144,10 +146,10 @@ const UpdatePitch = ({ editPitch, render, setEditPitch }) => {
           </div>
           <div className="w-full pt-5 pb-10 flex gap-4">
             <InputForm
-              label="Price pitch"
+              label="Price pitch morning"
               register={register}
               errors={errors}
-              id="price"
+              id="price_morning"
               validate={{
                 required: "Need to be fill",
               }}
@@ -166,6 +168,26 @@ const UpdatePitch = ({ editPitch, render, setEditPitch }) => {
               validate={{ required: "Nedd to be fill" }}
               style="flex-1"
               errors={errors}
+            />
+          </div>
+          <div className="w-full pt-5 pb-10 flex gap-4">
+            <InputForm
+              label="Price pitch afternoon"
+              register={register}
+              errors={errors}
+              id="price_afternoon"
+              style="flex-1"
+              placeholder="Price of new pitch"
+              type="number"
+            />
+            <InputForm
+              label="Price pitch evening"
+              register={register}
+              errors={errors}
+              id="price_evening"
+              style="flex-1"
+              placeholder="Price of new pitch"
+              type="number"
             />
           </div>
           <div className="w-full pt-5 pb-10 flex gap-4">

@@ -6,7 +6,7 @@ import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { apiGetUserOrderStatus, apiStatusOrder } from "apis";
 import { shifts } from "ultils/constant";
-import { formatMoney } from "ultils/helper";
+import { formatMoney, formatPrice } from "ultils/helper";
 
 import { Paypal, Congratulation, Button } from "components";
 import Swal from "sweetalert2";
@@ -21,13 +21,14 @@ const Checkout = () => {
   const [isSuccess, setIsSuccess] = useState(false);
   const [isChecked, setIsChecked] = useState(false);
   const [showCashButton, setShowCashButton] = useState(false);
-  const [discount, setDiscount] = useState(null)
+  const [discount, setDiscount] = useState(null);
 
   const fetchPitchData = async () => {
     const response = await apiGetUserOrderStatus(current?._id);
     if (response.success) {
       const firstOrder = response.Booking[0]; // Get the first order
-      const fetchedDiscount = firstOrder && firstOrder.coupon ? firstOrder.coupon.price : null;
+      const fetchedDiscount =
+        firstOrder && firstOrder.coupon ? firstOrder.coupon.price : null;
       setDiscount(fetchedDiscount);
       setOrder(response.Booking);
     }
@@ -85,12 +86,12 @@ const Checkout = () => {
           <tbody>
             {order?.map((el) => (
               <tr className="border" key={el._id}>
-                <td className="text-left p-2">{el.pitch?.title}</td>
+                <td className="text-left p-2">{el.total}</td>
                 <td className="text-center p-2">
                   {shifts.find((s) => s.value === +el.shift)?.time}
                 </td>
                 <td className="text-right p-2">
-                  {formatMoney(el.pitch?.price) + ` VND`}
+                  {formatMoney(formatPrice(el.total)) + ` VND`}
                 </td>
               </tr>
             ))}
@@ -101,7 +102,7 @@ const Checkout = () => {
             <span>Subtotal:</span>
             <span className="text-main text-3xl font-semibold">
               {formatMoney(
-                order?.reduce((sum, el) => sum + Number(el.pitch?.price), 0)
+                order?.reduce((sum, el) => sum + Number(el.total), 0)
               ) + ` VND`}
             </span>
           </span>
@@ -110,9 +111,9 @@ const Checkout = () => {
             <span className="text-main text-3xl font-semibold">
               {discount
                 ? formatMoney(
-                  (order?.reduce((sum, el) => sum + Number(el.pitch?.price), 0) *
-                    (discount / 100))
-                ) + ` VND`
+                    order?.reduce((sum, el) => sum + Number(el.total), 0) *
+                      (discount / 100)
+                  ) + ` VND`
                 : "0 VND"}
             </span>
           </span>
@@ -120,11 +121,11 @@ const Checkout = () => {
             <span className="mr-32">Total:</span>
             <span className="text-main text-3xl font-semibold">
               {formatMoney(
-                order?.reduce((sum, el) => sum + Number(el.pitch?.price), 0) -
-                (discount
-                  ? order?.reduce((sum, el) => sum + Number(el.pitch?.price), 0) *
-                  (discount / 100)
-                  : 0)
+                order?.reduce((sum, el) => sum + Number(el.total), 0) -
+                  (discount
+                    ? order?.reduce((sum, el) => sum + Number(el.total), 0) *
+                      (discount / 100)
+                    : 0)
               ) + ` VND`}
             </span>
           </span>
@@ -143,7 +144,7 @@ const Checkout = () => {
             setIsSuccess={setIsSuccess}
             amount={Math.round(
               order?.reduce((sum, el) => sum + Number(el.pitch?.price), 0) /
-              23500
+                23500
             )}
           />
         </div>

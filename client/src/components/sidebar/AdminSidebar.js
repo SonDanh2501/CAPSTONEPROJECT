@@ -8,7 +8,15 @@ import { useSelector } from "react-redux";
 import avatar from "assets/avatarwhite.jpg";
 import ThemeToggle from "components/buttons/ThemeToggle";
 import icons from "ultils/icons";
-const { FaAngleRight, FaAngleDown, GoDotFill, BiSolidLogOut, LuArrowLeftToLine, LuSun, FaMoon } = icons;
+const {
+  FaAngleRight,
+  FaAngleDown,
+  GoDotFill,
+  BiSolidLogOut,
+  LuArrowLeftToLine,
+  LuSun,
+  FaMoon,
+} = icons;
 
 const activedStyle =
   "px-4 py-2 flex items-center gap-2 bg-gradient-to-tr from-indigo-100 to-indigo-400 rounded-md text-indigo-700";
