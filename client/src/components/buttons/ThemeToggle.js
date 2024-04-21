@@ -27,7 +27,7 @@ const ThemeToggle = ({ SideBar, setdarkModeSideBar }) => {
     <div
       className={`relative ${
         SideBar ? "w-12 h-6" : "w-14 h-6"
-      } flex items-center dark:bg-black bg-white cursor-pointer rounded-full p-1`}
+      } flex items-center dark:bg-black bg- cursor-pointer rounded-full p-1`}
       onClick={() => {
         setdarkMode(!darkMode); setdarkModeSideBar?.(!darkMode);
       }}

@@ -3,7 +3,16 @@ import { TiCancel } from "react-icons/ti";
 import { IoIosArrowForward } from "react-icons/io";
 import { SiBrandfolder } from "react-icons/si";
 import { BsCart } from "react-icons/bs";
-import { IoFastFood, IoCart, IoNotifications, IoLogOut } from "react-icons/io5";
+import {
+  IoCartOutline,
+  IoLogOutOutline,
+  IoReaderOutline,
+  IoPersonOutline,
+  IoNotificationsOutline,
+  IoMoonOutline,
+  IoSunnyOutline,
+  IoTimeOutline,
+} from "react-icons/io5";
 import { GoDotFill } from "react-icons/go";
 import { BiSolidLogOut } from "react-icons/bi";
 import { LuSun, LuArrowLeftToLine } from "react-icons/lu";
@@ -113,7 +122,6 @@ const icons = {
   FaCar,
   FaWifi,
   AiOutlineSafety,
-  IoFastFood,
   BsFillTelephoneFill,
   FaArrowRight,
   FaChevronRight,
@@ -131,9 +139,14 @@ const icons = {
   FaAngleRight,
   FaAngleDown,
   FaTicketAlt,
-  IoCart,
-  IoNotifications,
-  IoLogOut,
+  IoCartOutline,
+  IoLogOutOutline,
+  IoReaderOutline,
+  IoPersonOutline,
+  IoNotificationsOutline,
+  IoMoonOutline,
+  IoSunnyOutline,
+  IoTimeOutline,
 };
 
 export default icons;

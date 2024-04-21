@@ -8,27 +8,40 @@ import Swal from "sweetalert2";
 import icons from "ultils/icons";
 import path from "ultils/path";
 import { navigation } from "ultils/constant";
-import { apiGetUserOrderStatus } from "apis";
+import { apiGetNotifications, apiGetUserOrderStatus } from "apis";
 
 import { NavLink } from "react-router-dom";
 import avatar from "assets/avatarwhite.jpg";
 import { showOrder } from "store/app/appSlice";
-import ThemeToggle from "components/buttons/ThemeToggle";
+import moment from "moment";
 
-const { FaBars } = icons;
-const { FaXmark } = icons;
-const { IoCart, IoNotifications, IoLogOut } = icons;
-
+const {
+  IoCartOutline,
+  IoLogOutOutline,
+  IoReaderOutline,
+  IoPersonOutline,
+  IoNotificationsOutline,
+  IoMoonOutline,
+  IoSunnyOutline,
+  IoTimeOutline,
+  FaXmark,
+  FaBars,
+  GoDotFill,
+} = icons;
 
 const TopHeader = () => {
+  const [darkMode, setdarkMode] = useState(true);
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const { isLoggedIn, current, mes, isUpdateCart } = useSelector(
     (state) => state.user
   );
   const [isShowOption, setisShowOption] = useState(false);
+  const [isShowNotification, setisShowNotification] = useState(false);
   const [isOpen, setisOpen] = useState(false);
   const [order, setOrder] = useState(null);
+  const [notification, setNotification] = useState(null);
+  const [isActiveNotificationTab, setisActiveNotificationTab] = useState([]);
 
   useEffect(() => {
     const setTimeoutId = setTimeout(() => {
@@ -46,6 +59,12 @@ const TopHeader = () => {
     }
   };
 
+  const fetnotification = async () => {
+    const response = await apiGetNotifications();
+    if (response.success) {
+      setNotification(response.notification);
+    }
+  };
   useEffect(() => {
     if (mes) {
       Swal.fire("Oops!", mes, "info").then(() => {
@@ -60,6 +79,9 @@ const TopHeader = () => {
   };
 
   useEffect(() => {
+    fetnotification();
+  },[])
+  useEffect(() => {
     // console.log("RERENDER ORDER")
     const setTimeoutId = setTimeout(() => {
       fetchPitchData();
@@ -69,8 +91,30 @@ const TopHeader = () => {
     };
   }, [isUpdateCart, current]);
 
+  useEffect(() => {
+    const theme = localStorage.getItem("theme");
+    if (theme === "dark") {
+      setdarkMode(true);
+    } else {
+      setdarkMode(false);
+    }
+  }, []);
+
+  useEffect(() => {
+    if (darkMode) {
+      document.documentElement.classList.add("dark");
+      localStorage.setItem("theme", "dark");
+    } else {
+      document.documentElement.classList.remove("dark");
+      localStorage.setItem("theme", "light");
+    }
+  }, [darkMode]);
+console.log(isActiveNotificationTab)
   return (
-    <div className="w-full min-h-[70px] bg-header-bg flex h-full items-center flex-wrap dark:bg-dark ">
+    <div
+      className="w-full min-h-[70px] flex h-full items-center flex-wrap duration-200 
+      bg-header-bg-light dark:bg-header-bg-dark"
+    >
       <div className="w-1/4 px-4 ">
         <Link to={`/${path.HOME}`}>
           <img
@@ -96,73 +140,176 @@ const TopHeader = () => {
         ))}
       </div>
       {isLoggedIn && current ? (
-        <div className="w-1/4 flex items-center justify-end px-4 gap-4">
-          <div className="max-[1183px]:hidden">
-            <ThemeToggle></ThemeToggle>
+        <div className="w-1/4 flex items-center justify-end gap-4">
+          <div
+            className="hover:bg-gray-500/25 rounded-md p-2 cursor-pointer duration-300"
+            onClick={() => setdarkMode(!darkMode)}
+          >
+            <span className="text-icon-bg-dark">
+              <IoSunnyOutline size={22} />
+            </span>
           </div>
-          <div className="hover:bg-gray-300/10 rounded-full p-1.5">
-            <span
-              className="cursor-pointer text-white"
-              onClick={() => dispatch(showOrder())}
-            >
-              <IoCart size={20} />
-              <span class="absolute flex items-center justify-center w-[16px] h-[16px] text-xs text-white bg-red-400 border-white rounded-full top-[12px] ml-3">
+          <div
+            className="hover:bg-gray-500/25 rounded-md p-2 cursor-pointer duration-300"
+            onClick={() => dispatch(showOrder())}
+          >
+            <span className="text-icon-bg-dark">
+              <IoCartOutline size={22} />
+              <span class="absolute flex items-center justify-center w-[16px] h-[16px] top-[12px] text-xs text-white bg-red-400 border-white rounded-full ml-3">
                 {order?.length || 0}
               </span>
             </span>
           </div>
-          {/* <div>
-            <span>hello</span>
-          </div> */}
+          {/*
+          Notification*/}
+          {isShowNotification && (
+            <div className="absolute flex-col flex mt-[570px] bg-header-bg-dark-tab w-[450px] h-[500px] py-2 rounded-lg z-10 right-5">
+              <div className="p-4">
+                <span className="text-white font-bold">Notification</span>
+              </div>
+              <div className="flex justify-between mx-4 py-2 bg-bg-select-tab rounded-md">
+                <span
+                  className={`w-1/2 py-1 text-center rounded-md mx-2 hover:text-indigo-700 duration-500 ${isActiveNotificationTab === 1 ? "bg-notification-bg-dark-active-tab text-indigo-700": "text-font-bg-dark cursor-pointer"}`}
+                  onClick={() => setisActiveNotificationTab(1)}
+                >
+                  View All
+                </span>
+                <span
+                  className={`w-1/2 py-1 text-center rounded-md mx-2 hover:text-indigo-700 duration-500 ${isActiveNotificationTab === 2 ? "bg-notification-bg-dark-active-tab text-indigo-700": "text-font-bg-dark cursor-pointer"}`}
+                  onClick={() => setisActiveNotificationTab(2)}
+                >
+                  Favorite
+                </span>
+              </div>
+              <div className="py-2 overflow-y-auto">
+                {notification?.map((el) => (
+                  <div className="p-4 flex gap-2 hover:bg-bg-select-tab cursor-pointer ">
+                    <img
+                      src={el?.owner?.avatar || avatar}
+                      alt="avatar"
+                      className="w-12 h-12 object-cover rounded-md "
+                    />
+                    <div className="">
+                      <div className="w-[250px]">
+                        <span className="text-white line-clamp-3">
+                          <span className="font-bold">
+                            {el?.owner?.firstname} {el?.owner?.lastname}
+                          </span>
+                          <span className=""> posted {el?.title}</span>
+                        </span>
+                      </div>
+                      <div className="flex items-center gap-2">
+                        <span className="text-header-bg-dark-tab-font">
+                          <IoTimeOutline />
+                        </span>
+                        <span className="text-header-bg-dark-tab-font">
+                          {moment(el?.createdAt).format("dddd hh:mm A")}
+                        </span>
+                      </div>
+                    </div>
+                    <div className="w-full flex justify-end gap-2">
+                      <span className="text-xs text-blue-500 mt-1.5">
+                        <GoDotFill />
+                      </span>
+                      <span className="text-header-bg-dark-tab-font">
+                        {moment(el?.createdAt).fromNow("ago")}
+                      </span>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          )}
           <div
-            className="cursor-pointer"
-            onClick={() => setisShowOption((prev) => !prev)}
+            className="hover:bg-gray-500/25 rounded-md p-2 cursor-pointer duration-300"
+            onClick={() => setisShowNotification(!isShowNotification)}
+          >
+            <span className="text-icon-bg-dark">
+              <IoNotificationsOutline size={22} />
+            </span>
+          </div>
+          <div
+            className="cursor-pointer px-2"
+            onClick={() => setisShowOption(!isShowOption)}
           >
             <img
               src={current?.avatar || avatar}
               alt="avatar"
-              className="w-6 h-6 object-cover rounded-full cursor-pointer"
+              className="w-8 h-8 object-cover rounded-full cursor-pointer"
             />
             {/* <span className="text-white">{`${current?.lastname} ${current?.firstname}`}</span> */}
           </div>
-
           {isShowOption && (
             <div
               onClick={(e) => e.stopPropagation()}
-              className="absolute flex-col flex mt-[165px] bg-gray-100 min-w-[200px] rounded-md z-10"
+              className="absolute flex-col flex mt-[290px] bg-header-bg-dark-tab min-w-[270px] py-2 rounded-lg z-10"
             >
-              <Link
-                className="p-2 w-full hover:bg-sky-100"
-                to={`/${path.MEMBER}/${path.PERSONAL}`}
-              >
-                Personal
-              </Link>
-              {+current.role === 1 && (
-                <Link
-                  className="p-2 w-full hover:bg-sky-100"
-                  to={`/${path.ADMIN}/${path.DASHBOARD}`}
-                >
-                  Admin Workspace
-                </Link>
-              )}
-              {+current.role === 2 && (
-                <Link
-                  className="p-2 w-full hover:bg-sky-100"
-                  to={`/${path.PITCHOWNER}/${path.MANAGE_PITCHOWN}`}
-                >
-                  Pitch Owner Workspace
-                </Link>
-              )}
+              <div className="px-2">
+                <div className="flex px-4 py-2 items-center border-b border-gray-700/70">
+                  <img
+                    src={current?.avatar || avatar}
+                    alt="avatar"
+                    className={`w-16 h-16 rounded-md`}
+                  />
+                  <div className={`flex justify-between items-center ml-3`}>
+                    <div className="leading-4 flex flex-col">
+                      <span className="font-bold text-white text-xl">
+                        {current?.firstname} {current?.lastname}
+                      </span>
+                      <span className="text-header-bg-dark-tab-font">
+                        {current?.email}
+                      </span>
+                    </div>
+                  </div>
+                </div>
+                <div className="border-b border-gray-700/70">
+                  <div className="px-4 text-font-bg-dark hover:text-indigo-700 duration-300">
+                    <Link
+                      className="flex items-center gap-4 p-2"
+                      to={`/${path.MEMBER}/${path.PERSONAL}`}
+                    >
+                      <span>
+                        <IoPersonOutline size={21} />
+                      </span>
+                      <span>Profile</span>
+                    </Link>
+                  </div>
+                  {+current.role === 1 && (
+                    <div className="px-4 text-font-bg-dark hover:text-indigo-700 duration-300">
+                      <Link
+                        className="flex items-center gap-4 p-2 "
+                        to={`/${path.ADMIN}/${path.DASHBOARD}`}
+                      >
+                        <span>
+                          <IoReaderOutline size={21} />
+                        </span>
+                        <span>Workspace</span>
+                      </Link>
+                    </div>
+                  )}
+                  {+current.role === 2 && (
+                    <Link
+                      className="p-2 w-full hover:bg-sky-100"
+                      to={`/${path.PITCHOWNER}/${path.MANAGE_PITCHOWN}`}
+                    >
+                      Pitch Owner Workspace
+                    </Link>
+                  )}
+                </div>
+                <div>
+                  <div className="px-4 text-font-bg-dark hover:text-indigo-700 duration-300 cursor-pointer">
+                    <span
+                      onClick={() => dispatch(logout())}
+                      className="flex items-center gap-3 p-2"
+                    >
+                      <IoLogOutOutline size={24} />
+                      Sign Out
+                    </span>
+                  </div>
+                </div>
+              </div>
             </div>
           )}
-          {/* <div className="hover:bg-gray-300/25 rounded-full p-1.5">
-            <span
-              onClick={() => dispatch(logout())}
-              className="cursor-pointer text-white"
-            >
-              <IoLogOut size={20} />
-            </span>
-          </div> */}
         </div>
       ) : (
         <div className="w-1/4 flex items-center justify-end px-4">
