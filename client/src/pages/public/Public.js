@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { Outlet } from "react-router-dom";
 import { Header, Navigation, TopHeader, Footer } from "components";
+import Chatbox from "components/common/Chatbox";
+
 
 const Public = () => {
   const [isLoading, setIsLoading] = useState(true);
@@ -17,6 +19,7 @@ const Public = () => {
 
   return (
     <div className="max-h-screen flex flex-col items-center ">
+      <Chatbox></Chatbox>
       <TopHeader></TopHeader>
       {/* <Header></Header> */}
       {/* <Navigation></Navigation> */}
