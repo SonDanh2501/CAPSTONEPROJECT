@@ -30,9 +30,19 @@ var pitchSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
-    price: {
+    // price: {
+    //   type: Number,
+    //   required: true,
+    // },
+    price_morning: {
       type: Number,
-      required: true,
+      require: true,
+    },
+    price_evening: {
+      type: Number,
+    },
+    price_afternoon: {
+      type: Number,
     },
     thumb: {
       type: String,
@@ -65,6 +75,17 @@ var pitchSchema = new mongoose.Schema(
     timestamps: true,
   }
 );
-
+pitchSchema.pre("save", function (next) {
+  if (this.price_morning && !this.price_evening) {
+    this.price_evening = this.price_morning;
+  }
+  next();
+});
+pitchSchema.pre("save", function (next) {
+  if (this.price_morning && !this.price_afternoon) {
+    this.price_afternoon = this.price_morning;
+  }
+  next();
+});
 //Export the model
 module.exports = mongoose.model("Pitch", pitchSchema);

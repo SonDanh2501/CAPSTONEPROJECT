@@ -185,10 +185,10 @@ const CreatePitch = () => {
           </div>
           <div className="w-full pb-5 flex gap-4">
             <InputForm
-              label="Price pitch"
+              label="Price pitch morning"
               register={register}
               errors={errors}
-              id="price"
+              id="price_morning"
               validate={{
                 required: "Need to be fill",
               }}
@@ -206,6 +206,26 @@ const CreatePitch = () => {
               }}
               style="flex-1"
               placeholder="Address of new pitch"
+            />
+          </div>
+          <div className="w-full pb-5 mt-10 flex gap-4">
+            <InputForm
+              label="Price pitch afternoon"
+              register={register}
+              errors={errors}
+              id="price_afternoon"
+              style="flex-1"
+              placeholder="Price of new pitch"
+              type="number"
+            />
+            <InputForm
+              label="Price pitch evening"
+              register={register}
+              errors={errors}
+              id="price_evening"
+              style="flex-1"
+              placeholder="Price of new pitch"
+              type="number"
             />
           </div>
           <div className="w-full pt-10 pb-5">

@@ -56,11 +56,33 @@ const DetailPitches = ({ isQuickView, data }) => {
   const [selectedShift, setSelectedShift] = useState([]);
   const [selectedDate, setSelectedDate] = useState(null);
   const [currentImage, setcurrentImage] = useState(null);
+  const [selectedPrice, setSelectedPrice] = useState(null);
   const [relatedPitches, setrelatedPitches] = useState(null);
   const [update, setUpdate] = useState(false);
   const { title, brand } = useParams();
   const [selectedHour, setSelectedHour] = useState([]);
   const [coords, setCoords] = useState(null);
+  const currentTime = new Date();
+  const currentHour = currentTime.getHours();
+
+  const getPrice = (price_morning, price_afternoon, price_evening) => {
+    if (currentHour >= 4 && currentHour < 11) {
+      return { price: price_morning };
+    } else if (currentHour >= 11 && currentHour < 16) {
+      return { price: price_afternoon };
+    } else {
+      return { price: price_evening };
+    }
+  };
+  useEffect(() => {
+    if (currentHour >= 4 && currentHour < 11) {
+      setSelectedPrice(pitch?.price_morning);
+    } else if (currentHour >= 11 && currentHour < 16) {
+      setSelectedPrice(pitch?.price_afternoon);
+    } else {
+      setSelectedPrice(pitch?.price_evening);
+    }
+  }, [currentHour, pitch]);
 
   const fetchBooking = async () => {
     const response = await apiGetAllOrder();
@@ -112,7 +134,7 @@ const DetailPitches = ({ isQuickView, data }) => {
       bookedDate: selectedDate,
       pitchId: pid,
       hours: selectedHour,
-      total: pitch?.price,
+      total: selectedPrice,
       namePitch: pitch?.title,
     });
     if (response.success) {
@@ -231,7 +253,13 @@ const DetailPitches = ({ isQuickView, data }) => {
         <div className="w-2/5 pr-[24px] gap-4">
           <h2 className="text-[30px] font-semibold">{pitch?.title}</h2>
           <h3 className="text-[30px] font-semibold">{`${formatMoney(
-            formatPrice(pitch?.price)
+            formatPrice(
+              getPrice(
+                pitch?.price_morning,
+                pitch?.price_afternoon,
+                pitch?.price_evening
+              )?.price
+            )
           )} VNĐ`}</h3>
           <div className="flex items-center mt-2">
             {renderStarFromNumber(pitch?.totalRatings, 24)?.map((el, index) => (
@@ -336,7 +364,9 @@ const DetailPitches = ({ isQuickView, data }) => {
               pid={pitch?._id}
               rerender={rerender}
             />
-            {!isQuickView && <Map coords={coords} address={pitch?.address[0]} />}
+            {!isQuickView && (
+              <Map coords={coords} address={pitch?.address[0]} />
+            )}
           </div>
         </div>
       )}

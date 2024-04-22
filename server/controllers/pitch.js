@@ -4,15 +4,24 @@ const asyncHandler = require("express-async-handler");
 const slugify = require("slugify");
 
 const createPitch = asyncHandler(async (req, res) => {
-  const { title, description, address, brand, price, category, owner } =
-    req.body;
+  const {
+    title,
+    description,
+    address,
+    brand,
+    price_morning,
+    price_evening,
+    price_afternoon,
+    category,
+    owner,
+  } = req.body;
   const thumb = req?.files?.thumb[0]?.path;
   const images = req.files?.images?.map((el) => el.path);
   if (
     !title ||
     !description ||
     !address ||
-    !price ||
+    !price_morning ||
     !category ||
     !owner ||
     !brand
@@ -23,11 +32,11 @@ const createPitch = asyncHandler(async (req, res) => {
     title: { $regex: brand, $options: "i" },
   });
 
-  const checktest = await Brand.findByIdAndUpdate(
-    findingBrand[0]?._id,
-    { totalPitch: findingBrand[0]?.totalPitch + 1 },
-    { new: true }
-  );
+  // const checktest = await Brand.findByIdAndUpdate(
+  //   findingBrand[0]?._id,
+  //   { totalPitch: findingBrand[0]?.totalPitch + 1 },
+  //   { new: true }
+  // );
   req.body.slug = slugify(title);
   if (thumb) req.body.thumb = thumb;
   if (images) req.body.images = images;
