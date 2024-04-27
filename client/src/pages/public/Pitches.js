@@ -16,17 +16,21 @@ import {
 } from "components";
 import { apiGetPitches } from "apis";
 import Masonry from "react-masonry-css";
-import { sorts } from "ultils/constant";
+import { getSort } from "ultils/constant";
 import { formattedCategory } from "ultils/helper";
 import { useSelector } from "react-redux";
+import { useTranslation } from "react-i18next";
 
 const Pitches = () => {
+  const { t } = useTranslation();
+  const { filter1, filter2, filter4, filter6, filter7, filter0 } = t("filter")
   const breakpointColumnsObj = {
     default: 4,
     1400: 3,
     1250: 2,
     1000: 1,
   };
+  const sorts = getSort();
   const [loading, setLoading] = useState(true);
   const { categories } = useSelector((state) => state.app);
   const navigate = useNavigate();
@@ -129,16 +133,16 @@ const Pitches = () => {
 
       <div className="w-full border p-4 flex justify-between mt-8 mx-auto gap-3">
         <div className="flex flex-col gap-3 ">
-          <span className="font-semibold text-sm dark:text-white">Filter by</span>
+          <span className="font-semibold text-sm dark:text-white">{filter1}</span>
           <div className="flex items-center gap-4">
             <SearchItem
-              name="Price"
+              name={filter2}
               activeClick={activeClick}
               changeActiveFilter={changeActiveFilter}
               type="input"
             ></SearchItem>
             <SearchItem
-              name="Address"
+              name={filter4}
               activeClick={activeClick}
               changeActiveFilter={changeActiveFilter}
             ></SearchItem>
@@ -146,7 +150,7 @@ const Pitches = () => {
         </div>
         <div className="flex gap-3 ">
           <div className="flex flex-col gap-3 ">
-            <span className="font-semibold text-sm dark:text-white">Search</span>
+            <span className="font-semibold text-sm dark:text-white">{filter6}</span>
             <input
               onChange={(e) => setSearching(e.target.value)}
               type="type"
@@ -156,7 +160,7 @@ const Pitches = () => {
             />
           </div>
           <div className="flex flex-col gap-3">
-            <span className="font-semibold text-sm dark:text-white">Sort by</span>
+            <span className="font-semibold text-sm dark:text-white">{filter7}</span>
             <div className="w-full">
               <InputSelect
                 changeValue={changeValue}
@@ -179,7 +183,7 @@ const Pitches = () => {
               : "text-black "
               }`}
           >
-            All
+            {filter0}
           </button>
           {categories?.map((el) => (
             <button

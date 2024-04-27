@@ -1,33 +1,39 @@
 import path from "./path";
 import icons from "./icons";
+import { useTranslation } from "react-i18next";
 
-export const navigation = [
-  {
-    id: 1,
-    value: "HOME",
-    path: `/${path.HOME}`,
-  },
-  {
-    id: 2,
-    value: "PITCHES",
-    path: `/${path.PITCHES}`,
-  },
-  {
-    id: 3,
-    value: "FAQs",
-    path: `/${path.FAQ}`,
-  },
-  {
-    id: 4,
-    value: "NEWS",
-    path: `/${path.NEWS}`,
-  },
-  {
-    id: 5,
-    value: "CONTACT",
-    path: `/${path.CONTACT}`,
-  },
-];
+
+export const getNavigation = () => {
+  const { t } = useTranslation();
+  const { nav1, nav2, nav3, nav4, nav5 } = t("navigation")
+  return [
+    {
+      id: 1,
+      value: nav1,
+      path: `/${path.HOME}`,
+    },
+    {
+      id: 2,
+      value: nav2,
+      path: `/${path.PITCHES}`,
+    },
+    {
+      id: 3,
+      value: nav3,
+      path: `/${path.FAQ}`,
+    },
+    {
+      id: 4,
+      value: nav4,
+      path: `/${path.NEWS}`,
+    },
+    {
+      id: 5,
+      value: nav5,
+      path: `/${path.CONTACT}`,
+    },
+  ];
+};
 
 const {
   FaShieldAlt,
@@ -38,32 +44,63 @@ const {
   BsFillTelephoneFill,
 } = icons;
 const { BsReplyFill, BsShieldShaded, FaTty, AiFillGift } = icons;
-export const pitchExtraInformation = [
-  {
-    id: "1",
-    title: "Guarantee",
-    sub: "Quality Checked",
-    icon: <BsShieldShaded />,
-  },
-  {
-    id: "2",
-    title: "Consultancy",
-    sub: "Online 24/7",
-    icon: <FaTty />,
-  },
-  {
-    id: "3",
-    title: "Free Return Money",
-    sub: "Within 24 hours",
-    icon: <BsReplyFill />,
-  },
-  {
-    id: "4",
-    title: "Special Deal",
-    sub: "Deals Everyday",
-    icon: <AiFillGift />,
-  },
-];
+
+export const getpitchExtraInformation = () => {
+  const { t } = useTranslation();
+  const { pitchEx1, pitchEx2, pitchEx3, pitchEx4, pitchEx5, pitchEx6, pitchEx7, pitchEx8 } = t("pitchExtraInformation")
+  return [
+    {
+      id: "1",
+      title: pitchEx1,
+      sub: pitchEx2,
+      icon: <BsShieldShaded />,
+    },
+    {
+      id: "2",
+      title: pitchEx3,
+      sub: pitchEx4,
+      icon: <FaTty />,
+    },
+    {
+      id: "3",
+      title: pitchEx5,
+      sub: pitchEx6,
+      icon: <BsReplyFill />,
+    },
+    {
+      id: "4",
+      title: pitchEx7,
+      sub: pitchEx8,
+      icon: <AiFillGift />,
+    },
+  ];
+};
+// export const pitchExtraInformation = [
+//   {
+//     id: "1",
+//     title: "Guarantee",
+//     sub: "Quality Checked",
+//     icon: <BsShieldShaded />,
+//   },
+//   {
+//     id: "2",
+//     title: "Consultancy",
+//     sub: "Online 24/7",
+//     icon: <FaTty />,
+//   },
+//   {
+//     id: "3",
+//     title: "Free Return Money",
+//     sub: "Within 24 hours",
+//     icon: <BsReplyFill />,
+//   },
+//   {
+//     id: "4",
+//     title: "Special Deal",
+//     sub: "Deals Everyday",
+//     icon: <AiFillGift />,
+//   },
+// ];
 
 export const pitchInforTabs = [
   {
@@ -115,38 +152,74 @@ export const pitchInforTabs = [
   // },
 ];
 
-export const sorts = [
-  {
-    id: 1,
-    value: "-price",
-    text: "Price, high to low",
-  },
-  {
-    id: 2,
-    value: "price",
-    text: "Price, low to high",
-  },
-  {
-    id: 3,
-    value: "-title",
-    text: "Alphabetically, Z-A",
-  },
-  {
-    id: 4,
-    value: "title",
-    text: "Alphabetically, A-Z",
-  },
-  {
-    id: 5,
-    value: "-createdAt",
-    text: "Date, new to old",
-  },
-  {
-    id: 6,
-    value: "createdAt",
-    text: "Date, old to new",
-  },
-];
+export const getSort = () => {
+  const { t } = useTranslation();
+  const { filter11, filter12, filter13, filter14, filter15, filter16 } = t("filter")
+  return [
+    {
+      id: 1,
+      value: "-price",
+      text: filter11,
+    },
+    {
+      id: 2,
+      value: "price",
+      text: filter12,
+    },
+    {
+      id: 3,
+      value: "-title",
+      text: filter13,
+    },
+    {
+      id: 4,
+      value: "title",
+      text: filter14,
+    },
+    {
+      id: 5,
+      value: "-createdAt",
+      text: filter15,
+    },
+    {
+      id: 6,
+      value: "createdAt",
+      text: filter16,
+    },
+  ];
+};
+// export const sorts = [
+//   {
+//     id: 1,
+//     value: "-price",
+//     text: "Price, high to low",
+//   },
+//   {
+//     id: 2,
+//     value: "price",
+//     text: "Price, low to high",
+//   },
+//   {
+//     id: 3,
+//     value: "-title",
+//     text: "Alphabetically, Z-A",
+//   },
+//   {
+//     id: 4,
+//     value: "title",
+//     text: "Alphabetically, A-Z",
+//   },
+//   {
+//     id: 5,
+//     value: "-createdAt",
+//     text: "Date, new to old",
+//   },
+//   {
+//     id: 6,
+//     value: "createdAt",
+//     text: "Date, old to new",
+//   },
+// ];
 
 const {
   MdSpaceDashboard,

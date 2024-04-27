@@ -4,7 +4,11 @@ import { FaChevronDown } from "react-icons/fa";
 import { MdNavigateNext } from "react-icons/md";
 import { apiGetFaq } from "apis";
 import { useNavigate } from "react-router-dom";
+import { useTranslation } from "react-i18next";
+
 const FAQ = () => {
+  const { t } = useTranslation();
+  const { faq1, faq2, faq3, faq4, faq5, faq6, faq7 } = t("faq")
   const navigate = useNavigate();
   const [faq, setFaq] = useState(null);
   const fetchFaq = async () => {
@@ -24,12 +28,12 @@ const FAQ = () => {
     <>
       <div className="w-full dark:bg-medium mb-5">
         <div>
-          <HeaderBanner title="WEBSITE INFORMATION" subtitle="FAQ" />
+          <HeaderBanner title={faq1} subtitle={faq2} />
         </div>
 
         <div className="flex items-center justify-start p-14 pb-4">
           <h1 className="text-black text-2xl font-bold dark:text-white ">
-            Frequently Asked Questions
+            {faq3}
           </h1>
         </div>
 
@@ -41,9 +45,8 @@ const FAQ = () => {
               <div className="flex text-xl font-semibold justify-between items-center">
                 <span>{e.title}</span>
                 <FaChevronDown
-                  className={`text-lg mr-4 cursor-pointer hover:text-zinc-300 ${
-                    openQuestionId === e._id ? "transform rotate-180" : ""
-                  }`}
+                  className={`text-lg mr-4 cursor-pointer hover:text-zinc-300 ${openQuestionId === e._id ? "transform rotate-180" : ""
+                    }`}
                   onClick={() => onOpen(e._id)}
                 />
               </div>
@@ -65,19 +68,22 @@ const FAQ = () => {
         </div>
         <div className="flex flex-col items-center justify-center pb-14 dark:text-white">
           <h1 className="font-bold text-black mt-8 gap-4 text-2xl  p-2 dark:text-white">
-            DON'T SEE YOUR QUESTION HERE? DROP US A LINE
+            {faq4}
+
           </h1>
           <h3 className="text-2xl p-2 pt-1">
-            Check out our FAQ or contact us below
+            {faq5}
+
           </h3>
           <span className="text-lg pt-1 p-2">debugboy@gmail.com</span>
           <span
             className="text-lg cursor-pointer hover:text-blue-500"
             onClick={() => navigate(`/contact`)}
           >
-            Chat with us
+            {faq6}
           </span>
-          <span className="text-lg">Monday-Sunday 9am - 5pm EST</span>
+          <span className="text-lg">{faq7}
+          </span>
         </div>
       </div>
     </>

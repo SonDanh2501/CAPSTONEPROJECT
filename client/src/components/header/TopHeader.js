@@ -7,8 +7,9 @@ import logo from "assets/logo.png";
 import Swal from "sweetalert2";
 import icons from "ultils/icons";
 import path from "ultils/path";
-import { navigation } from "ultils/constant";
+import { getNavigation } from "ultils/constant";
 import { apiGetNotifications, apiGetUserOrderStatus } from "apis";
+import { useTranslation } from "react-i18next";
 
 import { NavLink } from "react-router-dom";
 import avatar from "assets/avatarwhite.jpg";
@@ -30,6 +31,7 @@ const {
 } = icons;
 
 const TopHeader = () => {
+  const navigation = getNavigation();
   const [darkMode, setdarkMode] = useState(true);
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -42,6 +44,10 @@ const TopHeader = () => {
   const [order, setOrder] = useState(null);
   const [notification, setNotification] = useState(null);
   const [isActiveNotificationTab, setisActiveNotificationTab] = useState([]);
+  const { t } = useTranslation();
+  const { infor1, infor2, infor3, infor4, infor5 } = t("information")
+  const { noti1, noti2, noti3 } = t("notification")
+
 
   useEffect(() => {
     const setTimeoutId = setTimeout(() => {
@@ -80,7 +86,7 @@ const TopHeader = () => {
 
   useEffect(() => {
     fetnotification();
-  },[])
+  }, [])
   useEffect(() => {
     // console.log("RERENDER ORDER")
     const setTimeoutId = setTimeout(() => {
@@ -109,7 +115,6 @@ const TopHeader = () => {
       localStorage.setItem("theme", "light");
     }
   }, [darkMode]);
-console.log(isActiveNotificationTab)
   return (
     <div
       className="w-full min-h-[70px] flex h-full items-center flex-wrap duration-200 
@@ -165,20 +170,20 @@ console.log(isActiveNotificationTab)
           {isShowNotification && (
             <div className="absolute flex-col flex mt-[570px] bg-header-bg-dark-tab w-[450px] h-[500px] py-2 rounded-lg z-10 right-5">
               <div className="p-4">
-                <span className="text-white font-bold">Notification</span>
+                <span className="text-white font-bold">{noti1}</span>
               </div>
               <div className="flex justify-between mx-4 py-2 bg-bg-select-tab rounded-md">
                 <span
-                  className={`w-1/2 py-1 text-center rounded-md mx-2 hover:text-indigo-700 duration-500 ${isActiveNotificationTab === 1 ? "bg-notification-bg-dark-active-tab text-indigo-700": "text-font-bg-dark cursor-pointer"}`}
+                  className={`w-1/2 py-1 text-center rounded-md mx-2 hover:text-indigo-700 duration-500 ${isActiveNotificationTab === 1 ? "bg-notification-bg-dark-active-tab text-indigo-700" : "text-font-bg-dark cursor-pointer"}`}
                   onClick={() => setisActiveNotificationTab(1)}
                 >
-                  View All
+                  {noti2}
                 </span>
                 <span
-                  className={`w-1/2 py-1 text-center rounded-md mx-2 hover:text-indigo-700 duration-500 ${isActiveNotificationTab === 2 ? "bg-notification-bg-dark-active-tab text-indigo-700": "text-font-bg-dark cursor-pointer"}`}
+                  className={`w-1/2 py-1 text-center rounded-md mx-2 hover:text-indigo-700 duration-500 ${isActiveNotificationTab === 2 ? "bg-notification-bg-dark-active-tab text-indigo-700" : "text-font-bg-dark cursor-pointer"}`}
                   onClick={() => setisActiveNotificationTab(2)}
                 >
-                  Favorite
+                  {noti3}
                 </span>
               </div>
               <div className="py-2 overflow-y-auto">
@@ -271,7 +276,7 @@ console.log(isActiveNotificationTab)
                       <span>
                         <IoPersonOutline size={21} />
                       </span>
-                      <span>Profile</span>
+                      <span>{infor1}</span>
                     </Link>
                   </div>
                   {+current.role === 1 && (
@@ -283,7 +288,7 @@ console.log(isActiveNotificationTab)
                         <span>
                           <IoReaderOutline size={21} />
                         </span>
-                        <span>Workspace</span>
+                        <span>{infor2}</span>
                       </Link>
                     </div>
                   )}
@@ -292,7 +297,7 @@ console.log(isActiveNotificationTab)
                       className="p-2 w-full hover:bg-sky-100"
                       to={`/${path.PITCHOWNER}/${path.MANAGE_PITCHOWN}`}
                     >
-                      Pitch Owner Workspace
+                      {infor4}
                     </Link>
                   )}
                 </div>
@@ -303,7 +308,7 @@ console.log(isActiveNotificationTab)
                       className="flex items-center gap-3 p-2"
                     >
                       <IoLogOutOutline size={24} />
-                      Sign Out
+                      {infor3}
                     </span>
                   </div>
                 </div>
@@ -317,7 +322,7 @@ console.log(isActiveNotificationTab)
             className="mr-6 text-lg font-bold hover:text-orange text-white"
             to={`/${path.LOGIN}`}
           >
-            Sign In or Sign Up
+            {infor5}
           </Link>
         </div>
       )}

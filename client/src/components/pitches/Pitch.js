@@ -13,6 +13,7 @@ import icons from "ultils/icons";
 import { toast } from "react-toastify";
 import { apiUpdateWishlist } from "apis";
 import { getCurrent } from "store/user/asyncAction";
+import { useTranslation } from "react-i18next";
 
 const { AiFillEye, AiOutlineMenu, BsFillSuitHeartFill, FaArrowRight } = icons;
 
@@ -21,8 +22,9 @@ const Pitch = ({ pitchData, isNew, normal, navigate, dispatch, pid }) => {
   const [isShowOption, setIsShowOption] = useState(false);
   const currentTime = new Date();
   const currentHour = currentTime.getHours();
+  const { t } = useTranslation();
+  const { pitchcard1, pitchcard2 } = t("pitchcard")
 
-  
 
   const getPrice = (price_morning, price_afternoon, price_evening) => {
     if (currentHour >= 4 && currentHour < 11) {
@@ -40,8 +42,7 @@ const Pitch = ({ pitchData, isNew, normal, navigate, dispatch, pid }) => {
     e.stopPropagation();
     if (flag === "MENU")
       navigate(
-        `/${pitchData?.category?.toLowerCase()}/${pitchData?.brand?.toLowerCase()}/${
-          pitchData?._id
+        `/${pitchData?.category?.toLowerCase()}/${pitchData?.brand?.toLowerCase()}/${pitchData?._id
         }/${pitchData?.title}`
       );
     if (flag === "QUICK_VIEW") {
@@ -73,8 +74,7 @@ const Pitch = ({ pitchData, isNew, normal, navigate, dispatch, pid }) => {
       className=" max-w-[285px] min-w-[250px] bg-gradient-to-r from-white to-gray-300 shadow-lg rounded-md overflow-hidden hover:shadow-2xl hover:shadow-gray-500 duration-300 hover:bg-gradient-to-l"
       onClick={(e) =>
         navigate(
-          `/${pitchData?.category?.toLowerCase()}/${pitchData?.brand?.toLowerCase()}/${
-            pitchData?._id
+          `/${pitchData?.category?.toLowerCase()}/${pitchData?.brand?.toLowerCase()}/${pitchData?._id
           }/${pitchData?.title}`
         )
       }
@@ -158,7 +158,7 @@ const Pitch = ({ pitchData, isNew, normal, navigate, dispatch, pid }) => {
             )} VNĐ`}
           </span>
           <span className="bg-green-400 px-1.5 py-0.5 rounded-md text-xs text-white">
-            Per Hour
+            {pitchcard1}
           </span>
         </div>
 
@@ -193,13 +193,13 @@ const Pitch = ({ pitchData, isNew, normal, navigate, dispatch, pid }) => {
             hover:before:w-full"
             onClick={(e) =>
               navigate(
-                `/${pitchData?.category.toLowerCase()}/${pitchData?.brand.toLowerCase()}/${
-                  pitchData?.pid
+                `/${pitchData?.category.toLowerCase()}/${pitchData?.brand.toLowerCase()}/${pitchData?.pid
                 }/${pitchData?.title}`
               )
             }
           >
-            <span className="relative">View details</span>
+            <span className="relative">{pitchcard2}
+            </span>
             <span className="relative">
               <FaArrowRight />
             </span>

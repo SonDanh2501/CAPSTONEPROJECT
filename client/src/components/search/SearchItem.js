@@ -9,6 +9,8 @@ import {
   createSearchParams,
   useSearchParams,
 } from "react-router-dom";
+import { useTranslation } from "react-i18next";
+
 const { AiOutlineDown } = icons;
 
 const SearchItems = ({
@@ -39,6 +41,8 @@ const SearchItems = ({
   };
   const debouncePriceFrom = useDebounce(price.from, 500);
   const debouncePriceTo = useDebounce(price.to, 500);
+  const { t } = useTranslation();
+  const { filter3, filter5, filter8, filter9, filter10 } = t("filter")
 
   useEffect(() => {
     let param = [];
@@ -101,7 +105,7 @@ const SearchItems = ({
           {type === "checkbox" && (
             <div className="p-2">
               <div className="p-4 items-center flex justify-between gap-8 border-b ">
-                <span className="text-main">{`${selected.length} selected`}</span>
+                <span className="text-main">{`${selected.length} ${filter5}`}</span>
                 <span
                   className="underline cursor-pointer hover:text-main whitespace-nowrap"
                   onClick={(e) => {
@@ -141,23 +145,23 @@ const SearchItems = ({
           {type === "input" && (
             <div onClick={(e) => e.stopPropagation()}>
               <div className="p-4 items-center flex justify-between gap-8 border-b">
-                <span className="whitespace-nowrap text-main">{`The highest price is ${Number(
+                <span className="whitespace-nowrap text-main">{`${filter3} ${Number(
                   bestPrice
                 ).toLocaleString()} VNĐ `}</span>
                 <span
-                  className="underline cursor-pointer hover:text-main whitespace-nowrap"
+                  className="underline cursor-pointer hover:text-main whitespace-nowrap dark:text-black"
                   onClick={(e) => {
                     e.stopPropagation();
                     setPrice({ from: "", to: "" });
                     changeActiveFilter(null);
                   }}
                 >
-                  Reset
+                  {filter10}
                 </span>
               </div>
               <div className="flex items-center p-2 gap-2 rou">
-                <div className="flex items-center gap-2">
-                  <label htmlFor="from">From</label>
+                <div className="flex items-center gap-2 dark:text-black">
+                  <label htmlFor="from">{filter8}</label>
                   <input
                     className="form-input rounded-md"
                     type="number"
@@ -168,8 +172,8 @@ const SearchItems = ({
                     }
                   ></input>
                 </div>
-                <div className="flex items-center gap-2">
-                  <label htmlFor="to">To</label>
+                <div className="flex items-center gap-2 dark:text-black">
+                  <label htmlFor="to">{filter9}</label>
                   <input
                     className="form-input rounded-md"
                     type="number"
