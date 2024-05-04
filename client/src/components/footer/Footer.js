@@ -7,6 +7,7 @@ import {
   FaYoutube,
   FaPaperPlane,
 } from "react-icons/fa";
+import { GrLanguage } from "react-icons/gr";
 import { BiLogoGmail } from "react-icons/bi";
 import icons from "ultils/icons";
 import path from "ultils/path";
@@ -24,6 +25,7 @@ const Footer = () => {
     <div className="w-full">
       <div className="p-10 bg-blue-900 text-gray-200 w-full dark:bg-medium">
         <div className="flex justify-end text-black">
+          <span className="text-blue-700 mt-3 mr-2 text-xl"><GrLanguage></GrLanguage></span>
           <LanguageSelector></LanguageSelector>
         </div>
         <div className="max-w-7xl mx-auto">

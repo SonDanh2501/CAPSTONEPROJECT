@@ -18,9 +18,12 @@ import path from "ultils/path";
 import { showOrder } from "store/app/appSlice";
 import moment from "moment";
 import { updateCart } from "store/user/userSlice";
+import { useTranslation } from "react-i18next";
 
 const Order = () => {
   const dispatch = useDispatch();
+  const { t } = useTranslation();
+  const { order1, order2, order3, order4, order5, order6, order7, order8, order9, order10 } = t("order")
   const navigate = useNavigate();
   const { current, isUpdateCart } = useSelector((state) => state.user);
   const [order, setOrder] = useState(null);
@@ -86,7 +89,7 @@ const Order = () => {
       className="w-[450px] h-screen overflow-y-auto bg-white text-black shadow-2xl flex flex-col dark:bg-medium"
     >
       <div className="p-4 flex justify-between items-center font-bold text-xl border-b-2 border-gray-300 dark:text-white">
-        <span>Your Order</span>
+        <span>{order1}</span>
         <span onClick={() => dispatch(showOrder())} className=" cursor-pointer">
           <IoMdClose />
         </span>
@@ -95,7 +98,7 @@ const Order = () => {
       <div className="h-4/6 flex flex-col gap-3 overflow-y-auto py-3">
         {(!order || order?.length === 0) && (
           <span className="flex justify-center text-sm italic dark:text-white">
-            Your Order is Empty
+            {order2}
           </span>
         )}
         {order &&
@@ -126,7 +129,7 @@ const Order = () => {
                       onClick={() => updateOrder(el._id)}
                     >
                       <span className="text-xs text-white border-r pr-2">
-                        Remove
+                        {order3}
                       </span>
                       <span className="h-5 w-5 flex items-center duration-500 text-white">
                         <MdDeleteForever size={16} />
@@ -150,7 +153,7 @@ const Order = () => {
             id="title"
             value={title}
             className="w-full rounded-lg"
-            placeholder="Coupon"
+            placeholder={order4}
             onChange={(e) => settitle(e.target.value)}
           ></input>
           <button
@@ -159,11 +162,11 @@ const Order = () => {
             }}
             className=" px-6 py-2 bg-red-500 rounded-md text-white hover:bg-red-600 duration-300 border-2 border-red-500"
           >
-            <span>Apply</span>
+            <span>{order5}</span>
           </button>
         </div>
         <div className="flex items-center mx-4 justify-between dark:text-white">
-          <span> Subtotal:</span>
+          <span>{order6}:</span>
           <span>
             {formatMoney(
               order?.reduce((sum, el) => sum + Number(el.total), 0)
@@ -171,28 +174,28 @@ const Order = () => {
           </span>
         </div>
         <div className="flex items-center mx-4 justify-between dark:text-white">
-          <span> Discount ({discount?.title}): </span>
+          <span>{order7} ({discount?.title}): </span>
           <span>
             {discount
               ? formatMoney(
-                  order?.reduce((sum, el) => sum + Number(el.total), 0) *
-                    (discount.price / 100)
-                ) + ` VND`
+                order?.reduce((sum, el) => sum + Number(el.total), 0) *
+                (discount.price / 100)
+              ) + ` VND`
               : "0 VND"}{" "}
           </span>
         </div>
         <div className="flex items-center mx-4 justify-between font-bold dark:text-white">
-          <span> Total:</span>
+          <span>{order8}:</span>
           <span>
             {formatMoney(
               order?.reduce((sum, el) => sum + Number(el.total), 0) -
-                (discount
-                  ? order?.reduce(
-                      (sum, el) => sum + Number(el.pitch?.price),
-                      0
-                    ) *
-                    (discount.price / 100)
-                  : 0)
+              (discount
+                ? order?.reduce(
+                  (sum, el) => sum + Number(el.pitch?.price),
+                  0
+                ) *
+                (discount.price / 100)
+                : 0)
             ) + ` VND`}
           </span>
         </div>
@@ -203,7 +206,7 @@ const Order = () => {
             }}
             className="my-4 ml-4 py-2 w-1/2 bg-gray-500 rounded-md text-white hover:bg-gray-600 duration-300"
           >
-            <span>Continue Shopping</span>
+            <span>{order9}</span>
           </button>
           <button
             onClick={() => {
@@ -212,7 +215,7 @@ const Order = () => {
             }}
             className="my-4 mr-4 py-2 w-1/2 bg-red-500 rounded-md text-white hover:bg-red-600 duration-300"
           >
-            <span>Checkout</span>
+            <span>{order10}</span>
           </button>
         </div>
       </div>

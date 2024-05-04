@@ -293,12 +293,17 @@ const TopHeader = () => {
                     </div>
                   )}
                   {+current.role === 2 && (
-                    <Link
-                      className="p-2 w-full hover:bg-sky-100"
-                      to={`/${path.PITCHOWNER}/${path.MANAGE_PITCHOWN}`}
-                    >
-                      {infor4}
-                    </Link>
+                    <div className="px-4 text-font-bg-dark hover:text-indigo-700 duration-300">
+                      <Link
+                        className="flex items-center gap-4 p-2"
+                        to={`/${path.PITCHOWNER}/${path.MANAGE_PITCHOWN}`}
+                      >
+                        <span>
+                          <IoReaderOutline size={21} />
+                        </span>
+                        <span>{infor4}</span>
+                      </Link>
+                    </div>
                   )}
                 </div>
                 <div>

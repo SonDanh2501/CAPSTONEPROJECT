@@ -8,8 +8,13 @@ import { shifts } from "ultils/constant";
 import { formatMoney, convertToTitleCase, formatPrice } from "ultils/helper";
 import { Breadcrumb, Button } from "components";
 import path from "ultils/path";
+import { useTranslation } from "react-i18next";
+
 
 const DetailOrder = () => {
+
+  const { t } = useTranslation();
+  const { detailorder1, detailorder2, detailorder3, detailorder4, detailorder5, detailorder6, detailorder7, detailorder8, detailorder9, detailorder10 } = t("detailorder")
   const navigate = useNavigate();
   const location = useLocation();
   const { current } = useSelector((state) => state.user);
@@ -35,15 +40,15 @@ const DetailOrder = () => {
     <div className="w-full dark:bg-medium">
       <div className="h-[81px] flex justify-center items-center bg-gray-100 dark:bg-dark">
         <div className="w-main dark:text-white">
-          <h3 className="font-semibold uppercase">My Order </h3>
+          <h3 className="font-semibold uppercase">{detailorder1} </h3>
           <Breadcrumb category={convertToTitleCase(location?.pathname)} />
         </div>
       </div>
       <div className="flex flex-col border my-8 w-main mx-auto">
         <div className="w-[1378px] mx-auto bg-gray-200  font-bold  py-3 grid grid-cols-10 dark:bg-dark dark:text-white">
-          <span className="col-span-6 w-full text-center">Pitches </span>
-          <span className="col-span-1 w-full text-center">Shift </span>
-          <span className="col-span-3 w-full text-center">Price </span>
+          <span className="col-span-6 w-full text-center">{detailorder2} </span>
+          <span className="col-span-1 w-full text-center">{detailorder3} </span>
+          <span className="col-span-3 w-full text-center">{detailorder4} </span>
         </div>
         {order?.map((el) => (
           <div
@@ -81,7 +86,7 @@ const DetailOrder = () => {
       </div>
       <div className="w-main flex flex-col mb-12 gap-3 items-end mx-auto dark:text-white">
         <div className="flex items-center mx-4 gap-8 dark:text-white">
-          <span> Subtotal:</span>
+          <span> {detailorder5}:</span>
           <span className="text-main">
             {formatMoney(
               order?.reduce((sum, el) => sum + Number(el.total), 0)
@@ -90,30 +95,30 @@ const DetailOrder = () => {
         </div>
         {discount !== null ? (
           <div className="flex items-center mx-4 gap-8 dark:text-white">
-            <span>Discount: </span>
+            <span>{detailorder6}: </span>
             <span className="text-main">
               {formatMoney(
                 order?.reduce((sum, el) => sum + Number(el.total), 0) *
-                  (discount / 100)
+                (discount / 100)
               )}{" "}
               VND
             </span>
           </div>
         ) : null}
         <div className="flex items-center mx-4 gap-8 font-bold dark:text-white">
-          <span> Total:</span>
+          <span> {detailorder7}:</span>
           <span className="text-main">
             {formatMoney(
               order?.reduce((sum, el) => sum + Number(el.total), 0) -
-                (discount
-                  ? order?.reduce((sum, el) => sum + Number(el.total), 0) *
-                    (discount / 100)
-                  : 0)
+              (discount
+                ? order?.reduce((sum, el) => sum + Number(el.total), 0) *
+                (discount / 100)
+                : 0)
             ) + ` VND`}
           </span>
         </div>
         <span className="text-xs italic">
-          taxes and discount calculated at check out form
+          {detailorder8}
         </span>
         <div className="flex gap-3 ">
           <Button
@@ -122,7 +127,7 @@ const DetailOrder = () => {
               navigate(`/${path.HOME}`);
             }}
           >
-            Book Other
+            {detailorder9}
           </Button>
 
           <Link
@@ -131,7 +136,7 @@ const DetailOrder = () => {
             to={`/${path.CHECKOUT}`}
             onClick={() => setOrderChanged(true)}
           >
-            Check Out
+            {detailorder10}
           </Link>
         </div>
       </div>
