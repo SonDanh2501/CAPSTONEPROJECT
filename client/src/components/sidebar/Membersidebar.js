@@ -1,6 +1,6 @@
 import React, { Fragment, memo, useState } from "react";
 import avatar from "assets/defaultava.png";
-import { memberSidebar } from "ultils/constant";
+import { getmemberSidebar } from "ultils/constant";
 import { Link, NavLink } from "react-router-dom";
 import logo from "assets/logo.png";
 import clsx from "clsx";
@@ -8,6 +8,8 @@ import { useSelector } from "react-redux";
 import path from "ultils/path";
 import ThemeToggle from "components/buttons/ThemeToggle";
 import icons from "ultils/icons";
+import { useTranslation } from "react-i18next";
+
 const { FaAngleRight, FaAngleDown, GoDotFill, BiSolidLogOut, LuArrowLeftToLine, LuSun, FaMoon } = icons;
 
 const activedStyle =
@@ -16,8 +18,10 @@ const notactivedStyle =
   "px-4 py-2 flex items-center gap-2 hover:bg-indigo-50 hover:rounded-md hover:text-indigo-700 text-gray-400 duration-300";
 
 const Membersidebar = ({ open, setOpen }) => {
+  const { t } = useTranslation();
+  const { sidebar1, sidebar2, sidebar3 } = t("sidebar")
   const [darkModeSideBar, setdarkModeSideBar] = useState(true);
-
+  const memberSidebar = getmemberSidebar();
   const [actived, setActived] = useState([]);
   const { current } = useSelector((state) => state.user);
   const [activedTab, setActivedTab] = useState([]);
@@ -35,9 +39,8 @@ const Membersidebar = ({ open, setOpen }) => {
   console.log(current.role);
   return (
     <div
-      className={`bg-white overflow-y-auto h-full py-4 border-r shadow-lg flex flex-col justify-between  ${
-        open ? "w-60" : "w-20"
-      } duration-300`}
+      className={`bg-white overflow-y-auto h-full py-4 border-r shadow-lg flex flex-col justify-between  ${open ? "w-60" : "w-20"
+        } duration-300`}
     >
       <div className="">
         <div className="flex items-center justify-between p-4 pb-2 ">
@@ -50,9 +53,8 @@ const Membersidebar = ({ open, setOpen }) => {
           </Link>
           <LuArrowLeftToLine
             onClick={() => setOpen(!open)}
-            className={`  text-2xl cursor-pointer rounded-md ${
-              !open && "rotate-180 mr-2 text-3xl"
-            } `}
+            className={`  text-2xl cursor-pointer rounded-md ${!open && "rotate-180 mr-2 text-3xl"
+              } `}
           />
 
           {/* <h1
@@ -103,15 +105,13 @@ const Membersidebar = ({ open, setOpen }) => {
                     {el.icon}
                   </span>
                   <span
-                    className={`${
-                      open
-                        ? "text-sm "
-                        : `absolute left-full text-center py-2 ml-4 bg-indigo-100 rounded-md text-indigo-800 text-sm w-[110px] transition-all ${
-                            hover === +el.id
-                              ? "visible translate-x-0 opacity-100"
-                              : " invisible -translate-x-3 opacity-20"
-                          }`
-                    }`}
+                    className={`${open
+                      ? "text-sm "
+                      : `absolute left-full text-center py-2 ml-4 bg-indigo-100 rounded-md text-indigo-800 text-sm w-[110px] transition-all ${hover === +el.id
+                        ? "visible translate-x-0 opacity-100"
+                        : " invisible -translate-x-3 opacity-20"
+                      }`
+                      }`}
                   >
                     {el.text}
                   </span>
@@ -120,11 +120,10 @@ const Membersidebar = ({ open, setOpen }) => {
               {el.type === "PARENT" && (
                 <div onClick={() => handleShowTabs(+el.id)}>
                   <div
-                    className={`flex items-center justify-between px-4 py-2 my-2 hover:bg-slidebar_active hover:text-indigo-700 rounded-md cursor-pointer duration-300 ${
-                      activedTab === +el.id
-                        ? "bg-gradient-to-tr from-indigo-100 to-indigo-400 text-indigo-700 duration-300"
-                        : "text-gray-400 "
-                    }`}
+                    className={`flex items-center justify-between px-4 py-2 my-2 hover:bg-slidebar_active hover:text-indigo-700 rounded-md cursor-pointer duration-300 ${activedTab === +el.id
+                      ? "bg-gradient-to-tr from-indigo-100 to-indigo-400 text-indigo-700 duration-300"
+                      : "text-gray-400 "
+                      }`}
                     onMouseOver={() => setHover(+el.id)}
                     onMouseLeave={() => setHover([])}
                   >
@@ -133,15 +132,13 @@ const Membersidebar = ({ open, setOpen }) => {
                         {el.icon}
                       </span>
                       <span
-                        className={`${
-                          open
-                            ? "text-sm "
-                            : `absolute left-full text-center py-2 ml-4 bg-indigo-100 rounded-md text-indigo-800 text-sm w-[110px] transition-all ${
-                                hover === +el.id
-                                  ? "visible translate-x-0 opacity-100"
-                                  : " invisible -translate-x-3 opacity-20"
-                              }`
-                        }`}
+                        className={`${open
+                          ? "text-sm "
+                          : `absolute left-full text-center py-2 ml-4 bg-indigo-100 rounded-md text-indigo-800 text-sm w-[110px] transition-all ${hover === +el.id
+                            ? "visible translate-x-0 opacity-100"
+                            : " invisible -translate-x-3 opacity-20"
+                          }`
+                          }`}
                       >
                         {el.text}
                       </span>
@@ -156,9 +153,8 @@ const Membersidebar = ({ open, setOpen }) => {
                   </div>
                   {actived.some((id) => +id === +el.id) && (
                     <div
-                      className={`flex flex-col text-white ${
-                        !open && "hidden"
-                      }`}
+                      className={`flex flex-col text-white ${!open && "hidden"
+                        }`}
                     >
                       {el.submenu.map((item) => (
                         <NavLink
@@ -171,9 +167,9 @@ const Membersidebar = ({ open, setOpen }) => {
                           className={({ isActive }) =>
                             clsx(
                               isActive &&
-                                "px-4 py-2 flex items-center gap-2 rounded-md text-indigo-700",
+                              "px-4 py-2 flex items-center gap-2 rounded-md text-indigo-700",
                               !isActive &&
-                                "px-4 py-2 flex items-center gap-2 hover:text-blue-700 text-gray-400",
+                              "px-4 py-2 flex items-center gap-2 hover:text-blue-700 text-gray-400",
                               "px-4 py-2 my-2"
                             )
                           }
@@ -201,9 +197,8 @@ const Membersidebar = ({ open, setOpen }) => {
             className={`w-5 h-5 rounded-md border ${!open && "ml-1 w-6 h-6"}`}
           />
           <div
-            className={`flex justify-between items-center ml-3 w-52 ${
-              !open && "hidden"
-            }`}
+            className={`flex justify-between items-center ml-3 w-52 ${!open && "hidden"
+              }`}
           >
             <div className="leading-4">
               <h4 className="font-semibold">
@@ -223,25 +218,24 @@ const Membersidebar = ({ open, setOpen }) => {
               <span
                 className={`text-sm duration-300 pl-2  ${!open && "hidden"}`}
               >
-                Back To Home Page
+                {sidebar1}
               </span>
             </div>
           </Link>
         </div>
         <div className="h-[40px] hover:bg-slidebar_active flex items-center rounded-md text-gray-400">
           <div
-            className={`${
-              !open ? "ml-2" : "ml-4"
-            } flex ml-2 items-center gap-2`}
+            className={`${!open ? "ml-2" : "ml-4"
+              } flex ml-2 items-center gap-2`}
           >
             <span className={`text-sm duration-300 ${!open && "hidden"}`}>
               {darkModeSideBar ? (
                 <span className="flex items-center justify-center gap-2">
-                  <FaMoon /> Dark Mode
+                  <FaMoon /> {sidebar2}
                 </span>
               ) : (
                 <span className="flex items-center justify-center gap-2">
-                  <LuSun /> Light Mode
+                  <LuSun /> {sidebar3}
                 </span>
               )}
             </span>

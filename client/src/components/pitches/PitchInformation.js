@@ -7,6 +7,7 @@ import { useNavigate } from "react-router-dom";
 import { Button, Votebar, VoteOption, Comment } from "components";
 import Swal from "sweetalert2";
 import path from "ultils/path";
+import { useTranslation } from "react-i18next";
 
 const PitchInformation = ({
   totalRatings,
@@ -15,6 +16,9 @@ const PitchInformation = ({
   pid,
   rerender,
 }) => {
+  const { t } = useTranslation();
+  const { rating1, rating2, rating3 } = t("rating")
+
   const [activedTab, setActivedTab] = useState(1);
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -73,7 +77,7 @@ const PitchInformation = ({
                 <span key={index}>{el}</span>
               ))}
             </span>
-            <span className="text-sm mt-2">{`${ratings?.length} reviewers`}</span>
+            <span className="text-sm mt-2">{`${ratings?.length} ${rating1}`}</span>
           </div>
           <div className="flex-6  flex gap-2 flex-col p-4">
             {Array.from(Array(5).keys())
@@ -91,9 +95,9 @@ const PitchInformation = ({
           </div>
         </div>
         <div className="p-4 flex items-center justify-center text-sm flex-col gap-2">
-          <span>Do you review this pitch?</span>
+          <span>{rating2}</span>
           <Button size handleOnClick={handleVoteNow}>
-            Rate now
+            {rating3}
           </Button>
         </div>
         <div className="flex flex-col gap-4">

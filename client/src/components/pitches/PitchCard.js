@@ -4,6 +4,7 @@ import { formatMoney, formatPrice } from "ultils/helper";
 import { renderStarFromNumber } from "ultils/helper";
 import icons from "ultils/icons";
 import SelectOption from "components/search/SelectOption";
+import { useTranslation } from "react-i18next";
 
 const { BsFillSuitHeartFill, AiFillEye, FaArrowRight } = icons;
 
@@ -19,6 +20,8 @@ const PitchCard = ({
   brand,
 }) => {
   const navigate = useNavigate();
+  const { t } = useTranslation();
+  const { pitchcard1, pitchcard2 } = t("pitchcard")
 
   const getPrice = (price_morning, price_afternoon, price_evening) => {
     if ((price_morning === price_afternoon) === price_evening)
@@ -59,7 +62,7 @@ const PitchCard = ({
             {getPrice(price_morning, price_afternoon, price_evening)?.price}
           </span>
           <span className="bg-green-400 px-1.5 py-0.5 rounded-md text-xs text-white">
-            Per Hour
+            {pitchcard1}
           </span>
         </div>
         <span className="flex gap-1">
@@ -103,7 +106,8 @@ const PitchCard = ({
               )
             }
           >
-            <span className="relative hidden lg:flex">View details</span>
+            <span className="relative hidden lg:flex">{pitchcard2}
+            </span>
             <span className="relative">
               <FaArrowRight />
             </span>

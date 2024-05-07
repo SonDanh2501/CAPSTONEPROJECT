@@ -2,8 +2,11 @@ import React, { useState, useEffect, memo } from "react";
 import PitchCard from "components/pitches/PitchCard";
 import { apiGetPitches } from "apis";
 import Slider from "react-slick";
+import { useTranslation } from "react-i18next";
 
 const FeaturePitch = () => {
+  const { t } = useTranslation();
+  const { feat1, feat2, feat3 } = t("featurepitch")
   const settings = {
     dots: true,
     infinite: true,
@@ -51,12 +54,12 @@ const FeaturePitch = () => {
   return (
     <div className="w-full dark:bg-medium pb-10">
       <h3 className="text-[40px] font-semibold py-[15px] text-center">
-        <span className="text-indigo-500 ">Our</span>
+        <span className="text-indigo-500 ">{feat1}</span>
         <span className="border-b-2 border-indigo-500 dark:text-white">
           {" "}
-          Pit
+          {feat2}
         </span>
-        <span className="dark:text-white">ches</span>
+        <span className="dark:text-white">{feat3}</span>
       </h3>
 
       <div className="w-3/4	m-auto">

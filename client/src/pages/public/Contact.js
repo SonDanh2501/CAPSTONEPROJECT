@@ -6,8 +6,12 @@ import { FaLocationDot } from "react-icons/fa6";
 import { FaPhoneAlt } from "react-icons/fa";
 import { IoIosSend } from "react-icons/io";
 import { FaDiscord } from "react-icons/fa";
+import { useTranslation } from "react-i18next";
 
 const Contact = () => {
+  const { t } = useTranslation();
+  const { contact1, contact2, contact3, contact4, contact5, contact6, contact7, contact8, contact9, contact10, contact11, contact12, } = t("contact")
+
   const form = useRef();
   const [isFormValid, setIsFormValid] = useState(false);
 
@@ -51,7 +55,7 @@ const Contact = () => {
   return (
     <div className="w-full bg-gray-200 dark:bg-medium mb-5">
       <div>
-        <HeaderBanner title="WEBSITE INFORMATION" subtitle="Contact Us" />
+        <HeaderBanner title={contact1} subtitle={contact2} />
       </div>
 
       <div className="flex justify-center items-center mt-14 pb-6">
@@ -59,7 +63,7 @@ const Contact = () => {
           {/* Fill in Form*/}
           <div className="w-2/3 flex justify-center items-center flex-col pb-6 ">
             <h1 className="text-4xl font-bold text-black p-8 dark:text-white">
-              Get in touch
+              {contact3}
             </h1>
             <form
               className="flex flex-col w-[500px] "
@@ -68,12 +72,12 @@ const Contact = () => {
               onChange={validateForm}
             >
               {/* name*/}
-              <label className="mt-2 mb-1 text-lg dark:text-white">Name</label>
+              <label className="mt-2 mb-1 text-lg dark:text-white">{contact4}</label>
               <input
                 className="rounded-md text-lg"
                 type="text"
                 name="user_name"
-                placeholder="Example: john cena"
+                placeholder={`${contact10}: john cena`}
                 required
               />
               {/* user email*/}
@@ -82,17 +86,17 @@ const Contact = () => {
                 className="rounded-md text-lg"
                 type="email"
                 name="user_email"
-                placeholder="Example: Example@gmail.com"
+                placeholder={`${contact10}: Example@gmail.com`}
                 required
               />
               {/* Message*/}
               <label className="mt-2 mb-1 text-lg dark:text-white">
-                Message
+                {contact5}
               </label>
               <textarea
                 className="rounded-md text-lg h-32"
                 name="message"
-                placeholder="Your message ..."
+                placeholder={contact11}
                 required
               />
               {/* button send*/}
@@ -113,18 +117,18 @@ const Contact = () => {
               hover:shadow-blue-400 
                 ${isFormValid ? "" : "opacity-50 cursor-not-allowed"}`}
                 type="submit"
-                value="Send"
+                value={contact12}
                 disabled={!isFormValid}
               />
             </form>
           </div>
           {/* Contact information form*/}
           <div className="w-1/3 flex justify-center items-center flex-col pb-6 bg-blue-500 dark:bg-blue-950 text-white">
-            <h1 className="text-4xl font-bold pb-8">Contact us</h1>
+            <h1 className="text-4xl font-bold pb-8"> {contact6}</h1>
             <span className="flex items-center gap-2 pt-8 pb-4 pr-4 pl-4">
               <FaLocationDot className="w-4 h-4 " />
               {/* Address*/}
-              <span className="font-bold text-xl">Address :</span>
+              <span className="font-bold text-xl">{contact7} :</span>
               <span className="cursor-pointer text-lg">
                 1 Vo Van Ngan, Linh Trung, Thu Duc
               </span>
@@ -132,7 +136,7 @@ const Contact = () => {
             <span className="flex items-center gap-2 pt-8 pb-4 pr-4 pl-4">
               <FaPhoneAlt className="w-4 h-4 " />
               {/* Phone number*/}
-              <span className="font-bold  cursor-pointer text-xl">Phone :</span>
+              <span className="font-bold  cursor-pointer text-xl"> {contact8} :</span>
               <span className="cursor-pointer text-lg">(+84) 0900000000</span>
             </span>
             <span className="flex items-center gap-2 pt-8 pb-4 pr-4 pl-4">
@@ -148,7 +152,7 @@ const Contact = () => {
                 Discord :
               </span>
               <span className="cursor-pointer text-lg">
-                <a href="https://discord.gg/CDKTeQr6">Join us on Discord</a>
+                <a href="https://discord.gg/CDKTeQr6"> {contact9}</a>
               </span>
             </span>
           </div>

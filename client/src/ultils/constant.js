@@ -1,33 +1,39 @@
 import path from "./path";
 import icons from "./icons";
+import { useTranslation } from "react-i18next";
 
-export const navigation = [
-  {
-    id: 1,
-    value: "HOME",
-    path: `/${path.HOME}`,
-  },
-  {
-    id: 2,
-    value: "PITCHES",
-    path: `/${path.PITCHES}`,
-  },
-  {
-    id: 3,
-    value: "FAQs",
-    path: `/${path.FAQ}`,
-  },
-  {
-    id: 4,
-    value: "NEWS",
-    path: `/${path.NEWS}`,
-  },
-  {
-    id: 5,
-    value: "CONTACT",
-    path: `/${path.CONTACT}`,
-  },
-];
+
+export const getNavigation = () => {
+  const { t } = useTranslation();
+  const { nav1, nav2, nav3, nav4, nav5 } = t("navigation")
+  return [
+    {
+      id: 1,
+      value: nav1,
+      path: `/${path.HOME}`,
+    },
+    {
+      id: 2,
+      value: nav2,
+      path: `/${path.PITCHES}`,
+    },
+    {
+      id: 3,
+      value: nav3,
+      path: `/${path.FAQ}`,
+    },
+    {
+      id: 4,
+      value: nav4,
+      path: `/${path.NEWS}`,
+    },
+    {
+      id: 5,
+      value: nav5,
+      path: `/${path.CONTACT}`,
+    },
+  ];
+};
 
 const {
   FaShieldAlt,
@@ -38,32 +44,63 @@ const {
   BsFillTelephoneFill,
 } = icons;
 const { BsReplyFill, BsShieldShaded, FaTty, AiFillGift } = icons;
-export const pitchExtraInformation = [
-  {
-    id: "1",
-    title: "Guarantee",
-    sub: "Quality Checked",
-    icon: <BsShieldShaded />,
-  },
-  {
-    id: "2",
-    title: "Consultancy",
-    sub: "Online 24/7",
-    icon: <FaTty />,
-  },
-  {
-    id: "3",
-    title: "Free Return Money",
-    sub: "Within 24 hours",
-    icon: <BsReplyFill />,
-  },
-  {
-    id: "4",
-    title: "Special Deal",
-    sub: "Deals Everyday",
-    icon: <AiFillGift />,
-  },
-];
+
+export const getpitchExtraInformation = () => {
+  const { t } = useTranslation();
+  const { pitchEx1, pitchEx2, pitchEx3, pitchEx4, pitchEx5, pitchEx6, pitchEx7, pitchEx8 } = t("pitchExtraInformation")
+  return [
+    {
+      id: "1",
+      title: pitchEx1,
+      sub: pitchEx2,
+      icon: <BsShieldShaded />,
+    },
+    {
+      id: "2",
+      title: pitchEx3,
+      sub: pitchEx4,
+      icon: <FaTty />,
+    },
+    {
+      id: "3",
+      title: pitchEx5,
+      sub: pitchEx6,
+      icon: <BsReplyFill />,
+    },
+    {
+      id: "4",
+      title: pitchEx7,
+      sub: pitchEx8,
+      icon: <AiFillGift />,
+    },
+  ];
+};
+// export const pitchExtraInformation = [
+//   {
+//     id: "1",
+//     title: "Guarantee",
+//     sub: "Quality Checked",
+//     icon: <BsShieldShaded />,
+//   },
+//   {
+//     id: "2",
+//     title: "Consultancy",
+//     sub: "Online 24/7",
+//     icon: <FaTty />,
+//   },
+//   {
+//     id: "3",
+//     title: "Free Return Money",
+//     sub: "Within 24 hours",
+//     icon: <BsReplyFill />,
+//   },
+//   {
+//     id: "4",
+//     title: "Special Deal",
+//     sub: "Deals Everyday",
+//     icon: <AiFillGift />,
+//   },
+// ];
 
 export const pitchInforTabs = [
   {
@@ -115,38 +152,74 @@ export const pitchInforTabs = [
   // },
 ];
 
-export const sorts = [
-  {
-    id: 1,
-    value: "-price",
-    text: "Price, high to low",
-  },
-  {
-    id: 2,
-    value: "price",
-    text: "Price, low to high",
-  },
-  {
-    id: 3,
-    value: "-title",
-    text: "Alphabetically, Z-A",
-  },
-  {
-    id: 4,
-    value: "title",
-    text: "Alphabetically, A-Z",
-  },
-  {
-    id: 5,
-    value: "-createdAt",
-    text: "Date, new to old",
-  },
-  {
-    id: 6,
-    value: "createdAt",
-    text: "Date, old to new",
-  },
-];
+export const getSort = () => {
+  const { t } = useTranslation();
+  const { filter11, filter12, filter13, filter14, filter15, filter16 } = t("filter")
+  return [
+    {
+      id: 1,
+      value: "-price",
+      text: filter11,
+    },
+    {
+      id: 2,
+      value: "price",
+      text: filter12,
+    },
+    {
+      id: 3,
+      value: "-title",
+      text: filter13,
+    },
+    {
+      id: 4,
+      value: "title",
+      text: filter14,
+    },
+    {
+      id: 5,
+      value: "-createdAt",
+      text: filter15,
+    },
+    {
+      id: 6,
+      value: "createdAt",
+      text: filter16,
+    },
+  ];
+};
+// export const sorts = [
+//   {
+//     id: 1,
+//     value: "-price",
+//     text: "Price, high to low",
+//   },
+//   {
+//     id: 2,
+//     value: "price",
+//     text: "Price, low to high",
+//   },
+//   {
+//     id: 3,
+//     value: "-title",
+//     text: "Alphabetically, Z-A",
+//   },
+//   {
+//     id: 4,
+//     value: "title",
+//     text: "Alphabetically, A-Z",
+//   },
+//   {
+//     id: 5,
+//     value: "-createdAt",
+//     text: "Date, new to old",
+//   },
+//   {
+//     id: 6,
+//     value: "createdAt",
+//     text: "Date, old to new",
+//   },
+// ];
 
 const {
   MdSpaceDashboard,
@@ -162,182 +235,225 @@ const {
   FaNewspaper,
   FaTicketAlt
 } = icons;
-export const adminSideBar = [
-  {
-    id: 1,
-    type: "SINGLE",
-    text: "Dashboard",
-    path: `/${path.ADMIN}/${path.DASHBOARD}`,
-    icon: <MdSpaceDashboard />,
-  },
-  {
-    id: 2,
-    type: "SINGLE",
-    text: "Manage users",
-    path: `/${path.ADMIN}/${path.MANAGE_USER}`,
-    icon: <MdGroups />,
-  },
-  {
-    id: 3,
-    type: "SINGLE",
-    text: "Manage Orders",
-    path: `/${path.ADMIN}/${path.MANAGE_ORDER}`,
-    icon: <FaMoneyBill />,
-  },
-  {
-    id: 4,
-    type: "PARENT",
-    text: "Pitches",
-    icon: <FaProductHunt />,
-    submenu: [
-      {
-        text: "Create Pitch",
-        path: `/${path.ADMIN}/${path.CREATE_PITCH}`,
-      },
-      {
-        text: "Manage Pitches",
-        path: `/${path.ADMIN}/${path.MANAGE_PITCH}`,
-      },
-    ],
-  },
 
-  {
-    id: 5,
-    type: "PARENT",
-    text: "Category",
-    icon: <MdCategory />,
-    submenu: [
-      {
-        text: "Create Category",
-        path: `/${path.ADMIN}/${path.CREATE_CATEGORY}`,
-      },
-      {
-        text: "Manage Category",
-        path: `/${path.ADMIN}/${path.MANAGE_CATEGORY}`,
-      },
-    ],
-  },
-  {
-    id: 6,
-    type: "PARENT",
-    text: "Brands",
-    icon: <SiBrandfolder />,
-    submenu: [
-      {
-        text: "Create Brands",
-        path: `/${path.ADMIN}/${path.CREATE_BRANDS}`,
-      },
-      {
-        text: "Manage Brands",
-        path: `/${path.ADMIN}/${path.MANAGE_BRANDS}`,
-      },
-    ],
-  },
-  {
-    id: 7,
-    type: "PARENT",
-    text: "News",
-    icon: <FaNewspaper />,
-    submenu: [
-      {
-        text: "Create News",
-        path: `/${path.ADMIN}/${path.CREATE_NEWS}`,
-      },
-      {
-        text: "Manage News",
-        path: `/${path.ADMIN}/${path.MANAGE_NEWS}`,
-      },
-    ],
-  },
-  {
-    id: 8,
-    type: "PARENT",
-    text: "FAQ",
-    icon: <FaQq />,
-    submenu: [
-      {
-        text: "Create FAQ",
-        path: `/${path.ADMIN}/${path.CREATE_FAQ}`,
-      },
-      {
-        text: "Manage FAQ",
-        path: `/${path.ADMIN}/${path.MANAGE_FAQ}`,
-      },
-    ],
-  },
-  {
-    id: 9,
-    type: "PARENT",
-    text: "Coupon",
-    icon: <FaTicketAlt />,
-    submenu: [
-      {
-        text: "Create Coupon",
-        path: `/${path.ADMIN}/${path.CREATE_COUPON}`,
-      },
-      {
-        text: "Manage Coupon",
-        path: `/${path.ADMIN}/${path.MANAGE_COUPON}`,
-      },
-    ],
-  },
-];
+export const getadminSideBar = () => {
+  const { t } = useTranslation();
+  const { adminsidebar1, adminsidebar2, adminsidebar3, adminsidebar4,
+    adminsidebar5, adminsidebar6, adminsidebar7, adminsidebar8, adminsidebar9,
+    adminsidebar10, adminsidebar11, adminsidebar12, adminsidebar13, adminsidebar14,
+    adminsidebar15, adminsidebar16, adminsidebar17, adminsidebar18,
+    adminsidebar19, adminsidebar20, adminsidebar21 } = t("adminsidebar")
+  return [
+    {
+      id: 1,
+      type: "SINGLE",
+      text: adminsidebar1,
+      path: `/${path.ADMIN}/${path.DASHBOARD}`,
+      icon: <MdSpaceDashboard />,
+    },
+    {
+      id: 2,
+      type: "SINGLE",
+      text: adminsidebar2,
+      path: `/${path.ADMIN}/${path.MANAGE_USER}`,
+      icon: <MdGroups />,
+    },
+    {
+      id: 3,
+      type: "SINGLE",
+      text: adminsidebar3,
+      path: `/${path.ADMIN}/${path.MANAGE_ORDER}`,
+      icon: <FaMoneyBill />,
+    },
+    {
+      id: 4,
+      type: "PARENT",
+      text: adminsidebar4,
+      icon: <FaProductHunt />,
+      submenu: [
+        {
+          text: adminsidebar5,
+          path: `/${path.ADMIN}/${path.CREATE_PITCH}`,
+        },
+        {
+          text: adminsidebar6,
+          path: `/${path.ADMIN}/${path.MANAGE_PITCH}`,
+        },
+      ],
+    },
 
-export const pitchOwnerSideBar = [
-  {
-    id: 1,
-    type: "SINGLE",
-    text: "Dashboard",
-    path: `/${path.PITCHOWNER}/${path.DASHBOARD_PITCHOWN}`,
-    icon: <MdSpaceDashboard />,
-  },
-  {
-    id: 2,
-    type: "PARENT",
-    text: "Manage pitches",
-    icon: <FaProductHunt />,
-    submenu: [
-      {
-        text: "Create pitch",
-        path: `/${path.PITCHOWNER}/${path.CREATE_PITCHOWN}`,
-      },
-      {
-        text: "Manage pitches",
-        path: `/${path.PITCHOWNER}/${path.MANAGE_PITCHOWN}`,
-      },
-    ],
-  },
-  {
-    id: 3,
-    type: "SINGLE",
-    text: "Create Brand",
-    path: `/${path.PITCHOWNER}/${path.CREATE_BRAND_PITCHOWNER}`,
-    icon: <SiBrandfolder />,
-  },
-  {
-    id: 4,
-    type: "SINGLE",
-    text: "Manage Orders",
-    path: `/${path.PITCHOWNER}/${path.MANAGE_ORDER_PITCHOWNER}`,
-    icon: <FaMoneyBill />,
-  },
-  {
-    id: 5,
-    type: "PARENT",
-    text: "Coupon",
-    icon: <FaTicketAlt />,
-    submenu: [
-      {
-        text: "Create Coupon",
-        path: `/${path.PITCHOWNER}/${path.CREATE_COUPONOWN}`,
-      },
-      {
-        text: "Manage Coupon",
-        path: `/${path.PITCHOWNER}/${path.MANAGE_COUPONOWN}`,
-      },
-    ],
-  },
-];
+    {
+      id: 5,
+      type: "PARENT",
+      text: adminsidebar7,
+      icon: <MdCategory />,
+      submenu: [
+        {
+          text: adminsidebar8,
+          path: `/${path.ADMIN}/${path.CREATE_CATEGORY}`,
+        },
+        {
+          text: adminsidebar9,
+          path: `/${path.ADMIN}/${path.MANAGE_CATEGORY}`,
+        },
+      ],
+    },
+    {
+      id: 6,
+      type: "PARENT",
+      text: adminsidebar10,
+      icon: <SiBrandfolder />,
+      submenu: [
+        {
+          text: adminsidebar11,
+          path: `/${path.ADMIN}/${path.CREATE_BRANDS}`,
+        },
+        {
+          text: adminsidebar12,
+          path: `/${path.ADMIN}/${path.MANAGE_BRANDS}`,
+        },
+      ],
+    },
+    {
+      id: 7,
+      type: "PARENT",
+      text: adminsidebar13,
+      icon: <FaNewspaper />,
+      submenu: [
+        {
+          text: adminsidebar14,
+          path: `/${path.ADMIN}/${path.CREATE_NEWS}`,
+        },
+        {
+          text: adminsidebar15,
+          path: `/${path.ADMIN}/${path.MANAGE_NEWS}`,
+        },
+      ],
+    },
+    {
+      id: 8,
+      type: "PARENT",
+      text: adminsidebar16,
+      icon: <FaQq />,
+      submenu: [
+        {
+          text: adminsidebar17,
+          path: `/${path.ADMIN}/${path.CREATE_FAQ}`,
+        },
+        {
+          text: adminsidebar18,
+          path: `/${path.ADMIN}/${path.MANAGE_FAQ}`,
+        },
+      ],
+    },
+    {
+      id: 9,
+      type: "PARENT",
+      text: adminsidebar19,
+      icon: <FaTicketAlt />,
+      submenu: [
+        {
+          text: adminsidebar20,
+          path: `/${path.ADMIN}/${path.CREATE_COUPON}`,
+        },
+        {
+          text: adminsidebar21,
+          path: `/${path.ADMIN}/${path.MANAGE_COUPON}`,
+        },
+      ],
+    },
+  ];
+};
+export const getpitchOwnerSideBar = () => {
+  const { t } = useTranslation();
+  const { pitchownersidebar1, pitchownersidebar2, pitchownersidebar3, pitchownersidebar4,
+    pitchownersidebar5, pitchownersidebar6, pitchownersidebar7, pitchownersidebar8, pitchownersidebar9 } = t("pitchownersidebar")
+  return [
+    {
+      id: 1,
+      type: "SINGLE",
+      text: pitchownersidebar1,
+      path: `/${path.PITCHOWNER}/${path.DASHBOARD_PITCHOWN}`,
+      icon: <MdSpaceDashboard />,
+    },
+    {
+      id: 2,
+      type: "PARENT",
+      text: pitchownersidebar2,
+      icon: <FaProductHunt />,
+      submenu: [
+        {
+          text: pitchownersidebar3,
+          path: `/${path.PITCHOWNER}/${path.CREATE_PITCHOWN}`,
+        },
+        {
+          text: pitchownersidebar4,
+          path: `/${path.PITCHOWNER}/${path.MANAGE_PITCHOWN}`,
+        },
+      ],
+    },
+    {
+      id: 3,
+      type: "SINGLE",
+      text: pitchownersidebar5,
+      path: `/${path.PITCHOWNER}/${path.CREATE_BRAND_PITCHOWNER}`,
+      icon: <SiBrandfolder />,
+    },
+    {
+      id: 4,
+      type: "SINGLE",
+      text: pitchownersidebar6,
+      path: `/${path.PITCHOWNER}/${path.MANAGE_ORDER_PITCHOWNER}`,
+      icon: <FaMoneyBill />,
+    },
+    {
+      id: 5,
+      type: "PARENT",
+      text: pitchownersidebar7,
+      icon: <FaTicketAlt />,
+      submenu: [
+        {
+          text: pitchownersidebar8,
+          path: `/${path.PITCHOWNER}/${path.CREATE_COUPONOWN}`,
+        },
+        {
+          text: pitchownersidebar9,
+          path: `/${path.PITCHOWNER}/${path.MANAGE_COUPONOWN}`,
+        },
+      ],
+    },
+  ];
+};
+
+
+export const getmemberSidebar = () => {
+  const { t } = useTranslation();
+  const { membersidebar1, membersidebar2, membersidebar3 } = t("membersidebar")
+  return [
+    {
+      id: 1,
+      type: "SINGLE",
+      text: membersidebar1,
+      path: `/${path.MEMBER}/${path.PERSONAL}`,
+      icon: <MdPersonalInjury />,
+    },
+    {
+      id: 2,
+      type: "SINGLE",
+      text: membersidebar2,
+      path: `/${path.MEMBER}/${path.HISTORY}`,
+      icon: <MdHistory />,
+    },
+    {
+      id: 3,
+      type: "SINGLE",
+      text: membersidebar3,
+      path: `/${path.MEMBER}/${path.WISHLIST}`,
+      icon: <AiFillLike />,
+    },
+  ];
+};
+
 export const memberSidebar = [
   {
     id: 1,

@@ -14,6 +14,7 @@ import poster04 from "assets/poster04.jpg";
 import poster05 from "assets/poster05.jpg";
 import poster06 from "assets/poster06.jpg";
 import { useNavigate } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 
 import Button from "components/buttons/Button";
 const { AiFillStar, AiOutlineMenu, BsCart } = icons;
@@ -21,6 +22,8 @@ let idInterval;
 const imageArray = [poster01, poster02, poster03, poster04, poster05, poster06];
 
 const DealDaily = () => {
+  const { t } = useTranslation();
+  const { deal1, deal2, deal3 } = t("dealdaily")
   const navigate = useNavigate();
   const [dealdaily, setDealdaily] = useState(null);
   const [hour, setHour] = useState(0);
@@ -88,8 +91,8 @@ const DealDaily = () => {
         <div className="px-4 mt-4">
           <div className="flex flex-col">
             <h3 className="text-[40px] font-semibold py-[5px] ">
-              <span className="text-indigo-500">Deal </span>
-              <span className="dark:text-white">of the month</span>
+              <span className="text-indigo-500">{deal1} </span>
+              <span className="dark:text-white">{deal2}</span>
             </h3>
             <span className=" text-lg uppercase font-semibold dark:text-white ">
               {dealdaily?.title}
@@ -138,7 +141,7 @@ const DealDaily = () => {
            hover:before:w-56"
           >
             <BsCart className="relative"></BsCart>
-            <span className="relative">Check Now</span>
+            <span className="relative">{deal3}</span>
           </button>
           {/* <Button
             type="button"

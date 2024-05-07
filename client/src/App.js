@@ -53,6 +53,7 @@ import { showOrder } from "store/app/appSlice";
 import DetailOrder from "pages/public/DetailOrder";
 import Checkout from "pages/member/CheckOut";
 import "react-toastify/dist/ReactToastify.css";
+import "./ultils/i18n.js"
 function App() {
   const dispatch = useDispatch();
   const { isShowModal, modalChildren, isShowOrder } = useSelector(

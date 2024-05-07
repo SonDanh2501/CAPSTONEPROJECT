@@ -19,7 +19,7 @@ import {
 import Slider from "react-slick";
 
 import { formatMoney, formatPrice, renderStarFromNumber } from "ultils/helper";
-import { pitchExtraInformation } from "ultils/constant";
+import { getpitchExtraInformation } from "ultils/constant";
 import DOMPurify, { clearConfig } from "dompurify";
 import clsx from "clsx";
 import Select from "react-select";
@@ -33,6 +33,7 @@ import path from "ultils/path";
 import { toast } from "react-toastify";
 import { geocodeByAddress, getLatLng } from "react-google-places-autocomplete";
 import { updateCart } from "store/user/userSlice";
+import { useTranslation } from "react-i18next";
 
 const settings = {
   dots: false,
@@ -44,6 +45,10 @@ const settings = {
 
 const { FaCalendarAlt } = icons;
 const DetailPitches = ({ isQuickView, data }) => {
+  const { t } = useTranslation();
+  const { detail1, detail2, detail3, detail4, detail5, detail6, detail7, detail8, detail9 } = t("detailpitch")
+  const pitchExtraInformation = getpitchExtraInformation();
+
   const dispatch = useDispatch();
   const [booking, setBooking] = useState(null);
   const [getShift, setGetShift] = useState(null);
@@ -100,7 +105,7 @@ const DetailPitches = ({ isQuickView, data }) => {
           const isSameDay = moment(selectedDate).isSame(currentDate, "day");
           elshift.value === +el.shift &&
             new Date(el.bookedDate).getTime() ===
-              new Date(selectedDate).getTime() &&
+            new Date(selectedDate).getTime() &&
             pitch._id === el.pitch?._id &&
             (elshift.isDisabled = true);
           // : (elshift.isDisabled = false);
@@ -266,9 +271,9 @@ const DetailPitches = ({ isQuickView, data }) => {
               <span key={index}>{el}</span>
             ))}
           </div>
-          <h2 className="font-semibold pt-2">Brand:</h2>
+          <h2 className="font-semibold pt-2">{detail1}:</h2>
           <span>{pitch?.brand} </span>
-          <h2 className="font-semibold pt-2  ">Description:</h2>
+          <h2 className="font-semibold pt-2  ">{detail2}:</h2>
           {/* <ul className='list-item'>
             <div className='text-sm' dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(pitch?.description) }}></div>
           </ul> */}
@@ -288,10 +293,10 @@ const DetailPitches = ({ isQuickView, data }) => {
               ></div>
             )}
           </ul>
-          <h2 className="font-semibold pt-2">Address:</h2>
+          <h2 className="font-semibold pt-2">{detail3}:</h2>
           <ul className="list-item text-sm text-gray-500">{pitch?.address}</ul>
           <div>
-            <h2 className="font-semibold">Shift:</h2>
+            <h2 className="font-semibold">{detail4}:</h2>
             <Select
               id="shift"
               options={getShift?.map((st) => ({
@@ -303,7 +308,7 @@ const DetailPitches = ({ isQuickView, data }) => {
               isMulti
               isSearchable={false}
               isDisabled={selectedDate ? false : true}
-              placeholder={"Select Shift Book"}
+              placeholder={detail8}
               onChange={(selectedOptions) => {
                 setSelectedShift(selectedOptions.map((option) => option.value));
                 setSelectedHour(selectedOptions.map((option) => option.hour));
@@ -311,7 +316,7 @@ const DetailPitches = ({ isQuickView, data }) => {
             />
           </div>
           <div>
-            <h2 className="font-semibold">Date:</h2>
+            <h2 className="font-semibold">{detail5}:</h2>
             <div className="border font-bold mb-4 p-2 flex items-center">
               <FaCalendarAlt className="mr-2" />
               {/* <ChooseDate /> */}
@@ -321,10 +326,10 @@ const DetailPitches = ({ isQuickView, data }) => {
                 minDate={moment().toDate()}
                 dateFormat="dd/MM/yyyy"
                 // minDate={new Date()}
-                placeholderText="Select Date Book"
-                // showPopperArrow={false}
-                // className="w-full border-none outline-none"
-                // popperClassName="datepicker-popper"
+                placeholderText={detail9}
+              // showPopperArrow={false}
+              // className="w-full border-none outline-none"
+              // popperClassName="datepicker-popper"
               />
             </div>
           </div>
@@ -335,7 +340,7 @@ const DetailPitches = ({ isQuickView, data }) => {
               <span className="h1">BOOKING</span>
             </div> */}
             <Button fw handleOnClick={handleClickBooking}>
-              Booking
+              {detail6}
             </Button>
           </div>
         </div>
@@ -374,7 +379,7 @@ const DetailPitches = ({ isQuickView, data }) => {
         <>
           <div className="w-main m-auto mt-8">
             <h3 className="text-[20px] font-semibold py-[15px] border-b-2 border-blue-500">
-              OTHER PITCHES
+              {detail7}
             </h3>
             <CustomSlider pitches={relatedPitches} normal={true} />
           </div>

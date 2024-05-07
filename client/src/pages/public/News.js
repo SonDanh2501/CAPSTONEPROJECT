@@ -12,17 +12,22 @@ import { apiGetAllNews } from "apis";
 import { RiAdminFill } from "react-icons/ri";
 import { MdOutlineUpdate } from "react-icons/md";
 import { MdRemoveRedEye } from "react-icons/md";
+import { useTranslation } from "react-i18next";
 
-const options = [
-  { id: 1, value: "-createdAt", text: "Newest" },
-  { id: 2, value: "createdAt", text: "Oldest" },
-];
+
+
+
 const News = () => {
   const navigate = useNavigate();
   const [params] = useSearchParams();
   const [news, setNews] = useState(null);
   const [sort, setSort] = useState("");
-
+  const { t } = useTranslation();
+  const { new1, new2, new3, new4, new5, new6, new7 } = t("new")
+  const options = [
+    { id: 1, value: "-createdAt", text: new6 },
+    { id: 2, value: "createdAt", text: new7 },
+  ];
   useEffect(() => {
     fetchNews();
     // window.scrollTo(0, 0);
@@ -54,7 +59,7 @@ const News = () => {
     <>
       <div className="w-full">
         <div>
-          <HeaderBanner title="FOOTBALL INFORMATION" subtitle="NEWS ARTICLE" />
+          <HeaderBanner title={new1} subtitle={new2} />
         </div>
 
         <div className="p-8">
@@ -65,7 +70,7 @@ const News = () => {
               </div>
               <div className="flex mt-8 items-center justify-between mb-2">
                 <h1 className=" text-blue-900 font-bold text-2xl ">
-                  FEATURE NEWS
+                  {new3}
                 </h1>
                 <div className="">
                   <InputSelect
@@ -114,7 +119,7 @@ const News = () => {
                         <span>{e.description}</span>
                         <span className="mr-2 ml-1">...</span>
                         <span className="hover:text-blue-700 hover:underline">
-                          Read more
+                          {new4}
                         </span>
                       </div>
                     </div>
@@ -127,7 +132,7 @@ const News = () => {
             </div>
             <div className="w-1/5 md:block hidden ">
               <span className="font-bold text-2xl pl-4 text-red-600">
-                News of the day
+                {new5}
               </span>
               <div className="mt-4 flex flex-col pl-2">
                 {news?.news?.map((el, index) => (

@@ -1,8 +1,11 @@
 import React, { useRef, useEffect, memo } from "react";
 import icons from "ultils/icons";
+import { useTranslation } from "react-i18next";
 
 const { AiFillStar } = icons;
 const Votebar = ({ number, ratingCount, ratingTotal }) => {
+  const { t } = useTranslation();
+  const { rating1 } = t("rating")
   const percentRef = useRef();
   useEffect(() => {
     const percent = Math.round((ratingCount * 100) / ratingTotal) || 0;
@@ -22,9 +25,8 @@ const Votebar = ({ number, ratingCount, ratingTotal }) => {
           ></div>
         </div>
       </div>
-      <div className="w-[15%] flex justify-end text-xs text-400">{`${
-        ratingCount || 0
-      } reviewers`}</div>
+      <div className="w-[15%] flex justify-end text-xs text-400">{`${ratingCount || 0
+        } ${rating1}`}</div>
     </div>
   );
 };
