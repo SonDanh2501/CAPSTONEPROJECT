@@ -15,6 +15,19 @@ import {
   IoMoonOutline,
   IoSunnyOutline,
   IoTimeOutline,
+  IoBarChartOutline,
+  IoPeopleOutline,
+  IoCreateOutline,
+  IoFootballOutline,
+  IoLogoBuffer,
+  IoPricetagOutline,
+  IoNewspaperOutline,
+  IoChatbubblesOutline,
+  IoTicketOutline,
+  IoReturnUpBackOutline,
+  IoPlaySkipBackOutline,
+  IoLogInOutline,
+  IoBarChart,
 } from "react-icons/io5";
 import { GoDotFill } from "react-icons/go";
 import { BiSolidLogOut } from "react-icons/bi";
@@ -151,6 +164,18 @@ const icons = {
   IoMoonOutline,
   IoSunnyOutline,
   IoTimeOutline,
+  IoBarChartOutline,
+  IoPeopleOutline,
+  IoCreateOutline,
+  IoFootballOutline,
+  IoLogoBuffer,
+  IoPricetagOutline,
+  IoNewspaperOutline,
+  IoChatbubblesOutline,
+  IoTicketOutline,
+  IoReturnUpBackOutline,
+  IoPlaySkipBackOutline,
+  IoLogInOutline,
 };
 
 export default icons;

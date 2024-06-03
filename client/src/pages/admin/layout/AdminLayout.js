@@ -13,7 +13,7 @@ const AdminLayout = () => {
       <div className="top-0 bottom-0 flex-none fixed">
         <AdminSideBar open={open} setOpen={setOpen} />
       </div>
-      <div className={`duration-300 ${open ? "w-60" : " w-20"}`}></div>
+      <div className={`duration-300 ${open ? "w-60" : " w-24"}`}></div>
       <div className="flex-auto">
         <Outlet context={[open, setOpen]} />
       </div>

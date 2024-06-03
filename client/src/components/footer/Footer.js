@@ -19,13 +19,29 @@ const { FaChevronRight } = icons;
 
 const Footer = () => {
   const navigate = useNavigate();
-  const { t } = useTranslation()
-  const { foot1, foot2, foot3, foot4, foot5, foot6, foot7, foot8, foot9, foot10, foot11, foot12, foot13, foot14, foot15 } = t("footer")
+  const { t } = useTranslation();
+  const {
+    foot1,
+    foot2,
+    foot3,
+    foot4,
+    foot5,
+    foot6,
+    foot7,
+    foot8,
+    foot9,
+    foot10,
+    foot11,
+    foot12,
+    foot13,
+    foot14,
+    foot15,
+  } = t("footer");
   return (
     <div className="w-full">
       <div className="p-10 bg-blue-900 text-gray-200 w-full dark:bg-medium">
         <div className="flex justify-end text-black">
-          <span className="text-blue-700 mt-3 mr-2 text-xl"><GrLanguage></GrLanguage></span>
+       
           <LanguageSelector></LanguageSelector>
         </div>
         <div className="max-w-7xl mx-auto">
@@ -83,9 +99,7 @@ const Footer = () => {
             </div>
             <div className="mb-5">
               <h4 className="pb-4">{foot10}</h4>
-              <p className="text-gray-500 pb-2">
-                {foot11}
-              </p>
+              <p className="text-gray-500 pb-2">{foot11}</p>
               <form className="flex gap-1">
                 <input
                   type="text"
@@ -104,15 +118,14 @@ const Footer = () => {
         <div className="max-w-7xl flex flex-col md:flex-row py-4 mx-auto justify-between items-center gap-4">
           <div className="text-center">
             <div>
-              {foot12}{" "}
+              {foot12}
               <strong>
                 <span>{foot13}</span>
               </strong>
               . {foot14}
             </div>
             <div className="flex gap-1">
-              {foot15}:
-              <span className="text-white">Danh Truong Son,</span>
+              {foot15}:<span className="text-white">Danh Truong Son,</span>
               <span className="text-white">Dang Thanh Tuyen,</span>
               <span className="text-white">Dang Phuoc Truong Tai</span>
             </div>

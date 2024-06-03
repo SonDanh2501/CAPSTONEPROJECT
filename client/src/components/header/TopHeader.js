@@ -7,14 +7,21 @@ import logo from "assets/logo.png";
 import Swal from "sweetalert2";
 import icons from "ultils/icons";
 import path from "ultils/path";
-import { getNavigation } from "ultils/constant";
+import { useGetNavigation } from "ultils/constant";
 import { apiGetNotifications, apiGetUserOrderStatus } from "apis";
 import { useTranslation } from "react-i18next";
-
 import { NavLink } from "react-router-dom";
 import avatar from "assets/avatarwhite.jpg";
+import vn from "assets/vn.png";
+import us from "assets/us.png";
+import vietnam from "assets/vietnam.png";
+import unitedstate from "assets/united-states.png";
 import { showOrder } from "store/app/appSlice";
 import moment from "moment";
+const languages = [
+  { code: "vi", lang: "Vietnamese", img: vietnam },
+  { code: "en", lang: "English", img: unitedstate },
+];
 
 const {
   IoCartOutline,
@@ -31,7 +38,16 @@ const {
 } = icons;
 
 const TopHeader = () => {
-  const navigation = getNavigation();
+  const { i18n } = useTranslation();
+  useEffect(() => {
+    document.body.dir = i18n.dir();
+  }, [i18n, i18n.language]);
+
+  const changeLanguage = (lng) => {
+    i18n.changeLanguage(lng);
+  };
+
+  const navigation = useGetNavigation();
   const [darkMode, setdarkMode] = useState(true);
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -40,14 +56,14 @@ const TopHeader = () => {
   );
   const [isShowOption, setisShowOption] = useState(false);
   const [isShowNotification, setisShowNotification] = useState(false);
+  const [isShowSelectLanguage, setIsShowSelectLanguage] = useState(false);
   const [isOpen, setisOpen] = useState(false);
   const [order, setOrder] = useState(null);
   const [notification, setNotification] = useState(null);
   const [isActiveNotificationTab, setisActiveNotificationTab] = useState([]);
   const { t } = useTranslation();
-  const { infor1, infor2, infor3, infor4, infor5 } = t("information")
-  const { noti1, noti2, noti3 } = t("notification")
-
+  const { infor1, infor2, infor3, infor4, infor5 } = t("information");
+  const { noti1, noti2, noti3 } = t("notification");
 
   useEffect(() => {
     const setTimeoutId = setTimeout(() => {
@@ -86,7 +102,7 @@ const TopHeader = () => {
 
   useEffect(() => {
     fetnotification();
-  }, [])
+  }, []);
   useEffect(() => {
     // console.log("RERENDER ORDER")
     const setTimeoutId = setTimeout(() => {
@@ -148,6 +164,27 @@ const TopHeader = () => {
         <div className="w-1/4 flex items-center justify-end gap-4">
           <div
             className="hover:bg-gray-500/25 rounded-md p-2 cursor-pointer duration-300"
+            onClick={() => setIsShowSelectLanguage(!isShowSelectLanguage)}
+          >
+            <span className="text-icon-bg-dark ">
+              <img src={`${i18n.language === "en" ? us : vn}`}></img>
+            </span>
+          </div>
+          {isShowSelectLanguage && (
+            <div className="absolute flex-col flex mt-[170px] bg-header-bg-dark-tab w-[160px] h-[100px] py-2 rounded-lg z-10 right-24">
+              {languages.map((lng) => (
+                <div
+                  className="flex items-center px-4 py-2 my-1 gap-2 cursor-pointer text-font-bg-dark font-bold hover:text-blue-500 duration-300"
+                  onClick={() => changeLanguage(lng.code)}
+                >
+                  <img src={lng.img}></img>
+                  <span>{lng.lang}</span>
+                </div>
+              ))}
+            </div>
+          )}
+          <div
+            className="hover:bg-gray-500/25 rounded-md p-2 cursor-pointer duration-300"
             onClick={() => setdarkMode(!darkMode)}
           >
             <span className="text-icon-bg-dark">
@@ -165,8 +202,6 @@ const TopHeader = () => {
               </span>
             </span>
           </div>
-          {/*
-          Notification*/}
           {isShowNotification && (
             <div className="absolute flex-col flex mt-[570px] bg-header-bg-dark-tab w-[450px] h-[500px] py-2 rounded-lg z-10 right-5">
               <div className="p-4">
@@ -174,13 +209,21 @@ const TopHeader = () => {
               </div>
               <div className="flex justify-between mx-4 py-2 bg-bg-select-tab rounded-md">
                 <span
-                  className={`w-1/2 py-1 text-center rounded-md mx-2 hover:text-indigo-700 duration-500 ${isActiveNotificationTab === 1 ? "bg-notification-bg-dark-active-tab text-indigo-700" : "text-font-bg-dark cursor-pointer"}`}
+                  className={`w-1/2 py-1 text-center rounded-md mx-2 hover:text-indigo-700 duration-500 ${
+                    isActiveNotificationTab === 1
+                      ? "bg-notification-bg-dark-active-tab text-indigo-700"
+                      : "text-font-bg-dark cursor-pointer"
+                  }`}
                   onClick={() => setisActiveNotificationTab(1)}
                 >
                   {noti2}
                 </span>
                 <span
-                  className={`w-1/2 py-1 text-center rounded-md mx-2 hover:text-indigo-700 duration-500 ${isActiveNotificationTab === 2 ? "bg-notification-bg-dark-active-tab text-indigo-700" : "text-font-bg-dark cursor-pointer"}`}
+                  className={`w-1/2 py-1 text-center rounded-md mx-2 hover:text-indigo-700 duration-500 ${
+                    isActiveNotificationTab === 2
+                      ? "bg-notification-bg-dark-active-tab text-indigo-700"
+                      : "text-font-bg-dark cursor-pointer"
+                  }`}
                   onClick={() => setisActiveNotificationTab(2)}
                 >
                   {noti3}

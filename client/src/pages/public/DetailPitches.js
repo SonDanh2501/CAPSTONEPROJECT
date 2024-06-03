@@ -19,7 +19,7 @@ import {
 import Slider from "react-slick";
 
 import { formatMoney, formatPrice, renderStarFromNumber } from "ultils/helper";
-import { getpitchExtraInformation } from "ultils/constant";
+import { useGetpitchExtraInformation } from "ultils/constant";
 import DOMPurify, { clearConfig } from "dompurify";
 import clsx from "clsx";
 import Select from "react-select";
@@ -47,7 +47,7 @@ const { FaCalendarAlt } = icons;
 const DetailPitches = ({ isQuickView, data }) => {
   const { t } = useTranslation();
   const { detail1, detail2, detail3, detail4, detail5, detail6, detail7, detail8, detail9 } = t("detailpitch")
-  const pitchExtraInformation = getpitchExtraInformation();
+  const pitchExtraInformation = useGetpitchExtraInformation();
 
   const dispatch = useDispatch();
   const [booking, setBooking] = useState(null);
@@ -361,7 +361,6 @@ const DetailPitches = ({ isQuickView, data }) => {
         <div>
           <div className="w-main m-auto mt-8">
             <Map coords={coords} address={pitch?.address[0]} />
-
             <PitchInformation
               totalRatings={pitch?.totalRatings}
               ratings={pitch?.ratings}
