@@ -2,10 +2,9 @@ import path from "./path";
 import icons from "./icons";
 import { useTranslation } from "react-i18next";
 
-
-export const getNavigation = () => {
+export const useGetNavigation = () => {
   const { t } = useTranslation();
-  const { nav1, nav2, nav3, nav4, nav5 } = t("navigation")
+  const { nav1, nav2, nav3, nav4, nav5 } = t("navigation");
   return [
     {
       id: 1,
@@ -45,9 +44,18 @@ const {
 } = icons;
 const { BsReplyFill, BsShieldShaded, FaTty, AiFillGift } = icons;
 
-export const getpitchExtraInformation = () => {
+export const useGetpitchExtraInformation = () => {
   const { t } = useTranslation();
-  const { pitchEx1, pitchEx2, pitchEx3, pitchEx4, pitchEx5, pitchEx6, pitchEx7, pitchEx8 } = t("pitchExtraInformation")
+  const {
+    pitchEx1,
+    pitchEx2,
+    pitchEx3,
+    pitchEx4,
+    pitchEx5,
+    pitchEx6,
+    pitchEx7,
+    pitchEx8,
+  } = t("pitchExtraInformation");
   return [
     {
       id: "1",
@@ -152,9 +160,11 @@ export const pitchInforTabs = [
   // },
 ];
 
-export const getSort = () => {
+export const useGetSort = () => {
   const { t } = useTranslation();
-  const { filter11, filter12, filter13, filter14, filter15, filter16 } = t("filter")
+  const { filter11, filter12, filter13, filter14, filter15, filter16 } = t(
+    "filter"
+  );
   return [
     {
       id: 1,
@@ -223,53 +233,78 @@ export const getSort = () => {
 
 const {
   MdSpaceDashboard,
-  MdGroups,
   FaProductHunt,
   FaMoneyBill,
   MdPersonalInjury,
   MdHistory,
   AiFillLike,
-  MdCategory,
   SiBrandfolder,
-  FaQq,
-  FaNewspaper,
-  FaTicketAlt
+  FaTicketAlt,
+  IoNotificationsOutline,
+  IoBarChartOutline,
+  IoPeopleOutline,
+  IoCreateOutline,
+  IoFootballOutline,
+  IoLogoBuffer,
+  IoPricetagOutline,
+  IoNewspaperOutline,
+  IoChatbubblesOutline,
+  IoTicketOutline,
+  FaBars
 } = icons;
 
-export const getadminSideBar = () => {
+export const useGetadminSideBar = () => {
   const { t } = useTranslation();
-  const { adminsidebar1, adminsidebar2, adminsidebar3, adminsidebar4,
-    adminsidebar5, adminsidebar6, adminsidebar7, adminsidebar8, adminsidebar9,
-    adminsidebar10, adminsidebar11, adminsidebar12, adminsidebar13, adminsidebar14,
-    adminsidebar15, adminsidebar16, adminsidebar17, adminsidebar18,
-    adminsidebar19, adminsidebar20, adminsidebar21 } = t("adminsidebar")
+  const {
+    adminsidebar1,
+    adminsidebar2,
+    adminsidebar3,
+    adminsidebar4,
+    adminsidebar5,
+    adminsidebar6,
+    adminsidebar7,
+    adminsidebar8,
+    adminsidebar9,
+    adminsidebar10,
+    adminsidebar11,
+    adminsidebar12,
+    adminsidebar13,
+    adminsidebar14,
+    adminsidebar15,
+    adminsidebar16,
+    adminsidebar17,
+    adminsidebar18,
+    adminsidebar19,
+    adminsidebar20,
+    adminsidebar21,
+  } = t("adminsidebar");
   return [
     {
       id: 1,
       type: "SINGLE",
       text: adminsidebar1,
       path: `/${path.ADMIN}/${path.DASHBOARD}`,
-      icon: <MdSpaceDashboard />,
+      icon: <IoBarChartOutline />,
     },
     {
       id: 2,
       type: "SINGLE",
       text: adminsidebar2,
       path: `/${path.ADMIN}/${path.MANAGE_USER}`,
-      icon: <MdGroups />,
+      icon: <IoPeopleOutline />,
     },
     {
       id: 3,
       type: "SINGLE",
       text: adminsidebar3,
       path: `/${path.ADMIN}/${path.MANAGE_ORDER}`,
-      icon: <FaMoneyBill />,
+      icon: <IoCreateOutline />,
     },
     {
       id: 4,
       type: "PARENT",
       text: adminsidebar4,
-      icon: <FaProductHunt />,
+      icon: <IoFootballOutline />,
       submenu: [
         {
           text: adminsidebar5,
@@ -286,7 +321,7 @@ export const getadminSideBar = () => {
       id: 5,
       type: "PARENT",
       text: adminsidebar7,
-      icon: <MdCategory />,
+      icon: <IoLogoBuffer />,
       submenu: [
         {
           text: adminsidebar8,
@@ -302,7 +337,7 @@ export const getadminSideBar = () => {
       id: 6,
       type: "PARENT",
       text: adminsidebar10,
-      icon: <SiBrandfolder />,
+      icon: <IoPricetagOutline />,
       submenu: [
         {
           text: adminsidebar11,
@@ -318,7 +353,7 @@ export const getadminSideBar = () => {
       id: 7,
       type: "PARENT",
       text: adminsidebar13,
-      icon: <FaNewspaper />,
+      icon: <IoNewspaperOutline />,
       submenu: [
         {
           text: adminsidebar14,
@@ -334,7 +369,7 @@ export const getadminSideBar = () => {
       id: 8,
       type: "PARENT",
       text: adminsidebar16,
-      icon: <FaQq />,
+      icon: <IoChatbubblesOutline />,
       submenu: [
         {
           text: adminsidebar17,
@@ -350,7 +385,23 @@ export const getadminSideBar = () => {
       id: 9,
       type: "PARENT",
       text: adminsidebar19,
-      icon: <FaTicketAlt />,
+      icon: <IoTicketOutline />,
+      submenu: [
+        {
+          text: adminsidebar20,
+          path: `/${path.ADMIN}/${path.CREATE_COUPON}`,
+        },
+        {
+          text: adminsidebar21,
+          path: `/${path.ADMIN}/${path.MANAGE_COUPON}`,
+        },
+      ],
+    },
+    {
+      id: 10,
+      type: "PARENT",
+      text: adminsidebar19,
+      icon: <IoNotificationsOutline />,
       submenu: [
         {
           text: adminsidebar20,
@@ -364,10 +415,19 @@ export const getadminSideBar = () => {
     },
   ];
 };
-export const getpitchOwnerSideBar = () => {
+export const useGetpitchOwnerSideBar = () => {
   const { t } = useTranslation();
-  const { pitchownersidebar1, pitchownersidebar2, pitchownersidebar3, pitchownersidebar4,
-    pitchownersidebar5, pitchownersidebar6, pitchownersidebar7, pitchownersidebar8, pitchownersidebar9 } = t("pitchownersidebar")
+  const {
+    pitchownersidebar1,
+    pitchownersidebar2,
+    pitchownersidebar3,
+    pitchownersidebar4,
+    pitchownersidebar5,
+    pitchownersidebar6,
+    pitchownersidebar7,
+    pitchownersidebar8,
+    pitchownersidebar9,
+  } = t("pitchownersidebar");
   return [
     {
       id: 1,
@@ -425,10 +485,9 @@ export const getpitchOwnerSideBar = () => {
   ];
 };
 
-
-export const getmemberSidebar = () => {
+export const useGetmemberSidebar = () => {
   const { t } = useTranslation();
-  const { membersidebar1, membersidebar2, membersidebar3 } = t("membersidebar")
+  const { membersidebar1, membersidebar2, membersidebar3 } = t("membersidebar");
   return [
     {
       id: 1,

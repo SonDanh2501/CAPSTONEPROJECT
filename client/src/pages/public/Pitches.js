@@ -16,7 +16,7 @@ import {
 } from "components";
 import { apiGetPitches } from "apis";
 import Masonry from "react-masonry-css";
-import { getSort } from "ultils/constant";
+import { useGetSort } from "ultils/constant";
 import { formattedCategory } from "ultils/helper";
 import { useSelector } from "react-redux";
 import { useTranslation } from "react-i18next";
@@ -30,7 +30,7 @@ const Pitches = () => {
     1250: 2,
     1000: 1,
   };
-  const sorts = getSort();
+  const sorts = useGetSort();
   const [loading, setLoading] = useState(true);
   const { categories } = useSelector((state) => state.app);
   const navigate = useNavigate();

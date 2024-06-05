@@ -2,12 +2,13 @@ import React, { useState, useEffect, memo } from "react";
 import NewsCard from "components/news/NewsCard";
 
 import Slider from "react-slick";
+import PitchCard from "./PitchCard";
 
-const NewsSlider = ({ news }) => {
+const PitchSlider = ({ pitches }) => {
   const settings = {
-    dots: false,
+    dots: true,
     lazyLoad: true,
-    infinite: false,
+    infinite: true,
     speed: 500,
     slidesToShow: 3,
     slidesToScroll: 1,
@@ -30,17 +31,20 @@ const NewsSlider = ({ news }) => {
   return (
     <>
       {/* News slider for full screen*/}
-      <div className="md:w-[91vw] md:m-auto hidden md:block">
+      <div className="md:w-5/6 md:m-auto hidden md:block">
         <Slider className="custom-slider" {...settings}>
-          {news?.map((el) => (
-            <NewsCard
+          {pitches?.map((el) => (
+            <PitchCard
               key={el._id}
-              nid={el._id}
+              pid={el._id}
+              image={el.images[0]}
               title={el.title}
-              views={el.views}
-              thumb={el.thumb}
-              postedDate={el.postedDate}
-              description={el.description}
+              totalRatings={el.totalRatings}
+              price_morning={el.price_morning}
+              price_evening={el.price_evening}
+              price_afternoon={el.price_afternoon}
+              category={el.category}
+              brand={el.brand}
             />
           ))}
         </Slider>
@@ -48,15 +52,18 @@ const NewsSlider = ({ news }) => {
       {/* News slider for responsive (mobile screen)*/}
       <div className="w-5/6 m-auto md:hidden ">
         <Slider className="" {...settings}>
-          {news?.map((el) => (
-            <NewsCard
+          {pitches?.map((el) => (
+            <PitchCard
               key={el._id}
-              nid={el._id}
+              pid={el._id}
+              image={el.images[0]}
               title={el.title}
-              views={el.views}
-              thumb={el.thumb}
-              postedDate={el.postedDate}
-              description={el.description}
+              totalRatings={el.totalRatings}
+              price_morning={el.price_morning}
+              price_evening={el.price_evening}
+              price_afternoon={el.price_afternoon}
+              category={el.category}
+              brand={el.brand}
             />
           ))}
         </Slider>
@@ -65,4 +72,4 @@ const NewsSlider = ({ news }) => {
   );
 };
 
-export default NewsSlider;
+export default memo(PitchSlider);

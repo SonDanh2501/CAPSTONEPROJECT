@@ -4,7 +4,7 @@ module.exports = {
   darkMode: "class",
   theme: {
     fontFamily: {
-      main: ["Segoe UI Symbol"],
+      main: ["sans-serif"],
     },
     extend: {
       width: {
@@ -29,6 +29,7 @@ module.exports = {
         // Dark Mode
         "header-bg-dark": "#132236",
         "icon-bg-dark": "#6F86A7",
+        "footer-bg-dark": "#EEF1E4",
         // Dark Mode (Header Tab Personal)
         "font-bg-dark": "#90AFD2",
         "header-bg-dark-tab": "#1D2F45",
@@ -36,8 +37,17 @@ module.exports = {
         "notification-bg-dark-active-tab": "#1C2E45",
         // Dark Mode (Notication)
         "bg-select-tab": "#223A56",
+        
         // Light Mode
+        // Font
+        "font-normal": "#163121",
+        // Header
         "header-bg-light": "#FEFEFF",
+        // Footer
+        "bg-light": "#EEF1E4",
+        // Button
+        "button-color": "#173021",
+        "button-color-hover": "#B6C4B6",
       },
       flex: {
         2: "2 2 0%",

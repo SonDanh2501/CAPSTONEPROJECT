@@ -1,147 +1,223 @@
 import React, { memo } from "react";
-
-import {
+import icons from "ultils/icons";
+import { useNavigate } from "react-router-dom";
+import { useTranslation } from "react-i18next";
+import logo_full from "assets/logo_full.png";
+import visa from "assets/visa.png";
+import paypal from "assets/paypal.png";
+import master from "assets/mastercard.png";
+import amex from "assets/amex.png";
+const {
   FaFacebookF,
   FaDiscord,
   FaInstagram,
   FaYoutube,
-  FaPaperPlane,
-} from "react-icons/fa";
-import { GrLanguage } from "react-icons/gr";
-import { BiLogoGmail } from "react-icons/bi";
-import icons from "ultils/icons";
-import path from "ultils/path";
-import { useNavigate } from "react-router-dom";
-import LanguageSelector from "components/common/LanguageSelector";
-import { useTranslation } from "react-i18next";
-
-const { FaChevronRight } = icons;
-
+  FaGithub,
+  IoPhonePortrait,
+  IoHome,
+  IoMail,
+} = icons;
 const Footer = () => {
   const navigate = useNavigate();
-  const { t } = useTranslation()
-  const { foot1, foot2, foot3, foot4, foot5, foot6, foot7, foot8, foot9, foot10, foot11, foot12, foot13, foot14, foot15 } = t("footer")
+  const { t } = useTranslation();
+  const {
+    foot1,
+    foot2,
+    foot3,
+    foot4,
+    foot5,
+    foot6,
+    foot7,
+    foot8,
+    foot9,
+    foot10,
+    foot11,
+    foot12,
+    foot13,
+    foot14,
+    foot15,
+  } = t("footer");
   return (
-    <div className="w-full">
-      <div className="p-10 bg-blue-900 text-gray-200 w-full dark:bg-medium">
-        <div className="flex justify-end text-black">
-          <span className="text-blue-700 mt-3 mr-2 text-xl"><GrLanguage></GrLanguage></span>
-          <LanguageSelector></LanguageSelector>
-        </div>
-        <div className="max-w-7xl mx-auto">
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-2">
-            <div className="mb-5">
-              <h4 className="text-2xl pb-4">{foot1}</h4>
-              <p className="text-gray-500">
-                1 Vo Van Ngan <br />
-                Viet Nam <br />
-                <br />
-                <strong>{foot2}:</strong> +84 0837440017 <br />
-                <strong>Email:</strong> sondanhwork2501@gmail.com
-                <br />
-              </p>
-            </div>
-            <div className="mb-5">
-              <h4 className="text-2xl pb-4">{foot3}</h4>
-              <ul className="text-gray-500">
-                <li className="pb-2 flex items-center gap-1">
-                  <FaChevronRight className="text-blue-500" />
-                  <a href="#" className="hover:text-blue-500/50 duration-300">
-                    {foot4}
+    <div className="w-full bg-bg-light flex justify-center">
+      <div className="w-[90vw]">
+        <div className="px-10 pt-8 text-gray-200 w-full">
+          <div className="max-w-7xl mx-auto">
+            <div className="grid grid-cols-1 lg:grid-cols-4">
+              {/*Intro and logo*/}
+              <div className="mb-5 flex flex-col lg:items-start items-center">
+                {/*Logo*/}
+                <img
+                  src={logo_full}
+                  alt="logo"
+                  className="w-48 md:ml-2.5 object-contain"
+                />
+                {/*Intro text*/}
+                <p className="text-black text-sm py-4 md:ml-2.5 text-center lg:text-start">
+                  {foot11}
+                </p>
+                {/*Icon social media*/}
+                <div className="flex ">
+                  <a
+                    href="#"
+                    className="w-6 h-6 flex items-center justify-center rounded-full text-lg hover:bg-blue-600 hover:text-white mx-1 text-black transition duration-300 hover:scale-125 cursor-pointer transform"
+                  >
+                    <FaFacebookF />
                   </a>
-                </li>
-                <li className="pb-2 flex items-center gap-1">
-                  <FaChevronRight className="text-blue-500" />
-                  <a href="#" className="hover:text-blue-500/50 duration-300">
-                    {foot5}
+
+                  <a
+                    href="#"
+                    className="w-6 h-6 flex items-center justify-center rounded-full text-lg hover:bg-pink-600 hover:text-white mx-1 text-black transition duration-300 hover:scale-125 cursor-pointer transform"
+                  >
+                    <FaInstagram />
                   </a>
-                </li>
-                <li className="pb-2 flex items-center gap-1">
-                  <FaChevronRight className="text-blue-500" />
-                  <a href="#" className="hover:text-blue-500/50 duration-300">
-                    {foot6}
+                  <a
+                    href="#"
+                    className="w-6 h-6 flex items-center justify-center rounded-full text-lg hover:bg-red-600 hover:text-white mx-1 text-black transition duration-300 hover:scale-125 cursor-pointer transform"
+                  >
+                    <FaYoutube />
                   </a>
-                </li>
-              </ul>
-            </div>
-            <div className="mb-5">
-              <h4 className="text-2xl pb-4">{foot7}</h4>
-              <ul className="text-gray-500">
-                <li className="pb-2 flex items-center gap-1">
-                  <FaChevronRight className="text-blue-500" />
-                  <a href="#" className="hover:text-blue-500/50 duration-300">
-                    {foot8}
+                  <a
+                    href="#"
+                    className="w-6 h-6 flex items-center justify-center rounded-full text-lg hover:bg-black hover:text-white mx-1 text-black transition duration-300 hover:scale-125 cursor-pointer transform"
+                  >
+                    <FaGithub />
                   </a>
-                </li>
-                <li className="pb-2 flex items-center gap-1">
-                  <FaChevronRight className="text-blue-500" />
-                  <a href="#" className="hover:text-blue-500/50 duration-300">
-                    {foot9}
+                  <a
+                    href="#"
+                    className="w-6 h-6 flex items-center justify-center rounded-full text-lg hover:bg-gray-600 hover:text-white mx-1 text-black transition duration-300 hover:scale-125 cursor-pointer transform"
+                  >
+                    <FaDiscord />
                   </a>
-                </li>
-              </ul>
-            </div>
-            <div className="mb-5">
-              <h4 className="pb-4">{foot10}</h4>
-              <p className="text-gray-500 pb-2">
-                {foot11}
-              </p>
-              <form className="flex gap-1">
-                <input
-                  type="text"
-                  className="text-white focus:border-white bg-gray-700 rounded-md border-white outline-none"
-                  placeholder="email@example.com"
-                ></input>
-                <button className="bg-blue-500 text-white hover:bg-blue-700 rounded-md px-5 py-2">
-                  <FaPaperPlane />
-                </button>
-              </form>
+                </div>
+              </div>
+              {/*Shop now*/}
+              <div className="mb-5 lg:ml-12">
+                {/*Header*/}
+                <div className="relative mb-3.5">
+                  <h4 className="text-2xl py-2 text-green-800 font-bold ">
+                    {foot3}
+                  </h4>
+                  <span
+                    style={{
+                      transform: "scaleX(0.1)",
+                    }}
+                    className="absolute -bottom-0 -left-0 -right-2 h-1 origin-left rounded-full bg-emerald-900"
+                  ></span>
+                </div>
+                {/*Subtext*/}
+                <ul className="text-black">
+                  <li className="flex items-center gap-1">
+                    <a href="#" className="hover:underline">
+                      Contact Us
+                    </a>
+                  </li>
+                  <li className="flex items-center gap-1">
+                    <a href="#" className="hover:underline">
+                      {foot4}
+                    </a>
+                  </li>
+                  <li className="flex items-center gap-1">
+                    <a href="#" className="hover:underline">
+                      {foot5}
+                    </a>
+                  </li>
+                  <li className="flex items-center gap-1">
+                    <a href="#" className="hover:underline">
+                      {foot6}
+                    </a>
+                  </li>
+                </ul>
+              </div>
+              {/*Useful links*/}
+              <div className="mb-5">
+                {/*Header*/}
+                <div className="relative mb-3.5">
+                  <h4 className="text-2xl py-2 text-green-800 font-bold">
+                    {foot7}
+                  </h4>
+                  <span
+                    style={{
+                      transform: "scaleX(0.1)",
+                    }}
+                    className="absolute -bottom-0 -left-0 -right-2 h-1 origin-left rounded-full bg-emerald-900"
+                  ></span>
+                </div>
+                {/*Subtext*/}
+                <ul className="text-black">
+                  <li className="flex items-center gap-1">
+                    <a href="#" className="hover:underline">
+                      {foot8}
+                    </a>
+                  </li>
+                  <li className="flex items-center gap-1">
+                    <a href="#" className="hover:underline">
+                      {foot9}
+                    </a>
+                  </li>
+                </ul>
+              </div>
+              {/*Information*/}
+              <div className="mb-5">
+                {/*Header*/}
+                <div className="relative mb-3.5">
+                  <h4 className="text-2xl py-2 text-green-800 font-bold">
+                    Information
+                  </h4>
+                  <span
+                    style={{
+                      transform: "scaleX(0.1)",
+                    }}
+                    className="absolute -bottom-0 -left-0 -right-2 h-1 origin-left rounded-full bg-emerald-900"
+                  ></span>
+                </div>
+                {/*Subtext*/}
+                <ul className="text-black">
+                  <li className="flex flex-col gap-1">
+                    {/*Phone icon footer*/}
+                    <div className="flex pb-2 gap-2">
+                      <div className="flex text-xl">
+                        <IoMail />
+                      </div>
+                      <div className="flex justify-center items-center">
+                        <span>Example@gmail.com.vn</span>
+                      </div>
+                    </div>
+                    {/*Email icon Footer*/}
+                    <div className="flex pb-2 gap-2">
+                      <div className="flex text-xl">
+                        <IoPhonePortrait />
+                      </div>
+                      <div className="flex justify-center items-center">
+                        <span>+84-779-902-051</span>
+                      </div>
+                    </div>
+                    {/*Address icon Footer*/}
+                    <div className="flex pb-2 gap-2">
+                      <div className="flex text-xl">
+                        <IoHome />
+                      </div>
+                      <div className="flex justify-center items-center">
+                        <span>
+                          1 Võ Văn Ngân, Phường Linh Chiểu, Thành phố Thủ Đức,
+                          Thành phố Hồ Chí Minh
+                        </span>
+                      </div>
+                    </div>
+                  </li>
+                </ul>
+              </div>
             </div>
           </div>
         </div>
-      </div>
-      <div className="w-full bg-blue-900 text-gray-500 px-10 border-t-2 border-gray-400 dark:bg-medium ">
-        <div className="max-w-7xl flex flex-col md:flex-row py-4 mx-auto justify-between items-center gap-4">
-          <div className="text-center">
-            <div>
-              {foot12}{" "}
-              <strong>
-                <span>{foot13}</span>
-              </strong>
-              . {foot14}
-            </div>
-            <div className="flex gap-1">
-              {foot15}:
-              <span className="text-white">Danh Truong Son,</span>
-              <span className="text-white">Dang Thanh Tuyen,</span>
-              <span className="text-white">Dang Phuoc Truong Tai</span>
-            </div>
+        <div className="flex justify-between text-black mx-10 border-t border-green-700 ">
+          <div className="py-6">
+            <span className="text-sm">© 2024 Football Booking</span>
           </div>
-          <div className="text-center flex">
-            <a
-              href="#"
-              className="w-10 h-10 flex items-center justify-center rounded-full bg-blue-500 hover:bg-blue-700 mx-1 text-white transition duration-300 hover:scale-125 cursor-pointer transform"
-            >
-              <FaFacebookF />
-            </a>
-            <a
-              href="#"
-              className="w-10 h-10 flex items-center justify-center rounded-full bg-gray-500 hover:bg-gray-700 mx-1 text-white transition duration-500 hover:scale-125 cursor-pointer transform"
-            >
-              <FaDiscord />
-            </a>
-            <a
-              href="#"
-              className="w-10 h-10 flex items-center justify-center rounded-full bg-pink-600 hover:bg-pink-700 mx-1 text-white transition duration-500 hover:scale-125 cursor-pointer transform"
-            >
-              <FaInstagram />
-            </a>
-            <a
-              href="#"
-              className="w-10 h-10 flex items-center justify-center rounded-full bg-red-600 hover:bg-red-700 mx-1 text-white transition duration-500 hover:scale-125 cursor-pointer transform"
-            >
-              <FaYoutube />
-            </a>
+          <div className="flex gap-4">
+            <img src={paypal} alt="logo" className="w-8 object-contain" />
+            <img src={visa} alt="logo" className="w-8 object-contain" />
+            <img src={master} alt="logo" className="w-8 object-contain" />
+            <img src={amex} alt="logo" className="w-8 object-contain" />
           </div>
         </div>
       </div>

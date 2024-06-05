@@ -21,6 +21,7 @@ export { default as Pitch } from "./pitches/Pitch";
 export { default as DealDaily } from "./pitches/DealDaily";
 export { default as FeaturePitch } from "./pitches/FeaturePitch";
 export { default as PitchCard } from "./pitches/PitchCard";
+export { default as PitchSlider } from "./pitches/PitchSlider";
 export { default as PitchExtraInfo } from "./pitches/PitchExtraInfo";
 export { default as Skeleton } from "./pitches/Skeleton";
 export { default as PitchInformation } from "./pitches/PitchInformation";
@@ -62,10 +63,8 @@ export { default as Barchart } from "./chart/Barchart";
 export { default as AreaChartMonth } from "./chart/AreaChartMonth";
 export { default as ChartPrice } from "./chart/ChartPrice";
 export { default as PiechartCategory } from "./chart/PiechartCategory";
-
 // Event
 export { default as EventBanner } from "./event/EventBanner";
-
 //News
 export { default as NewsCard } from "./news/NewsCard";
 export { default as News } from "./news/News";

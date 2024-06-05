@@ -1,6 +1,6 @@
 import React, { Fragment, memo, useState } from "react";
 import avatar from "assets/defaultava.png";
-import { getmemberSidebar } from "ultils/constant";
+import { useGetmemberSidebar } from "ultils/constant";
 import { Link, NavLink } from "react-router-dom";
 import logo from "assets/logo.png";
 import clsx from "clsx";
@@ -21,7 +21,7 @@ const Membersidebar = ({ open, setOpen }) => {
   const { t } = useTranslation();
   const { sidebar1, sidebar2, sidebar3 } = t("sidebar")
   const [darkModeSideBar, setdarkModeSideBar] = useState(true);
-  const memberSidebar = getmemberSidebar();
+  const memberSidebar = useGetmemberSidebar();
   const [actived, setActived] = useState([]);
   const { current } = useSelector((state) => state.user);
   const [activedTab, setActivedTab] = useState([]);

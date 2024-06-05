@@ -8,7 +8,7 @@ const EventBanner = () => {
   const { t } = useTranslation();
   const { event1, event2, event3, event4, event5 } = t("eventbanner")
   return (
-    <div className="w-full h-[553px] bg-white flex items-center justify-center dark:bg-medium">
+    <div className="w-full h-[553px] bg-bg-light flex items-center justify-center dark:bg-medium">
       <div className="flex flex-col md:flex-row">
         <div className="flex flex-col items-center md:items-start pt-8 px-4 gap-2 w-">
           <img src={ball} alt="" className="w-full h-[300px] object-cover" />

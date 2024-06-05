@@ -1,6 +1,6 @@
 import React, { Fragment, memo, useEffect, useState } from "react";
 import logo from "assets/logo.png";
-import { getadminSideBar } from "ultils/constant";
+import { useGetadminSideBar } from "ultils/constant";
 import { Link, NavLink } from "react-router-dom";
 import clsx from "clsx";
 import path from "ultils/path";
@@ -14,21 +14,19 @@ const {
   FaAngleRight,
   FaAngleDown,
   GoDotFill,
-  BiSolidLogOut,
-  LuArrowLeftToLine,
-  LuSun,
-  FaMoon,
+  IoPlaySkipBackOutline,
+  IoLogInOutline,
 } = icons;
 
 const activedStyle =
-  "px-4 py-2 flex items-center gap-2 bg-gradient-to-tr from-indigo-100 to-indigo-400 rounded-md text-indigo-700";
+"px-4 py-2 flex items-center gap-2 bg-gradient-to-tr from-indigo-100 to-indigo-400 rounded-md text-indigo-700";
 const notactivedStyle =
-  "px-4 py-2 flex items-center gap-2 hover:bg-indigo-50 hover:rounded-md hover:text-indigo-700 text-gray-400 duration-300";
+"px-4 py-2 flex items-center gap-2 hover:bg-indigo-50 hover:rounded-md hover:text-indigo-700 text-gray-400 duration-300";
 
 const AdminSideBar = ({ open, setOpen }) => {
   const { t } = useTranslation();
   const { sidebar1, sidebar2, sidebar3 } = t("sidebar")
-  const adminSideBar = getadminSideBar();
+  const adminSideBar = useGetadminSideBar();
   const [darkModeSideBar, setdarkModeSideBar] = useState(true);
   const { current } = useSelector((state) => state.user);
   const [actived, setActived] = useState([]);
@@ -46,8 +44,9 @@ const AdminSideBar = ({ open, setOpen }) => {
   };
   return (
     <div
-      className={`bg-white overflow-y-auto h-full py-4 border-r shadow-lg flex flex-col justify-between  ${open ? "w-60" : "w-20"
-        } duration-300`}
+      className={`bg-white overflow-y-auto h-full py-4 border-r shadow-lg flex flex-col justify-between  ${
+        open ? "w-60" : "w-24"
+      } duration-300`}
     >
       <div className="">
         <div className="flex items-center justify-between p-4 pb-2 ">
@@ -58,10 +57,10 @@ const AdminSideBar = ({ open, setOpen }) => {
               className={`w-32 ${!open && "hidden"}`}
             />
           </Link>
-          <LuArrowLeftToLine
+          <IoPlaySkipBackOutline
             onClick={() => setOpen(!open)}
-            className={`text-2xl cursor-pointer rounded-md ${!open && "rotate-180 mr-2 text-3xl"
-              } `}
+            className={`text-2xl cursor-pointer rounded-md ${!open &&
+              "rotate-180 mr-2 text-3xl"} `}
           />
 
           {/* <h1
@@ -93,13 +92,15 @@ const AdminSideBar = ({ open, setOpen }) => {
                     {el.icon}
                   </span>
                   <span
-                    className={`${open
-                      ? "text-sm"
-                      : `absolute left-full text-center py-2 ml-4 bg-indigo-100 rounded-md text-indigo-800 text-sm w-[110px] transition-all ${hover === +el.id
-                        ? "visible translate-x-0 opacity-100"
-                        : "invisible -translate-x-3 opacity-20"
-                      }`
-                      }`}
+                    className={`${
+                      open
+                        ? "text-sm"
+                        : `absolute left-full text-center py-2 ml-4 bg-indigo-100 rounded-md text-indigo-800 text-sm w-[110px] transition-all ${
+                            hover === +el.id
+                              ? "visible translate-x-0 opacity-100"
+                              : "invisible -translate-x-3 opacity-20"
+                          }`
+                    }`}
                   >
                     {el.text}
                   </span>
@@ -108,10 +109,11 @@ const AdminSideBar = ({ open, setOpen }) => {
               {el.type === "PARENT" && (
                 <div onClick={() => handleShowTabs(+el.id)}>
                   <div
-                    className={`flex items-center justify-between px-4 py-2 my-2 hover:bg-slidebar_active hover:text-indigo-700 rounded-md cursor-pointer duration-300 ${activedTab === +el.id
-                      ? "bg-gradient-to-tr from-indigo-100 to-indigo-400 text-indigo-700 duration-300"
-                      : "text-gray-400 "
-                      }`}
+                    className={`flex items-center justify-between px-4 py-2 my-2 hover:bg-slidebar_active hover:text-indigo-700 rounded-md cursor-pointer duration-300 ${
+                      activedTab === +el.id
+                        ? "bg-gradient-to-tr from-indigo-100 to-indigo-400 text-indigo-700 duration-300"
+                        : "text-gray-400 "
+                    }`}
                     onMouseOver={() => setHover(+el.id)}
                     onMouseLeave={() => setHover([])}
                   >
@@ -120,13 +122,15 @@ const AdminSideBar = ({ open, setOpen }) => {
                         {el.icon}
                       </span>
                       <span
-                        className={`${open
-                          ? "text-sm "
-                          : `absolute left-full text-center py-2 ml-4 bg-indigo-100 rounded-md text-indigo-800 text-sm w-[110px] transition-all ${hover === +el.id
-                            ? "visible translate-x-0 opacity-100"
-                            : " invisible -translate-x-3 opacity-20"
-                          }`
-                          }`}
+                        className={`${
+                          open
+                            ? "text-sm "
+                            : `absolute left-full text-center py-2 ml-4 bg-indigo-100 rounded-md text-indigo-800 text-sm w-[110px] transition-all ${
+                                hover === +el.id
+                                  ? "visible translate-x-0 opacity-100"
+                                  : " invisible -translate-x-3 opacity-20"
+                              }`
+                        }`}
                       >
                         {el.text}
                       </span>
@@ -141,8 +145,8 @@ const AdminSideBar = ({ open, setOpen }) => {
                   </div>
                   {actived.some((id) => +id === +el.id) && (
                     <div
-                      className={`flex flex-col text-white ${!open && "hidden"
-                        }`}
+                      className={`flex flex-col text-white ${!open &&
+                        "hidden"}`}
                     >
                       {el.submenu.map((item) => (
                         <NavLink
@@ -155,9 +159,9 @@ const AdminSideBar = ({ open, setOpen }) => {
                           className={({ isActive }) =>
                             clsx(
                               isActive &&
-                              "px-4 py-2 flex items-center gap-2 rounded-md text-indigo-700",
+                                "px-4 py-2 flex items-center gap-2 rounded-md text-indigo-700",
                               !isActive &&
-                              "px-4 py-2 flex items-center gap-2 hover:text-blue-700 text-gray-400",
+                                "px-4 py-2 flex items-center gap-2 hover:text-blue-700 text-gray-400",
                               "px-4 py-2 my-2"
                             )
                           }
@@ -186,8 +190,8 @@ const AdminSideBar = ({ open, setOpen }) => {
             className={`w-8 h-8 rounded-md ${!open && "w-6 h-6"}`}
           />
           <div
-            className={`flex justify-between items-center ml-3 w-52 ${!open && "hidden"
-              }`}
+            className={`flex justify-between items-center ml-3 w-52 ${!open &&
+              "hidden"}`}
           >
             <div className="leading-4">
               <h4 className="font-semibold">
@@ -197,29 +201,11 @@ const AdminSideBar = ({ open, setOpen }) => {
             </div>
           </div>
         </div>
-
-        <div className="h-[40px] hover:bg-slidebar_active flex items-center rounded-md text-gray-400 hover:text-indigo-700 duration-300">
-          <Link to={path.PUBLIC}>
-            <div className=" flex ml-4 items-center">
-              <span className={`${open ? "text-xl" : "text-3xl"}`}>
-                <BiSolidLogOut />
-              </span>
-              <span
-                className={`text-sm duration-300 pl-2 ${!open && "hidden"}`}
-              >
-                {sidebar1}
-              </span>
-            </div>
-          </Link>
-        </div>
         <div className="h-[40px] hover:bg-slidebar_active flex items-center rounded-md text-gray-400">
           <div className={`${!open ? "ml-2" : "ml-4"} flex items-center`}>
             <span className={`text-sm duration-300 ${!open && "hidden"}`}>
               {darkModeSideBar ? (
                 <div className=" flex items-center">
-                  <span className={`${open ? "text-xl" : "text-3xl"}`}>
-                    <FaMoon />
-                  </span>
                   <span
                     className={`text-sm duration-300 pl-2 ${!open && "hidden"}`}
                   >
@@ -228,9 +214,6 @@ const AdminSideBar = ({ open, setOpen }) => {
                 </div>
               ) : (
                 <div className=" flex items-center">
-                  <span className={`${open ? "text-xl" : "text-3xl"}`}>
-                    <LuSun />
-                  </span>
                   <span
                     className={`text-sm duration-300 pl-2 ${!open && "hidden"}`}
                   >
@@ -243,6 +226,20 @@ const AdminSideBar = ({ open, setOpen }) => {
               <ThemeToggle SideBar setdarkModeSideBar={setdarkModeSideBar} />
             </div>
           </div>
+        </div>
+        <div className="h-[40px] hover:bg-slidebar_active flex items-center rounded-md text-gray-400 hover:text-indigo-700 duration-300">
+          <Link to={path.PUBLIC}>
+            <div className=" flex ml-4 items-center">
+              <span className={`${open ? "text-xl" : "text-3xl"}`}>
+                <IoLogInOutline />
+              </span>
+              <span
+                className={`text-sm duration-300 pl-2 ${!open && "hidden"}`}
+              >
+                {sidebar1}
+              </span>
+            </div>
+          </Link>
         </div>
       </div>
     </div>

@@ -2,7 +2,7 @@ import React, { Fragment, memo, useState } from "react";
 import avatar from "assets/defaultava.png";
 import logo from "assets/logo.png";
 import ThemeToggle from "components/buttons/ThemeToggle";
-import { getpitchOwnerSideBar } from "ultils/constant";
+import { useGetpitchOwnerSideBar } from "ultils/constant";
 import { Link, NavLink } from "react-router-dom";
 import clsx from "clsx";
 import { useSelector } from "react-redux";
@@ -20,7 +20,7 @@ const notactivedStyle =
 const PitchOwnerSidebar = ({ open, setOpen }) => {
   const { t } = useTranslation();
   const { sidebar1, sidebar2, sidebar3 } = t("sidebar")
-  const pitchOwnerSideBar = getpitchOwnerSideBar();
+  const pitchOwnerSideBar = useGetpitchOwnerSideBar();
   const [darkModeSideBar, setdarkModeSideBar] = useState(true);
   const [actived, setActived] = useState([]);
   const { current } = useSelector((state) => state.user);
@@ -39,8 +39,9 @@ const PitchOwnerSidebar = ({ open, setOpen }) => {
 
   return (
     <div
-      className={`bg-white overflow-y-auto h-full py-4 border-r shadow-lg flex flex-col justify-between  ${open ? "w-60" : "w-20"
-        } duration-300`}
+      className={`bg-white overflow-y-auto h-full py-4 border-r shadow-lg flex flex-col justify-between  ${
+        open ? "w-60" : "w-24"
+      } duration-300`}
     >
       <div className="">
         <div className="flex items-center justify-between p-4 pb-2 ">
@@ -53,8 +54,8 @@ const PitchOwnerSidebar = ({ open, setOpen }) => {
           </Link>
           <LuArrowLeftToLine
             onClick={() => setOpen(!open)}
-            className={`text-2xl cursor-pointer rounded-md ${!open && "rotate-180 mr-2 text-3xl"
-              } `}
+            className={`text-2xl cursor-pointer rounded-md ${!open &&
+              "rotate-180 mr-2 text-3xl"} `}
           />
 
           {/* <h1
@@ -86,13 +87,15 @@ const PitchOwnerSidebar = ({ open, setOpen }) => {
                     {el.icon}
                   </span>
                   <span
-                    className={`${open
-                      ? "text-sm "
-                      : `absolute left-full text-center py-2 ml-4 bg-indigo-100 rounded-md text-indigo-800 text-sm w-[110px] transition-all ${hover === +el.id
-                        ? "visible translate-x-0 opacity-100"
-                        : "invisible -translate-x-3 opacity-20"
-                      }`
-                      }`}
+                    className={`${
+                      open
+                        ? "text-sm "
+                        : `absolute left-full text-center py-2 ml-4 bg-indigo-100 rounded-md text-indigo-800 text-sm w-[110px] transition-all ${
+                            hover === +el.id
+                              ? "visible translate-x-0 opacity-100"
+                              : "invisible -translate-x-3 opacity-20"
+                          }`
+                    }`}
                   >
                     {el.text}
                   </span>
@@ -101,10 +104,11 @@ const PitchOwnerSidebar = ({ open, setOpen }) => {
               {el.type === "PARENT" && (
                 <div onClick={() => handleShowTabs(+el.id)}>
                   <div
-                    className={`flex items-center justify-between px-4 py-2 my-2 hover:bg-slidebar_active hover:text-indigo-700 rounded-md cursor-pointer duration-300 ${activedTab === +el.id
-                      ? "bg-gradient-to-tr from-indigo-100 to-indigo-400 text-indigo-700 duration-300"
-                      : "text-gray-400 "
-                      }`}
+                    className={`flex items-center justify-between px-4 py-2 my-2 hover:bg-slidebar_active hover:text-indigo-700 rounded-md cursor-pointer duration-300 ${
+                      activedTab === +el.id
+                        ? "bg-gradient-to-tr from-indigo-100 to-indigo-400 text-indigo-700 duration-300"
+                        : "text-gray-400 "
+                    }`}
                     onMouseOver={() => setHover(+el.id)}
                     onMouseLeave={() => setHover([])}
                   >
@@ -113,13 +117,15 @@ const PitchOwnerSidebar = ({ open, setOpen }) => {
                         {el.icon}
                       </span>
                       <span
-                        className={`${open
-                          ? "text-sm "
-                          : `absolute left-full text-center py-2 ml-4 bg-indigo-100 rounded-md text-indigo-800 text-sm w-[110px] transition-all ${hover === +el.id
-                            ? "visible translate-x-0 opacity-100"
-                            : " invisible -translate-x-3 opacity-20"
-                          }`
-                          }`}
+                        className={`${
+                          open
+                            ? "text-sm "
+                            : `absolute left-full text-center py-2 ml-4 bg-indigo-100 rounded-md text-indigo-800 text-sm w-[110px] transition-all ${
+                                hover === +el.id
+                                  ? "visible translate-x-0 opacity-100"
+                                  : " invisible -translate-x-3 opacity-20"
+                              }`
+                        }`}
                       >
                         {el.text}
                       </span>
@@ -134,8 +140,8 @@ const PitchOwnerSidebar = ({ open, setOpen }) => {
                   </div>
                   {actived.some((id) => +id === +el.id) && (
                     <div
-                      className={`flex flex-col text-white ${!open && "hidden"
-                        }`}
+                      className={`flex flex-col text-white ${!open &&
+                        "hidden"}`}
                     >
                       {el.submenu.map((item) => (
                         <NavLink
@@ -148,9 +154,9 @@ const PitchOwnerSidebar = ({ open, setOpen }) => {
                           className={({ isActive }) =>
                             clsx(
                               isActive &&
-                              "px-4 py-2 flex items-center gap-2 rounded-md text-indigo-700",
+                                "px-4 py-2 flex items-center gap-2 rounded-md text-indigo-700",
                               !isActive &&
-                              "px-4 py-2 flex items-center gap-2 hover:text-blue-700 text-gray-400",
+                                "px-4 py-2 flex items-center gap-2 hover:text-blue-700 text-gray-400",
                               "px-4 py-2 my-2"
                             )
                           }
@@ -179,8 +185,8 @@ const PitchOwnerSidebar = ({ open, setOpen }) => {
             className={`w-8 h-8 rounded-md ${!open && "w-6 h-6"}`}
           />
           <div
-            className={`flex justify-between items-center ml-3 w-52 ${!open && "hidden"
-              }`}
+            className={`flex justify-between items-center ml-3 w-52 ${!open &&
+              "hidden"}`}
           >
             <div className="leading-4">
               <h4 className="font-semibold">
@@ -207,8 +213,9 @@ const PitchOwnerSidebar = ({ open, setOpen }) => {
         </div>
         <div className="h-[40px] hover:bg-slidebar_active flex items-center rounded-md text-gray-400">
           <div
-            className={`${!open ? "ml-2" : "ml-4"
-              } flex ml-2 items-center gap-2`}
+            className={`${
+              !open ? "ml-2" : "ml-4"
+            } flex ml-2 items-center gap-2`}
           >
             <span className={`text-sm duration-300 ${!open && "hidden"}`}>
               {darkModeSideBar ? (
