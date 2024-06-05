@@ -17,12 +17,19 @@ const News = () => {
     fetchNews({ sort: "createdAt" });
   }, []);
   return (
-    <div className="w-full dark:bg-medium bg-gray-200 pb-10">
-      <h3 className="text-[40px] font-semibold py-[15px] text-center">
-        <span className="text-indigo-500">{new1}</span>
-        <span className="border-b-2 border-indigo-500 dark:text-white"> {new2}</span>
-        <span className="dark:text-white">{new3}</span>
+    <div className="w-full flex flex-col items-center">
+      <h3 className="text-[40px] font-semibold">
+        {/*Header */}
+        <span className=" text-font-normal">Stay on For Updates</span>
       </h3>
+      {/*Sub text */}
+      <div className="w-full lg:w-[40vw] text-sm pt-2 pb-6 px-4 flex">
+        <span className="text-font-normal text-center">
+          Imagination reigns supreme in this realm, with designers pushing the
+          boundaries of innovation to create breathtaking masterpieces
+        </span>
+      </div>
+
       {/* News slider*/}
       <NewsSlider news={news} />
     </div>

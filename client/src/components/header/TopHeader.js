@@ -1,4 +1,5 @@
 import React, { memo, useEffect, useState } from "react";
+import { AnimatePresence, motion } from "framer-motion"
 import { Link, useNavigate } from "react-router-dom";
 import { getCurrent } from "store/user/asyncAction";
 import { useDispatch, useSelector } from "react-redux";
@@ -18,6 +19,7 @@ import vietnam from "assets/vietnam.png";
 import unitedstate from "assets/united-states.png";
 import { showOrder } from "store/app/appSlice";
 import moment from "moment";
+import { set } from "react-hook-form";
 const languages = [
   { code: "vi", lang: "Vietnamese", img: vietnam },
   { code: "en", lang: "English", img: unitedstate },
@@ -32,6 +34,9 @@ const {
   IoMoonOutline,
   IoSunnyOutline,
   IoTimeOutline,
+  IoPhonePortrait,
+  IoHome,
+  IoMail,
   FaXmark,
   FaBars,
   GoDotFill,
@@ -61,10 +66,17 @@ const TopHeader = () => {
   const [order, setOrder] = useState(null);
   const [notification, setNotification] = useState(null);
   const [isActiveNotificationTab, setisActiveNotificationTab] = useState([]);
+  const [isActivetab, setIsActivetab] = useState(null);
+  const [open, setOpen] = useState(false);
+  const [isHoverTab, setIsHoverTab] = useState(false);
+
   const { t } = useTranslation();
   const { infor1, infor2, infor3, infor4, infor5 } = t("information");
   const { noti1, noti2, noti3 } = t("notification");
-
+  const handleSelectTab = (tab) => {
+    setIsHoverTab(tab)
+    setOpen(true);
+  };
   useEffect(() => {
     const setTimeoutId = setTimeout(() => {
       if (isLoggedIn) dispatch(getCurrent());
@@ -133,32 +145,63 @@ const TopHeader = () => {
   }, [darkMode]);
   return (
     <div
-      className="w-full min-h-[70px] flex h-full items-center flex-wrap duration-200 
+      className="w-full h-full flex min-h-[70px] justify-between duration-200 
       bg-header-bg-light dark:bg-header-bg-dark"
     >
-      <div className="w-1/4 px-4 ">
-        <Link to={`/${path.HOME}`}>
-          <img
-            src={logo}
-            alt="logo"
-            className="max-w-[180px] object-contain rounded-md"
-          />
-        </Link>
-      </div>
-      <div className="w-2/4 pl-8 text-lg font-bold hidden lg:justify-center lg:flex ">
-        {navigation.map((el) => (
-          <NavLink
-            to={el.path}
-            key={el.id}
-            className={({ isActive }) =>
-              isActive
-                ? "pr-12 hover:text-orange text-orange "
-                : "pr-12 hover:text-orange text-white"
-            }
-          >
-            {el.value}
-          </NavLink>
-        ))}
+      <div className="flex items-center">
+        <div className="">
+          <Link to={`/${path.HOME}`}>
+            <img
+              src={logo}
+              alt="logo"
+              className="ml-4 w-12 h-12 object-contain rounded-md"
+            />
+          </Link>
+        </div>
+        <div className="relative h-fit w-fit pl-8 gap-4 text-md font-bold hidden lg:justify-center lg:flex ">
+          {navigation.map((el) => (
+            <div
+              onMouseEnter={() => handleSelectTab(el?.id)}
+              onMouseLeave={() => {
+                setOpen(false);
+              }}
+              className="relative h-fit w-fit"
+            >
+              <NavLink
+                to={el.path}
+                key={el.id}
+                className={({ isActive }) => isActive && setIsActivetab(el?.id)}
+              >
+                <span className="uppercase">{el.value}</span>
+                {+isHoverTab === +el?.id && (
+                  <span
+                    style={{
+                      transform: open ? "scaleX(1)" : "scaleX(0)",
+                    }}
+                    className="absolute -bottom-2 -left-2 -right-2 h-1 origin-left rounded-full bg-green-300 transition-tranform duration-300 ease-out"
+                  ></span>
+                )}
+              </NavLink>
+              <AnimatePresence>
+                {open && +isHoverTab === +el?.id && (
+                  <motion.div
+                    initial={{ opacity: 0, y: 15 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, y: 15 }}
+                    style={{ x: "-50%" }}
+                    className="absolute left-1/2 top-12 z-10 text-black"
+                  >
+                    <div className="absolute -top-6 left-0 right-0 h-6 bg-transparent"></div>
+                    <div className=" absolute left-1/2 top-0 h-4 w-4 -translate-x-1/2 -translate-y-1/2 rotate-45 bg-green-500"></div>
+                    <div className="h-24 w-64 p-6 bg-green-500 shadow-xl">
+                      <span className="text-white">Hello</span>
+                    </div>
+                  </motion.div>
+                )}
+              </AnimatePresence>
+            </div>
+          ))}
+        </div>
       </div>
       {isLoggedIn && current ? (
         <div className="w-1/4 flex items-center justify-end gap-4">
@@ -170,19 +213,7 @@ const TopHeader = () => {
               <img src={`${i18n.language === "en" ? us : vn}`}></img>
             </span>
           </div>
-          {isShowSelectLanguage && (
-            <div className="absolute flex-col flex mt-[170px] bg-header-bg-dark-tab w-[160px] h-[100px] py-2 rounded-lg z-10 right-24">
-              {languages.map((lng) => (
-                <div
-                  className="flex items-center px-4 py-2 my-1 gap-2 cursor-pointer text-font-bg-dark font-bold hover:text-blue-500 duration-300"
-                  onClick={() => changeLanguage(lng.code)}
-                >
-                  <img src={lng.img}></img>
-                  <span>{lng.lang}</span>
-                </div>
-              ))}
-            </div>
-          )}
+
           <div
             className="hover:bg-gray-500/25 rounded-md p-2 cursor-pointer duration-300"
             onClick={() => setdarkMode(!darkMode)}
@@ -201,6 +232,26 @@ const TopHeader = () => {
                 {order?.length || 0}
               </span>
             </span>
+          </div>
+
+          <div
+            className="hover:bg-gray-500/25 rounded-md p-2 cursor-pointer duration-300"
+            onClick={() => setisShowNotification(!isShowNotification)}
+          >
+            <span className="text-icon-bg-dark">
+              <IoNotificationsOutline size={22} />
+            </span>
+          </div>
+          <div
+            className="cursor-pointer px-2"
+            onClick={() => setisShowOption(!isShowOption)}
+          >
+            <img
+              src={current?.avatar || avatar}
+              alt="avatar"
+              className="w-8 h-8 object-cover rounded-full cursor-pointer"
+            />
+            {/* <span className="text-white">{`${current?.lastname} ${current?.firstname}`}</span> */}
           </div>
           {isShowNotification && (
             <div className="absolute flex-col flex mt-[570px] bg-header-bg-dark-tab w-[450px] h-[500px] py-2 rounded-lg z-10 right-5">
@@ -268,25 +319,19 @@ const TopHeader = () => {
               </div>
             </div>
           )}
-          <div
-            className="hover:bg-gray-500/25 rounded-md p-2 cursor-pointer duration-300"
-            onClick={() => setisShowNotification(!isShowNotification)}
-          >
-            <span className="text-icon-bg-dark">
-              <IoNotificationsOutline size={22} />
-            </span>
-          </div>
-          <div
-            className="cursor-pointer px-2"
-            onClick={() => setisShowOption(!isShowOption)}
-          >
-            <img
-              src={current?.avatar || avatar}
-              alt="avatar"
-              className="w-8 h-8 object-cover rounded-full cursor-pointer"
-            />
-            {/* <span className="text-white">{`${current?.lastname} ${current?.firstname}`}</span> */}
-          </div>
+          {isShowSelectLanguage && (
+            <div className="absolute flex-col flex mt-[170px] bg-header-bg-dark-tab w-[160px] h-[100px] py-2 rounded-lg z-10 right-24">
+              {languages.map((lng) => (
+                <div
+                  className="flex items-center px-4 py-2 my-1 gap-2 cursor-pointer text-font-bg-dark font-bold hover:text-blue-500 duration-300"
+                  onClick={() => changeLanguage(lng.code)}
+                >
+                  <img src={lng.img}></img>
+                  <span>{lng.lang}</span>
+                </div>
+              ))}
+            </div>
+          )}
           {isShowOption && (
             <div
               onClick={(e) => e.stopPropagation()}
@@ -365,16 +410,21 @@ const TopHeader = () => {
           )}
         </div>
       ) : (
-        <div className="w-1/4 flex items-center justify-end px-4">
+        <div className="flex items-center justify-end px-4 gap-2">
           <Link
-            className="mr-6 text-lg font-bold hover:text-orange text-white"
+            className="text-md font-bold py-2 px-4 hover:bg-gray-300/50 rounded text-black hover:scale-[1.02] transition-all"
             to={`/${path.LOGIN}`}
           >
-            {infor5}
+            Login
+          </Link>
+          <Link
+            className="before:ease relative py-2 px-2 rounded font-bold overflow-hidden border border-green-500 bg-green-500 text-white shadow-2xl transition-all before:absolute before:right-0 before:top-0 before:h-12 before:w-6 before:translate-x-12 before:rotate-6 before:bg-white before:opacity-10 before:duration-700 hover:shadow-green-500 hover:before:-translate-x-40"
+            to={`/${path.LOGIN}`}
+          >
+            Sign Up
           </Link>
         </div>
       )}
-
       <div className="lg:hidden mr-4">
         <button onClick={toggleNavbar}>
           {isOpen ? (

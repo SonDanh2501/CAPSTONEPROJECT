@@ -3,6 +3,7 @@ import PitchCard from "components/pitches/PitchCard";
 import { apiGetPitches } from "apis";
 import Slider from "react-slick";
 import { useTranslation } from "react-i18next";
+import PitchSlider from "./PitchSlider";
 
 const FeaturePitch = () => {
   const { t } = useTranslation();
@@ -52,34 +53,17 @@ const FeaturePitch = () => {
   }, []);
 
   return (
-    <div className="w-full dark:bg-medium pb-10">
+    <div className="w-full pb-10">
       <h3 className="text-[40px] font-semibold py-[15px] text-center">
-        <span className="text-indigo-500 ">{feat1}</span>
+        <span className="text-indigo-500">{feat1}</span>
         <span className="border-b-2 border-indigo-500 dark:text-white">
           {" "}
           {feat2}
         </span>
         <span className="dark:text-white">{feat3}</span>
       </h3>
-
-      <div className="w-3/4	m-auto">
-        <Slider className="custom-slider" {...settings}>
-          {pitches?.map((el) => (
-            <PitchCard
-              key={el._id}
-              pid={el._id}
-              image={el.images[0]}
-              title={el.title}
-              totalRatings={el.totalRatings}
-              price_morning={el.price_morning}
-              price_evening={el.price_evening}
-              price_afternoon={el.price_afternoon}
-              category={el.category}
-              brand={el.brand}
-            ></PitchCard>
-          ))}
-        </Slider>
-      </div>
+      {/* News slider*/}
+      <PitchSlider pitches={pitches} />
     </div>
   );
 };
