@@ -33,7 +33,10 @@ import {
   IoHome,
   IoMail,
   IoArrowForwardOutline,
-  IoEyeOutline ,
+  IoEyeOutline,
+  IoStar,
+  IoStarHalf,
+  IoStarOutline,
 } from "react-icons/io5";
 import {
   MdEmail,
@@ -156,7 +159,10 @@ const icons = {
   IoMail,
   IoIosArrowForward,
   IoArrowForwardOutline,
-  IoEyeOutline ,
+  IoEyeOutline,
+  IoStarOutline,
+  IoStar,
+  IoStarHalf,
   // Material Design icons
   MdEmail,
   MdSpaceDashboard,

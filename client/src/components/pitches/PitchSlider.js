@@ -6,7 +6,7 @@ import PitchCard from "./PitchCard";
 
 const PitchSlider = ({ pitches }) => {
   const settings = {
-    dots: true,
+    dots: false,
     lazyLoad: true,
     infinite: true,
     speed: 500,
@@ -24,6 +24,7 @@ const PitchSlider = ({ pitches }) => {
         breakpoint: 800,
         settings: {
           slidesToShow: 1,
+          dots: true,
         },
       },
     ],

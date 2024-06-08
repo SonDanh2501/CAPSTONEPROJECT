@@ -1,5 +1,12 @@
 import icons from "./icons";
-const { FaStarHalfAlt, FaStar, FaRegStar } = icons;
+const {
+  FaStarHalfAlt,
+  FaStar,
+  FaRegStar,
+  IoStarOutline,
+  IoStar,
+  IoStarHalf,
+} = icons;
 
 export const createSlug = (string) =>
   string
@@ -12,26 +19,27 @@ export const createSlug = (string) =>
 export const formatMoney = (number) =>
   Number(number?.toFixed(1)).toLocaleString();
 
-export const renderStarFromNumber = (number, size) => {
+export const renderStarFromNumber = (number, color, size) => {
   const integerPart = Math.floor(number);
   const decimalPart = number - integerPart;
-
   const stars = [];
   if (!Number(number)) {
     for (let i = 0; i < 5; i++) {
-      stars.push(<FaRegStar key={i} color="orange" size={size || 16} />);
+      stars.push(<IoStarOutline key={i} size={size || 16} />);
     }
     return stars;
   }
 
   for (let i = 0; i < 5; i++) {
     if (i < integerPart) {
-      stars.push(<FaStar key={i} color="orange" size={size || 16} />);
+      stars.push(<IoStar key={i} color={color || "orange"} size={size || 16} />);
     } else if (i === integerPart && decimalPart > 0) {
       // In ra ngôi sao có phần thập phân
-      stars.push(<FaStarHalfAlt key={i} color="orange" size={size || 16} />);
+      stars.push(<IoStarHalf key={i} color={color || "orange"} size={size || 16} />);
     } else {
-      stars.push(<FaRegStar key={i} color="orange" size={size || 16} />);
+      stars.push(
+        <IoStarOutline key={i} color={color || "orange"} size={size || 16} />
+      );
     }
   }
   return stars;

@@ -9,6 +9,7 @@ import {
   LandingBanner,
   EventBanner,
   News,
+  Comments
 } from "../../components";
 import { useSelector } from "react-redux";
 import icons from "../../ultils/icons";
@@ -23,7 +24,7 @@ const Home = () => {
       <div>
         <LandingBanner></LandingBanner>
       </div>
-      <div className="w-full my-10 ">
+      <div className="w-full my-10">
         <FeaturePitch></FeaturePitch>
       </div>
       <div className="w-full my-10">
@@ -35,18 +36,21 @@ const Home = () => {
       <div className="w-full my-10">
         <EventBanner />
       </div>
-      <div className="w-full">
+      <div className="w-full py-8">
+        <Comments />
+      </div>
+      <div className="w-full py-8">
         <News />
       </div>
       {/*Email subcribe component*/}
-      <div className="w-full flex items-center justify-center py-6">
-        <div className=" w-[90vw] md:w-[84vw] h-fit bg-bg-light py-4">
+      <div className="w-full flex items-center justify-center py-8">
+        <div className=" w-[90vw] h-fit bg-bg-light py-8">
           <div className="flex flex-col items-center">
             {/*Header text*/}
-            <div className="flex items-center justify-center pt-2">
-              <span className="md:text-3xl text-xl text-center">
+            <div className="flex md:w-[50vw] w-[90vw] items-center justify-center pt-2">
+              <span className="md:text-3xl text-xl text-center font-bold">
                 Do you want to be among the first to know about
-                <span className="md:text-3xl text-xl font-semibold text-emerald-900">
+                <span className="md:text-3xl text-xl font-bold text-emerald-900">
                   {" "}
                   sale time?
                 </span>
@@ -66,15 +70,15 @@ const Home = () => {
             <form className="flex items-center justify-center gap-2 px-4">
               <input
                 type="text"
-                className="w-fit md:w-[370px] py-2.5 text-black focus:border-black border-black bg-transparent focus:ring-transparent rounded"
+                className="w-fit md:w-[370px] py-2.5 text-black focus:border-black border-black bg-transparent focus:ring-transparent"
                 placeholder="Enter email address..."
                 required
               ></input>
               <button
-                class="text-red relative lg:py-2.5 py-2 px-6 rounded 
-              overflow-hidden bg-emerald-950 text-white
+                class="text-red relative lg:py-2.5 py-2 px-6 
+              overflow-hidden bg-button-color text-white
               shadow-2xl transition-all before:absolute before:bottom-0 before:left-0 
-              before:top-0 before:z-0 before:h-full before:w-0 before:bg-emerald-500 before:transition-all 
+              before:top-0 before:z-0 before:h-full before:w-0 before:bg-button-color-hover hover:text-black before:transition-all 
               before:duration-500 hover:before:left-0 
               hover:before:w-full"
               >

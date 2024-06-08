@@ -4,7 +4,7 @@ module.exports = {
   darkMode: "class",
   theme: {
     fontFamily: {
-      main: ["sans-serif"],
+      main: ["Segoe UI"],
     },
     extend: {
       width: {
@@ -37,7 +37,6 @@ module.exports = {
         "notification-bg-dark-active-tab": "#1C2E45",
         // Dark Mode (Notication)
         "bg-select-tab": "#223A56",
-        
         // Light Mode
         // Font
         "font-normal": "#163121",
