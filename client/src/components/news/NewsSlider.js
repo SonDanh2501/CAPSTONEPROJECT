@@ -30,7 +30,7 @@ const NewsSlider = ({ news }) => {
   return (
     <>
       {/* News slider for full screen*/}
-      <div className="md:w-[91vw] md:m-auto hidden md:block">
+      <div className="md:w-[90vw] md:m-auto hidden md:block">
         <Slider className="custom-slider" {...settings}>
           {news?.map((el) => (
             <NewsCard
