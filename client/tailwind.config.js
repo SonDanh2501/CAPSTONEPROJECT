@@ -25,6 +25,8 @@ module.exports = {
         io2: "#F3E8FF",
         io3: "#D2F4EE",
         io4: "#FEE2E2",
+        io5: "#F3F5B6",
+        io6: "#F4C3F7",
         slidebar_active: "#EEF6FE",
         // Dark Mode
         "header-bg-dark": "#132236",
@@ -37,7 +39,7 @@ module.exports = {
         "notification-bg-dark-active-tab": "#1C2E45",
         // Dark Mode (Notication)
         "bg-select-tab": "#223A56",
-        
+
         // Light Mode
         // Font
         "font-normal": "#163121",

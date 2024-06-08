@@ -301,6 +301,7 @@ const ratings = asyncHandler(async (req, res) => {
     );
   }
 
+
   //sumratings
   const updatedPitch = await Pitch.findById(pid);
   const ratingCount = updatedPitch.ratings.length;
@@ -324,7 +325,35 @@ const uploadImagesPitch = asyncHandler(async (req, res) => {
     updatedPitch: response ? response : "Cannot upload images pitches",
   });
 });
+const getPitchRating = asyncHandler(async (req, res) => {
+  const response = await Pitch.find().populate({
+    path: "ratings",
+    populate: {
+      path: "postedBy",
+      select: "firstname lastname avatar",
+    },
+  }).sort({ totalRatings: -1 });
+  ;
+  return res.status(200).json({
+    success: response ? true : false,
+    pitchData: response ? response : "Can not get pitch",
+  });
+});
+const getPitchWithSpecificTotalRatings = asyncHandler(async (req, res) => {
+  const totalRatings = 5; // You can also get this value from req.params if it's dynamic
+  const response = await Pitch.find({ totalRatings: totalRatings }).populate({
+    path: "ratings",
+    populate: {
+      path: "postedBy",
+      select: "firstname lastname avatar role",
+    },
+  });
 
+  return res.status(200).json({
+    success: response ? true : false,
+    pitchData: response ? response : "Can not get pitch",
+  });
+});
 module.exports = {
   createPitch,
   getPitch,
@@ -334,4 +363,6 @@ module.exports = {
   ratings,
   uploadImagesPitch,
   getPitches,
+  getPitchRating,
+  getPitchWithSpecificTotalRatings,
 };
