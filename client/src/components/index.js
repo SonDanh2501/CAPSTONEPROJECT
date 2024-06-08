@@ -65,8 +65,12 @@ export { default as ChartPrice } from "./chart/ChartPrice";
 export { default as PiechartCategory } from "./chart/PiechartCategory";
 // Event
 export { default as EventBanner } from "./event/EventBanner";
-//News
+// News
 export { default as NewsCard } from "./news/NewsCard";
 export { default as News } from "./news/News";
 export { default as NewsCarousel } from "./news/NewsCarousel";
 export { default as NewsItem } from "./news/NewsItem";
+// Comment
+export { default as Comments } from "./comment/Comments";
+export { default as CommentCard } from "./comment/CommentCard";
+export { default as CommentSlider } from "./comment/CommentSlider";

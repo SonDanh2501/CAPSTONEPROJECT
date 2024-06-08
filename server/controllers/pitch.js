@@ -340,12 +340,12 @@ const getPitchRating = asyncHandler(async (req, res) => {
   });
 });
 const getPitchWithSpecificTotalRatings = asyncHandler(async (req, res) => {
-  const totalRatings = 5; // You can also get this value from req.params if it's dynamic
+  const totalRatings = 5;
   const response = await Pitch.find({ totalRatings: totalRatings }).populate({
     path: "ratings",
     populate: {
       path: "postedBy",
-      select: "firstname lastname avatar role",
+      select: "firstname lastname avatar role avatar",
     },
   });
 

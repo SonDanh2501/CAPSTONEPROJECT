@@ -46,3 +46,8 @@ export const apiGetOrder = (params) =>
     method: "get",
     params,
   });
+export const apiGetPitchComment = () =>
+  axios({
+    url: "/pitch/topcomment",
+    method: "get",
+  });

@@ -18,7 +18,7 @@ const News = () => {
   }, []);
   return (
     <div className="w-full flex flex-col items-center">
-      <h3 className="text-[40px] font-semibold">
+      <h3 className="text-[50px] font-semibold">
         {/*Header */}
         <span className=" text-font-normal">Stay on For Updates</span>
       </h3>
@@ -29,7 +29,6 @@ const News = () => {
           boundaries of innovation to create breathtaking masterpieces
         </span>
       </div>
-
       {/* News slider*/}
       <NewsSlider news={news} />
     </div>
