@@ -8,7 +8,6 @@ const {
 const uploader = require("../config/cloudinaryconfig");
 
 
-router.get("/toprating", ctrls.getPitchRating);
 router.get("/topcomment", ctrls.getPitchWithSpecificTotalRatings);
 
 router.post(
