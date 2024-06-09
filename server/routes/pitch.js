@@ -7,6 +7,9 @@ const {
 } = require("../middlewares/verifyToken");
 const uploader = require("../config/cloudinaryconfig");
 
+
+router.get("/topcomment", ctrls.getPitchWithSpecificTotalRatings);
+
 router.post(
   "/",
   [verifyAccessToken, isAdminAndPitchOwn],

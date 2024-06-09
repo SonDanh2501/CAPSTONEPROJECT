@@ -3,12 +3,21 @@ import Button from "components/buttons/Button";
 import "./LandingBanner.css"
 import icons from "../../ultils/icons";
 import { useTranslation } from "react-i18next";
+import { useNavigate } from 'react-router-dom'; // Ensure you have react-router-dom installed
+import path from "ultils/path";
 
 const { BsReplyFill, BsShieldShaded, FaTty, AiFillGift } = icons;
 
 const LandingBanner = () => {
+    const navigate = useNavigate();
     const { t } = useTranslation();
     const { landing1, landing2, landing3, landing4, landing5, landing6, landing7, landing8, landing9, landing10 } = t("landingbanner")
+    const handleButton2 = () => {
+        navigate(`/${path.CONTACT}`)
+    }
+    const handleButton1 = () => {
+        navigate(`/${path.PITCHES}`)
+    }
     return (
         <div>
             <div className="w-full h-[1000px]">
@@ -24,11 +33,13 @@ const LandingBanner = () => {
                         <div className="flex flex-col md:flex-row items-center justify-center mt-10 gap-4">
                             <Button
                                 size={20}
+                                handleOnClick={handleButton1}
                             >
                                 {landing3}
                             </Button>
                             <Button
                                 size={20}
+                                handleOnClick={handleButton2}
                             >
                                 {landing4}
                             </Button>

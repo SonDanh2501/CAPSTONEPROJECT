@@ -301,6 +301,7 @@ const ratings = asyncHandler(async (req, res) => {
     );
   }
 
+
   //sumratings
   const updatedPitch = await Pitch.findById(pid);
   const ratingCount = updatedPitch.ratings.length;
@@ -325,6 +326,21 @@ const uploadImagesPitch = asyncHandler(async (req, res) => {
   });
 });
 
+const getPitchWithSpecificTotalRatings = asyncHandler(async (req, res) => {
+  const totalRatings = 5;
+  const response = await Pitch.find({ totalRatings: totalRatings }).populate({
+    path: "ratings",
+    populate: {
+      path: "postedBy",
+      select: "firstname lastname avatar role avatar",
+    },
+  });
+
+  return res.status(200).json({
+    success: response ? true : false,
+    pitchData: response ? response : "Can not get pitch",
+  });
+});
 module.exports = {
   createPitch,
   getPitch,
@@ -334,4 +350,5 @@ module.exports = {
   ratings,
   uploadImagesPitch,
   getPitches,
+  getPitchWithSpecificTotalRatings,
 };

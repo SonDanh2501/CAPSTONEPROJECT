@@ -71,7 +71,7 @@ const TopHeader = () => {
   const [isHoverTab, setIsHoverTab] = useState(false);
 
   const { t } = useTranslation();
-  const { infor1, infor2, infor3, infor4, infor5 } = t("information");
+  const { infor1, infor2, infor3, infor4, infor5, infor6 } = t("information");
   const { noti1, noti2, noti3 } = t("notification");
   const handleSelectTab = (tab) => {
     setIsHoverTab(tab)
@@ -260,21 +260,19 @@ const TopHeader = () => {
               </div>
               <div className="flex justify-between mx-4 py-2 bg-bg-select-tab rounded-md">
                 <span
-                  className={`w-1/2 py-1 text-center rounded-md mx-2 hover:text-indigo-700 duration-500 ${
-                    isActiveNotificationTab === 1
-                      ? "bg-notification-bg-dark-active-tab text-indigo-700"
-                      : "text-font-bg-dark cursor-pointer"
-                  }`}
+                  className={`w-1/2 py-1 text-center rounded-md mx-2 hover:text-indigo-700 duration-500 ${isActiveNotificationTab === 1
+                    ? "bg-notification-bg-dark-active-tab text-indigo-700"
+                    : "text-font-bg-dark cursor-pointer"
+                    }`}
                   onClick={() => setisActiveNotificationTab(1)}
                 >
                   {noti2}
                 </span>
                 <span
-                  className={`w-1/2 py-1 text-center rounded-md mx-2 hover:text-indigo-700 duration-500 ${
-                    isActiveNotificationTab === 2
-                      ? "bg-notification-bg-dark-active-tab text-indigo-700"
-                      : "text-font-bg-dark cursor-pointer"
-                  }`}
+                  className={`w-1/2 py-1 text-center rounded-md mx-2 hover:text-indigo-700 duration-500 ${isActiveNotificationTab === 2
+                    ? "bg-notification-bg-dark-active-tab text-indigo-700"
+                    : "text-font-bg-dark cursor-pointer"
+                    }`}
                   onClick={() => setisActiveNotificationTab(2)}
                 >
                   {noti3}
@@ -415,13 +413,13 @@ const TopHeader = () => {
             className="text-md font-bold py-2 px-4 hover:bg-gray-300/50 rounded text-black hover:scale-[1.02] transition-all"
             to={`/${path.LOGIN}`}
           >
-            Login
+            {infor5}
           </Link>
           <Link
             className="before:ease relative py-2 px-2 rounded font-bold overflow-hidden border border-green-500 bg-green-500 text-white shadow-2xl transition-all before:absolute before:right-0 before:top-0 before:h-12 before:w-6 before:translate-x-12 before:rotate-6 before:bg-white before:opacity-10 before:duration-700 hover:shadow-green-500 hover:before:-translate-x-40"
             to={`/${path.LOGIN}`}
           >
-            Sign Up
+            {infor6}
           </Link>
         </div>
       )}

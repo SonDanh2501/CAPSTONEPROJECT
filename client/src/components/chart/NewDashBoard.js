@@ -9,6 +9,9 @@ const NewDashBoard = () => {
   const [user, setUser] = useState(null);
   const [order, setOrder] = useState(null);
   const [profit, setProfit] = useState(null)
+  const [user1, setUser1] = useState(null);
+  const [user2, setUser2] = useState(null);
+
 
   const fetchOrderData = async () => {
     const response = await apiGetOrderByAdmin();
@@ -29,15 +32,25 @@ const NewDashBoard = () => {
     const response = await apiGetAllOrder();
     if (response.success) setOrder(response);
   };
+  const fetchUsers1 = async () => {
+    const response = await apiGetUsers({ role: "3" });
+    if (response.success) setUser1(response);
+  };
 
+  const fetchUsers2 = async () => {
+    const response = await apiGetUsers({ role: "2" });
+    if (response.success) setUser2(response);
+  };
   useEffect(() => {
     fetchProducts();
     fetchUsers();
     fetchOrders();
     fetchOrderData();
+    fetchUsers1();
+    fetchUsers2();
   }, []);
   return (
-    <div className="flex gap-4 pt-4">
+    <div className="flex gap-10 pt-4">
       <div className="w-44 h-36 bg-white flex flex-col justify-center items-center rounded-md shadow-md gap-2">
         <div className="rounded-full h-12 w-12 flex items-center justify-center bg-io1">
           <IoFootballOutline className="text-3xl text-sky-500" />
@@ -58,6 +71,28 @@ const NewDashBoard = () => {
             {user?.counts}
           </strong>
           <span className="text-sm text-gray-500">Total User</span>
+        </div>
+      </div>
+      <div className="w-44 h-36 bg-white flex flex-col justify-center items-center rounded-md shadow-md gap-2">
+        <div className="rounded-full h-12 w-12 flex items-center justify-center bg-io5">
+          <IoPeople className="text-3xl text-yellow-500" />
+        </div>
+        <div className="flex flex-col justify-center items-center gap-2">
+          <strong className="text-xl text-black font-semibold">
+            {user1?.counts}
+          </strong>
+          <span className="text-sm text-gray-500">Total Pitch Owner</span>
+        </div>
+      </div>
+      <div className="w-44 h-36 bg-white flex flex-col justify-center items-center rounded-md shadow-md gap-2">
+        <div className="rounded-full h-12 w-12 flex items-center justify-center bg-io6">
+          <IoPeople className="text-3xl text-pink-500" />
+        </div>
+        <div className="flex flex-col justify-center items-center gap-2">
+          <strong className="text-xl text-black font-semibold">
+            {user2?.counts}
+          </strong>
+          <span className="text-sm text-gray-500">Total Player</span>
         </div>
       </div>
       <div className="w-44 h-36 bg-white flex flex-col justify-center items-center rounded-md shadow-md gap-2">
