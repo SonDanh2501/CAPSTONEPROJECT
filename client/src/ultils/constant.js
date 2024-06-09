@@ -277,6 +277,9 @@ export const useGetadminSideBar = () => {
     adminsidebar19,
     adminsidebar20,
     adminsidebar21,
+    adminsidebar23,
+    adminsidebar24,
+    adminsidebar25,
   } = t("adminsidebar");
   return [
     {
@@ -400,15 +403,15 @@ export const useGetadminSideBar = () => {
     {
       id: 10,
       type: "PARENT",
-      text: adminsidebar19,
+      text: adminsidebar23,
       icon: <IoNotificationsOutline />,
       submenu: [
         {
-          text: adminsidebar20,
+          text: adminsidebar24,
           path: `/${path.ADMIN}/${path.CREATE_COUPON}`,
         },
         {
-          text: adminsidebar21,
+          text: adminsidebar25,
           path: `/${path.ADMIN}/${path.MANAGE_COUPON}`,
         },
       ],

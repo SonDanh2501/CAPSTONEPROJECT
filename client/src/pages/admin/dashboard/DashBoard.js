@@ -10,6 +10,7 @@ import { formatMoney, formatPrice } from "ultils/helper";
 import React, { useEffect, useState } from "react";
 import { apiGetOrderByAdmin, apiGetAllBrands } from "apis";
 import { useOutletContext } from "react-router-dom";
+import Toprating from "components/chart/TopRatings";
 
 const Dashboard = () => {
   const [open, setOpen] = useOutletContext();
@@ -40,7 +41,7 @@ const Dashboard = () => {
       <div className="w-full ml-2 py-4 border-b-2 border-gray-300">
         <h1 className="text-2xl font-bold tracking-tight">Dash Board</h1>
       </div>
-      <div className="w-[1450px]">
+      <div className="w-[1260px]">
         <div className="flex items-center gap-2 py-2">
           <div>
             <NewDashBoard />
@@ -53,6 +54,9 @@ const Dashboard = () => {
           <div className="flex-1 bg-white">
             <PiechartCategory />
           </div>
+        </div>
+        <div>
+          <Toprating></Toprating>
         </div>
         <div className="flex items-center justify-center gap-2 py-2">
           <div className="flex-1 bg-white">

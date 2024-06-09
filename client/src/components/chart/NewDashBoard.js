@@ -51,7 +51,7 @@ const NewDashBoard = () => {
   }, []);
   return (
     <div className="flex gap-10 pt-4">
-      <div className="w-52 h-36 bg-white flex flex-col justify-center items-center rounded-md shadow-md gap-2">
+      <div className="w-44 h-36 bg-white flex flex-col justify-center items-center rounded-md shadow-md gap-2">
         <div className="rounded-full h-12 w-12 flex items-center justify-center bg-io1">
           <IoFootballOutline className="text-3xl text-sky-500" />
         </div>
@@ -62,7 +62,7 @@ const NewDashBoard = () => {
           <span className="text-sm text-gray-500">Total Pitch</span>
         </div>
       </div>
-      <div className="w-52 h-36 bg-white flex flex-col justify-center items-center rounded-md shadow-md gap-2">
+      <div className="w-44 h-36 bg-white flex flex-col justify-center items-center rounded-md shadow-md gap-2">
         <div className="rounded-full h-12 w-12 flex items-center justify-center bg-io2">
           <IoPeople className="text-3xl text-violet-500" />
         </div>
@@ -73,7 +73,7 @@ const NewDashBoard = () => {
           <span className="text-sm text-gray-500">Total User</span>
         </div>
       </div>
-      <div className="w-52 h-36 bg-white flex flex-col justify-center items-center rounded-md shadow-md gap-2">
+      <div className="w-44 h-36 bg-white flex flex-col justify-center items-center rounded-md shadow-md gap-2">
         <div className="rounded-full h-12 w-12 flex items-center justify-center bg-io5">
           <IoPeople className="text-3xl text-yellow-500" />
         </div>
@@ -84,7 +84,7 @@ const NewDashBoard = () => {
           <span className="text-sm text-gray-500">Total Pitch Owner</span>
         </div>
       </div>
-      <div className="w-52 h-36 bg-white flex flex-col justify-center items-center rounded-md shadow-md gap-2">
+      <div className="w-44 h-36 bg-white flex flex-col justify-center items-center rounded-md shadow-md gap-2">
         <div className="rounded-full h-12 w-12 flex items-center justify-center bg-io6">
           <IoPeople className="text-3xl text-pink-500" />
         </div>
@@ -95,7 +95,7 @@ const NewDashBoard = () => {
           <span className="text-sm text-gray-500">Total Player</span>
         </div>
       </div>
-      <div className="w-52 h-36 bg-white flex flex-col justify-center items-center rounded-md shadow-md gap-2">
+      <div className="w-44 h-36 bg-white flex flex-col justify-center items-center rounded-md shadow-md gap-2">
         <div className="rounded-full h-12 w-12 flex items-center justify-center bg-io3">
           <IoCart className="text-3xl text-emerald-500" />
         </div>
@@ -106,7 +106,7 @@ const NewDashBoard = () => {
           <span className="text-sm text-gray-500">Total Orders</span>
         </div>
       </div>
-      <div className="w-52 h-36 bg-white flex flex-col justify-center items-center rounded-md shadow-md gap-2">
+      <div className="w-44 h-36 bg-white flex flex-col justify-center items-center rounded-md shadow-md gap-2">
         <div className="rounded-full h-12 w-12 flex items-center justify-center bg-io4">
           <IoFootballOutline className="text-3xl text-rose-500" />
         </div>

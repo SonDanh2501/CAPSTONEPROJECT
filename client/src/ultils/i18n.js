@@ -24,7 +24,8 @@ i18n
                         "infor2": "Workspace",
                         "infor3": "Sign Out",
                         "infor4": "Pitch Owner Workspace",
-                        "infor5": "Sign In or Sign Up",
+                        "infor5": "Login",
+                        "infor6": "Sign Up",
 
                     },
                     notification: {
@@ -198,6 +199,9 @@ i18n
                         "adminsidebar20": "Create Coupon",
                         "adminsidebar21": "Manage Coupon",
                         "adminsidebar22": "FAQ",
+                        "adminsidebar23": "Notification",
+                        "adminsidebar24": "Create Notification",
+                        "adminsidebar25": "Manage Notification",
                     },
                     pitchownersidebar: {
                         "pitchownersidebar1": "Dashboard",
@@ -254,7 +258,8 @@ i18n
                         "infor2": "Quản lý cá nhân",
                         "infor3": "Đăng xuất",
                         "infor4": "Quản lý chủ sân",
-                        "infor5": "Đăng nhập hoặc đăng kí",
+                        "infor5": "Đăng nhập",
+                        "infor6": "Đăng kí",
 
                     },
                     notification: {
@@ -428,6 +433,9 @@ i18n
                         "adminsidebar19": "Mã giảm giá",
                         "adminsidebar20": "Tạo mã giảm giá",
                         "adminsidebar21": "Quản lý mã giảm giá",
+                        "adminsidebar23": "Thông báo",
+                        "adminsidebar24": "Tạo thông báo",
+                        "adminsidebar25": "Quản lý thông báo",
                     },
                     pitchownersidebar: {
                         "pitchownersidebar1": "Thống kê",
