@@ -12,8 +12,8 @@ const { IoArrowForwardOutline, IoEyeOutline } = icons;
 
 const CommentCard = ({ title, comment, firstname, lastname, role, avatar }) => {
   const navigate = useNavigate();
-  return (
-    <div className=" bg-white h-[250px]  text-gray-700 md:min-h-[10rem] overflow-hidden">
+  return (  
+    <div className=" bg-white h-[250px] text-gray-700 md:min-h-[10rem] overflow-hidden">
       {/*Pitch Title*/}
       <div className="flex items-center justify-center px-2 py-2.5 font-bold text-xl text-font-normal">
         {title}
@@ -27,8 +27,8 @@ const CommentCard = ({ title, comment, firstname, lastname, role, avatar }) => {
         </span>
       </div>
       {/*Comment*/}
-      <div className="px-6 py-2.5">
-        <span className=" line-clamp-4 text-sm">
+      <div className="h-2/5 px-6 py-2.5">
+        <span className=" line-clamp-4 text-sm text-center">
           {comment}
         </span>
       </div>
