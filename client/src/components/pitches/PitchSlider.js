@@ -7,7 +7,6 @@ import PitchCard from "./PitchCard";
 const PitchSlider = ({ pitches }) => {
   const settings = {
     dots: false,
-    lazyLoad: true,
     infinite: true,
     speed: 500,
     slidesToShow: 4,
@@ -17,18 +16,25 @@ const PitchSlider = ({ pitches }) => {
       {
         breakpoint: 1200,
         settings: {
+          slidesToShow: 3,
+        },
+      },
+      {
+        breakpoint: 900,
+        settings: {
           slidesToShow: 2,
         },
       },
       {
-        breakpoint: 800,
+        breakpoint: 700,
         settings: {
           slidesToShow: 1,
-          dots: true,
+          dots: false,
         },
       },
     ],
   };
+  console.log(pitches)
   return (
     <>
       {/* News slider for full screen*/}
@@ -39,6 +45,7 @@ const PitchSlider = ({ pitches }) => {
               key={el._id}
               pid={el._id}
               image={el.images[0]}
+              image_change={el.images[1]}
               title={el.title}
               totalRatings={el.totalRatings}
               price_morning={el.price_morning}
@@ -46,6 +53,7 @@ const PitchSlider = ({ pitches }) => {
               price_afternoon={el.price_afternoon}
               category={el.category}
               brand={el.brand}
+              address={el.address[0]}
             />
           ))}
         </Slider>
@@ -58,6 +66,7 @@ const PitchSlider = ({ pitches }) => {
               key={el._id}
               pid={el._id}
               image={el.images[0]}
+              image_change={el.images[1]}
               title={el.title}
               totalRatings={el.totalRatings}
               price_morning={el.price_morning}
@@ -65,6 +74,7 @@ const PitchSlider = ({ pitches }) => {
               price_afternoon={el.price_afternoon}
               category={el.category}
               brand={el.brand}
+              address={el.address[0]}
             />
           ))}
         </Slider>

@@ -37,6 +37,7 @@ import {
   IoStar,
   IoStarHalf,
   IoStarOutline,
+  IoHeartOutline,
 } from "react-icons/io5";
 import {
   MdEmail,
@@ -163,6 +164,7 @@ const icons = {
   IoStarOutline,
   IoStar,
   IoStarHalf,
+  IoHeartOutline,
   // Material Design icons
   MdEmail,
   MdSpaceDashboard,
