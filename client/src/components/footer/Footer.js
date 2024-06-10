@@ -94,7 +94,7 @@ const Footer = () => {
               <div className="mb-5 lg:ml-12">
                 {/*Header*/}
                 <div className="relative mb-3.5">
-                  <h4 className="text-2xl py-2 text-green-800 font-bold ">
+                  <h4 className="text-2xl py-2 text-green-800 font-bold uppercase">
                     {foot3}
                   </h4>
                   <span
@@ -132,7 +132,7 @@ const Footer = () => {
               <div className="mb-5">
                 {/*Header*/}
                 <div className="relative mb-3.5">
-                  <h4 className="text-2xl py-2 text-green-800 font-bold">
+                  <h4 className="text-2xl py-2 text-green-800 font-bold uppercase">
                     {foot7}
                   </h4>
                   <span
@@ -160,7 +160,7 @@ const Footer = () => {
               <div className="mb-5">
                 {/*Header*/}
                 <div className="relative mb-3.5">
-                  <h4 className="text-2xl py-2 text-green-800 font-bold">
+                  <h4 className="text-2xl py-2 text-green-800 font-bold uppercase">
                     Information
                   </h4>
                   <span

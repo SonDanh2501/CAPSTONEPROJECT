@@ -17,13 +17,13 @@ import { useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 
 import Button from "components/buttons/Button";
-const { AiFillStar, AiOutlineMenu, BsCart } = icons;
+const { AiFillStar, AiOutlineMenu, BsCart, IoArrowForwardOutline } = icons;
 let idInterval;
 const imageArray = [poster01, poster02, poster03, poster04, poster05, poster06];
 
 const DealDaily = () => {
   const { t } = useTranslation();
-  const { deal1, deal2, deal3 } = t("dealdaily")
+  const { deal1, deal2, deal3 } = t("dealdaily");
   const navigate = useNavigate();
   const [dealdaily, setDealdaily] = useState(null);
   const [hour, setHour] = useState(0);
@@ -79,7 +79,7 @@ const DealDaily = () => {
   }, [second, minute, hour, expireTime]);
 
   return (
-    <div className=" w-full flex flex-col items-center justify-center ">
+    <div className="w-full bg-bg-light flex flex-col items-center justify-center py-8">
       {/*Content*/}
       <div className="text-3xl md:text-[50px] font-semibold text-center">
         {/*Header */}
@@ -93,18 +93,38 @@ const DealDaily = () => {
         </span>
       </div>
       {/*Content*/}
-      <div className="w-[40vw]">
+      <div className="w-[50vw]">
         <div className="w-full relative overflow-hidden">
-          <img src={dealdaily?.thumb || defaultt} alt="" className="" />
-          <div class=" absolute h-full w-full bg-black/50 flex items-center justify-center -bottom-20 hover:bottom-0 opacity-0 hover:opacity-100 duration-300 transition-all">
-          <span className=" text-lg uppercase font-semibold dark:text-white ">
+          <img src={dealdaily?.thumb || defaultt}  className="w-full h-full object-cover" />
+          <div class="absolute h-full w-full bg-black/50 flex flex-col items-center justify-center -bottom-20 hover:bottom-0 opacity-0 hover:opacity-100 duration-500 transition-all">
+            <span className="text-3xl text-white font-bold py-2">
               {dealdaily?.title}
-            </span>          </div>
+            </span>
+            <span className="flex items-center justify-center">
+              {renderStarFromNumber(dealdaily?.totalRatings)?.map(
+                (el, index) => (
+                  <span key={index}>{el}</span>
+                )
+              )}
+            </span>
+            <span className="py-2 text-white text-sm">
+              {dealdaily?.address}
+            </span>
+            <button className="flex items-center justify-center gap-2 px-8 py-3 relative overflow-hidden bg-white text-black transition-all before:absolute before:bottom-0 before:left-0 before:top-0 before:z-0 before:h-full before:w-0 before:bg-emerald-800 before:transition-all before:duration-500 hover:text-white hover:before:left-0 hover:before:w-full">
+              <span className="relative uppercase text-sm">VIEW MORE</span>
+              <span className="relative">
+                <IoArrowForwardOutline />
+              </span>
+            </button>
+            {/* <span className="text-white">{`${formatMoney(
+       dealdaily?.price
+      )} VNĐ`}</span> */}
+          </div>
         </div>
         {/*Clock*/}
-        <div className="mx-auto flex w-full max-w-4xl items-center bg-white">
+        <div className="mx-auto flex w-full max-w-4xl items-center bg-transparent py-2">
           {/*Hour */}
-          <div className="flex h-24 w-1/3 flex-col items-center justify-center gap-1 border-r-[1px] border-slate-200 font-mono md:h-36 md:gap-2">
+          <div className="flex h-24 w-1/3 flex-col items-center justify-center gap-1 border-r-[1px] border-gray-400 md:h-36 md:gap-2">
             <div className="relative w-full overflow-hidden text-center">
               <span className="block text-2xl font-medium text-black md:text-4xl lg:text-6xl xl:text-7xl">
                 {hour}
@@ -115,7 +135,7 @@ const DealDaily = () => {
             </span>
           </div>
           {/*Minute */}
-          <div className="flex h-24 w-1/3 flex-col items-center justify-center gap-1 border-r-[1px] border-slate-200 font-mono md:h-36 md:gap-2">
+          <div className="flex h-24 w-1/3 flex-col items-center justify-center gap-1 border-r-[1px] border-gray-400 md:h-36 md:gap-2">
             <div className="relative w-full overflow-hidden text-center">
               <span className="block text-2xl font-medium text-black md:text-4xl lg:text-6xl xl:text-7xl">
                 {minute}
@@ -126,7 +146,7 @@ const DealDaily = () => {
             </span>
           </div>
           {/*Second */}
-          <div className="flex h-24 w-1/3 flex-col items-center justify-center gap-1  border-slate-200 font-mono md:h-36 md:gap-2">
+          <div className="flex h-24 w-1/3 flex-col items-center justify-center gap-1 border-gray-400 md:h-36 md:gap-2">
             <div className="relative w-full overflow-hidden text-center">
               <span className="block text-2xl font-medium text-black md:text-4xl lg:text-6xl xl:text-7xl">
                 {second}

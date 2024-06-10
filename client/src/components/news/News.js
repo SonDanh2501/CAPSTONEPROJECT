@@ -24,13 +24,13 @@ const News = () => {
           Stay on For Updates
         </span>
       </div>
-      {/*Sub text */}
-      <div className="w-full lg:w-[40vw] text-sm py-6 px-4 flex">
-        <span className="text-font-normal text-center">
-          Imagination reigns supreme in this realm, with designers pushing the
-          boundaries of innovation to create breathtaking masterpieces
-        </span>
-      </div>
+        {/*Sub text */}
+        <div className="w-full lg:w-[40vw] text-sm py-6 px-4 flex">
+          <span className="text-font-normal text-center">
+            Imagination reigns supreme in this realm, with designers pushing the
+            boundaries of innovation to create breathtaking masterpieces
+          </span>
+        </div>
       {/* News slider*/}
       <NewsSlider news={news} />
     </div>

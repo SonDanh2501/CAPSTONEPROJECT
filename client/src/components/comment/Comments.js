@@ -40,7 +40,7 @@ const Comments = () => {
         {/* News slider*/}
         <CommentSlider news={pitch} />
         {/* Blank content*/}
-        <div className="w-full h-[50px] md:h-[100px]"></div>
+        <div className="w-full h-[50px] md:h-[80px]"></div>
       </div>
     </div>
   );
