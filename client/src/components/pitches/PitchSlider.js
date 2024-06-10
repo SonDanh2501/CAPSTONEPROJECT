@@ -7,38 +7,45 @@ import PitchCard from "./PitchCard";
 const PitchSlider = ({ pitches }) => {
   const settings = {
     dots: false,
-    lazyLoad: true,
     infinite: true,
     speed: 500,
-    slidesToShow: 3,
+    slidesToShow: 4,
     slidesToScroll: 1,
     initialSlide: 0,
     responsive: [
       {
         breakpoint: 1200,
         settings: {
+          slidesToShow: 3,
+        },
+      },
+      {
+        breakpoint: 900,
+        settings: {
           slidesToShow: 2,
         },
       },
       {
-        breakpoint: 800,
+        breakpoint: 700,
         settings: {
           slidesToShow: 1,
-          dots: true,
+          dots: false,
         },
       },
     ],
   };
+  console.log(pitches)
   return (
     <>
       {/* News slider for full screen*/}
-      <div className="md:w-5/6 md:m-auto hidden md:block">
+      <div className="md:w-[90vw] md:m-auto hidden md:block">
         <Slider className="custom-slider" {...settings}>
           {pitches?.map((el) => (
             <PitchCard
               key={el._id}
               pid={el._id}
               image={el.images[0]}
+              image_change={el.images[1]}
               title={el.title}
               totalRatings={el.totalRatings}
               price_morning={el.price_morning}
@@ -46,18 +53,20 @@ const PitchSlider = ({ pitches }) => {
               price_afternoon={el.price_afternoon}
               category={el.category}
               brand={el.brand}
+              address={el.address[0]}
             />
           ))}
         </Slider>
       </div>
       {/* News slider for responsive (mobile screen)*/}
-      <div className="w-5/6 m-auto md:hidden ">
+      <div className="w-[90vw] m-auto md:hidden ">
         <Slider className="" {...settings}>
           {pitches?.map((el) => (
             <PitchCard
               key={el._id}
               pid={el._id}
               image={el.images[0]}
+              image_change={el.images[1]}
               title={el.title}
               totalRatings={el.totalRatings}
               price_morning={el.price_morning}
@@ -65,6 +74,7 @@ const PitchSlider = ({ pitches }) => {
               price_afternoon={el.price_afternoon}
               category={el.category}
               brand={el.brand}
+              address={el.address[0]}
             />
           ))}
         </Slider>

@@ -8,37 +8,6 @@ import PitchSlider from "./PitchSlider";
 const FeaturePitch = () => {
   const { t } = useTranslation();
   const { feat1, feat2, feat3 } = t("featurepitch")
-  const settings = {
-    dots: true,
-    infinite: true,
-    speed: 500,
-    slidesToShow: 3,
-    slidesToScroll: 1,
-    initialSlide: 0,
-    responsive: [
-      {
-        breakpoint: 1200,
-        settings: {
-          dots: true,
-          infinite: true,
-          slidesToShow: 2,
-          slidesToScroll: 1,
-          initialSlide: 0,
-        },
-      },
-      {
-        breakpoint: 800,
-        settings: {
-          dots: true,
-          infinite: true,
-          slidesToShow: 1,
-          slidesToScroll: 1,
-          initialSlide: 0,
-        },
-      },
-    ],
-  };
-
   const [pitches, setPitches] = useState(null);
   const fetchPitches = async () => {
     const response = await apiGetPitches({
@@ -53,15 +22,18 @@ const FeaturePitch = () => {
   }, []);
 
   return (
-    <div className="w-full pb-10">
-      <h3 className="text-[40px] font-semibold py-[15px] text-center">
-        <span className="text-indigo-500">{feat1}</span>
-        <span className="border-b-2 border-indigo-500 dark:text-white">
-          {" "}
-          {feat2}
+    <div className="w-full flex flex-col items-center">
+      <div className="text-3xl md:text-[50px] font-semibold text-center">
+        {/*Header */}
+        <span className=" text-font-normal">Pitches ready To Book</span>
+      </div>
+      {/*Sub text */}
+      <div className="w-full lg:w-[40vw] text-sm py-6 px-4 flex">
+        <span className="text-font-normal text-center">
+          Imagination reigns supreme in this realm, with designers pushing the
+          boundaries of innovation to create breathtaking masterpieces
         </span>
-        <span className="dark:text-white">{feat3}</span>
-      </h3>
+      </div>
       {/* News slider*/}
       <PitchSlider pitches={pitches} />
     </div>

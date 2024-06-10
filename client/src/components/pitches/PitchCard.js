@@ -6,7 +6,14 @@ import icons from "ultils/icons";
 import SelectOption from "components/search/SelectOption";
 import { useTranslation } from "react-i18next";
 
-const { BsFillSuitHeartFill, AiFillEye, FaArrowRight } = icons;
+const {
+  BsFillSuitHeartFill,
+  AiFillEye,
+  FaArrowRight,
+  IoArrowForwardOutline,
+  IoEyeOutline,
+  IoHeartOutline,
+} = icons;
 
 const PitchCard = ({
   price_morning,
@@ -15,14 +22,16 @@ const PitchCard = ({
   totalRatings,
   title,
   image,
+  image_change,
   pid,
   category,
   brand,
+  address,
 }) => {
   const navigate = useNavigate();
   const { t } = useTranslation();
-  const { pitchcard1, pitchcard2 } = t("pitchcard")
-
+  const { pitchcard1, pitchcard2 } = t("pitchcard");
+  const [isHover, setIsHover] = useState(false);
   const getPrice = (price_morning, price_afternoon, price_evening) => {
     if ((price_morning === price_afternoon) === price_evening)
       return { price: `${formatMoney(formatPrice(price_morning))}` };
@@ -36,27 +45,109 @@ const PitchCard = ({
   };
 
   return (
-    <div className="my-4 bg-gradient-to-r from-white to-gray-100 text-gray-700 shadow-lg rounded-md overflow-hidden hover:shadow-2xl hover:shadow-gray-500 duration-300">
-      <img
-        src={image}
-        alt="pitches"
-        className="w-full h-[190px] object-cover "
-      />
-      <div className="p-5 flex flex-col gap-3">
-        <div className="flex items-center gap-2">
+    <div
+      onMouseEnter={() => setIsHover(true)}
+      onMouseLeave={() => setIsHover(false)}
+      className="my-4 bg-gradient-to-r from-white to-gray-100 text-gray-700 border border-button-color overflow-hidden hover:shadow-2xl hover:shadow-gray-500 duration-300"
+    >
+      <div className="relative h-1/2">
+        <img
+          src={`${isHover ? image_change : image}`}
+          alt="pitches"
+          className="w-full h-[190px] object-cover "
+        />
+        {/*News tag */}
+        <div class="absolute bottom-0 top-0 right-0 left-0 ">
+          <div class="flex items-center text-xs absolute top-0 left-0 bg-button-color px-3 py-1 text-white mt-3 ml-3 ">
+            <span className="font-semibold">{category}</span>
+          </div>
+        </div>
+        {/*Add to cart */}
+        <div
+          class={`flex flex-col items-center justify-end mb-2 transition duration-500 absolute bottom-0 top-0 right-0 left-0 ${
+            isHover ? "opacity-100" : "opacity-0"
+          }`}
+        >
+          <button className="flex items-center justify-center w-5/6 gap-2 py-2.5 relative overflow-hidden bg-button-color text-white transition-all before:absolute before:bottom-0 before:left-0 before:top-0 before:z-0 before:h-full before:w-0 before:bg-button-color-hover before:transition-all before:duration-500 hover:text-black hover:before:left-0 hover:before:w-full">
+            <span className="relative text-sm font-semibold">Add to Cart</span>
+            <span className="relative ">
+              <IoArrowForwardOutline />
+            </span>
+          </button>
+        </div>
+        {/*Icon */}
+        <div
+          class={`flex flex-col gap-2 items-center justify-end mb-2 transition duration-500 absolute top-0 right-0 opacity-0  mt-3 mr-3 ${
+            isHover ? "opacity-100" : "opacity-0"
+          }`}
+        >
+          {/*Icon Heart*/}
+          <button
+            className="relative flex flex-grow items-center justify-center px-1 py-1
+            overflow-hidden bg-button-color-hover shadow-lg transition-all
+            before:absolute 
+            before:h-0 
+            before:w-0 
+            before:rounded-full 
+           before:bg-red-500 
+           before:duration-500 
+           before:ease-out 
+          hover:text-white
+           hover:before:h-56 
+           hover:before:w-56"
+          >
+            <span className="relative z-10">
+              <IoHeartOutline />
+            </span>
+          </button>
+          {/*Icon Eyes*/}
+          <button
+            className="relative flex flex-grow items-center justify-center px-1 py-1
+            overflow-hidden bg-button-color-hover shadow-lg transition-all
+            before:absolute 
+            before:h-0 
+            before:w-0 
+            before:rounded-full 
+            before:bg-yellow-500 
+            before:duration-500 
+            before:ease-out 
+            hover:text-white
+            hover:before:h-56 
+            hover:before:w-56"
+          >
+            <span className="relative z-10">
+              <IoEyeOutline />
+            </span>
+          </button>
+        </div>
+      </div>
+      {/*Content */}
+      <div className="p-4 flex flex-col gap-3">
+        {/*Category, Brand */}
+        {/* <div className="flex items-center gap-2">
           <span className="px-3 py-1 rounded-full text-xs bg-gray-300 whitespace-nowrap">
             {category}
           </span>
           <span className="px-3 py-1 rounded-full text-xs bg-gray-300 whitespace-nowrap">
             {brand}
           </span>
-        </div>
+        </div> */}
+        {/*Title */}
         <h2
           className="font-semibold text-2xl overflow-ellipsis overflow-hidden whitespace-nowrap"
           title={title}
         >
           {title}
         </h2>
+        {/*Address */}
+        <span className="font-bold text-sm">{address}</span>
+        {/*Rating */}
+        <span className="flex gap-1">
+          {renderStarFromNumber(totalRatings)?.map((el, index) => (
+            <span key={index}>{el}</span>
+          ))}
+        </span>
+        {/*Price */}
         <div className="flex items-center gap-2 mt-1">
           <span className="text-xl font-bold">
             {getPrice(price_morning, price_afternoon, price_evening)?.price}
@@ -65,12 +156,8 @@ const PitchCard = ({
             {pitchcard1}
           </span>
         </div>
-        <span className="flex gap-1">
-          {renderStarFromNumber(totalRatings)?.map((el, index) => (
-            <span key={index}>{el}</span>
-          ))}
-        </span>
-        <div className="mt-5 flex gap-2">
+
+        {/* <div className="mt-5 flex gap-2">
           <button
             className="
             text-white 
@@ -106,8 +193,7 @@ const PitchCard = ({
               )
             }
           >
-            <span className="relative hidden lg:flex">{pitchcard2}
-            </span>
+            <span className="relative hidden lg:flex">{pitchcard2}</span>
             <span className="relative">
               <FaArrowRight />
             </span>
@@ -150,7 +236,7 @@ const PitchCard = ({
               <AiFillEye />
             </span>
           </button>
-        </div>
+        </div> */}
       </div>
     </div>
   );
