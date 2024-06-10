@@ -46,7 +46,7 @@ const NewsSlider = ({ news }) => {
         </Slider>
       </div>
       {/* News slider for responsive (mobile screen)*/}
-      <div className="w-5/6 m-auto md:hidden ">
+      <div className="w-[90vw] m-auto md:hidden ">
         <Slider className="" {...settings}>
           {news?.map((el) => (
             <NewsCard

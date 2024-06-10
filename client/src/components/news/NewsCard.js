@@ -10,7 +10,7 @@ const { IoArrowForwardOutline,IoEyeOutline  } = icons;
 const NewsCard = ({ nid, title, views, thumb, postedDate, description }) => {
   const navigate = useNavigate();
   return (
-    <div className=" bg-gradient-to-r from-white to-gray-100 h-[380px] text-gray-700 md:min-h-[10rem] overflow-hidden border shadow-lg transform transition-all hover:-translate-y-2 hover:shadow-2xl duration-300">
+    <div className=" bg-gradient-to-r from-white to-gray-100 h-[380px] text-gray-700 md:min-h-[10rem] overflow-hidden border border-button-color shadow-lg transform transition-all hover:shadow-2xl duration-300 ">
       <div className="relative h-1/2">
         {/* News thumbs*/}
         <img
@@ -18,12 +18,13 @@ const NewsCard = ({ nid, title, views, thumb, postedDate, description }) => {
           alt="news image"
           className="w-full h-full object-cover "
         />
-        <div class="hover:bg-gray-900 transition duration-300 absolute bottom-0 top-0 right-0 left-0 opacity-25"></div>
-        <a href="#!">
-          <div class="text-sm font-bold absolute top-0 right-0 bg-emerald-900 px-4 py-2 text-white mt-3 mr-3 ">
-            {moment(postedDate).format("DD MMMM YYYY")}
-          </div>
-        </a>
+        <div class="hover:bg-black/25 transition duration-300 absolute bottom-0 top-0 right-0 left-0 opacity-0 hover:opacity-100">
+          <a href="#!">
+            <div class="text-sm font-bold absolute top-0 right-0 bg-emerald-900 px-4 py-2 text-white mt-3 mr-3 ">
+              {moment(postedDate).format("DD MMMM YYYY")}
+            </div>
+          </a>
+        </div>
       </div>
       <div className="h-1/2 py-2 pl-4 pr-2">
         <div className="h-2/3">

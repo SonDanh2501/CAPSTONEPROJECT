@@ -17,13 +17,13 @@ import { useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 
 import Button from "components/buttons/Button";
-const { AiFillStar, AiOutlineMenu, BsCart } = icons;
+const { AiFillStar, AiOutlineMenu, BsCart, IoArrowForwardOutline } = icons;
 let idInterval;
 const imageArray = [poster01, poster02, poster03, poster04, poster05, poster06];
 
 const DealDaily = () => {
   const { t } = useTranslation();
-  const { deal1, deal2, deal3 } = t("dealdaily")
+  const { deal1, deal2, deal3 } = t("dealdaily");
   const navigate = useNavigate();
   const [dealdaily, setDealdaily] = useState(null);
   const [hour, setHour] = useState(0);
@@ -79,84 +79,83 @@ const DealDaily = () => {
   }, [second, minute, hour, expireTime]);
 
   return (
-    <div className=" w-full h-[553px] flex flex-col md:flex-row bg-gray-200 items-center justify-center dark:bg-medium">
-      <div className="md:items-start">
-        <img
-          src={dealdaily?.thumb || defaultt}
-          alt=""
-          className=" w-[467px] h-[200px] px-4 object-fill md:h-[300px]"
-        ></img>
+    <div className="w-full bg-bg-light flex flex-col items-center justify-center py-8">
+      {/*Content*/}
+      <div className="text-3xl md:text-[50px] font-semibold text-center">
+        {/*Header */}
+        <span className=" text-font-normal">Hot Deal</span>
       </div>
-      <div>
-        <div className="px-4 mt-4">
-          <div className="flex flex-col">
-            <h3 className="text-[40px] font-semibold py-[5px] ">
-              <span className="text-indigo-500">{deal1} </span>
-              <span className="dark:text-white">{deal2}</span>
-            </h3>
-            <span className=" text-lg uppercase font-semibold dark:text-white ">
+      {/*Sub text */}
+      <div className="w-full lg:w-[40vw] text-sm py-6 px-4 flex">
+        <span className="text-font-normal text-center">
+          Imagination reigns supreme in this realm, with designers pushing the
+          boundaries of innovation to create breathtaking masterpieces
+        </span>
+      </div>
+      {/*Content*/}
+      <div className="w-[50vw]">
+        <div className="w-full relative overflow-hidden">
+          <img src={dealdaily?.thumb || defaultt}  className="w-full h-full object-cover" />
+          <div class="absolute h-full w-full bg-black/50 flex flex-col items-center justify-center -bottom-20 hover:bottom-0 opacity-0 hover:opacity-100 duration-500 transition-all">
+            <span className="text-3xl text-white font-bold py-2">
               {dealdaily?.title}
             </span>
-            <span className="py-2 dark:text-white">{dealdaily?.address}</span>
-            {/* <span className="flex ">
+            <span className="flex items-center justify-center">
               {renderStarFromNumber(dealdaily?.totalRatings)?.map(
                 (el, index) => (
                   <span key={index}>{el}</span>
                 )
               )}
             </span>
-            <span>{`${formatMoney(dealdaily?.price)} VNĐ`}</span> */}
+            <span className="py-2 text-white text-sm">
+              {dealdaily?.address}
+            </span>
+            <button className="flex items-center justify-center gap-2 px-8 py-3 relative overflow-hidden bg-white text-black transition-all before:absolute before:bottom-0 before:left-0 before:top-0 before:z-0 before:h-full before:w-0 before:bg-emerald-800 before:transition-all before:duration-500 hover:text-white hover:before:left-0 hover:before:w-full">
+              <span className="relative uppercase text-sm">VIEW MORE</span>
+              <span className="relative">
+                <IoArrowForwardOutline />
+              </span>
+            </button>
+            {/* <span className="text-white">{`${formatMoney(
+       dealdaily?.price
+      )} VNĐ`}</span> */}
           </div>
-          <div className="flex gap-2 py-3 justify-center items-center sm:justify-normal">
-            <CountDown unit={"Hours"} number={hour}></CountDown>
-            <CountDown unit={"Minutes"} number={minute}></CountDown>
-            <CountDown unit={"Seconds"} number={second}></CountDown>
+        </div>
+        {/*Clock*/}
+        <div className="mx-auto flex w-full max-w-4xl items-center bg-transparent py-2">
+          {/*Hour */}
+          <div className="flex h-24 w-1/3 flex-col items-center justify-center gap-1 border-r-[1px] border-gray-400 md:h-36 md:gap-2">
+            <div className="relative w-full overflow-hidden text-center">
+              <span className="block text-2xl font-medium text-black md:text-4xl lg:text-6xl xl:text-7xl">
+                {hour}
+              </span>
+            </div>
+            <span className="text-xs font-light text-slate-500 md:text-sm lg:text-base">
+              Hour
+            </span>
           </div>
-          <button
-            className="flex 
-            items-center 
-            justify-center 
-           bg-indigo-500 
-            py-3 px-5 
-            rounded-3xl 
-            gap-2 
-            w-full
-            md:w-fit
-          text-white 
-            shadow-lg
-          shadow-blue-500/50 
-            relative  
-            overflow-hidden  
-            transition-all
-            before:absolute 
-            before:h-0 
-            before:w-0 
-            before:rounded-full 
-           before:bg-red-500 
-           before:duration-500 
-           before:ease-out 
-           hover:shadow-red-400
-           hover:text-white
-           hover:before:h-56 
-           hover:before:w-56"
-          >
-            <BsCart className="relative"></BsCart>
-            <span className="relative">{deal3}</span>
-          </button>
-          {/* <Button
-            type="button"
-            handleOnClick={() =>
-              navigate(
-                `/${dealdaily?.category?.toLowerCase()}/${dealdaily?.brand?.toLowerCase()}/${
-                  dealdaily?._id
-                }/${dealdaily?.title}`
-              )
-            }
-            style="flex"
-          >
-            <AiOutlineMenu></AiOutlineMenu>
-            <span>Option</span>
-          </Button> */}
+          {/*Minute */}
+          <div className="flex h-24 w-1/3 flex-col items-center justify-center gap-1 border-r-[1px] border-gray-400 md:h-36 md:gap-2">
+            <div className="relative w-full overflow-hidden text-center">
+              <span className="block text-2xl font-medium text-black md:text-4xl lg:text-6xl xl:text-7xl">
+                {minute}
+              </span>
+            </div>
+            <span className="text-xs font-light text-slate-500 md:text-sm lg:text-base">
+              Minute
+            </span>
+          </div>
+          {/*Second */}
+          <div className="flex h-24 w-1/3 flex-col items-center justify-center gap-1 border-gray-400 md:h-36 md:gap-2">
+            <div className="relative w-full overflow-hidden text-center">
+              <span className="block text-2xl font-medium text-black md:text-4xl lg:text-6xl xl:text-7xl">
+                {second}
+              </span>
+            </div>
+            <span className="text-xs font-light text-slate-500 md:text-sm lg:text-base">
+              Second
+            </span>
+          </div>
         </div>
       </div>
     </div>
