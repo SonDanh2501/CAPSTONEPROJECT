@@ -10,7 +10,7 @@ const PitchSlider = ({ pitches }) => {
     lazyLoad: true,
     infinite: true,
     speed: 500,
-    slidesToShow: 3,
+    slidesToShow: 4,
     slidesToScroll: 1,
     initialSlide: 0,
     responsive: [
@@ -32,7 +32,7 @@ const PitchSlider = ({ pitches }) => {
   return (
     <>
       {/* News slider for full screen*/}
-      <div className="md:w-5/6 md:m-auto hidden md:block">
+      <div className="md:w-[90vw] md:m-auto hidden md:block">
         <Slider className="custom-slider" {...settings}>
           {pitches?.map((el) => (
             <PitchCard
@@ -51,7 +51,7 @@ const PitchSlider = ({ pitches }) => {
         </Slider>
       </div>
       {/* News slider for responsive (mobile screen)*/}
-      <div className="w-5/6 m-auto md:hidden ">
+      <div className="w-[90vw] m-auto md:hidden ">
         <Slider className="" {...settings}>
           {pitches?.map((el) => (
             <PitchCard
