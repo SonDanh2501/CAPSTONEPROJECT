@@ -1,4 +1,5 @@
 import { RiPhoneFill } from "react-icons/ri";
+import { FiBox } from "react-icons/fi";
 import { TiCancel } from "react-icons/ti";
 import { IoIosArrowForward } from "react-icons/io";
 import { SiBrandfolder } from "react-icons/si";
@@ -38,6 +39,10 @@ import {
   IoStarHalf,
   IoStarOutline,
   IoHeartOutline,
+  IoGiftOutline,
+  IoHelpBuoyOutline,
+  IoLogoDropbox,
+  IoChevronDown,
 } from "react-icons/io5";
 import {
   MdEmail,
@@ -165,6 +170,10 @@ const icons = {
   IoStar,
   IoStarHalf,
   IoHeartOutline,
+  IoGiftOutline,
+  IoHelpBuoyOutline,
+  IoLogoDropbox,
+  IoChevronDown ,
   // Material Design icons
   MdEmail,
   MdSpaceDashboard,
@@ -201,6 +210,7 @@ const icons = {
   GoDotFill,
   TiCancel,
   SiBrandfolder,
+  FiBox,
 };
 
 export default icons;

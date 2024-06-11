@@ -8,29 +8,56 @@ export const useGetNavigation = () => {
   return [
     {
       id: 1,
-      value: nav1,
+      type: "SINGLE",
+      value: "Home",
       path: `/${path.HOME}`,
     },
     {
       id: 2,
-      value: nav2,
+      type: "PARENT",
+      value: "Product",
       path: `/${path.PITCHES}`,
+      submenu: [
+        {
+          text: "Booking Page",
+          path: `/${path.PITCHES}`,
+        },
+        {
+          text: "News",
+          path: `/${path.NEWS}`,
+        },
+      ],
     },
     {
       id: 3,
-      value: nav3,
-      path: `/${path.FAQ}`,
+      type: "PARENT",
+      value: "Pages",
+      submenu: [
+        {
+          text: "Contact Us",
+          path: `/${path.CONTACT}`,
+        },
+        {
+          text: "Our Faq's",
+          path: `/${path.FAQ}`,
+        },
+      ],
     },
-    {
-      id: 4,
-      value: nav4,
-      path: `/${path.NEWS}`,
-    },
-    {
-      id: 5,
-      value: nav5,
-      path: `/${path.CONTACT}`,
-    },
+    // {
+    //   id: 3,
+    //   value: nav3,
+    //   path: `/${path.FAQ}`,
+    // },
+    // {
+    //   id: 4,
+    //   value: nav4,
+    //   path: `/${path.NEWS}`,
+    // },
+    // {
+    //   id: 5,
+    //   value: nav5,
+    //   path: `/${path.CONTACT}`,
+    // },
   ];
 };
 

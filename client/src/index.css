@@ -3,6 +3,12 @@
 @tailwind utilities;
 
 
+.body {
+    font-family: "Marcellus", serif;
+    font-weight: 400;
+    font-style: normal;
+  }
+
 .custom-slider .slick-slide > div {
     margin: 0 10px;
 }

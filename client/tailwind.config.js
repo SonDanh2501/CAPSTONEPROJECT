@@ -4,7 +4,8 @@ module.exports = {
   darkMode: "class",
   theme: {
     fontFamily: {
-      main: ["Segoe UI"],
+      main: ["Marcellus", "ui-serif"],
+      'mono': ['ui-monospace', 'SFMono-Regular'],
     },
     extend: {
       width: {
@@ -110,6 +111,9 @@ module.exports = {
           "slide-right 0.5s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;",
         "scale-up-center":
           "scale-up-ver-center 0.15s cubic-bezier(0.390, 0.575, 0.565, 1.000) both;",
+      },
+      rotate: {
+        "360": "360deg",
       },
     },
   },

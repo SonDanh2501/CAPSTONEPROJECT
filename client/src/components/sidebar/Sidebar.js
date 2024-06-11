@@ -6,16 +6,12 @@ const Sidebar = () => {
   const { categories } = useSelector((state) => state.app);
 
   return (
-    <div className="flex flex-col border">
+    <div className="flex flex-col gap-4 font-mono font-light py-2">
       {categories?.map((el) => (
         <NavLink
           key={formattedCategory(el.title)}
           to={formattedCategory(el.title)}
-          className={({ isActive }) =>
-            isActive
-              ? "bg-main text-white px-5 pt -[25px] pb-[20px] text-sm hover:text-main"
-              : "px-5 pt-[25px] pb-[20px] text-sm hover:text-main hover:text-lg duration-100"
-          }
+          className="w-fit border-b-2 border-transparent hover:border-black duration-300 "
         >
           {el.title}
         </NavLink>

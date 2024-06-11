@@ -37,7 +37,7 @@ const PitchSlider = ({ pitches }) => {
   console.log(pitches)
   return (
     <>
-      {/* News slider for full screen*/}
+      {/* Pitches slider for full screen*/}
       <div className="md:w-[90vw] md:m-auto hidden md:block">
         <Slider className="custom-slider" {...settings}>
           {pitches?.map((el) => (
@@ -58,7 +58,7 @@ const PitchSlider = ({ pitches }) => {
           ))}
         </Slider>
       </div>
-      {/* News slider for responsive (mobile screen)*/}
+      {/* Pitches slider for responsive (mobile screen)*/}
       <div className="w-[90vw] m-auto md:hidden ">
         <Slider className="" {...settings}>
           {pitches?.map((el) => (

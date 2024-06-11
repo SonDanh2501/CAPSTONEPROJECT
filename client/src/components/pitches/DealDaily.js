@@ -79,7 +79,7 @@ const DealDaily = () => {
   }, [second, minute, hour, expireTime]);
 
   return (
-    <div className="w-full bg-bg-light flex flex-col items-center justify-center py-8">
+    <div className="w-full bg-bg-light flex flex-col items-center justify-center py-20">
       {/*Content*/}
       <div className="text-3xl md:text-[50px] font-semibold text-center">
         {/*Header */}
@@ -88,14 +88,17 @@ const DealDaily = () => {
       {/*Sub text */}
       <div className="w-full lg:w-[40vw] text-sm py-6 px-4 flex">
         <span className="text-font-normal text-center">
-          Imagination reigns supreme in this realm, with designers pushing the
-          boundaries of innovation to create breathtaking masterpieces
+          Don't miss our SALE: Save up to 50% on select items! This offer is for
+          a limited time only. Hurry and shop your favorite items now
         </span>
       </div>
       {/*Content*/}
       <div className="w-[50vw]">
         <div className="w-full relative overflow-hidden">
-          <img src={dealdaily?.thumb || defaultt}  className="w-full h-full object-cover" />
+          <img
+            src={dealdaily?.thumb || defaultt}
+            className="w-full h-full object-cover"
+          />
           <div class="absolute h-full w-full bg-black/50 flex flex-col items-center justify-center -bottom-20 hover:bottom-0 opacity-0 hover:opacity-100 duration-500 transition-all">
             <span className="text-3xl text-white font-bold py-2">
               {dealdaily?.title}
@@ -122,7 +125,7 @@ const DealDaily = () => {
           </div>
         </div>
         {/*Clock*/}
-        <div className="mx-auto flex w-full max-w-4xl items-center bg-transparent py-2">
+        <div className="mx-auto flex w-full max-w-4xl items-center bg-transparent py-6">
           {/*Hour */}
           <div className="flex h-24 w-1/3 flex-col items-center justify-center gap-1 border-r-[1px] border-gray-400 md:h-36 md:gap-2">
             <div className="relative w-full overflow-hidden text-center">
