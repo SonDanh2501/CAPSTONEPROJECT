@@ -30,8 +30,8 @@ const FeaturePitch = () => {
       {/*Sub text */}
       <div className="w-full lg:w-[40vw] text-sm py-6 px-4 flex">
         <span className="text-font-normal text-center">
-          Imagination reigns supreme in this realm, with designers pushing the
-          boundaries of innovation to create breathtaking masterpieces
+          Football is not only a favorite sport for men, but today there are
+          many girls who like this sport.
         </span>
       </div>
       {/* News slider*/}
