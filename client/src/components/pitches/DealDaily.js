@@ -79,7 +79,7 @@ const DealDaily = () => {
   }, [second, minute, hour, expireTime]);
 
   return (
-    <div className="w-full bg-bg-light flex flex-col items-center justify-center py-8">
+    <div className="w-full bg-bg-light flex flex-col items-center justify-center py-14">
       {/*Content*/}
       <div className="text-3xl md:text-[50px] font-semibold text-center">
         {/*Header */}

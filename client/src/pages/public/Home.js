@@ -21,25 +21,25 @@ const Home = () => {
   const { categories } = useSelector((state) => state.app);
   return (
     <div className="w-full">
-      <div>
-        <LandingBanner></LandingBanner>
-      </div>
-      <div className="w-full my-10">
-        <FeaturePitch></FeaturePitch>
-      </div>
-      <div className="w-full my-10">
-        <DealDaily></DealDaily>
-      </div>
       {/* <div className="flex flex-col gap-5 w-[30%] flex-auto">
           <Sidebar></Sidebar>
         </div> */}
-      <div className="w-full my-10">
+      <div className="">
+        <LandingBanner />
+      </div>
+      <div className="w-full py-12">
+        <FeaturePitch />
+      </div>
+      <div className="w-full ">
         <EventBanner />
       </div>
-      <div className="w-full py-8">
+      <div className="w-full ">
+        <DealDaily />
+      </div>
+      <div className="w-full py-12">
         <Comments />
       </div>
-      <div className="w-full py-8">
+      <div className="w-full py-12">
         <News />
       </div>
       {/*Email subcribe component*/}

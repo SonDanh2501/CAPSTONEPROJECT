@@ -10,7 +10,12 @@ const EventBanner = () => {
   const { t } = useTranslation();
   const { event1, event2, event3, event4, event5 } = t("eventbanner");
   return (
-    <div className="w-full flex items-center justify-center py-8 ">
+    <div
+      style={{
+        background: "linear-gradient( #FFFFFF 50%, #EEF1E4 50%)",
+      }}
+      className="w-full  flex items-center justify-center "
+    >
       <div className="w-[90vw] h-full overflow-hidden relative ">
         <img
           onMouseEnter={() => setHoverZoom(true)}

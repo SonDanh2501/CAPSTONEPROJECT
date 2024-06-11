@@ -4,7 +4,7 @@ module.exports = {
   darkMode: "class",
   theme: {
     fontFamily: {
-      main: ["Segoe UI"],
+      main: ["Marcellus"],
     },
     extend: {
       width: {
