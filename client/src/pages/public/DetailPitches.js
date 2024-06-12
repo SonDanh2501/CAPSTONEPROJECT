@@ -213,7 +213,7 @@ const DetailPitches = ({ isQuickView, data }) => {
     fetchBooking();
   }, [selectedDate]);
   return (
-    <div className={clsx("w-full")}>
+    <div className="w-full">
       {/*BreadCrumb*/}
       {!isQuickView && (
         <div className="h-[81px] flex justify-center items-center bg-gray-100">
@@ -234,7 +234,7 @@ const DetailPitches = ({ isQuickView, data }) => {
           isQuickView ? "max-w-[1200px] gap-16 p-8" : "w-main"
         )}
       >
-              {/*Img and Slider Image*/}
+        {/*Img and Slider Image*/}
         <div
           className={clsx("flex flex-col gap-3 w-2/5 ", isQuickView && "w-1/2")}
         >
@@ -243,7 +243,7 @@ const DetailPitches = ({ isQuickView, data }) => {
             alt="pitch"
             className="border h-[458px] w-[470px] object-cover"
           />
-          <div className="w-[458px] ml-2">
+          <div className="w-[458px] ml-2 bg-black">
             <Slider className="image-slider" {...settings}>
               {pitch?.images?.map((el) => (
                 <div className="flex w-full gap-2" key={el}>
@@ -362,12 +362,7 @@ const DetailPitches = ({ isQuickView, data }) => {
         )} */}
       </div>
 
-
-
-      
-
-
-{/*       
+      {/*       
       {!isQuickView && (
         <>
           <div className="w-main m-auto mt-8">
