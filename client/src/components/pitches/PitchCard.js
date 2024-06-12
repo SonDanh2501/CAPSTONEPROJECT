@@ -56,7 +56,7 @@ const PitchCard = ({
           alt="pitches"
           className="w-full h-[190px] object-cover "
         />
-        {/*News tag */}
+        {/*Category tag */}
         <div class="absolute bottom-0 top-0 right-0 left-0 ">
           <div class="flex items-center text-xs absolute top-0 left-0 bg-button-color px-3 py-1 text-white mt-3 ml-3 ">
             <span className="font-semibold">{category}</span>
@@ -134,7 +134,7 @@ const PitchCard = ({
         </div> */}
         {/*Title */}
         <h2
-          className="font-semibold text-2xl overflow-ellipsis overflow-hidden whitespace-nowrap"
+          className="font-semibold text-2xl line-clamp-1"
           title={title}
         >
           {title}
@@ -148,15 +148,14 @@ const PitchCard = ({
           ))}
         </span>
         {/*Price */}
-        <div className="flex items-center gap-2 mt-1">
-          <span className="text-xl font-bold">
+        <div className="flex items-center gap-2">
+          <span className="text-base font-bold">
             {getPrice(price_morning, price_afternoon, price_evening)?.price}
           </span>
-          <span className="bg-green-400 px-1.5 py-0.5 rounded-md text-xs text-white">
+          <span className="bg-green-400 px-2 py-1 rounded-md text-xs tracking-tighter text-white">
             {pitchcard1}
           </span>
         </div>
-
         {/* <div className="mt-5 flex gap-2">
           <button
             className="

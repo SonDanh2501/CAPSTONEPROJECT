@@ -12,7 +12,7 @@ import {
   SearchItem,
   InputSelect,
   Pagination,
-  Skeleton
+  Skeleton,
 } from "components";
 import { apiGetPitches } from "apis";
 import Masonry from "react-masonry-css";
@@ -20,13 +20,14 @@ import { useGetSort } from "ultils/constant";
 import { formattedCategory } from "ultils/helper";
 import { useSelector } from "react-redux";
 import { useTranslation } from "react-i18next";
+import icons from "ultils/icons";
 
+const { IoFilter } = icons;
 const Pitches = () => {
   const { t } = useTranslation();
-  const { filter1, filter2, filter4, filter6, filter7, filter0 } = t("filter")
+  const { filter1, filter2, filter4, filter6, filter7, filter0 } = t("filter");
   const breakpointColumnsObj = {
-    default: 4,
-    1400: 3,
+    default: 3,
     1250: 2,
     1000: 1,
   };
@@ -47,11 +48,11 @@ const Pitches = () => {
   const fetchProductsByCategory = async (queries) => {
     if (getCategory && getCategory.length > 0) {
       queries.category = getCategory;
-    };
+    }
     const response = await apiGetPitches(queries);
     if (response.success) {
       setpitches(response);
-    };
+    }
   };
   const changeActiveFilter = useCallback(
     (name) => {
@@ -67,8 +68,7 @@ const Pitches = () => {
     [sort]
   );
 
-
-  console.log(categories)
+  console.log(categories);
   useEffect(() => {
     const queries = Object.fromEntries([...params]);
     let priceQuery = {};
@@ -115,7 +115,6 @@ const Pitches = () => {
   }, [searching, params]);
 
   useEffect(() => {
-    console.log("RUN")
     setTimeout(() => {
       setLoading(false);
     }, 1500);
@@ -124,55 +123,110 @@ const Pitches = () => {
   // console.log(getCategory);
   return (
     <div className="w-full dark:bg-medium">
+      {/*Bread crumb*/}
       <div className="h-[81px] flex justify-center items-center bg-gray-100 dark:bg-dark">
         <div className="w-main dark:text-white">
           <h3 className="font-semibold uppercase">{category}</h3>
           <Breadcrumb category={category}> </Breadcrumb>
         </div>
       </div>
-
-      <div className="w-full border p-4 flex justify-between mt-8 mx-auto gap-3">
-        <div className="flex flex-col gap-3 ">
-          <span className="font-semibold text-sm dark:text-white">{filter1}</span>
-          <div className="flex items-center gap-4">
-            <SearchItem
-              name={filter2}
-              activeClick={activeClick}
-              changeActiveFilter={changeActiveFilter}
-              type="input"
-            ></SearchItem>
-            <SearchItem
-              name={filter4}
-              activeClick={activeClick}
-              changeActiveFilter={changeActiveFilter}
-            ></SearchItem>
+      {/*Filter Section*/}
+      <div className="w-full flex items-center justify-center py-4">
+        <div className="w-[85vw] flex gap-8">
+          {/*Filter By Header*/}
+          <div className="w-1/4 flex items-center gap-2 border border-green-700 px-3 py-1">
+            <span className="text-2xl">
+              <IoFilter />
+            </span>
+            <span className="text-2xl font-bold ">Filter</span>
           </div>
-        </div>
-        <div className="flex gap-3 ">
-          <div className="flex flex-col gap-3 ">
-            <span className="font-semibold text-sm dark:text-white">{filter6}</span>
-            <input
-              onChange={(e) => setSearching(e.target.value)}
-              type="type"
-              value={searching}
-              id="q"
-              className="form-input my-auto rounded-md w-full text-sm mb-1 "
-            />
-          </div>
-          <div className="flex flex-col gap-3">
-            <span className="font-semibold text-sm dark:text-white">{filter7}</span>
-            <div className="w-full">
+          {/*Sort, Search Header*/}
+          <div className="w-3/4 flex justify-between border border-green-700 px-3 py-1">
+            {/*Search*/}
+            <div className="flex flex-col">
+              <input
+                onChange={(e) => setSearching(e.target.value)}
+                placeholder="Searching..."
+                type="type"
+                value={searching}
+                id="q"
+                className="form-input w-full text-sm focus:ring-0 focus:border-green-700"
+              />
+            </div>
+            {/*Sort*/}
+            <div className="w-fit flex items-center gap-2">
+              <span className="font-bold font-mono">{filter7}</span>
               <InputSelect
                 changeValue={changeValue}
                 value={sort}
                 options={sorts}
-              ></InputSelect>
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+      {/*Filter Select and Pitches Section*/}
+      <div className="w-full flex items-center justify-center">
+        <div className="w-[85vw] flex gap-8">
+          {/*Filter Select Option*/}
+          <div className="w-1/4 border border-green-700 h-fit">
+            {/*Container Address*/}
+            <div className="px-2 py-4 border-b border-gray-300">
+              {/*Header Address Select Option*/}
+              <div className="bg-bg-light p-2 ">
+                <span className="uppercase text-lg">Address</span>
+              </div>
+              {/*List Address Option*/}
+              <div className="flex flex-col gap-2">
+                <SearchItem
+                  name={filter4}
+                  activeClick={activeClick}
+                  changeActiveFilter={changeActiveFilter}
+                ></SearchItem>
+              </div>
+            </div>
+            {/*Container Price*/}
+            <div className="px-2 py-4 ">
+              {/*Header Address Select Option*/}
+              <div className="bg-bg-light p-2 ">
+                <span className="uppercase text-lg">Price</span>
+              </div>
+              {/*List Address Option*/}
+              <div className="flex flex-col gap-2">
+                <SearchItem
+                  name={filter2}
+                  activeClick={activeClick}
+                  changeActiveFilter={changeActiveFilter}
+                  type="input"
+                ></SearchItem>
+              </div>
+            </div>
+          </div>
+          {/*Pitches*/}
+          <div className="w-3/4">
+            <Masonry
+              breakpointCols={breakpointColumnsObj}
+              className="my-masonry-grid"
+              columnClassName="my-masonry-grid_column"
+            >
+              {pitches?.pitches?.map((el) => (
+                <div key={el._id} className="cursor-pointer">
+                  {loading ? (
+                    <Skeleton />
+                  ) : (
+                    <Pitch pid={el._id} pitchData={el} normal={true} />
+                  )}
+                </div>
+              ))}
+            </Masonry>
+            <div className="md:w-full w-main m-auto my-4 flex justify-end">
+              <Pagination totalCount={pitches?.totalCount} />
             </div>
           </div>
         </div>
       </div>
 
-      <div className="mt-8 w-full m-auto">
+      {/* <div className="mt-8 w-full m-auto">
         <div className="flex items-center justify-center gap-4 mb-12 ">
           <button
             onClick={() => {
@@ -219,8 +273,7 @@ const Pitches = () => {
       </div>
       <div className="md:w-full w-main m-auto my-4 flex justify-end">
         <Pagination totalCount={pitches?.totalCount} />
-      </div>
-      {/* <div className="w-full h-[500px]"></div> */}
+      </div>  */}
     </div>
   );
 };

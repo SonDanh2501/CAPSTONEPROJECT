@@ -74,3 +74,5 @@ export { default as NewsItem } from "./news/NewsItem";
 export { default as Comments } from "./comment/Comments";
 export { default as CommentCard } from "./comment/CommentCard";
 export { default as CommentSlider } from "./comment/CommentSlider";
+// MapBox
+export { default as MapBox } from "./map/MapBox";

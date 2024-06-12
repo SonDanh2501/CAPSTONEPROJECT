@@ -1,5 +1,6 @@
 import React, { Fragment, memo, useEffect, useState } from "react";
-import logo from "assets/logo.png";
+import logo_full from "assets/logo_full.png";
+
 import { useGetadminSideBar } from "ultils/constant";
 import { Link, NavLink } from "react-router-dom";
 import clsx from "clsx";
@@ -52,7 +53,7 @@ const AdminSideBar = ({ open, setOpen }) => {
         <div className="flex items-center justify-between p-4 pb-2 ">
           <Link to={"/"}>
             <img
-              src={logo}
+              src={logo_full}
               alt="logo"
               className={`w-32 ${!open && "hidden"}`}
             />

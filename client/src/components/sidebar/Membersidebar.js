@@ -2,7 +2,7 @@ import React, { Fragment, memo, useState } from "react";
 import avatar from "assets/defaultava.png";
 import { useGetmemberSidebar } from "ultils/constant";
 import { Link, NavLink } from "react-router-dom";
-import logo from "assets/logo.png";
+import logo from "assets/logo_full.png";
 import clsx from "clsx";
 import { useSelector } from "react-redux";
 import path from "ultils/path";
