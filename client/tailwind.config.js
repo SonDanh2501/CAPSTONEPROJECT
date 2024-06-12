@@ -5,7 +5,7 @@ module.exports = {
   theme: {
     fontFamily: {
       main: ["Marcellus", "ui-serif"],
-      'mono': ['ui-monospace', 'SFMono-Regular'],
+      mono: ["ui-monospace", "SFMono-Regular"],
     },
     extend: {
       width: {
@@ -31,7 +31,6 @@ module.exports = {
         slidebar_active: "#EEF6FE",
         // Dark Mode
         "header-bg-dark": "#132236",
-        "icon-bg-dark": "#6F86A7",
         "footer-bg-dark": "#EEF1E4",
         // Dark Mode (Header Tab Personal)
         "font-bg-dark": "#90AFD2",
@@ -40,7 +39,7 @@ module.exports = {
         "notification-bg-dark-active-tab": "#1C2E45",
         // Dark Mode (Notication)
         "bg-select-tab": "#223A56",
-
+        
         // Light Mode
         // Font
         "font-normal": "#163121",

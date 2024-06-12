@@ -15,16 +15,24 @@ import { apiUpdateWishlist } from "apis";
 import { getCurrent } from "store/user/asyncAction";
 import { useTranslation } from "react-i18next";
 
-const { AiFillEye, AiOutlineMenu, BsFillSuitHeartFill, FaArrowRight } = icons;
+const {
+  AiFillEye,
+  AiOutlineMenu,
+  BsFillSuitHeartFill,
+  FaArrowRight,
+  IoArrowForwardOutline,
+  IoEyeOutline,
+  IoHeartOutline,
+} = icons;
 
 const Pitch = ({ pitchData, isNew, normal, navigate, dispatch, pid }) => {
+  const [isHover, setIsHover] = useState(false);
   const { current } = useSelector((state) => state.user);
   const [isShowOption, setIsShowOption] = useState(false);
   const currentTime = new Date();
   const currentHour = currentTime.getHours();
   const { t } = useTranslation();
-  const { pitchcard1, pitchcard2 } = t("pitchcard")
-
+  const { pitchcard1, pitchcard2 } = t("pitchcard");
 
   const getPrice = (price_morning, price_afternoon, price_evening) => {
     if (currentHour >= 4 && currentHour < 11) {
@@ -42,7 +50,8 @@ const Pitch = ({ pitchData, isNew, normal, navigate, dispatch, pid }) => {
     e.stopPropagation();
     if (flag === "MENU")
       navigate(
-        `/${pitchData?.category?.toLowerCase()}/${pitchData?.brand?.toLowerCase()}/${pitchData?._id
+        `/${pitchData?.category?.toLowerCase()}/${pitchData?.brand?.toLowerCase()}/${
+          pitchData?._id
         }/${pitchData?.title}`
       );
     if (flag === "QUICK_VIEW") {
@@ -71,31 +80,22 @@ const Pitch = ({ pitchData, isNew, normal, navigate, dispatch, pid }) => {
   };
   return (
     <div
-      className=" max-w-[285px] min-w-[250px] bg-gradient-to-r from-white to-gray-300 shadow-lg rounded-md overflow-hidden hover:shadow-2xl hover:shadow-gray-500 duration-300 hover:bg-gradient-to-l"
+      onMouseEnter={() => setIsHover(true)}
+      onMouseLeave={() => setIsHover(false)}
       onClick={(e) =>
         navigate(
-          `/${pitchData?.category?.toLowerCase()}/${pitchData?.brand?.toLowerCase()}/${pitchData?._id
+          `/${pitchData?.category?.toLowerCase()}/${pitchData?.brand?.toLowerCase()}/${
+            pitchData?._id
           }/${pitchData?.title}`
         )
       }
-      onMouseEnter={(e) => {
-        e.stopPropagation();
-        setIsShowOption(true);
-      }}
-      onMouseLeave={(e) => {
-        e.stopPropagation();
-        setIsShowOption(false);
-      }}
+      className="bg-gradient-to-r from-white to-gray-100 text-gray-700 border border-button-color overflow-hidden hover:shadow-2xl hover:shadow-gray-500 duration-300"
     >
-      <div className="w-full relative px-3 py-3">
+      <div className="relative h-1/2">
+        {/*Hover Icon */}
         {isShowOption && (
           <div className="absolute bottom-[-10px] left-0 right-0 flex justify-center gap-2 animate-slide-top">
-            <span onClick={(e) => handleClickOptions(e, "QUICK_VIEW")}>
-              <SelectOption
-                quickview
-                icon={<AiFillEye></AiFillEye>}
-              ></SelectOption>
-            </span>
+            <span onClick={(e) => handleClickOptions(e, "QUICK_VIEW")}></span>
             <span onClick={(e) => handleClickOptions(e, "MENU")}>
               <SelectOption
                 detail
@@ -114,39 +114,98 @@ const Pitch = ({ pitchData, isNew, normal, navigate, dispatch, pid }) => {
             </span>
           </div>
         )}
+        {/*Image pitches*/}
         <img
           src={pitchData?.thumb || defaultt}
-          alt="thumb"
-          className="w-full h-[190px] object-fill rounded-md"
-        ></img>
+          alt="pitches"
+          className="w-full h-[190px] object-cover"
+        />
+        {/*Category tag */}
+        <div class="absolute bottom-0 top-0 right-0 left-0 ">
+          <div class="flex items-center text-xs absolute top-0 left-0 bg-button-color px-3 py-1 text-white mt-3 ml-3 ">
+            <span className="font-semibold">{pitchData?.category}</span>
+          </div>
+        </div>
+        {/*Add to cart */}
+        <div
+          class={`flex flex-col items-center justify-end mb-2 transition duration-500 absolute bottom-0 top-0 right-0 left-0 ${
+            isHover ? "opacity-100" : "opacity-0"
+          }`}
+        >
+          <button className="flex items-center justify-center w-5/6 gap-2 py-2.5 relative overflow-hidden bg-button-color text-white transition-all before:absolute before:bottom-0 before:left-0 before:top-0 before:z-0 before:h-full before:w-0 before:bg-button-color-hover before:transition-all before:duration-500 hover:text-black hover:before:left-0 hover:before:w-full">
+            <span className="relative text-sm font-semibold">Add to Cart</span>
+            <span className="relative ">
+              <IoArrowForwardOutline />
+            </span>
+          </button>
+        </div>
+        {/*Icon */}
+        <div
+          class={`flex flex-col gap-2 items-center justify-end mb-2 transition duration-500 absolute top-0 right-0 opacity-0  mt-3 mr-3 ${
+            isHover ? "opacity-100" : "opacity-0"
+          }`}
+        >
+          {/*Icon Heart*/}
+          <button
+            className="relative flex flex-grow items-center justify-center px-1 py-1
+            overflow-hidden bg-button-color-hover shadow-lg transition-all
+            before:absolute 
+            before:h-0 
+            before:w-0 
+            before:rounded-full 
+           before:bg-red-500 
+           before:duration-500 
+           before:ease-out 
+          hover:text-white
+           hover:before:h-56 
+           hover:before:w-56"
+          >
+            <span className="relative z-10">
+              <IoHeartOutline />
+            </span>
+          </button>
+          {/*Icon Eyes*/}
+          <button
+            className="relative flex flex-grow items-center justify-center px-1 py-1
+            overflow-hidden bg-button-color-hover shadow-lg transition-all
+            before:absolute 
+            before:h-0 
+            before:w-0 
+            before:rounded-full 
+            before:bg-yellow-500 
+            before:duration-500 
+            before:ease-out 
+            hover:text-white
+            hover:before:h-56 
+            hover:before:w-56"
+          >
+            <span className="relative z-10">
+              <IoEyeOutline />
+            </span>
+          </button>
+        </div>
       </div>
-
-      <div className="p-5 flex flex-col gap-3">
-        {/* <div className="flex items-center gap-2">
-          <span className="px-3 py-1 rounded-full text-xs bg-gray-300">
-            {pitchData?.category}
-          </span>
-          <span className="px-3 py-1 rounded-full text-xs bg-gray-300">
-            {pitchData?.brand}
-          </span>
-        </div> */}
+      {/*Content */}
+      <div className="p-4 flex flex-col gap-3">
         <h2
-          className="font-semibold text-2xl line-clamp-1 text-center"
+          className="font-semibold text-2xl line-clamp-1"
           title={pitchData?.title}
         >
           {pitchData?.title}
         </h2>
-        <div className="flex gap-2 justify-center text-sm">
-          <span>{pitchData?.brand},</span>
-          <span>{pitchData?.category}</span>
-        </div>
-        <span className="flex gap-1 justify-center">
+        {/*Address */}
+        <span className="font-bold text-sm line-clamp-2">
+          {pitchData?.address}
+        </span>
+        {/*Rating */}
+        <span className="flex gap-1">
           {renderStarFromNumber(pitchData?.totalRatings)?.map((el, index) => (
             <span key={index}>{el}</span>
           ))}
         </span>
-        <div className="flex items-center justify-center gap-2 mt-1 ">
-          <span className="text-xl font-bold ">
+        {/*Price */}
+        <div className="flex items-center gap-3">
+          <span className="text-base font-bold">
             {`${formatMoney(
               formatPrice(
                 getPrice(
@@ -155,55 +214,11 @@ const Pitch = ({ pitchData, isNew, normal, navigate, dispatch, pid }) => {
                   pitchData?.price_evening
                 )?.price
               )
-            )} VNĐ`}
+            )} VNĐ`}{" "}
           </span>
-          <span className="bg-green-400 px-1.5 py-0.5 rounded-md text-xs text-white">
+          <span className="bg-green-400 px-2 py-1 text-sm rounded-md tracking-tighter text-white">
             {pitchcard1}
           </span>
-        </div>
-
-        <div className="mt-3 flex gap-2 ">
-          <button
-            className="
-            text-white 
-            flex 
-            flex-grow 
-            items-center 
-            justify-center
-            gap-2
-            px-2 py-2 
-            rounded-3xl
-            relative overflow-hidden 
-          bg-gray-800 
-            shadow-lg 
-            transition-all 
-            before:absolute 
-            before:bottom-0 
-            before:left-0 
-            before:top-0 
-            before:z-0 
-            before:h-full 
-            before:w-0
-          before:bg-blue-500 
-            before:transition-all 
-            before:duration-500 
-          hover:text-white 
-          hover:shadow-blue-400 
-            hover:before:left-0 
-            hover:before:w-full"
-            onClick={(e) =>
-              navigate(
-                `/${pitchData?.category.toLowerCase()}/${pitchData?.brand.toLowerCase()}/${pitchData?.pid
-                }/${pitchData?.title}`
-              )
-            }
-          >
-            <span className="relative">{pitchcard2}
-            </span>
-            <span className="relative">
-              <FaArrowRight />
-            </span>
-          </button>
         </div>
       </div>
     </div>

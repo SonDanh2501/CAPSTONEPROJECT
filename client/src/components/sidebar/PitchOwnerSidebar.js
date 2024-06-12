@@ -1,6 +1,6 @@
 import React, { Fragment, memo, useState } from "react";
 import avatar from "assets/defaultava.png";
-import logo from "assets/logo.png";
+import logo_full from "assets/logo_full.png";
 import ThemeToggle from "components/buttons/ThemeToggle";
 import { useGetpitchOwnerSideBar } from "ultils/constant";
 import { Link, NavLink } from "react-router-dom";
@@ -47,7 +47,7 @@ const PitchOwnerSidebar = ({ open, setOpen }) => {
         <div className="flex items-center justify-between p-4 pb-2 ">
           <Link to={"/"}>
             <img
-              src={logo}
+              src={logo_full}
               alt="logo"
               className={`w-32 ${!open && "hidden"}`}
             />

@@ -15,6 +15,7 @@ import {
   PitchInformation,
   CustomSlider,
   Map,
+  MapBox,
 } from "components";
 import Slider from "react-slick";
 
@@ -176,17 +177,17 @@ const DetailPitches = ({ isQuickView, data }) => {
     }
   }, [update]);
 
-  useEffect(() => {
-    if (pitch) {
-      const getCoords = async () => {
-        const result = await geocodeByAddress(pitch?.address[0]);
-        const latLng = await getLatLng(result[0]);
+  // useEffect(() => {
+  //   if (pitch) {
+  //     const getCoords = async () => {
+  //       const result = await geocodeByAddress(pitch?.address[0]);
+  //       const latLng = await getLatLng(result[0]);
 
-        setCoords(latLng);
-      };
-      pitch && getCoords();
-    }
-  }, [pitch]);
+  //       setCoords(latLng);
+  //     };
+  //     pitch && getCoords();
+  //   }
+  // }, [pitch]);
 
   useEffect(() => {
     if (data) {
@@ -213,6 +214,7 @@ const DetailPitches = ({ isQuickView, data }) => {
   }, [selectedDate]);
   return (
     <div className={clsx("w-full")}>
+      {/*BreadCrumb*/}
       {!isQuickView && (
         <div className="h-[81px] flex justify-center items-center bg-gray-100">
           <div className="w-main">
@@ -232,6 +234,7 @@ const DetailPitches = ({ isQuickView, data }) => {
           isQuickView ? "max-w-[1200px] gap-16 p-8" : "w-main"
         )}
       >
+              {/*Img and Slider Image*/}
         <div
           className={clsx("flex flex-col gap-3 w-2/5 ", isQuickView && "w-1/2")}
         >
@@ -327,9 +330,9 @@ const DetailPitches = ({ isQuickView, data }) => {
                 dateFormat="dd/MM/yyyy"
                 // minDate={new Date()}
                 placeholderText={detail9}
-              // showPopperArrow={false}
-              // className="w-full border-none outline-none"
-              // popperClassName="datepicker-popper"
+                // showPopperArrow={false}
+                // className="w-full border-none outline-none"
+                // popperClassName="datepicker-popper"
               />
             </div>
           </div>
@@ -344,7 +347,8 @@ const DetailPitches = ({ isQuickView, data }) => {
             </Button>
           </div>
         </div>
-        {!isQuickView && (
+        {/*Pitch Infor */}
+        {/* {!isQuickView && (
           <div className="w-1/5">
             {pitchExtraInformation.map((el) => (
               <PitchExtraInfo
@@ -355,25 +359,15 @@ const DetailPitches = ({ isQuickView, data }) => {
               />
             ))}
           </div>
-        )}
+        )} */}
       </div>
-      {!isQuickView && (
-        <div>
-          <div className="w-main m-auto mt-8">
-            <Map coords={coords} address={pitch?.address[0]} />
-            <PitchInformation
-              totalRatings={pitch?.totalRatings}
-              ratings={pitch?.ratings}
-              namePitch={pitch?.title}
-              pid={pitch?._id}
-              rerender={rerender}
-            />
-            {!isQuickView && (
-              <Map coords={coords} address={pitch?.address[0]} />
-            )}
-          </div>
-        </div>
-      )}
+
+
+
+      
+
+
+{/*       
       {!isQuickView && (
         <>
           <div className="w-main m-auto mt-8">
@@ -384,7 +378,7 @@ const DetailPitches = ({ isQuickView, data }) => {
           </div>
           <div className="h-[100px] w-full"></div>
         </>
-      )}
+      )} */}
     </div>
   );
 };

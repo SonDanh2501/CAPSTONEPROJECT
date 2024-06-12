@@ -43,6 +43,9 @@ import {
   IoHelpBuoyOutline,
   IoLogoDropbox,
   IoChevronDown,
+  IoClipboardOutline,
+  IoNotifications,
+  IoFilter,
 } from "react-icons/io5";
 import {
   MdEmail,
@@ -173,7 +176,10 @@ const icons = {
   IoGiftOutline,
   IoHelpBuoyOutline,
   IoLogoDropbox,
-  IoChevronDown ,
+  IoChevronDown,
+  IoClipboardOutline,
+  IoNotifications,
+  IoFilter ,
   // Material Design icons
   MdEmail,
   MdSpaceDashboard,

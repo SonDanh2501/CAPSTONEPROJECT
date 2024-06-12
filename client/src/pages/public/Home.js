@@ -44,7 +44,7 @@ const Home = () => {
       </div>
       {/*Email subcribe component*/}
       <div className="w-full flex items-center justify-center py-8">
-        <div className=" w-[90vw] h-fit bg-bg-light py-8">
+        <div className="w-[90vw] h-fit bg-bg-light py-8">
           <div className="flex flex-col items-center">
             {/*Header text*/}
             <div className="flex md:w-[50vw] w-[90vw] items-center justify-center pt-2">

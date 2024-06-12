@@ -42,7 +42,7 @@ const SearchItems = ({
   const debouncePriceFrom = useDebounce(price.from, 500);
   const debouncePriceTo = useDebounce(price.to, 500);
   const { t } = useTranslation();
-  const { filter3, filter5, filter8, filter9, filter10 } = t("filter")
+  const { filter3, filter5, filter8, filter9, filter10 } = t("filter");
 
   useEffect(() => {
     let param = [];
@@ -53,7 +53,6 @@ const SearchItems = ({
       queries.address = selected.join(",");
       queries.page = 1;
     } else delete queries.address;
-
     navigate({
       pathname: `/${category}`,
       search: createSearchParams(queries).toString(),
@@ -95,100 +94,111 @@ const SearchItems = ({
   }, [price]);
   return (
     <div
-      className="p-3 cursor-pointer text-gray-500 text-xs gap-6 relative border border-gray-800 dark:border-white dark:text-white flex justify-between items-center rounded-md"
+      className="gap-6 relative flex justify-between items-center"
       onClick={() => changeActiveFilter(name)}
     >
-      <span className="capitalize">{name}</span>
-      <AiOutlineDown></AiOutlineDown>
-      {activeClick === name && (
-        <div className="absolute  z-10 top-[calc(100%+1px)] border left-0 w-fit p-4 bg-white min-w-[200px] ">
-          {type === "checkbox" && (
-            <div className="p-2">
-              <div className="p-4 items-center flex justify-between gap-8 border-b ">
-                <span className="text-main">{`${selected.length} ${filter5}`}</span>
-                <span
-                  className="underline cursor-pointer hover:text-main whitespace-nowrap"
-                  onClick={(e) => {
-                    e.stopPropagation();
-                    setSetSelected([]);
-                    changeActiveFilter(null);
-                  }}
-                >
-                  Reset
-                </span>
-              </div>
-              <div
-                className="flex flex-col gap-2 mt-2"
-                onClick={(e) => e.stopPropagation()}
+      {/*Count Selected, Reset Button */}
+      <div className="w-full py-2 ">
+        {type === "checkbox" && (
+          <div className="">
+            {/*Count Selected, Reset Button */}
+            <div className="flex justify-between gap-8 pb-2">
+              {/*Count Selected*/}
+              <span className="text-xs">{`${selected.length} ${filter5}`}</span>
+              {/*Reset*/}
+              <span
+                className="text-xs underline cursor-pointer hover:text-main whitespace-nowrap"
+                onClick={(e) => {
+                  e.stopPropagation();
+                  setSetSelected([]);
+                  changeActiveFilter(null);
+                }}
               >
-                {locations.map((el, index) => (
-                  <div key={index} className="flex items-center gap-4">
-                    <input
-                      type="checkbox"
-                      className="w-4 h-4 text-blue-600 bg-gray-100 rounded border-gray-300 focus:ring-blue-500"
-                      onChange={handleSelect}
-                      id={el}
-                      value={el}
-                      checked={selected.some(
-                        (selectedItem) => selectedItem === el
-                      )}
-                    />
-                    <label htmlFor={el} className="text-gray-700 ">
-                      {el}
-                    </label>
-                  </div>
-                ))}
+                Reset
+              </span>
+            </div>
+            {/*List Address*/}
+            <div
+              className="flex flex-col gap-2 max-h-[220px] overflow-hidden overflow-y-auto"
+              onClick={(e) => e.stopPropagation()}
+            >
+              {locations.map((el, index) => (
+                <div key={index} className="flex items-center gap-4">
+                  {/*Check Box Address*/}
+                  <input
+                    type="checkbox"
+                    className="w-5 h-5 focus:ring-0 text-green-700 "
+                    onChange={handleSelect}
+                    id={el}
+                    value={el}
+                    checked={selected.some(
+                      (selectedItem) => selectedItem === el
+                    )}
+                  />
+                  {/*Address*/}
+                  <label htmlFor={el} className="text-gray-700 ">
+                    {el}
+                  </label>
+                </div>
+              ))}
+            </div>
+          </div>
+        )}
+        {type === "input" && (
+          <div onClick={(e) => e.stopPropagation()}>
+            <div className=" items-center flex justify-between">
+              {/*Best Price*/}
+              <span className="whitespace-nowrap text-xs">{`${filter3} ${Number(
+                bestPrice
+              ).toLocaleString()} VNĐ `}</span>
+              {/*Rest Price*/}
+              <span
+                className="underline cursor-pointer hover:text-main whitespace-nowrap text-xs"
+                onClick={(e) => {
+                  e.stopPropagation();
+                  setPrice({ from: "", to: "" });
+                  changeActiveFilter(null);
+                }}
+              >
+                {filter10}
+              </span>
+            </div>
+            {/*Set Price*/}
+            <div className="flex items-center gap-4 pt-4">
+              <div className="flex flex-col text-sm ">
+                {/*Label From Price*/}
+                <span className="text-xs">{filter8}</span>
+                {/*Input From Price*/}
+                <input
+                  className="form-input w-full"
+                  placeholder="0"
+                  type="number"
+                  id="from"
+                  value={price.from}
+                  onChange={(e) =>
+                    setPrice((prev) => ({ ...prev, from: e.target.value }))
+                  }
+                ></input>
+              </div>
+              <div className="flex flex-col text-sm">
+                {/*Label To Price*/}
+                <span className="text-xs">{filter9}</span>
+                {/*Input To Price*/}
+                <input
+                  className="form-input w-full"
+                  placeholder={Number(bestPrice)}
+                  type="number"
+                  id="to"
+                  value={price.to}
+                  onChange={(e) =>
+                    setPrice((prev) => ({ ...prev, to: e.target.value }))
+                  }
+                ></input>
               </div>
             </div>
-          )}
-
-          {type === "input" && (
-            <div onClick={(e) => e.stopPropagation()}>
-              <div className="p-4 items-center flex justify-between gap-8 border-b">
-                <span className="whitespace-nowrap text-main">{`${filter3} ${Number(
-                  bestPrice
-                ).toLocaleString()} VNĐ `}</span>
-                <span
-                  className="underline cursor-pointer hover:text-main whitespace-nowrap dark:text-black"
-                  onClick={(e) => {
-                    e.stopPropagation();
-                    setPrice({ from: "", to: "" });
-                    changeActiveFilter(null);
-                  }}
-                >
-                  {filter10}
-                </span>
-              </div>
-              <div className="flex items-center p-2 gap-2 rou">
-                <div className="flex items-center gap-2 dark:text-black">
-                  <label htmlFor="from">{filter8}</label>
-                  <input
-                    className="form-input rounded-md"
-                    type="number"
-                    id="from"
-                    value={price.from}
-                    onChange={(e) =>
-                      setPrice((prev) => ({ ...prev, from: e.target.value }))
-                    }
-                  ></input>
-                </div>
-                <div className="flex items-center gap-2 dark:text-black">
-                  <label htmlFor="to">{filter9}</label>
-                  <input
-                    className="form-input rounded-md"
-                    type="number"
-                    id="to"
-                    value={price.to}
-                    onChange={(e) =>
-                      setPrice((prev) => ({ ...prev, to: e.target.value }))
-                    }
-                  ></input>
-                </div>
-              </div>
-            </div>
-          )}
-        </div>
-      )}
+          </div>
+        )}
+      </div>
     </div>
   );
 };

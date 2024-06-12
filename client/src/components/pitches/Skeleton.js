@@ -15,7 +15,7 @@ import icons from "ultils/icons";
 const { AiFillEye, AiOutlineMenu, BsFillSuitHeartFill, FaArrowRight } = icons;
 const Skeleton = () => {
   return (
-    <div className=" max-w-[285px] min-w-[285px] bg-gradient-to-r from-white to-gray-300 shadow-lg rounded-md overflow-hidden hover:shadow-2xl hover:shadow-gray-500 duration-300 hover:bg-gradient-to-l animate-pulse">
+    <div className="w-[250px] bg-gradient-to-r from-white to-gray-300 shadow-lg rounded overflow-hidden hover:shadow-2xl hover:shadow-gray-500 duration-300 hover:bg-gradient-to-l animate-pulse">
       <div className="w-full relative px-3 py-3">
         <img
           src={defaultt}
