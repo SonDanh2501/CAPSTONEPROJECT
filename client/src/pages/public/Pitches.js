@@ -155,7 +155,7 @@ const Pitches = () => {
             </div>
             {/*Sort*/}
             <div className="w-fit flex items-center gap-2">
-              <span className="font-bold font-mono">{filter7}</span>
+              <span className="font-bold ">{filter7}</span>
               <InputSelect
                 changeValue={changeValue}
                 value={sort}

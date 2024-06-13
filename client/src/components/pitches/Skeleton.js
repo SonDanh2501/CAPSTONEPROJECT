@@ -15,21 +15,20 @@ import icons from "ultils/icons";
 const { AiFillEye, AiOutlineMenu, BsFillSuitHeartFill, FaArrowRight } = icons;
 const Skeleton = () => {
   return (
-    <div className="w-[250px] bg-gradient-to-r from-white to-gray-300 shadow-lg rounded overflow-hidden hover:shadow-2xl hover:shadow-gray-500 duration-300 hover:bg-gradient-to-l animate-pulse">
+    <div className=" bg-gradient-to-r from-white to-gray-300 shadow-lg  overflow-hidden hover:shadow-2xl hover:shadow-gray-500 duration-300 hover:bg-gradient-to-l animate-pulse">
       <div className="w-full relative px-3 py-3">
-        <img
-          src={defaultt}
-          alt="thumb"
-          className="w-full h-[190px] object-fill rounded-md"
-        ></img>
+         {/*Image pitches*/}
+         <img
+          src={ defaultt}
+          alt="pitches"
+          className="w-full h-[190px] object-cover"
+        />
       </div>
       <div className="p-5 flex flex-col gap-3">
         <div className="h-3 bg-gray-500 rounded-full mb-4"></div>
         <div className="h-3 bg-gray-500 rounded-full mb-4"></div>
         <div className="h-3 bg-gray-500 rounded-full mb-4"></div>
         <div className="h-3 bg-gray-500 rounded-full mb-4"></div>
-        <div className="h-3 bg-gray-500 rounded-full mb-4"></div>
-
       </div>
     </div>
   );

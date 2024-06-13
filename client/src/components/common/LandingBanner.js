@@ -95,7 +95,9 @@ const LandingBanner = () => {
             <FiBox size={35} />
           </span>
           <div className="flex flex-col text-sm text-gray-500">
-            <h3 className="font-bold uppercase text-white py-1 md:text-sm text-xs">RETURN</h3>
+            <h3 className="font-bold uppercase text-white py-1 md:text-sm text-xs">
+              RETURN
+            </h3>
             <span className="w-2/3 md:text-xl text-sm font-bold text-white">
               3 Days Free Return
             </span>
@@ -107,7 +109,9 @@ const LandingBanner = () => {
             <IoHelpBuoyOutline size={35} />
           </span>
           <div className="flex flex-col text-sm text-gray-500">
-            <h3 className="font-bold uppercase text-white py-1 md:text-sm text-xs">Help</h3>
+            <h3 className="font-bold uppercase text-white py-1 md:text-sm text-xs">
+              Help
+            </h3>
             <span className="w-2/3 md:text-xl text-sm font-bold text-white">
               24/7 Customer Support
             </span>
@@ -119,7 +123,9 @@ const LandingBanner = () => {
             <IoGiftOutline size={35} />
           </span>
           <div className="flex flex-col text-sm text-gray-500">
-            <h3 className="font-bold uppercase text-white py-1 md:text-sm text-xs">Deal</h3>
+            <h3 className="font-bold uppercase text-white py-1 md:text-sm text-xs">
+              Deal
+            </h3>
             <span className="w-2/3 md:text-xl text-sm font-bold text-white">
               Hot Deal & Coupon
             </span>

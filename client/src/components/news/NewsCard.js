@@ -10,7 +10,7 @@ const { IoArrowForwardOutline,IoEyeOutline  } = icons;
 const NewsCard = ({ nid, title, views, thumb, postedDate, description }) => {
   const navigate = useNavigate();
   return (
-    <div className=" bg-gradient-to-r from-white to-gray-100 h-[380px] text-gray-700 md:min-h-[10rem] overflow-hidden border border-button-color shadow-lg transform transition-all hover:shadow-2xl hover:shadow-gray-500 duration-300 ">
+    <div className=" bg-gradient-to-r from-white to-gray-100 h-[380px] text-gray-700 md:min-h-[10rem] overflow-hidden border border-green-700 shadow-lg transform transition-all hover:shadow-2xl hover:shadow-gray-500 duration-300 ">
       <div className="relative h-1/2">
         {/* News thumbs*/}
         <img

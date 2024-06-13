@@ -67,50 +67,65 @@ const PitchInformation = ({
     }
   };
   return (
-    <div>
-      <div className=" flex flex-col py-4 w-main">
-        <div className="flex border border-red-500">
-          <div className="flex-4 flex-col flex items-center justify-center   ">
-            <span className="font-semibold text-3xl">{`${totalRatings}/5`}</span>
-            <span className="flex items-center gap-2 mt-1">
-              {renderStarFromNumber(totalRatings)?.map((el, index) => (
-                <span key={index}>{el}</span>
-              ))}
+    <div className="w-full h-full">
+      <div className="w-full h-2/5 py-2 ">
+        {/*Rating Avg and Vote Bar */}
+        <div className="flex w-full ">
+          {/*Rating Avg*/}
+          <div className="w-1/2 flex flex-col items-center justify-center">
+            {/*Total Avg*/}
+            <div className="flex flex-col items-center justify-center bg-button-color p-4">
+              <span className="font-bold text-3xl text-white">{`${totalRatings}`}</span>
+              <span className="text-xs font-bold  text-white">Out of 5</span>
+            </div>
+            <div>
+              <span className="flex items-center gap-0.5 mt-2">
+                {renderStarFromNumber(totalRatings, "darkgreen")?.map(
+                  (el, index) => (
+                    <span key={index}>{el}</span>
+                  )
+                )}
+              </span>
+            </div>
+          </div>
+          {/*Vote Bar*/}
+          <div className="w-1/2 flex justify-center items-center">
+            <div className="w-full">
+              {Array.from(Array(5).keys())
+                .reverse()
+                .map((el) => (
+                  <Votebar
+                    key={el}
+                    number={el + 1}
+                    ratingTotal={ratings?.length}
+                    ratingCount={
+                      ratings?.filter((i) => i.star === el + 1)?.length
+                    }
+                  />
+                ))}
+            </div>
+          </div>
+        </div>
+        <div className="flex flex-col w-full items-center justify-center py-4 gap-2">
+          <span className="text-sm">Review this pitch </span>
+          <button onClick={() => handleVoteNow()}>
+            <span className="px-4 py-2 text-white bg-button-color font-bold ">
+              Write a Review
             </span>
-            <span className="text-sm mt-2">{`${ratings?.length} ${rating1}`}</span>
-          </div>
-          <div className="flex-6  flex gap-2 flex-col p-4">
-            {Array.from(Array(5).keys())
-              .reverse()
-              .map((el) => (
-                <Votebar
-                  key={el}
-                  number={el + 1}
-                  ratingTotal={ratings?.length}
-                  ratingCount={
-                    ratings?.filter((i) => i.star === el + 1)?.length
-                  }
-                />
-              ))}
-          </div>
+          </button>
         </div>
-        <div className="p-4 flex items-center justify-center text-sm flex-col gap-2">
-          <span>{rating2}</span>
-          <Button size handleOnClick={handleVoteNow}>
-            {rating3}
-          </Button>
-        </div>
-        <div className="flex flex-col gap-4">
-          {ratings?.map((el) => (
-            <Comment
-              key={el._id}
-              star={el.star}
-              updatedAt={el.updatedAt}
-              comment={el.comment}
-              name={`${el.postedBy?.lastname} ${el.postedBy?.firstname}`}
-            ></Comment>
-          ))}
-        </div>
+      </div>
+      {/*Comment*/}
+      <div className="w-full flex flex-col h-3/5 mt-4 py-4 border-t gap-2 border-green-700">
+        {ratings?.map((el) => (
+          <Comment
+            key={el._id}
+            star={el.star}
+            updatedAt={el.updatedAt}
+            comment={el.comment}
+            name={`${el.postedBy?.lastname} ${el.postedBy?.firstname}`}
+          ></Comment>
+        ))}
       </div>
     </div>
   );
