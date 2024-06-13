@@ -53,7 +53,7 @@ const Contact = () => {
   }, []);
 
   return (
-    <div className="w-full bg-gray-200 dark:bg-medium mb-5">
+    <div className="w-full  dark:bg-medium mb-5">
       <div>
         <HeaderBanner title={contact1} subtitle={contact2} />
       </div>

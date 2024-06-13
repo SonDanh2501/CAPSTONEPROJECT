@@ -89,7 +89,7 @@ const Pitch = ({ pitchData, isNew, normal, navigate, dispatch, pid }) => {
           }/${pitchData?.title}`
         )
       }
-      className="bg-gradient-to-r from-white to-gray-100 text-gray-700 border border-button-color overflow-hidden hover:shadow-2xl hover:shadow-gray-500 duration-300"
+      className="bg-gradient-to-r from-white to-gray-100 text-gray-700 border border-green-700 overflow-hidden hover:shadow-2xl hover:shadow-gray-500 duration-300"
     >
       <div className="relative h-1/2">
         {/*Hover Icon */}

@@ -21,11 +21,7 @@ const MapBox = () => {
       address:
         "01 Võ Văn Ngân, Linh Chiểu, Thủ Đức, Thành phố Hồ Chí Minh, Việt Nam",
     },
-    {
-      id: 2,
-      address:
-        "216 Võ Văn Ngân, Bình Thọ, Thủ Đức, Thành phố Hồ Chí Minh, Việt Nam",
-    },
+ 
   ];
   useEffect(() => {
     let newaddressdata = [];
@@ -57,10 +53,9 @@ const MapBox = () => {
     <Map
       mapboxAccessToken="pk.eyJ1Ijoic29uZGFuaCIsImEiOiJjbHdybjV2b2owMm53MnFwcmpjbnE5OGZtIn0.0A1izf6qM7jX3iFkHt4_HQ"
       style={{
-        width: "90vw",
-        height: "90vh",
+        width: "41vw",
+        height: "70vh",
         // borderRadius: "",
-        border: "1px solid black",
       }}
       initialViewState={{
         longitude: lng,
@@ -70,21 +65,24 @@ const MapBox = () => {
       //   10.85082205553165, 106.77194528140673
       mapStyle="mapbox://styles/mapbox/streets-v11"
     >
-      {/* <Popup
+      *{" "}
+      <Popup
         longitude={lng}
         latitude={lat}
         closeButton={true}
         closeOnClick={true}
         anchor="top-right"
       >
-        <div>Pop up marker</div>
-      </Popup> */}
-      {/* <Marker longitude={lng} latitude={lat}></Marker> */}
-
-      {addressMarker?.map((el) => (
+        <div>
+          <span>
+            01 Võ Văn Ngân, Linh Chiểu, Thủ Đức, Thành phố Hồ Chí Minh, Việt Nam
+          </span>
+        </div>
+      </Popup>
+      <Marker longitude={lng} latitude={lat}></Marker>
+      {/* {addressMarker?.map((el) => (
         <Marker longitude={el?.longitude} latitude={el?.latitude}></Marker>
-      ))}
-
+      ))} */}
       <NavigationControl position="bottom-right" />
       <GeolocateControl />
       <FullscreenControl />

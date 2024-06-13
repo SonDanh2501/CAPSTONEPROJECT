@@ -46,6 +46,8 @@ import {
   IoClipboardOutline,
   IoNotifications,
   IoFilter,
+  IoCalendarNumberOutline,
+  IoBagAddOutline,
 } from "react-icons/io5";
 import {
   MdEmail,
@@ -179,7 +181,9 @@ const icons = {
   IoChevronDown,
   IoClipboardOutline,
   IoNotifications,
-  IoFilter ,
+  IoFilter,
+  IoCalendarNumberOutline,
+  IoBagAddOutline,
   // Material Design icons
   MdEmail,
   MdSpaceDashboard,
