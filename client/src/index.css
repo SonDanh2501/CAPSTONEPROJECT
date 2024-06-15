@@ -12,6 +12,10 @@
 .custom-slider .slick-slide > div {
     margin: 0 10px;
 }
+.custom-slider-detail .slick-slide > div {
+    margin: 0px 15px;
+    margin-bottom: 20px;
+}
 /* .custom-slider .slick-list {
     margin: 0 -10px;
 } */

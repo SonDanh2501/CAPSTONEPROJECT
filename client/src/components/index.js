@@ -15,6 +15,7 @@ export { default as Map } from "./common/Map";
 export { default as BrandRating } from "./common/BrandRating";
 export { default as LandingBanner } from "./common/LandingBanner";
 export { default as HeaderBanner } from "./common/HeaderBanner";
+export { default as EmailSubcribe } from "./common/EmailSubcribe";
 // Pitches
 export { default as BestPrice } from "./pitches/BestPrice";
 export { default as Pitch } from "./pitches/Pitch";

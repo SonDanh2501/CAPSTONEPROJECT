@@ -153,7 +153,7 @@ const TopHeader = () => {
   return (
     <div
       className="w-full h-full justify-between flex min-h-[70px] duration-200	 
-      bg-bg-light "
+      bg-bg-light shadow-lg border-b border-green-700"
     >
       <div className="flex items-center">
         {/*Logo*/}
@@ -274,7 +274,7 @@ const TopHeader = () => {
                           <div className="flex flex-col">
                             {el?.submenu?.map((el) => (
                               <NavLink to={el?.path}>
-                                <span className="text-lg font-mono font-bold">
+                                <span className="text-lg  font-bold">
                                   {el?.text}
                                 </span>
                                 {el?.text !== "News" && <Sidebar />}
@@ -285,7 +285,7 @@ const TopHeader = () => {
                         {/*Page Sub Link*/}
                         {el?.value === "Pages" && (
                           <div className="flex flex-col gap-2">
-                            <span className="font-mono text-lg">
+                            <span className=" text-lg">
                               For Contact
                             </span>
 
@@ -293,7 +293,7 @@ const TopHeader = () => {
                               {el?.submenu?.map((el) => (
                                 <NavLink
                                   to={el?.path}
-                                  className="w-fit font-mono font-light border-b-2 border-transparent hover:border-black duration-300 "
+                                  className="w-fit  font-light border-b-2 border-transparent hover:border-black duration-300 "
                                 >
                                   <span>{el?.text}</span>
                                 </NavLink>
@@ -345,7 +345,7 @@ const TopHeader = () => {
                           onClick={() => changeLanguage(lng.code)}
                         >
                           <img src={lng.img}></img>
-                          <span className="text-sm font-bold font-mono border-b-2 border-transparent hover:border-black duration-300">
+                          <span className="text-sm font-bold  border-b-2 border-transparent hover:border-black duration-300">
                             {lng.lang}
                           </span>
                         </div>
@@ -374,7 +374,7 @@ const TopHeader = () => {
           >
             <span className="text-green-700">
               <IoCartOutline size={22} />
-              <span class="absolute flex items-center justify-center w-[16px] h-[16px] top-[12px] text-xs text-white bg-red-400 border-white rounded-full ml-3">
+              <span class="absolute flex items-center justify-center w-[18px] h-[18px] top-[10px] text-xs text-white bg-green-900  rounded-full ml-3">
                 {order?.length || 0}
               </span>
             </span>
@@ -406,12 +406,12 @@ const TopHeader = () => {
                   <div className="w-[350px] h-[350px] sm:w-[450px] bg-white shadow-xl px-6 py-4 overflow-hidden overflow-y-auto">
                     {/*Header Notfication */}
                     <div className="p-1">
-                      <span className="text-lg text-black font-bold font-mono">
+                      <span className="text-lg text-black font-bold ">
                         {noti1}
                       </span>
                     </div>
                     {/*Notfication Tab Select*/}
-                    <div className="w-full flex justify-between font-mono rounded-md font-semibold">
+                    <div className="w-full flex justify-between  rounded-md font-semibold">
                       <span
                         className={`w-1/2 py-1 text-center rounded-md mx-1 hover:bg-button-color hover:text-white duration-500 ${
                           isActiveNotificationTab === 1
@@ -448,21 +448,21 @@ const TopHeader = () => {
                             <div className="w-full ">
                               {/*Notfication Post By*/}
                               <span className="text-black line-clamp-3">
-                                <span className="font-mono text-sm sm:text-xs">
+                                <span className=" text-sm sm:text-xs">
                                   {el?.owner?.firstname} {el?.owner?.lastname}
                                 </span>
                                 {/*Notfication Description*/}
-                                <span className="font-mono text-sm ml-1 sm:text-xs">
+                                <span className=" text-sm ml-1 sm:text-xs">
                                   posted {el?.title}
                                 </span>
                               </span>
                             </div>
                             {/*Notfication Date Post */}
                             <div className="flex items-center gap-1 text-xs font-semibold ">
-                              <span className="text-gray-400 font-mono">
+                              <span className="text-gray-400 ">
                                 <IoTimeOutline />
                               </span>
-                              <span className="text-gray-400 font-mono text-xs font-semibold">
+                              <span className="text-gray-400  text-xs font-semibold">
                                 {moment(el?.createdAt).format("dddd hh:mm A")}
                               </span>
                             </div>
@@ -472,7 +472,7 @@ const TopHeader = () => {
                             <span className="text-xs text-blue-500 mt-0.5">
                               <GoDotFill />
                             </span>
-                            <span className="text-black font-mono text-xs font-semibold tracking-tighter">
+                            <span className="text-black  text-xs font-semibold tracking-tighter">
                               {moment(el?.createdAt).fromNow("ago")}
                             </span>
                           </div>
@@ -511,7 +511,7 @@ const TopHeader = () => {
                     <div className="flex flex-col gap-2 px-2 py-4">
                       <div className="px-4 text-black hover:text-indigo-700 duration-300">
                         <Link
-                          className="flex items-center gap-2 font-mono font-semibold"
+                          className="flex items-center gap-2  font-semibold"
                           to={`/${path.MEMBER}/${path.PERSONAL}`}
                         >
                           <span>
@@ -523,7 +523,7 @@ const TopHeader = () => {
                       {+current.role === 1 && (
                         <div className="px-4 text-black hover:text-indigo-700 duration-300">
                           <Link
-                            className="flex items-center gap-2 font-mono font-semibold"
+                            className="flex items-center gap-2  font-semibold"
                             to={`/${path.ADMIN}/${path.DASHBOARD}`}
                           >
                             <span>
@@ -536,7 +536,7 @@ const TopHeader = () => {
                       {+current.role === 2 && (
                         <div className="px-4 text-black hover:text-indigo-700 duration-300">
                           <Link
-                            className="flex items-center gap-2 font-mono font-semibold"
+                            className="flex items-center gap-2  font-semibold"
                             to={`/${path.PITCHOWNER}/${path.MANAGE_PITCHOWN}`}
                           >
                             <span>
@@ -550,7 +550,7 @@ const TopHeader = () => {
                         <div className="px-4 text-black hover:text-indigo-700 duration-300 cursor-pointer">
                           <span
                             onClick={() => dispatch(logout())}
-                            className="flex items-center gap-2 font-mono font-semibold"
+                            className="flex items-center gap-2  font-semibold"
                           >
                             <span>
                               <IoLogOutOutline />

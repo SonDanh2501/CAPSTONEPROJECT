@@ -5,7 +5,7 @@ import icons from "ultils/icons";
 
 const { IoIosArrowForward } = icons;
 
-const Breadcrumb = ({ title, category, brand }) => {
+const Breadcrumb = ({ title, category, brand, size }) => {
   const routes = [
     { path: "/:category", breadcrumb: category },
     { path: "/", breadcrumb: "Home" },
@@ -14,7 +14,7 @@ const Breadcrumb = ({ title, category, brand }) => {
   ];
   const breadcrumb = useBreadcrumbs(routes);
   return (
-    <div className="text-sm flex items-center gap-1">
+    <div className={` ${size ? size : "text-sm"} flex items-center gap-1`}>
       {breadcrumb
         ?.filter((el) => !el.match.route === false)
         .map(({ match, breadcrumb }, index, self) => (

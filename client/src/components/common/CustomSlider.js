@@ -13,9 +13,10 @@ const settings = {
 const CustomSlider = ({ pitches, activedTab, normal }) => {
   return (
     <>
-      {pitches && (
+      {/* Pitches slider for full screen*/}
+      <div className="md:w-[90vw] md:m-auto hidden md:block">
         <Slider className="custom-slider" {...settings}>
-          {pitches.map((el, index) => (
+          {pitches?.map((el, index) => (
             <Pitch
               key={index}
               pid={el.id}
@@ -25,7 +26,21 @@ const CustomSlider = ({ pitches, activedTab, normal }) => {
             />
           ))}
         </Slider>
-      )}
+      </div>
+      {/* Pitches slider for responsive (mobile screen)*/}
+      <div className="w-[90vw] m-auto md:hidden ">
+        <Slider className="" {...settings}>
+          {pitches?.map((el, index) => (
+            <Pitch
+              key={index}
+              pid={el.id}
+              pitchData={el}
+              isNew={activedTab === 1 ? false : true}
+              normal={normal}
+            />
+          ))}
+        </Slider>
+      </div>
     </>
   );
 };

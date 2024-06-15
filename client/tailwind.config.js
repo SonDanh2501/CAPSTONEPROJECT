@@ -38,14 +38,12 @@ module.exports = {
         "header-bg-dark-tab-font": "#557FB5",
         "notification-bg-dark-active-tab": "#1C2E45",
         // Dark Mode (Notication)
-        "bg-select-tab": "#223A56",
-        
+
         // Light Mode
         // Font
         "font-normal": "#163121",
-        // Header
-        "header-bg-light": "#FEFEFF",
-        // Footer
+        // Background
+        "bg-color-star": "#F9F0E9",
         "bg-light": "#EEF1E4",
         // Button
         "button-color": "#173021",
