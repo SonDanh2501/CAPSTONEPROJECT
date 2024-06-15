@@ -25,13 +25,12 @@ const FeaturePitch = () => {
     <div className="w-full flex flex-col items-center">
       <div className="text-3xl md:text-[50px] font-semibold text-center">
         {/*Header */}
-        <span className=" text-font-normal">Pitches ready To Book</span>
+        <span className=" text-font-normal">{feat1}</span>
       </div>
       {/*Sub text */}
       <div className="w-full lg:w-[40vw] text-sm py-6 px-4 flex">
         <span className="text-font-normal text-center">
-          Football is not only a favorite sport for men, but today there are
-          many girls who like this sport.
+          {feat2}
         </span>
       </div>
       {/* News slider*/}

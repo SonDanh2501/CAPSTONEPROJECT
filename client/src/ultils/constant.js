@@ -196,12 +196,12 @@ export const useGetSort = () => {
   return [
     {
       id: 1,
-      value: "-price",
+      value: "-price_afternoon",
       text: filter11,
     },
     {
       id: 2,
-      value: "price",
+      value: "price_afternoon",
       text: filter12,
     },
     {

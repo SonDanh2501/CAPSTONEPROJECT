@@ -35,7 +35,8 @@ const DetailOrder = () => {
   };
   useEffect(() => {
     fetchPitchData();
-  }, [orderChanged, order]);
+  }, []);
+  console.log(discount)
   return (
     <div className="w-full dark:bg-medium">
       <div className="h-[81px] flex justify-center items-center bg-gray-100 dark:bg-dark">
@@ -93,7 +94,7 @@ const DetailOrder = () => {
             ) + ` VND`}
           </span>
         </div>
-        {discount !== null ? (
+        {discount !== null && discount !== undefined && (
           <div className="flex items-center mx-4 gap-8 dark:text-white">
             <span>{detailorder6}: </span>
             <span className="text-main">
@@ -104,7 +105,7 @@ const DetailOrder = () => {
               VND
             </span>
           </div>
-        ) : null}
+        )}
         <div className="flex items-center mx-4 gap-8 font-bold dark:text-white">
           <span> {detailorder7}:</span>
           <span className="text-main">
