@@ -21,7 +21,7 @@ const Comments = () => {
       style={{
         backgroundImage: `url(${backgroundImage})`,
       }}
-      className="relative py-10"
+      className="relative py-24"
     >
       <div className="bg-gray-900 absolute bottom-0 top-0 right-0 left-0 opacity-75"></div>
       <div className="relative w-full flex flex-col items-center">
@@ -40,7 +40,7 @@ const Comments = () => {
         {/* News slider*/}
         <CommentSlider news={pitch} />
         {/* Blank content*/}
-        <div className="w-full h-[50px] md:h-[80px]"></div>
+        <div className="w-full h-[20px] md:h-[50px]"></div>
       </div>
     </div>
   );

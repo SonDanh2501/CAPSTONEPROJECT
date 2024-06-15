@@ -34,6 +34,8 @@ const path = {
   CREATE_FAQ: "create-faq",
   MANAGE_COUPON: "manage-coupon",
   CREATE_COUPON: "create-coupon",
+  CREATE_NOTIFICATION: "create-notification",
+  MANAGE_NOTIFICATION: "manage-notification",
   // Member Route
   MEMBER: "member",
   PERSONAL: "personal",
@@ -51,6 +53,5 @@ const path = {
   MANAGE_ORDER_PITCHOWNER: "manage-pitchowner-order",
   CREATE_COUPONOWN: "create-pitchowner-coupon",
   MANAGE_COUPONOWN: "manage-pitchowner-coupon",
-
 };
 export default path;

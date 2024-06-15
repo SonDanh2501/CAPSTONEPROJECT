@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import Swal from "sweetalert2";
 import emailjs from "@emailjs/browser";
-import { HeaderBanner } from "components";
+import { EmailSubcribe, HeaderBanner } from "components";
 import { FaLocationDot } from "react-icons/fa6";
 import { FaPhoneAlt } from "react-icons/fa";
 import { IoIosSend } from "react-icons/io";
@@ -53,110 +53,120 @@ const Contact = () => {
   }, []);
 
   return (
-    <div className="w-full  dark:bg-medium mb-5">
-      <div>
+    <div className="w-full">
+      <div className="pb-12">
         <HeaderBanner title={contact1} subtitle={contact2} />
       </div>
-
-      <div className="flex justify-center items-center mt-14 pb-6">
-        <div className="w-main flex justify-between bg-white dark:bg-dark  ">
-          {/* Fill in Form*/}
-          <div className="w-2/3 flex justify-center items-center flex-col pb-6 ">
-            <h1 className="text-4xl font-bold text-black p-8 dark:text-white">
-              {contact3}
-            </h1>
-            <form
-              className="flex flex-col w-[500px] "
-              ref={form}
-              onSubmit={sendEmail}
-              onChange={validateForm}
-            >
-              {/* name*/}
-              <label className="mt-2 mb-1 text-lg dark:text-white">{contact4}</label>
-              <input
-                className="rounded-md text-lg"
-                type="text"
-                name="user_name"
-                placeholder={`${contact10}: john cena`}
-                required
-              />
-              {/* user email*/}
-              <label className="mt-2 mb-1 text-lg dark:text-white">Email</label>
-              <input
-                className="rounded-md text-lg"
-                type="email"
-                name="user_email"
-                placeholder={`${contact10}: Example@gmail.com`}
-                required
-              />
-              {/* Message*/}
-              <label className="mt-2 mb-1 text-lg dark:text-white">
-                {contact5}
-              </label>
-              <textarea
-                className="rounded-md text-lg h-32"
-                name="message"
-                placeholder={contact11}
-                required
-              />
-              {/* button send*/}
-              <input
-                className={`mt-4 cursor-pointer  h-[40px] text-white
-                flex 
-                items-center 
-                justify-center
-                gap-2
-                px-1 py-2
-                md:px-2
-                rounded-3xl
-                relative overflow-hidden 
-              bg-gray-800
-              dark:bg-medium
-                shadow-lg 
-                transition-all 
-              hover:shadow-blue-400 
+      {/*Information*/}
+      <div className="w-full flex items-center justify-center py-12">
+        <div className="w-[90vw] flex items-center justify-center px-10">
+          <div className="w-full flex">
+            <div className="w-1/2 flex flex-col">
+              {/*Adrress, Phone Header*/}
+              <div className="w-full flex pb-4">
+                {/*Header*/}
+                <span className="w-1/2 uppercase text-lg font-bold">
+                  Address
+                </span>
+                {/*Header*/}
+                <span className="w-1/2 uppercase text-lg font-bold">
+                  Call Us
+                </span>
+              </div>
+              {/*Adrress, Phone Sub*/}
+              <div className="w-full flex pb-8">
+                {/*Sub*/}
+                <span className="w-1/2 text-sm pr-4">
+                  1 Võ Văn Ngân, Phường Linh Chiểu, Thành phố Thủ Đức, Thành phố
+                  Hồ Chí Minh
+                </span>
+                {/*Sub*/}
+                <span className="w-1/2 text-sm">(+84)837440017</span>
+              </div>
+              {/*Open, Email Header*/}
+              <div className="w-full flex pb-4">
+                {/*Header*/}
+                <span className="w-1/2 uppercase text-lg font-bold">Open</span>
+                {/*Header*/}
+                <span className="w-1/2 uppercase text-lg font-bold">Email</span>
+              </div>
+              {/*Open, Email Sub*/}
+              <div className="w-full flex pb-8">
+                {/*Sub*/}
+                <span className="w-1/2 text-sm pr-4">
+                  Monday - Sunday: 5am - 12pm
+                </span>
+                {/*Sub*/}
+                <span className="w-1/2 text-sm">Info@example</span>
+              </div>
+            </div>
+            <div className="w-1/2 flex items-center justify-center">
+              <form
+                className="w-3/4 flex flex-col border border-green-700"
+                ref={form}
+                onSubmit={sendEmail}
+                onChange={validateForm}
+              >
+                <div className="border-b border-green-700 w-full">
+                  <div className="flex flex-col p-4">
+                    <span className="font-bold text-xl">
+                      Got Any Questions?
+                    </span>
+                    <span>
+                      Use the form below to get in touch with the sales team
+                    </span>
+                  </div>
+                </div>
+                <div className="p-4 flex flex-col">
+                  {/* name*/}
+                  <span className="mt-2 mb-1 font-sm font-bold dark:text-white">
+                    {contact4}
+                  </span>
+                  <input
+                    className="focus:ring-0 hover:border-green-700 focus:border-green-700 border-green-700 font-sm"
+                    type="text"
+                    name="user_name"
+                    placeholder="Full name"
+                    required
+                  />
+                  {/* user email*/}
+                  <span className="mt-2 mb-1 font-sm font-bold dark:text-white">
+                    Email
+                  </span>
+                  <input
+                    className="focus:ring-0 hover:border-green-700 focus:border-green-700 border-green-700 font-sm"
+                    type="email"
+                    name="user_email"
+                    placeholder="example@gmail.com"
+                    required
+                  />
+                  {/* Message*/}
+                  <span className="mt-2 mb-1 font-sm font-bold dark:text-white">
+                    {contact5}
+                  </span>
+                  <textarea
+                    className=" h-28 focus:ring-0 hover:border-green-700 focus:border-green-700 border-green-700 font-sm"
+                    name="message"
+                    placeholder={contact11}
+                    required
+                  />
+                  {/* button send*/}
+                  <input
+                    className={`flex mt-3 items-center justify-center gap-2 py-2.5 px-8 relative overflow-hidden bg-button-color text-white transition-all before:absolute before:bottom-0 before:left-0 before:top-0 before:z-0 before:h-full before:w-0 before:bg-button-color-hover before:transition-all before:duration-500 hover:text-black hover:before:left-0 hover:before:w-full
                 ${isFormValid ? "" : "opacity-50 cursor-not-allowed"}`}
-                type="submit"
-                value={contact12}
-                disabled={!isFormValid}
-              />
-            </form>
-          </div>
-          {/* Contact information form*/}
-          <div className="w-1/3 flex justify-center items-center flex-col pb-6 bg-blue-500 dark:bg-blue-950 text-white">
-            <h1 className="text-4xl font-bold pb-8"> {contact6}</h1>
-            <span className="flex items-center gap-2 pt-8 pb-4 pr-4 pl-4">
-              <FaLocationDot className="w-4 h-4 " />
-              {/* Address*/}
-              <span className="font-bold text-xl">{contact7} :</span>
-              <span className="cursor-pointer text-lg">
-                1 Vo Van Ngan, Linh Trung, Thu Duc
-              </span>
-            </span>
-            <span className="flex items-center gap-2 pt-8 pb-4 pr-4 pl-4">
-              <FaPhoneAlt className="w-4 h-4 " />
-              {/* Phone number*/}
-              <span className="font-bold  cursor-pointer text-xl"> {contact8} :</span>
-              <span className="cursor-pointer text-lg">(+84) 0900000000</span>
-            </span>
-            <span className="flex items-center gap-2 pt-8 pb-4 pr-4 pl-4">
-              <IoIosSend className="w-4 h-4 " />
-              {/* Email*/}
-              <span className="font-bold  cursor-pointer text-xl">Email :</span>
-              <span className="cursor-pointer text-lg">debugBoy@gmail.com</span>
-            </span>
-            {/* Discord Link*/}
-            <span className="flex items-center gap-2 pt-8 pb-4 pr-4 pl-4">
-              <FaDiscord className="w-4 h-4 " />
-              <span className="font-bold text-xl cursor-pointer">
-                Discord :
-              </span>
-              <span className="cursor-pointer text-lg">
-                <a href="https://discord.gg/CDKTeQr6"> {contact9}</a>
-              </span>
-            </span>
+                    type="submit"
+                    value={contact12}
+                    disabled={!isFormValid}
+                  />
+                </div>
+              </form>
+            </div>
           </div>
         </div>
+      </div>
+      <div className="pb-12">
+      <EmailSubcribe />
+
       </div>
     </div>
   );

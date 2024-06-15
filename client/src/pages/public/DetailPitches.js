@@ -223,16 +223,6 @@ const DetailPitches = ({ isQuickView, data }) => {
       <div className="w-full py-2.5 px-4 text-white bg-button-color">
         <Breadcrumb title={title} category={category} brand={brand} />
       </div>
-      {/* <div className=" flex justify-center items-center bg-gray-100">
-        <div className="w-main">
-          <Breadcrumb
-            title={title}
-            category={category}
-            brand={brand}
-          ></Breadcrumb>
-        </div>
-      </div> */}
-      {/*Content Pitch*/}
       <div onClick={(e) => e.stopPropagation()} className="flex w-[85vw] py-12">
         {/*Img and Slider Image*/}
         <div className="w-1/2 flex">

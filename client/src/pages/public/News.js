@@ -84,19 +84,18 @@ const News = () => {
 
               <hr className="text-2xl" />
 
-              <div className=" flex flex-col gap-4 mt-4 bg-gray-100">
+              <div className="flex flex-col gap-4 mt-4">
                 {news?.news?.map((e, index) => (
                   <div
-                    style={{ fontFamily: "Open Sans" }}
                     key={e._id}
-                    className=" w-full cursor-pointer md:flex   "
+                    className="w-full cursor-pointer md:flex border border-green-700"
                     onClick={() => navigate(`/news/${e._id}`)}
                   >
                     <div className="md:w-1/3 w-full h-2/3">
                       <img
                         src={e.thumb}
                         alt="thumb"
-                        className="object-cover w-full h-full"
+                        className="object-cover w-fit h-fit"
                       />
                     </div>
                     <div className="md:w-2/3 w-full pl-4 pr-4 pb-2">

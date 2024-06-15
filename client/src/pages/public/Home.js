@@ -37,7 +37,7 @@ const Home = () => {
       <div className="w-full ">
         <DealDaily />
       </div>
-      <div className="w-full py-12">
+      <div className="w-full pb-12">
         <Comments />
       </div>
       <div className="w-full py-12">

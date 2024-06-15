@@ -1,6 +1,7 @@
 import path from "./path";
 import icons from "./icons";
 import { useTranslation } from "react-i18next";
+import { IoCartOutline, IoCodeOutline, IoHeartOutline, IoPersonOutline, IoTimeOutline } from "react-icons/io5";
 
 export const useGetNavigation = () => {
   const { t } = useTranslation();
@@ -277,7 +278,7 @@ const {
   IoNewspaperOutline,
   IoChatbubblesOutline,
   IoTicketOutline,
-  FaBars
+  FaBars,
 } = icons;
 
 export const useGetadminSideBar = () => {
@@ -435,11 +436,11 @@ export const useGetadminSideBar = () => {
       submenu: [
         {
           text: adminsidebar24,
-          path: `/${path.ADMIN}/${path.CREATE_COUPON}`,
+          path: `/${path.ADMIN}/${path.CREATE_NOTIFICATION}`,
         },
         {
           text: adminsidebar25,
-          path: `/${path.ADMIN}/${path.MANAGE_COUPON}`,
+          path: `/${path.ADMIN}/${path.MANAGE_NOTIFICATION}`,
         },
       ],
     },
@@ -464,13 +465,13 @@ export const useGetpitchOwnerSideBar = () => {
       type: "SINGLE",
       text: pitchownersidebar1,
       path: `/${path.PITCHOWNER}/${path.DASHBOARD_PITCHOWN}`,
-      icon: <MdSpaceDashboard />,
+      icon: <IoBarChartOutline />,
     },
     {
       id: 2,
       type: "PARENT",
       text: pitchownersidebar2,
-      icon: <FaProductHunt />,
+      icon: <IoFootballOutline />,
       submenu: [
         {
           text: pitchownersidebar3,
@@ -487,20 +488,20 @@ export const useGetpitchOwnerSideBar = () => {
       type: "SINGLE",
       text: pitchownersidebar5,
       path: `/${path.PITCHOWNER}/${path.CREATE_BRAND_PITCHOWNER}`,
-      icon: <SiBrandfolder />,
+      icon: <IoPricetagOutline />,
     },
     {
       id: 4,
       type: "SINGLE",
       text: pitchownersidebar6,
       path: `/${path.PITCHOWNER}/${path.MANAGE_ORDER_PITCHOWNER}`,
-      icon: <FaMoneyBill />,
+      icon: <IoCartOutline />,
     },
     {
       id: 5,
       type: "PARENT",
       text: pitchownersidebar7,
-      icon: <FaTicketAlt />,
+      icon: <IoTicketOutline />,
       submenu: [
         {
           text: pitchownersidebar8,
@@ -514,7 +515,6 @@ export const useGetpitchOwnerSideBar = () => {
     },
   ];
 };
-
 export const useGetmemberSidebar = () => {
   const { t } = useTranslation();
   const { membersidebar1, membersidebar2, membersidebar3 } = t("membersidebar");
@@ -524,48 +524,47 @@ export const useGetmemberSidebar = () => {
       type: "SINGLE",
       text: membersidebar1,
       path: `/${path.MEMBER}/${path.PERSONAL}`,
-      icon: <MdPersonalInjury />,
+      icon: <IoPersonOutline />,
     },
     {
       id: 2,
       type: "SINGLE",
       text: membersidebar2,
       path: `/${path.MEMBER}/${path.HISTORY}`,
-      icon: <MdHistory />,
+      icon: <IoTimeOutline />,
     },
     {
       id: 3,
       type: "SINGLE",
       text: membersidebar3,
       path: `/${path.MEMBER}/${path.WISHLIST}`,
-      icon: <AiFillLike />,
+      icon: <IoHeartOutline />,
     },
   ];
 };
-
-export const memberSidebar = [
-  {
-    id: 1,
-    type: "SINGLE",
-    text: "Personal",
-    path: `/${path.MEMBER}/${path.PERSONAL}`,
-    icon: <MdPersonalInjury />,
-  },
-  {
-    id: 2,
-    type: "SINGLE",
-    text: "Booking histories",
-    path: `/${path.MEMBER}/${path.HISTORY}`,
-    icon: <MdHistory />,
-  },
-  {
-    id: 3,
-    type: "SINGLE",
-    text: "Wishlist",
-    path: `/${path.MEMBER}/${path.WISHLIST}`,
-    icon: <AiFillLike />,
-  },
-];
+// export const memberSidebar = [
+//   {
+//     id: 1,
+//     type: "SINGLE",
+//     text: "Personal",
+//     path: `/${path.MEMBER}/${path.PERSONAL}`,
+//     icon: <IoPeopleOutline />,
+//   },
+//   {
+//     id: 2,
+//     type: "SINGLE",
+//     text: "Booking histories",
+//     path: `/${path.MEMBER}/${path.HISTORY}`,
+//     icon: <MdHistory />,
+//   },
+//   {
+//     id: 3,
+//     type: "SINGLE",
+//     text: "Wishlist",
+//     path: `/${path.MEMBER}/${path.WISHLIST}`,
+//     icon: <AiFillLike />,
+//   },
+// ];
 export const roles = [
   {
     code: 1,
@@ -580,7 +579,6 @@ export const roles = [
     value: "User",
   },
 ];
-
 export const blockStatus = [
   {
     code: 1,
@@ -591,7 +589,6 @@ export const blockStatus = [
     value: "Active",
   },
 ];
-
 export const voteOptions = [
   {
     id: 1,
@@ -614,7 +611,6 @@ export const voteOptions = [
     text: "Perfect",
   },
 ];
-
 export const shifts = [
   { value: 1, time: "6 AM - 7 AM", hour: 6, isDisabled: false },
   { value: 2, time: "7 AM - 8 AM", hour: 7, isDisabled: false },
@@ -635,7 +631,6 @@ export const shifts = [
   { value: 17, time: "10 PM - 11 PM", hour: 22, isDisabled: false },
   { value: 18, time: "11 PM - 12 AM", hour: 23, isDisabled: false },
 ];
-
 export const PitchExtraInformation = [
   {
     id: 1,
@@ -675,7 +670,6 @@ export const PitchExtraInformation = [
     icon: <BsFillTelephoneFill />,
   },
 ];
-
 export const locations = [
   "Quận 1",
   "Quận 2",
