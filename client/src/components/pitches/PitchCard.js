@@ -64,8 +64,9 @@ const PitchCard = ({
         </div>
         {/*Add to cart */}
         <div
-          class={`flex flex-col items-center justify-end mb-2 transition duration-500 absolute bottom-0 top-0 right-0 left-0 ${isHover ? "opacity-100" : "opacity-0"
-            }`}
+          class={`flex flex-col items-center justify-end mb-2 transition duration-500 absolute bottom-0 top-0 right-0 left-0 ${
+            isHover ? "opacity-100" : "opacity-0"
+          }`}
         >
           <button className="flex items-center justify-center w-5/6 gap-2 py-2.5 relative overflow-hidden bg-button-color text-white transition-all before:absolute before:bottom-0 before:left-0 before:top-0 before:z-0 before:h-full before:w-0 before:bg-button-color-hover before:transition-all before:duration-500 hover:text-black hover:before:left-0 hover:before:w-full">
             <span className="relative text-sm font-semibold">Add to Cart</span>
@@ -76,8 +77,9 @@ const PitchCard = ({
         </div>
         {/*Icon */}
         <div
-          class={`flex flex-col gap-2 items-center justify-end mb-2 transition duration-500 absolute top-0 right-0 opacity-0  mt-3 mr-3 ${isHover ? "opacity-100" : "opacity-0"
-            }`}
+          class={`flex flex-col gap-2 items-center justify-end mb-2 transition duration-500 absolute top-0 right-0 opacity-0  mt-3 mr-3 ${
+            isHover ? "opacity-100" : "opacity-0"
+          }`}
         >
           {/*Icon Heart*/}
           <button
@@ -121,20 +123,8 @@ const PitchCard = ({
       </div>
       {/*Content */}
       <div className="p-4 flex flex-col gap-3">
-        {/*Category, Brand */}
-        {/* <div className="flex items-center gap-2">
-          <span className="px-3 py-1 rounded-full text-xs bg-gray-300 whitespace-nowrap">
-            {category}
-          </span>
-          <span className="px-3 py-1 rounded-full text-xs bg-gray-300 whitespace-nowrap">
-            {brand}
-          </span>
-        </div> */}
         {/*Title */}
-        <h2
-          className="font-semibold text-2xl line-clamp-1"
-          title={title}
-        >
+        <h2 className="font-semibold text-2xl line-clamp-1" title={title}>
           {title}
         </h2>
         {/*Address */}
