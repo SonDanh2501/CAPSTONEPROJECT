@@ -32,6 +32,7 @@ const LandingBanner = () => {
     landing8,
     landing9,
     landing10,
+    landing11
   } = t("landingbanner");
   const handleButton2 = () => {
     navigate(`/${path.CONTACT}`);
@@ -45,16 +46,14 @@ const LandingBanner = () => {
         <div className="flex flex-col justify-center bg-banner hero-area">
           <div className="flex flex-col absolute z-10 md:ml-24 ml-5">
             {/*Sub text Header */}
-            <span className="text-green-500 font-bold">NEW PITCHES</span>
+            <span className="text-green-500 font-bold">{landing1}</span>
             {/*Header*/}
             <span className="md:w-3/5 w-full text-[55px] font-bold text-white leading-tight py-2">
-              Beautiful Pitches & High Facilities
+              {landing2}
             </span>
             {/*Sub text after header */}
             <span className="md:w-3/5 w-full text-white text-sm text-left py-2">
-              Known as the most famous and popular king sport in the world.
-              Soccer players must practice mobility, jogging and increase
-              endurance.
+              {landing3}
             </span>
             {/*Button*/}
             <div className="py-2 flex gap-2">
@@ -63,7 +62,7 @@ const LandingBanner = () => {
                 onClick={() => handleNavigatePitches()}
                 className="flex items-center justify-center gap-2 py-2.5 px-8 relative overflow-hidden bg-button-color-hover text-black transition-all before:absolute before:bottom-0 before:left-0 before:top-0 before:z-0 before:h-full before:w-0 before:bg-button-color before:transition-all before:duration-500 hover:text-white hover:before:left-0 hover:before:w-full"
               >
-                <span className="relative text-sm font-semibold">Book Now</span>
+                <span className="relative text-sm font-semibold">{landing4}</span>
                 <span className="relative ">
                   <IoArrowForwardOutline />
                 </span>
@@ -74,7 +73,7 @@ const LandingBanner = () => {
                 className="flex items-center justify-center border border-gray-300 hover:border-transparent text-white py-2.5 px-8 bg-transparent hover:bg-gray-300/20 duration-300"
               >
                 <span className="relative text-sm font-semibold ">
-                  Learn More
+                  {landing5}
                 </span>
               </button>
               {/* <Button size={20} handleOnClick={handleNavigatePitches}>
@@ -96,10 +95,10 @@ const LandingBanner = () => {
           </span>
           <div className="flex flex-col text-sm text-gray-500">
             <h3 className="font-bold uppercase text-white py-1 md:text-sm text-xs">
-              RETURN
+              {landing6}
             </h3>
             <span className="w-2/3 md:text-xl text-sm font-bold text-white">
-              3 Days Free Return
+              {landing7}
             </span>
           </div>
         </div>
@@ -110,10 +109,10 @@ const LandingBanner = () => {
           </span>
           <div className="flex flex-col text-sm text-gray-500">
             <h3 className="font-bold uppercase text-white py-1 md:text-sm text-xs">
-              Help
+              {landing8}
             </h3>
             <span className="w-2/3 md:text-xl text-sm font-bold text-white">
-              24/7 Customer Support
+              {landing9}
             </span>
           </div>
         </div>
@@ -124,10 +123,10 @@ const LandingBanner = () => {
           </span>
           <div className="flex flex-col text-sm text-gray-500">
             <h3 className="font-bold uppercase text-white py-1 md:text-sm text-xs">
-              Deal
+              {landing10}
             </h3>
             <span className="w-2/3 md:text-xl text-sm font-bold text-white">
-              Hot Deal & Coupon
+              {landing11}
             </span>
           </div>
         </div>

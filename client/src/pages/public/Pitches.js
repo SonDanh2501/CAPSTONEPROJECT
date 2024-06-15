@@ -67,8 +67,12 @@ const Pitches = () => {
     },
     [sort]
   );
-
-  console.log(categories);
+  useEffect(() => {
+    navigate({
+      pathname: `/${category}`,
+      search: createSearchParams({ sort }).toString(),
+    });
+  }, [sort])
   useEffect(() => {
     const queries = Object.fromEntries([...params]);
     let priceQuery = {};

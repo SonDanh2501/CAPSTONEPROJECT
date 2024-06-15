@@ -46,7 +46,7 @@ const settings = {
   arrows: false,
 };
 
-const { FaCalendarAlt, IoCalendarNumberOutline,IoTimeOutline,IoBagAddOutline,FiBox,IoHelpBuoyOutline   } = icons;
+const { FaCalendarAlt, IoCalendarNumberOutline, IoTimeOutline, IoBagAddOutline, FiBox, IoHelpBuoyOutline } = icons;
 const DetailPitches = ({ isQuickView, data }) => {
   const { t } = useTranslation();
   const {
@@ -119,7 +119,7 @@ const DetailPitches = ({ isQuickView, data }) => {
           const isSameDay = moment(selectedDate).isSame(currentDate, "day");
           elshift.value === +el.shift &&
             new Date(el.bookedDate).getTime() ===
-              new Date(selectedDate).getTime() &&
+            new Date(selectedDate).getTime() &&
             pitch._id === el.pitch?._id &&
             (elshift.isDisabled = true);
           // : (elshift.isDisabled = false);
@@ -183,7 +183,7 @@ const DetailPitches = ({ isQuickView, data }) => {
     }
     window.scrollTo(0, 0);
   }, [pid]);
-  
+
   useEffect(() => {
     if (pid) {
       fetchPitchData();
@@ -310,7 +310,7 @@ const DetailPitches = ({ isQuickView, data }) => {
             <div className="w-full flex items-center gap-4 py-2">
               {/*Date */}
               <div className="flex flex-col w-1/4">
-                <span className="text-sm">Shift:</span>
+                <span className="text-sm">Date:</span>
                 {/* <ChooseDate /> */}
                 <DatePicker
                   className="w-full border outline-none focus:ring-0 focus:border-black "
@@ -321,13 +321,13 @@ const DetailPitches = ({ isQuickView, data }) => {
                   minDate={moment().toDate()}
                   dateFormat="dd/MM/yyyy"
                   placeholderText={detail9}
-                  // showPopperArrow={false}
-                  // popperClassName="datepicker-popper"
+                // showPopperArrow={false}
+                // popperClassName="datepicker-popper"
                 />
               </div>
               {/*Shift */}
               <div className="flex flex-col w-3/4">
-                <span className="text-sm">Date:</span>
+                <span className="text-sm">Shift:</span>
                 <Select
                   className=""
                   theme={(theme) => ({
@@ -419,9 +419,8 @@ const DetailPitches = ({ isQuickView, data }) => {
             <div className="px-6 py-2 ">
               <button
                 onClick={() => setTabSelect(1)}
-                className={`relative block ${
-                  tabSelect === 1 ? "text-green-500" : "text-black"
-                } hover:text-green-500 duration-300`}
+                className={`relative block ${tabSelect === 1 ? "text-green-500" : "text-black"
+                  } hover:text-green-500 duration-300`}
               >
                 <span>Rating & Reviews</span>
               </button>
@@ -429,9 +428,8 @@ const DetailPitches = ({ isQuickView, data }) => {
             <div className="px-6 py-2 ">
               <button
                 onClick={() => setTabSelect(2)}
-                className={`relative block ${
-                  tabSelect === 2 ? "text-green-500" : "text-black"
-                } hover:text-green-500 duration-300`}
+                className={`relative block ${tabSelect === 2 ? "text-green-500" : "text-black"
+                  } hover:text-green-500 duration-300`}
               >
                 <span>Payments</span>
               </button>

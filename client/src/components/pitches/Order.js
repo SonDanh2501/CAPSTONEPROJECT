@@ -190,10 +190,7 @@ const Order = () => {
             {formatMoney(
               order?.reduce((sum, el) => sum + Number(el.total), 0) -
               (discount
-                ? order?.reduce(
-                  (sum, el) => sum + Number(el.pitch?.price),
-                  0
-                ) *
+                ? order?.reduce((sum, el) => sum + Number(el.total), 0) *
                 (discount.price / 100)
                 : 0)
             ) + ` VND`}
