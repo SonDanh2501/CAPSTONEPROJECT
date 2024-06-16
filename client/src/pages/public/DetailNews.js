@@ -2,11 +2,8 @@ import React, { useState, useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { MdNavigateNext } from "react-icons/md";
 import { apiGetNews, apiGetAllNews } from "apis";
-import DOMPurify, { clearConfig } from "dompurify";
+import DOMPurify from "dompurify";
 import NewsSlider from "components/news/NewsSlider";
-
-
-
 
 const DetailNews = () => {
   const [news, setNews] = useState(null);

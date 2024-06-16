@@ -11,6 +11,7 @@ const Select = ({
   style,
   fullWidth,
   pitchOwn,
+  defaultValue,
 }) => {
   return (
     <div className={clsx("flex flex-col h-[42px] gap-2", style)}>
@@ -28,14 +29,16 @@ const Select = ({
         id={id}
         {...register(id, validate)}
       >
-        <option value="">...</option>
+        {defaultValue && <option value={defaultValue}>All</option>}
         {pitchOwn && (
           <option selected="selected" value={pitchOwn._id}>
             {pitchOwn.firstname} {pitchOwn.lastname}
           </option>
         )}
         {options?.map((el, index) => (
-          <option key={index} value={el.code}>{el.value}</option>
+          <option key={index} value={el.code}>
+            {el.value}
+          </option>
         ))}
       </select>
       {errors[id] && (

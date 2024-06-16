@@ -1,41 +1,45 @@
 import React, { useCallback, useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
+import Slider from "react-slick";
+import Select from "react-select";
+import DatePicker from "react-datepicker";
+import { useTranslation } from "react-i18next";
+import { useDispatch, useSelector } from "react-redux";
+import { toast } from "react-toastify";
+// import { geocodeByAddress, getLatLng } from "react-google-places-autocomplete";
+
 import {
   apiGetPitch,
   apiGetPitches,
   apiBooking,
   apiGetAllOrder,
-  apiGetUserOrderStatus,
+  // apiGetUserOrderStatus,
 } from "apis";
+
 import moment from "moment";
 import {
   Breadcrumb,
-  Button,
-  PitchExtraInfo,
+  // Button,
+  // PitchExtraInfo,
   PitchInformation,
   CustomSlider,
-  Map,
+  // Map,
   MapBox,
   EmailSubcribe,
 } from "components";
-import Slider from "react-slick";
 
 import { formatMoney, formatPrice, renderStarFromNumber } from "ultils/helper";
 import { useGetpitchExtraInformation } from "ultils/constant";
-import DOMPurify, { clearConfig } from "dompurify";
-import clsx from "clsx";
-import Select from "react-select";
-import DatePicker from "react-datepicker";
-import "react-datepicker/dist/react-datepicker.css";
+import DOMPurify from "dompurify";
+// import clsx from "clsx";
+
 import { shifts } from "ultils/constant";
 import icons from "ultils/icons";
 import Swal from "sweetalert2";
-import { useDispatch, useSelector } from "react-redux";
 import path from "ultils/path";
-import { toast } from "react-toastify";
-import { geocodeByAddress, getLatLng } from "react-google-places-autocomplete";
 import { updateCart } from "store/user/userSlice";
-import { useTranslation } from "react-i18next";
+
+import "react-datepicker/dist/react-datepicker.css";
 
 const settings = {
   infinite: false,
@@ -46,7 +50,14 @@ const settings = {
   arrows: false,
 };
 
-const { FaCalendarAlt, IoCalendarNumberOutline,IoTimeOutline,IoBagAddOutline,FiBox,IoHelpBuoyOutline   } = icons;
+const {
+  FaCalendarAlt,
+  IoCalendarNumberOutline,
+  IoTimeOutline,
+  IoBagAddOutline,
+  FiBox,
+  IoHelpBuoyOutline,
+} = icons;
 const DetailPitches = ({ isQuickView, data }) => {
   const { t } = useTranslation();
   const {
@@ -74,34 +85,46 @@ const DetailPitches = ({ isQuickView, data }) => {
   const [selectedShift, setSelectedShift] = useState([]);
   const [selectedDate, setSelectedDate] = useState(null);
   const [currentImage, setcurrentImage] = useState(null);
-  const [selectedPrice, setSelectedPrice] = useState(null);
+  const [selectedPrice, setSelectedPrice] = useState([]);
   const [relatedPitches, setrelatedPitches] = useState(null);
   const [update, setUpdate] = useState(false);
   const { title, brand } = useParams();
   const [selectedHour, setSelectedHour] = useState([]);
-  const [coords, setCoords] = useState(null);
+  // const [coords, setCoords] = useState(null);
   const [tabSelect, setTabSelect] = useState(1);
   const currentTime = new Date();
   const currentHour = currentTime.getHours();
 
   const getPrice = (price_morning, price_afternoon, price_evening) => {
-    if (currentHour >= 4 && currentHour < 11) {
-      return { price: price_morning };
-    } else if (currentHour >= 11 && currentHour < 16) {
-      return { price: price_afternoon };
+    // Tìm giá cao nhất
+    const highestPrice = Math.max(
+      price_morning,
+      price_afternoon,
+      price_evening
+    );
+
+    // Kiểm tra xem có chỉ 1 giá khác 0 không
+    if (
+      (price_morning > 0 && price_afternoon === 0 && price_evening === 0) ||
+      (price_morning === 0 && price_afternoon > 0 && price_evening === 0) ||
+      (price_morning === 0 && price_afternoon === 0 && price_evening > 0)
+    ) {
+      // Chỉ có 1 giá khác 0, trả về giá đó
+      return { price: `${formatMoney(formatPrice(highestPrice))}` };
     } else {
-      return { price: price_evening };
+      // Có nhiều hơn 1 giá khác 0, trả về giá thấp nhất và cao nhất
+      const lowestPrice = Math.min(
+        price_morning,
+        price_afternoon,
+        price_evening
+      );
+      return {
+        price: `${formatMoney(formatPrice(lowestPrice))} - ${formatMoney(
+          formatPrice(highestPrice)
+        )}`,
+      };
     }
   };
-  useEffect(() => {
-    if (currentHour >= 4 && currentHour < 11) {
-      setSelectedPrice(pitch?.price_morning);
-    } else if (currentHour >= 11 && currentHour < 16) {
-      setSelectedPrice(pitch?.price_afternoon);
-    } else {
-      setSelectedPrice(pitch?.price_evening);
-    }
-  }, [currentHour, pitch]);
 
   const fetchBooking = async () => {
     const response = await apiGetAllOrder();
@@ -147,13 +170,14 @@ const DetailPitches = ({ isQuickView, data }) => {
         }
       });
     }
-
+    console.log("selectedPrice", selectedPrice);
+    console.log("selectedHour", selectedHour);
     const response = await apiBooking({
       shifts: selectedShift,
       bookedDate: selectedDate,
       pitchId: pid,
       hours: selectedHour,
-      total: selectedPrice,
+      prices: selectedPrice,
       namePitch: pitch?.title,
     });
     if (response.success) {
@@ -162,6 +186,7 @@ const DetailPitches = ({ isQuickView, data }) => {
       toast.success(response.message);
     } else toast.error(response.message);
   };
+
   const fetchPitchData = async () => {
     const response = await apiGetPitch(pid);
     if (response.success) {
@@ -183,7 +208,7 @@ const DetailPitches = ({ isQuickView, data }) => {
     }
     window.scrollTo(0, 0);
   }, [pid]);
-  
+
   useEffect(() => {
     if (pid) {
       fetchPitchData();
@@ -217,6 +242,7 @@ const DetailPitches = ({ isQuickView, data }) => {
   useEffect(() => {
     fetchBooking();
   }, [selectedDate]);
+
   return (
     <div className="flex flex-col items-center justify-center w-full">
       {/*BreadCrumb*/}
@@ -328,6 +354,7 @@ const DetailPitches = ({ isQuickView, data }) => {
               {/*Shift */}
               <div className="flex flex-col w-3/4">
                 <span className="text-sm">Date:</span>
+
                 <Select
                   className=""
                   theme={(theme) => ({
@@ -358,6 +385,19 @@ const DetailPitches = ({ isQuickView, data }) => {
                     setSelectedHour(
                       selectedOptions.map((option) => option.hour)
                     );
+                    setSelectedPrice(
+                      selectedOptions.map((option) => {
+                        let price;
+                        if (option.hour >= 4 && option.hour < 11) {
+                          price = pitch?.price_morning;
+                        } else if (option.hour >= 11 && option.hour < 16) {
+                          price = pitch?.price_afternoon;
+                        } else {
+                          price = pitch?.price_evening;
+                        }
+                        return { hour: option.hour, price: price };
+                      })
+                    );
                   }}
                 />
               </div>
@@ -366,15 +406,13 @@ const DetailPitches = ({ isQuickView, data }) => {
             <div className="flex items-center gap-2 border-b border-t border-black py-2 ">
               {/*Price*/}
               <span className="w-1/4 font-bold text-lg">
-                {`${formatMoney(
-                  formatPrice(
-                    getPrice(
-                      pitch?.price_morning,
-                      pitch?.price_afternoon,
-                      pitch?.price_evening
-                    )?.price
-                  )
-                )} VNĐ`}
+                {`${
+                  getPrice(
+                    pitch?.price_morning,
+                    pitch?.price_afternoon,
+                    pitch?.price_evening
+                  )?.price
+                } VNĐ`}
               </span>
               {/*Button add to cart*/}
               <button

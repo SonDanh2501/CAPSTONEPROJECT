@@ -465,7 +465,7 @@ const createUsers = asyncHandler(async (req, res) => {
 
 const BookingPitch = asyncHandler(async (req, res) => {
   const { _id } = req.user;
-  const { pitchId, bookedDate, shifts, hours, total, namePitch } = req.body;
+  const { pitchId, bookedDate, shifts, hours, prices, namePitch } = req.body;
   // check hour
   if (
     !pitchId ||
@@ -511,7 +511,7 @@ const BookingPitch = asyncHandler(async (req, res) => {
       bookedDate: bookedDate,
       shift: shift,
       hour: hours[index], // Gán giá trị giờ tương ứng với mỗi shift
-      total: total,
+      total: prices[index].price,
       owner: pitchInfo.owner,
       namePitch: namePitch,
     }));
@@ -618,7 +618,7 @@ const loginGG = asyncHandler(async (req, res) => {
       userData: newUser,
     });
   } else if (response) {
-    console.log("ĐÃ CÓ TÀI KHOẢN")
+    console.log("ĐÃ CÓ TÀI KHOẢN");
     const { role, refreshToken, ...userData } = response.toObject();
     //tạo accesstoken
     const accessToken = generateAccessToken(response._id, role);
