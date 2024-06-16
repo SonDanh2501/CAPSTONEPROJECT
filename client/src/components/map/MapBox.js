@@ -48,7 +48,7 @@ const MapBox = () => {
       setAddressMarker(newaddressdata);
     }, 500);
   }, []);
-  console.log("arr show up >> ", addressMarker);
+
   return (
     <Map
       mapboxAccessToken="pk.eyJ1Ijoic29uZGFuaCIsImEiOiJjbHdybjV2b2owMm53MnFwcmpjbnE5OGZtIn0.0A1izf6qM7jX3iFkHt4_HQ"
