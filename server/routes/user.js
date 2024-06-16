@@ -1,5 +1,7 @@
 const router = require("express").Router();
+
 const ctrls = require("../controllers/user");
+const controller = require("../controllers/zalopay");
 const { verifyAccessToken, isAdmin } = require("../middlewares/verifyToken");
 const uploader = require("../config/cloudinaryconfig");
 
@@ -7,6 +9,10 @@ router.post("/register", ctrls.register);
 router.post("/mock", ctrls.createUsers);
 router.put("/finalregister/:token", ctrls.finalRegister);
 router.post("/login", ctrls.login);
+router.post("/payment", controller.payment);
+router.post("/callback", controller.callback);
+router.post("/check-status-order", controller.checkStatus);
+
 router.post("/logingg", ctrls.loginGG);
 router.get("/current", verifyAccessToken, ctrls.getCurrent);
 router.post("/refreshtoken", ctrls.refreshAccessToken);
@@ -14,7 +20,11 @@ router.get("/logout", ctrls.logout);
 router.post("/forgotpassword", ctrls.forgotPassword);
 router.put("/resetpassword", ctrls.resetPassword);
 router.get("/", [verifyAccessToken, isAdmin], ctrls.getUsers);
-router.put("/current",[verifyAccessToken, uploader.single("avatar")], ctrls.updateUsers);
+router.put(
+  "/current",
+  [verifyAccessToken, uploader.single("avatar")],
+  ctrls.updateUsers
+);
 router.post("/booking", verifyAccessToken, ctrls.BookingPitch);
 router.put("/wishlist/:pid", [verifyAccessToken], ctrls.updateWishlist);
 router.get("/wishlist/:uid", [verifyAccessToken], ctrls.getWishListById);
