@@ -167,7 +167,7 @@ const ManageOwnerOrder = () => {
                     )}
                   </div>
                 </td>
-                <td className="text-center px-2 py-2">{el.pitch.title}</td>
+                <td className="text-center px-2 py-2">{el.pitch?.title}</td>
                 <td className="text-center px-2 py-2">
                   {shifts.find((s) => +s.value === +el.shift)?.time}
                 </td>
@@ -177,14 +177,13 @@ const ManageOwnerOrder = () => {
                 )} VNĐ`}</td>
                 <td className="text-center px-2 py-2">
                   <span
-                    className={`${
-                      el?.status === "Pay By Cash"
+                    className={`${el?.status === "Pay By Cash"
                         ? "text-blue-500 bg-blue-300/25 rounded-md p-2"
                         : el?.status === "Success"
-                        ? "text-green-500 bg-green-300/25 rounded-md p-2"
-                        : el?.status === "Pending" &&
+                          ? "text-green-500 bg-green-300/25 rounded-md p-2"
+                          : el?.status === "Pending" &&
                           "text-yellow-500 bg-yellow-300/25 rounded-md p-2"
-                    }`}
+                      }`}
                   >
                     {el.status}
                   </span>
