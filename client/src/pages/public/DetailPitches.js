@@ -1,89 +1,58 @@
 import React, { useCallback, useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
+import Slider from "react-slick";
+import Select from "react-select";
+import DatePicker from "react-datepicker";
+import { useTranslation } from "react-i18next";
+import { useDispatch, useSelector } from "react-redux";
+import { toast } from "react-toastify";
+// import { geocodeByAddress, getLatLng } from "react-google-places-autocomplete";
+
 import {
   apiGetPitch,
   apiGetPitches,
   apiBooking,
   apiGetAllOrder,
-  apiGetUserOrderStatus,
+  // apiGetUserOrderStatus,
 } from "apis";
+
 import moment from "moment";
 import {
   Breadcrumb,
-  Button,
-  PitchExtraInfo,
+  // Button,
+  // PitchExtraInfo,
   PitchInformation,
   CustomSlider,
-  Map,
+  // Map,
   MapBox,
   EmailSubcribe,
 } from "components";
-import Slider from "react-slick";
 
 import { formatMoney, formatPrice, renderStarFromNumber } from "ultils/helper";
 import { useGetpitchExtraInformation } from "ultils/constant";
-import DOMPurify, { clearConfig } from "dompurify";
-import clsx from "clsx";
-import Select from "react-select";
-import DatePicker from "react-datepicker";
-import "react-datepicker/dist/react-datepicker.css";
+import DOMPurify from "dompurify";
+// import clsx from "clsx";
+
 import { shifts } from "ultils/constant";
 import icons from "ultils/icons";
 import Swal from "sweetalert2";
-import { useDispatch, useSelector } from "react-redux";
 import path from "ultils/path";
-import { toast } from "react-toastify";
-import { geocodeByAddress, getLatLng } from "react-google-places-autocomplete";
 import { updateCart } from "store/user/userSlice";
-import { useTranslation } from "react-i18next";
 
-const settingsVertical = {
-  infinite: true,
-  arrows: false,
-  speed: 850,
-  slidesToShow: 4,
+import "react-datepicker/dist/react-datepicker.css";
+
+const settings = {
+  infinite: false,
+  slidesToShow: 3,
   slidesToScroll: 1,
-  initialSlide: 0,
   vertical: true,
   verticalSwiping: true,
-  // responsive: [
-  //   {
-  //     breakpoint: 1200,
-  //     settings: {
-  //       slidesToShow: 2,
-  //     },
-  //   },
-  //   {
-  //     breakpoint: 800,
-  //     settings: {
-  //       slidesToShow: 1,
-  //     },
-  //   },
-  // ],
-};
-const settingsHorizontal = {
-  infinite: true,
   arrows: false,
-  speed: 850,
-  slidesToShow: 4,
-  slidesToScroll: 1,
-  initialSlide: 0,
-  // responsive: [
-  //   {
-  //     breakpoint: 1200,
-  //     settings: {
-  //       slidesToShow: 2,
-  //     },
-  //   },
-  //   {
-  //     breakpoint: 800,
-  //     settings: {
-  //       slidesToShow: 1,
-  //     },
-  //   },
-  // ],
 };
+
+
 const { FaCalendarAlt, IoCalendarNumberOutline, IoTimeOutline, IoBagAddOutline, FiBox, IoHelpBuoyOutline } = icons;
+
 const DetailPitches = ({ isQuickView, data }) => {
   const { t } = useTranslation();
   const {
@@ -111,34 +80,46 @@ const DetailPitches = ({ isQuickView, data }) => {
   const [selectedShift, setSelectedShift] = useState([]);
   const [selectedDate, setSelectedDate] = useState(null);
   const [currentImage, setcurrentImage] = useState(null);
-  const [selectedPrice, setSelectedPrice] = useState(null);
+  const [selectedPrice, setSelectedPrice] = useState([]);
   const [relatedPitches, setrelatedPitches] = useState(null);
   const [update, setUpdate] = useState(false);
   const { title, brand } = useParams();
   const [selectedHour, setSelectedHour] = useState([]);
-  const [coords, setCoords] = useState(null);
+  // const [coords, setCoords] = useState(null);
   const [tabSelect, setTabSelect] = useState(1);
   const currentTime = new Date();
   const currentHour = currentTime.getHours();
 
   const getPrice = (price_morning, price_afternoon, price_evening) => {
-    if (currentHour >= 4 && currentHour < 11) {
-      return { price: price_morning };
-    } else if (currentHour >= 11 && currentHour < 16) {
-      return { price: price_afternoon };
+    // Tìm giá cao nhất
+    const highestPrice = Math.max(
+      price_morning,
+      price_afternoon,
+      price_evening
+    );
+
+    // Kiểm tra xem có chỉ 1 giá khác 0 không
+    if (
+      (price_morning > 0 && price_afternoon === 0 && price_evening === 0) ||
+      (price_morning === 0 && price_afternoon > 0 && price_evening === 0) ||
+      (price_morning === 0 && price_afternoon === 0 && price_evening > 0)
+    ) {
+      // Chỉ có 1 giá khác 0, trả về giá đó
+      return { price: `${formatMoney(formatPrice(highestPrice))}` };
     } else {
-      return { price: price_evening };
+      // Có nhiều hơn 1 giá khác 0, trả về giá thấp nhất và cao nhất
+      const lowestPrice = Math.min(
+        price_morning,
+        price_afternoon,
+        price_evening
+      );
+      return {
+        price: `${formatMoney(formatPrice(lowestPrice))} - ${formatMoney(
+          formatPrice(highestPrice)
+        )}`,
+      };
     }
   };
-  useEffect(() => {
-    if (currentHour >= 4 && currentHour < 11) {
-      setSelectedPrice(pitch?.price_morning);
-    } else if (currentHour >= 11 && currentHour < 16) {
-      setSelectedPrice(pitch?.price_afternoon);
-    } else {
-      setSelectedPrice(pitch?.price_evening);
-    }
-  }, [currentHour, pitch]);
 
   const fetchBooking = async () => {
     const response = await apiGetAllOrder();
@@ -184,13 +165,14 @@ const DetailPitches = ({ isQuickView, data }) => {
         }
       });
     }
-
+    console.log("selectedPrice", selectedPrice);
+    console.log("selectedHour", selectedHour);
     const response = await apiBooking({
       shifts: selectedShift,
       bookedDate: selectedDate,
       pitchId: pid,
       hours: selectedHour,
-      total: selectedPrice,
+      prices: selectedPrice,
       namePitch: pitch?.title,
     });
     if (response.success) {
@@ -199,6 +181,7 @@ const DetailPitches = ({ isQuickView, data }) => {
       toast.success(response.message);
     } else toast.error(response.message);
   };
+
   const fetchPitchData = async () => {
     const response = await apiGetPitch(pid);
     if (response.success) {
@@ -254,60 +237,50 @@ const DetailPitches = ({ isQuickView, data }) => {
   useEffect(() => {
     fetchBooking();
   }, [selectedDate]);
+
   return (
     <div className="flex flex-col items-center justify-center w-full">
       {/*BreadCrumb*/}
       <div className="w-full py-2.5 px-4 text-white bg-button-color">
-        <div className="w-[85vw]">
-          <Breadcrumb title={title} category={category} brand={brand} />
-        </div>
+        <Breadcrumb title={title} category={category} brand={brand} />
       </div>
-      <div
-        onClick={(e) => e.stopPropagation()}
-        className="lg:flex lg:flex-row flex-col w-[85vw] py-12"
-      >
+      {/* <div className=" flex justify-center items-center bg-gray-100">
+        <div className="w-main">
+          <Breadcrumb
+            title={title}
+            category={category}
+            brand={brand}
+          ></Breadcrumb>
+        </div>
+      </div> */}
+      {/*Content Pitch*/}
+      <div onClick={(e) => e.stopPropagation()} className="flex w-[85vw] py-12">
         {/*Img and Slider Image*/}
-        <div className="w-full lg:w-1/2 lg:flex lg:flex-row flex-col">
-          {/*Image Slider Vertical*/}
-          <div className="w-1/4 max-h-full h-full lg:block items-center hidden">
-            {/* <div className="">hello</div> */}
-            <Slider className="custom-slider-detail" {...settingsVertical}>
+        <div className="w-1/2 flex">
+          {/*Image Slider */}
+          <div className="w-1/4 h-[430px] flex items-center  overflow-hidden">
+            <Slider className="custom-slider-detail" {...settings}>
               {pitch?.images?.map((el) => (
                 <img
                   key={el}
                   onClick={(e) => handleClickimage(e, el)}
                   src={el}
                   alt="sub-pitch"
-                  className="object-scale-down cursor-pointer border border-green-500 "
+                  className="h-[150px] cursor-pointer border border-green-500 object-cover"
                 ></img>
               ))}
             </Slider>
           </div>
           {/*Image */}
-          <div className="w-full lg:w-3/4 h-full bg-gray-500 ">
+          <div className="w-3/4 h-full">
             <img
               src={currentImage}
               alt="pitch"
-              className="border h-full w-full object-cover"
+              className="border h-[430px] object-cover"
             />
           </div>
-          {/*Image Slider Horizontal*/}
-          <div className="w-full pt-2 lg:hidden items-center block">
-            {/* <div className="">hello</div> */}
-            <Slider className="" {...settingsHorizontal}>
-              {pitch?.images?.map((el) => (
-                <img
-                  key={el}
-                  onClick={(e) => handleClickimage(e, el)}
-                  src={el}
-                  alt="sub-pitch"
-                  className="object-cover cursor-pointer  pl-2"
-                ></img>
-              ))}
-            </Slider>
-          </div>
         </div>
-        <div className="w-full lg:w-1/2 lg:pl-7 pt-10 lg:pt-0">
+        <div className="w-1/2 pl-7">
           <div className="flex flex-col">
             {/*Tag */}
             <div className="flex gap-2 items-center">
@@ -369,13 +342,17 @@ const DetailPitches = ({ isQuickView, data }) => {
                   minDate={moment().toDate()}
                   dateFormat="dd/MM/yyyy"
                   placeholderText={detail9}
-                  // showPopperArrow={false}
-                  // popperClassName="datepicker-popper"
+                // showPopperArrow={false}
+                // popperClassName="datepicker-popper"
                 />
               </div>
               {/*Shift */}
               <div className="flex flex-col w-3/4">
+
+                <span className="text-sm">Date:</span>
+
                 <span className="text-sm">Shift:</span>
+
                 <Select
                   className=""
                   theme={(theme) => ({
@@ -406,6 +383,19 @@ const DetailPitches = ({ isQuickView, data }) => {
                     setSelectedHour(
                       selectedOptions.map((option) => option.hour)
                     );
+                    setSelectedPrice(
+                      selectedOptions.map((option) => {
+                        let price;
+                        if (option.hour >= 4 && option.hour < 11) {
+                          price = pitch?.price_morning;
+                        } else if (option.hour >= 11 && option.hour < 16) {
+                          price = pitch?.price_afternoon;
+                        } else {
+                          price = pitch?.price_evening;
+                        }
+                        return { hour: option.hour, price: price };
+                      })
+                    );
                   }}
                 />
               </div>
@@ -414,15 +404,13 @@ const DetailPitches = ({ isQuickView, data }) => {
             <div className="flex items-center gap-2 border-b border-t border-black py-2 ">
               {/*Price*/}
               <span className="w-1/4 font-bold text-lg">
-                {`${formatMoney(
-                  formatPrice(
-                    getPrice(
-                      pitch?.price_morning,
-                      pitch?.price_afternoon,
-                      pitch?.price_evening
-                    )?.price
-                  )
-                )} VNĐ`}
+                {`${
+                  getPrice(
+                    pitch?.price_morning,
+                    pitch?.price_afternoon,
+                    pitch?.price_evening
+                  )?.price
+                } VNĐ`}
               </span>
               {/*Button add to cart*/}
               <button
@@ -455,21 +443,20 @@ const DetailPitches = ({ isQuickView, data }) => {
         </div>
       </div>
       {/*Map and Comment*/}
-      <div className="lg:flex lg:flex-row flex-col w-[85vw] lg:h-[475px] h-[700px] lg:mt-10 mb-8">
+      <div className="flex w-[85vw] h-[475px] gap-7 mt-20 mb-8">
         {/*Map*/}
-        <div className="w-full h-1/2 lg:w-1/2 lg:h-full">
+        <div className="w-1/2">
           <MapBox />
         </div>
         {/*Comment*/}
-        <div className="w-full h-1/2 lg:w-1/2 lg:h-full lg:pl-7 lg:mt-0 mt-10 overflow-hidden overflow-y-auto ">
+        <div className="w-1/2 border-b border-green-600/30 overflow-hidden overflow-y-auto">
           {/* Tabs List/> */}
           <div className="flex items-center border-b border-green-600 ">
             <div className="px-6 py-2 ">
               <button
                 onClick={() => setTabSelect(1)}
-                className={`relative block ${
-                  tabSelect === 1 ? "text-green-500" : "text-black"
-                } hover:text-green-500 duration-300`}
+                className={`relative block ${tabSelect === 1 ? "text-green-500" : "text-black"
+                  } hover:text-green-500 duration-300`}
               >
                 <span>Rating & Reviews</span>
               </button>
@@ -477,9 +464,8 @@ const DetailPitches = ({ isQuickView, data }) => {
             <div className="px-6 py-2 ">
               <button
                 onClick={() => setTabSelect(2)}
-                className={`relative block ${
-                  tabSelect === 2 ? "text-green-500" : "text-black"
-                } hover:text-green-500 duration-300`}
+                className={`relative block ${tabSelect === 2 ? "text-green-500" : "text-black"
+                  } hover:text-green-500 duration-300`}
               >
                 <span>Payments</span>
               </button>
@@ -488,7 +474,7 @@ const DetailPitches = ({ isQuickView, data }) => {
           {/* Tabs Content/> */}
           <div className="w-full h-full relative">
             {/* Tabs 1/> */}
-            <div className={`${tabSelect !== 1 && "hidden"} pt-10`}>
+            <div className={`${tabSelect !== 1 && "hidden"}  `}>
               {/* Rating/> */}
               <PitchInformation
                 totalRatings={pitch?.totalRatings}
