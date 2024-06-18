@@ -50,8 +50,14 @@ const settings = {
   arrows: false,
 };
 
-
-const { FaCalendarAlt, IoCalendarNumberOutline, IoTimeOutline, IoBagAddOutline, FiBox, IoHelpBuoyOutline } = icons;
+const {
+  FaCalendarAlt,
+  IoCalendarNumberOutline,
+  IoTimeOutline,
+  IoBagAddOutline,
+  FiBox,
+  IoHelpBuoyOutline,
+} = icons;
 
 const DetailPitches = ({ isQuickView, data }) => {
   const { t } = useTranslation();
@@ -137,7 +143,7 @@ const DetailPitches = ({ isQuickView, data }) => {
           const isSameDay = moment(selectedDate).isSame(currentDate, "day");
           elshift.value === +el.shift &&
             new Date(el.bookedDate).getTime() ===
-            new Date(selectedDate).getTime() &&
+              new Date(selectedDate).getTime() &&
             pitch._id === el.pitch?._id &&
             (elshift.isDisabled = true);
           // : (elshift.isDisabled = false);
@@ -258,7 +264,7 @@ const DetailPitches = ({ isQuickView, data }) => {
         {/*Img and Slider Image*/}
         <div className="w-1/2 flex">
           {/*Image Slider */}
-          <div className="w-1/4 h-[430px] flex items-center  overflow-hidden">
+          <div className="w-1/4 h-[467px] flex items-center  overflow-hidden">
             <Slider className="custom-slider-detail" {...settings}>
               {pitch?.images?.map((el) => (
                 <img
@@ -276,7 +282,7 @@ const DetailPitches = ({ isQuickView, data }) => {
             <img
               src={currentImage}
               alt="pitch"
-              className="border h-[430px] object-cover"
+              className="border h-[467px] object-cover"
             />
           </div>
         </div>
@@ -342,17 +348,13 @@ const DetailPitches = ({ isQuickView, data }) => {
                   minDate={moment().toDate()}
                   dateFormat="dd/MM/yyyy"
                   placeholderText={detail9}
-                // showPopperArrow={false}
-                // popperClassName="datepicker-popper"
+                  // showPopperArrow={false}
+                  // popperClassName="datepicker-popper"
                 />
               </div>
               {/*Shift */}
               <div className="flex flex-col w-3/4">
-
-                <span className="text-sm">Date:</span>
-
                 <span className="text-sm">Shift:</span>
-
                 <Select
                   className=""
                   theme={(theme) => ({
@@ -360,8 +362,6 @@ const DetailPitches = ({ isQuickView, data }) => {
                     borderRadius: 0,
                     colors: {
                       ...theme.colors,
-                      primary25: "hotpink",
-                      neutral20: "black",
                       primary: "black",
                     },
                   })}
@@ -401,9 +401,9 @@ const DetailPitches = ({ isQuickView, data }) => {
               </div>
             </div>
             {/*Money, Button add to cart */}
-            <div className="flex items-center gap-2 border-b border-t border-black py-2 ">
+            <div className="flex flex-col items-center gap-2 border-b border-t border-black py-2 ">
               {/*Price*/}
-              <span className="w-1/4 font-bold text-lg">
+              <span className="w-full font-bold text-center text-lg ">
                 {`${
                   getPrice(
                     pitch?.price_morning,
@@ -412,31 +412,33 @@ const DetailPitches = ({ isQuickView, data }) => {
                   )?.price
                 } VNĐ`}
               </span>
-              {/*Button add to cart*/}
-              <button
-                onClick={() => {
-                  handleClickBooking();
-                }}
-                className="w-1/4 py-2 bg-transparent border border-black flex items-center justify-center gap-2 relative overflow-hidden bg-button-color-hover text-black transition-all before:absolute before:bottom-0 before:left-0 before:top-0 before:z-0 before:h-full before:w-0 before:bg-button-color before:transition-all before:duration-500 hover:text-white hover:before:left-0 hover:before:w-full"
-              >
-                <span className="relative mb-0.5">
-                  <IoBagAddOutline />
-                </span>
-                <span className="relative text-sm">Add to Cart</span>
-              </button>
-              {/*Support Rule 1*/}
-              <div className="w-1/4 flex items-center justify-center gap-2 py-2 border bg-button-color border-button-color">
-                <span className="text-white">
-                  <FiBox />
-                </span>
-                <span className="text-sm text-white">Return Quickly</span>
-              </div>
-              {/*Support Rule 2*/}
-              <div className="w-1/4 flex items-center justify-center gap-2 py-2 border bg-button-color border-green-700">
-                <span className="text-white">
-                  <IoHelpBuoyOutline />
-                </span>
-                <span className="text-sm text-white">24/7 Support</span>
+              <div className="w-full flex gap-4">
+                {/*Button add to cart*/}
+                <button
+                  onClick={() => {
+                    handleClickBooking();
+                  }}
+                  className="w-1/3 py-2 bg-transparent border border-black flex items-center justify-center gap-2 relative overflow-hidden bg-button-color-hover text-black transition-all before:absolute before:bottom-0 before:left-0 before:top-0 before:z-0 before:h-full before:w-0 before:bg-button-color before:transition-all before:duration-500 hover:text-white hover:before:left-0 hover:before:w-full"
+                >
+                  <span className="relative mb-0.5">
+                    <IoBagAddOutline />
+                  </span>
+                  <span className="relative text-sm">Add to Cart</span>
+                </button>
+                {/*Support Rule 1*/}
+                <div className="w-1/3 flex items-center justify-center gap-2 py-2 border bg-button-color border-button-color">
+                  <span className="text-white">
+                    <FiBox />
+                  </span>
+                  <span className="text-sm text-white">Return Quickly</span>
+                </div>
+                {/*Support Rule 2*/}
+                <div className="w-1/3 flex items-center justify-center gap-2 py-2 border bg-button-color border-green-700">
+                  <span className="text-white">
+                    <IoHelpBuoyOutline />
+                  </span>
+                  <span className="text-sm text-white">24/7 Support</span>
+                </div>
               </div>
             </div>
           </div>
@@ -455,8 +457,9 @@ const DetailPitches = ({ isQuickView, data }) => {
             <div className="px-6 py-2 ">
               <button
                 onClick={() => setTabSelect(1)}
-                className={`relative block ${tabSelect === 1 ? "text-green-500" : "text-black"
-                  } hover:text-green-500 duration-300`}
+                className={`relative block ${
+                  tabSelect === 1 ? "text-green-500" : "text-black"
+                } hover:text-green-500 duration-300`}
               >
                 <span>Rating & Reviews</span>
               </button>
@@ -464,8 +467,9 @@ const DetailPitches = ({ isQuickView, data }) => {
             <div className="px-6 py-2 ">
               <button
                 onClick={() => setTabSelect(2)}
-                className={`relative block ${tabSelect === 2 ? "text-green-500" : "text-black"
-                  } hover:text-green-500 duration-300`}
+                className={`relative block ${
+                  tabSelect === 2 ? "text-green-500" : "text-black"
+                } hover:text-green-500 duration-300`}
               >
                 <span>Payments</span>
               </button>

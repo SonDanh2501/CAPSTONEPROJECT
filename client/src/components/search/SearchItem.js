@@ -8,7 +8,6 @@ import {
   useParams,
   createSearchParams,
   useSearchParams,
-  useLocation,
 } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { useSelector } from "react-redux";
@@ -21,7 +20,7 @@ const SearchItems = ({
   changeActiveFilter,
   type = "checkbox",
 }) => {
-  let locationstest = useLocation();
+
   const { categories } = useSelector((state) => state.app);
   const [params] = useSearchParams();
   const navigate = useNavigate();
@@ -36,15 +35,14 @@ const SearchItems = ({
   const handleSelectAddress = (e) => {
     const alreadyEl = selectedAddress.find((el) => el === e.target.value);
     if (alreadyEl)
-      setSetSelectedAddress((prev) =>
-        prev.filter((el) => el !== e.target.value)
-      );
+      setSetSelectedAddress((prev) => prev.filter((el) => el !== e.target.value));
     else setSetSelectedAddress((prev) => [...prev, e.target.value]);
     changeActiveFilter(null);
   };
   const handleSelectCategory = (e) => {
     const alreadyEl = selectedCategory.find((el) => el === e.target.value);
-    if (!alreadyEl) setSetSelectedCategory(() => [e.target.value]);
+    if (!alreadyEl)
+    setSetSelectedCategory(() => [e.target.value]);
     // else setSetSelectedCategory((prev) => [...prev, e.target.value]);
     changeActiveFilter(null);
   };
@@ -120,8 +118,8 @@ const SearchItems = ({
       if (price.from > price.to)
         alert("From price cannot greater than To price");
   }, [price]);
-  console.log("CHECK PARAMS >>> ", locationstest);
-  console.log("CHECK SELECT ADDRESS >>>", selectedAddress);
+
+  console.log("CHECK SELECT ADDRESS >>>",selectedAddress)
   console.log("CHECK SELECT CATEGORY >>>", selectedCategory);
 
   return (
@@ -225,7 +223,7 @@ const SearchItems = ({
           <div onClick={(e) => e.stopPropagation()}>
             <div className=" items-center flex justify-between">
               {/*Best Price*/}
-              <span className="whitespace-nowrap text-xs">{`Highest ${Number(
+              <span className="whitespace-nowrap text-xs">{`${filter3} ${Number(
                 bestPrice
               ).toLocaleString()} VNĐ `}</span>
               {/*Rest Price*/}
