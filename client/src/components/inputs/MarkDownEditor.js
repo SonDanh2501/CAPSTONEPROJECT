@@ -52,7 +52,7 @@ const MarkDownEditor = ({
         onFocus={() => setInvalidFields && setInvalidFields([])}
       />
       {invalidFields?.some((el) => el.name === name) && (
-        <small className="text-main text-sm my-2">
+        <small className="text-green-700 text-sm my-2">
           {invalidFields?.find((el) => el.name === name)?.mes}
         </small>
       )}

@@ -100,7 +100,7 @@ const Checkout = () => {
         <div className="flex flex-col gap-2">
           <span className="flex items-center gap-20 text-3xl font-semibold">
             <span>Subtotal:</span>
-            <span className="text-main text-3xl font-semibold">
+            <span className="text-green-700 text-3xl font-semibold">
               {formatMoney(
                 order?.reduce((sum, el) => sum + Number(el.total), 0)
               ) + ` VND`}
@@ -108,7 +108,7 @@ const Checkout = () => {
           </span>
           <span className="flex items-center gap-20 text-3xl font-semibold">
             <span>Discount:</span>
-            <span className="text-main text-3xl font-semibold">
+            <span className="text-green-700 text-3xl font-semibold">
               {discount
                 ? formatMoney(
                     order?.reduce((sum, el) => sum + Number(el.total), 0) *
@@ -119,7 +119,7 @@ const Checkout = () => {
           </span>
           <span className="flex items-center text-3xl font-semibold">
             <span className="mr-32">Total:</span>
-            <span className="text-main text-3xl font-semibold">
+            <span className="text-green-700 text-3xl font-semibold">
               {formatMoney(
                 order?.reduce((sum, el) => sum + Number(el.total), 0) -
                   (discount

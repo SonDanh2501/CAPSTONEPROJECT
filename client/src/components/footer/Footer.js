@@ -121,11 +121,6 @@ const Footer = () => {
                       {foot5}
                     </a>
                   </li>
-                  <li className="flex items-center gap-1">
-                    <a href="#" className="hover:underline">
-                      {foot6}
-                    </a>
-                  </li>
                 </ul>
               </div>
               {/*Useful links*/}

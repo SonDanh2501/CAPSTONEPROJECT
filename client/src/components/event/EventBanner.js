@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import ball from "../../assets/bg-discount.jpg";
 import icons from "ultils/icons";
 import { useTranslation } from "react-i18next";
 import backgroundImage from "assets/event_banner.jpg";

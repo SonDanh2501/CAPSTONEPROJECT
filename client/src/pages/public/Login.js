@@ -249,7 +249,7 @@ const Login = () => {
           className="w-fit h-screen object-cover"
         ></img>
       </div>
-      <div className="top-0 bottom-0 left-1/2 right-0 items-center justify-center flex bg-gradient-to-r from-login to-login-2">
+      <div className="top-0 bottom-0 left-1/2 right-0 items-center justify-center flex bg-gradient-to-r from-login-1 to-login-2">
         <div className="max-w-[450px] w-full mx-auto bg-transeparent p-8 px-8 rounded-lg">
           <h2 className="text-4xl font-bold text-center text-white">
             {isRegister

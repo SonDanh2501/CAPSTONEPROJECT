@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { HeaderBanner } from "components";
+import { EmailSubcribe, HeaderBanner } from "components";
 import { FaChevronDown } from "react-icons/fa";
 import { MdNavigateNext } from "react-icons/md";
 import { apiGetFaq } from "apis";
@@ -26,11 +26,10 @@ const FAQ = () => {
 
   return (
     <>
-      <div className="w-full dark:bg-medium mb-5">
+      <div className="w-full dark:bg-medium">
         <div>
           <HeaderBanner title={faq1} subtitle={faq2} />
         </div>
-
         <div className="flex items-center justify-start p-14 pb-4">
           <h1 className="text-black text-2xl font-bold dark:text-white ">
             {faq3}
@@ -45,8 +44,9 @@ const FAQ = () => {
               <div className="flex text-xl font-semibold justify-between items-center">
                 <span>{e.title}</span>
                 <FaChevronDown
-                  className={`text-lg mr-4 cursor-pointer hover:text-zinc-300 ${openQuestionId === e._id ? "transform rotate-180" : ""
-                    }`}
+                  className={`text-lg mr-4 cursor-pointer hover:text-zinc-300 ${
+                    openQuestionId === e._id ? "transform rotate-180" : ""
+                  }`}
                   onClick={() => onOpen(e._id)}
                 />
               </div>
@@ -66,24 +66,8 @@ const FAQ = () => {
             </div>
           ))}
         </div>
-        <div className="flex flex-col items-center justify-center pb-14 dark:text-white">
-          <h1 className="font-bold text-black mt-8 gap-4 text-2xl  p-2 dark:text-white">
-            {faq4}
-
-          </h1>
-          <h3 className="text-2xl p-2 pt-1">
-            {faq5}
-
-          </h3>
-          <span className="text-lg pt-1 p-2">debugboy@gmail.com</span>
-          <span
-            className="text-lg cursor-pointer hover:text-blue-500"
-            onClick={() => navigate(`/contact`)}
-          >
-            {faq6}
-          </span>
-          <span className="text-lg">{faq7}
-          </span>
+        <div className="pb-12">
+          <EmailSubcribe />
         </div>
       </div>
     </>

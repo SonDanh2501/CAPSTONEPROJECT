@@ -123,7 +123,7 @@ const ManageOrder = () => {
         </div> */}
         <table className="table-auto w-full ">
           <thead className="text-md  text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
-            <tr className="bg-sky-900 text-white py-2">
+            <tr className="bg-emerald-700 text-white py-2">
               <th className="text-center h-[60px] rounded-tl-lg">#</th>
               <th className="text-center">Thumb</th>
               <th className="text-center">Pitch</th>

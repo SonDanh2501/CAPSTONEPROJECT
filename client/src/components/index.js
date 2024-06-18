@@ -5,7 +5,6 @@ export { default as TopHeader } from "./header/TopHeader";
 export { default as CountDown } from "./common/CountDown";
 export { default as CustomSlider } from "./common/CustomSlider";
 export { default as Breadcrumb } from "./common/Breadcrumb";
-export { default as Banner } from "./common/Banner";
 export { default as Loading } from "./common/Loading";
 export { default as Modal } from "./common/Modal";
 export { default as ImageSlider } from "./common/ImageSlider";

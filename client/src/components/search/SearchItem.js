@@ -8,8 +8,10 @@ import {
   useParams,
   createSearchParams,
   useSearchParams,
+  useLocation,
 } from "react-router-dom";
 import { useTranslation } from "react-i18next";
+import { useSelector } from "react-redux";
 
 const { AiOutlineDown } = icons;
 
@@ -19,20 +21,31 @@ const SearchItems = ({
   changeActiveFilter,
   type = "checkbox",
 }) => {
+  let locationstest = useLocation();
+  const { categories } = useSelector((state) => state.app);
   const [params] = useSearchParams();
   const navigate = useNavigate();
   const { category } = useParams();
-  const [selected, setSetSelected] = useState([]);
+  const [selectedAddress, setSetSelectedAddress] = useState([]);
+  const [selectedCategory, setSetSelectedCategory] = useState([]);
   const [bestPrice, setBestPrice] = useState(null);
   const [price, setPrice] = useState({
     from: "",
     to: "",
   });
-  const handleSelect = (e) => {
-    const alreadyEl = selected.find((el) => el === e.target.value);
+  const handleSelectAddress = (e) => {
+    const alreadyEl = selectedAddress.find((el) => el === e.target.value);
     if (alreadyEl)
-      setSetSelected((prev) => prev.filter((el) => el !== e.target.value));
-    else setSetSelected((prev) => [...prev, e.target.value]);
+      setSetSelectedAddress((prev) =>
+        prev.filter((el) => el !== e.target.value)
+      );
+    else setSetSelectedAddress((prev) => [...prev, e.target.value]);
+    changeActiveFilter(null);
+  };
+  const handleSelectCategory = (e) => {
+    const alreadyEl = selectedCategory.find((el) => el === e.target.value);
+    if (!alreadyEl) setSetSelectedCategory(() => [e.target.value]);
+    // else setSetSelectedCategory((prev) => [...prev, e.target.value]);
     changeActiveFilter(null);
   };
   const fetchBestPricePitch = async () => {
@@ -49,17 +62,32 @@ const SearchItems = ({
     for (let i of params.entries()) param.push(i);
     const queries = {};
     for (let i of param) queries[i[0]] = i[1];
-    if (selected.length > 0) {
-      queries.address = selected.join(",");
+    if (selectedAddress.length > 0) {
+      queries.address = selectedAddress.join(",");
       queries.page = 1;
     } else delete queries.address;
     navigate({
       pathname: `/${category}`,
       search: createSearchParams(queries).toString(),
     });
-  }, [selected]);
+  }, [selectedAddress]);
+
+  useEffect(() => {
+    let param = [];
+    for (let i of params.entries()) param.push(i);
+    const queries = {};
+    for (let i of param) queries[i[0]] = i[1];
+    if (selectedCategory.length > 0) {
+      queries.category = selectedCategory.join(",");
+      queries.page = 1;
+    } else delete queries.category;
+    navigate({
+      pathname: `/${category}`,
+      search: createSearchParams(queries).toString(),
+    });
+  }, [selectedCategory]);
   // debouncePriceFrom, debouncePriceTo
-  //   console.log(selected);
+  //   console.log(selectedAddress);
 
   useEffect(() => {
     if (type === "input") fetchBestPricePitch();
@@ -92,6 +120,10 @@ const SearchItems = ({
       if (price.from > price.to)
         alert("From price cannot greater than To price");
   }, [price]);
+  console.log("CHECK PARAMS >>> ", locationstest);
+  console.log("CHECK SELECT ADDRESS >>>", selectedAddress);
+  console.log("CHECK SELECT CATEGORY >>>", selectedCategory);
+
   return (
     <div
       className="gap-6 relative flex justify-between items-center"
@@ -104,13 +136,13 @@ const SearchItems = ({
             {/*Count Selected, Reset Button */}
             <div className="flex justify-between gap-8 pb-2">
               {/*Count Selected*/}
-              <span className="text-xs">{`${selected.length} ${filter5}`}</span>
+              <span className="text-xs">{`${selectedAddress.length} ${filter5}`}</span>
               {/*Reset*/}
               <span
-                className="text-xs underline cursor-pointer hover:text-main whitespace-nowrap"
+                className="text-xs underline cursor-pointer hover:text-green-700 whitespace-nowrap"
                 onClick={(e) => {
                   e.stopPropagation();
-                  setSetSelected([]);
+                  setSetSelectedAddress([]);
                   changeActiveFilter(null);
                 }}
               >
@@ -127,11 +159,11 @@ const SearchItems = ({
                   {/*Check Box Address*/}
                   <input
                     type="checkbox"
-                    className="w-5 h-5 focus:ring-0 text-green-700 "
-                    onChange={handleSelect}
+                    className="w-5 h-5 focus:ring-0 text-green-700 focus:outline-0"
+                    onChange={handleSelectAddress}
                     id={el}
                     value={el}
-                    checked={selected.some(
+                    checked={selectedAddress.some(
                       (selectedItem) => selectedItem === el
                     )}
                   />
@@ -144,16 +176,61 @@ const SearchItems = ({
             </div>
           </div>
         )}
+        {type === "category" && (
+          <div className="">
+            {/*Count Selected, Reset Button */}
+            <div className="flex justify-between gap-8 pb-2">
+              {/*Count Selected*/}
+              <span className="text-xs">{`${selectedCategory.length} ${filter5}`}</span>
+              {/*Reset*/}
+              <span
+                className="text-xs underline cursor-pointer hover:text-green-700 whitespace-nowrap"
+                onClick={(e) => {
+                  e.stopPropagation();
+                  setSetSelectedCategory([]);
+                  changeActiveFilter(null);
+                }}
+              >
+                Reset
+              </span>
+            </div>
+            {/*List Category*/}
+            <div
+              className="flex flex-col gap-2 max-h-[220px] overflow-hidden overflow-y-auto"
+              onClick={(e) => e.stopPropagation()}
+            >
+              {categories?.map((el, index) => (
+                <div key={index} className="flex items-center gap-4">
+                  {/*Check Box Address*/}
+                  <input
+                    type="checkbox"
+                    className="w-5 h-5 focus:ring-0 text-green-700 "
+                    onChange={handleSelectCategory}
+                    id={el._id}
+                    value={el.title}
+                    checked={selectedCategory.some(
+                      (selectedItem) => selectedItem === el?.title
+                    )}
+                  />
+                  {/*Category */}
+                  <label htmlFor={el?.title} className="text-gray-700 ">
+                    {el?.title}
+                  </label>
+                </div>
+              ))}
+            </div>
+          </div>
+        )}
         {type === "input" && (
           <div onClick={(e) => e.stopPropagation()}>
             <div className=" items-center flex justify-between">
               {/*Best Price*/}
-              <span className="whitespace-nowrap text-xs">{`${filter3} ${Number(
+              <span className="whitespace-nowrap text-xs">{`Highest ${Number(
                 bestPrice
               ).toLocaleString()} VNĐ `}</span>
               {/*Rest Price*/}
               <span
-                className="underline cursor-pointer hover:text-main whitespace-nowrap text-xs"
+                className="underline cursor-pointer hover:text-green-700 whitespace-nowrap text-xs"
                 onClick={(e) => {
                   e.stopPropagation();
                   setPrice({ from: "", to: "" });

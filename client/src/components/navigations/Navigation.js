@@ -11,8 +11,8 @@
 //           key={el.id}
 //           className={({ isActive }) =>
 //             isActive
-//               ? "pr-12 hover:text-main text-main"
-//               : "pr-12 hover:text-main"
+//               ? "pr-12 hover:text-green-700 text-green-700"
+//               : "pr-12 hover:text-green-700"
 //           }
 //         >
 //           {el.value}

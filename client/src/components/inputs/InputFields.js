@@ -39,7 +39,7 @@ const InputFields = ({
         onFocus={() => setInvalidFields && setInvalidFields([])}
       ></input>
       {invalidFields?.some((el) => el.name === nameKey) && (
-        <small className="text-main italic">
+        <small className="text-green-700 italic">
           {invalidFields.find((el) => el.name === nameKey)?.mes}
         </small>
       )}

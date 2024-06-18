@@ -5,8 +5,6 @@ import { useDispatch, useSelector } from "react-redux";
 import { showModal } from "store/app/appSlice";
 import { DetailPitches } from "pages/public";
 import { renderStarFromNumber } from "ultils/helper";
-import label from "assets/label.png";
-import label2 from "assets/label2.png";
 import defaultt from "assets/default.png";
 import SelectOption from "components/search/SelectOption";
 import icons from "ultils/icons";
