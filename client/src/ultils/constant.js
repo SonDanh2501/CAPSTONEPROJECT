@@ -226,38 +226,38 @@ export const useGetSort = () => {
     },
   ];
 };
-// export const sorts = [
-//   {
-//     id: 1,
-//     value: "-price",
-//     text: "Price, high to low",
-//   },
-//   {
-//     id: 2,
-//     value: "price",
-//     text: "Price, low to high",
-//   },
-//   {
-//     id: 3,
-//     value: "-title",
-//     text: "Alphabetically, Z-A",
-//   },
-//   {
-//     id: 4,
-//     value: "title",
-//     text: "Alphabetically, A-Z",
-//   },
-//   {
-//     id: 5,
-//     value: "-createdAt",
-//     text: "Date, new to old",
-//   },
-//   {
-//     id: 6,
-//     value: "createdAt",
-//     text: "Date, old to new",
-//   },
-// ];
+export const sorts = [
+  {
+    id: 1,
+    value: "-price",
+    text: "Price, high to low",
+  },
+  {
+    id: 2,
+    value: "price",
+    text: "Price, low to high",
+  },
+  {
+    id: 3,
+    value: "-title",
+    text: "Alphabetically, Z-A",
+  },
+  {
+    id: 4,
+    value: "title",
+    text: "Alphabetically, A-Z",
+  },
+  {
+    id: 5,
+    value: "-createdAt",
+    text: "Date, new to old",
+  },
+  {
+    id: 6,
+    value: "createdAt",
+    text: "Date, old to new",
+  },
+];
 
 const {
   MdSpaceDashboard,

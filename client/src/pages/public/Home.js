@@ -10,7 +10,7 @@ import {
   EventBanner,
   News,
   Comments,
-  EmailSubcribe
+  EmailSubcribe,
 } from "../../components";
 import { useSelector } from "react-redux";
 import icons from "../../ultils/icons";

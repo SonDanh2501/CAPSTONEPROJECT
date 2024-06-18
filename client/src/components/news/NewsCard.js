@@ -10,13 +10,13 @@ const { IoArrowForwardOutline,IoEyeOutline  } = icons;
 const NewsCard = ({ nid, title, views, thumb, postedDate, description }) => {
   const navigate = useNavigate();
   return (
-    <div className=" bg-gradient-to-r from-white to-gray-100 h-[380px] text-gray-700 md:min-h-[10rem] overflow-hidden border border-green-700 shadow-lg transform transition-all hover:shadow-2xl hover:shadow-gray-500 duration-300 ">
+    <div className=" bg-gradient-to-r from-white to-gray-100 h-[350px] text-gray-700 md:min-h-[10rem] overflow-hidden border border-green-700 shadow-lg transform transition-all hover:shadow-2xl hover:shadow-gray-500 duration-300 ">
       <div className="relative h-1/2">
         {/* News thumbs*/}
         <img
           src={thumb}
           alt="news image"
-          className="w-full h-full object-cover "
+          className="w-full h-full object-cover"
         />
         <div class="hover:bg-black/25 transition duration-300 absolute bottom-0 top-0 right-0 left-0 opacity-0 hover:opacity-100">
           <a href="#!">
@@ -31,7 +31,7 @@ const NewsCard = ({ nid, title, views, thumb, postedDate, description }) => {
           {/* News title*/}
           <span
             title={title}
-            className="font-semibold text-xl text-black mt-2 mb-2 line-clamp-1"
+            className="font-bold text-xl text-black line-clamp-1"
           >
             {title}
           </span>
@@ -40,9 +40,9 @@ const NewsCard = ({ nid, title, views, thumb, postedDate, description }) => {
             <span className="text-sm">{description}</span>
           </div>
         </div>
-        <div className="h-1/3 flex">
+        <div className="h-1/3 flex pt-3">
           {/*Button read more*/}
-          <div className="w-1/2 ">
+          <div className="w-1/2">
             <a
               onClick={() => navigate(`/news/${nid}`)}
               className=" 

@@ -48,13 +48,13 @@ const PitchCard = ({
     <div
       onMouseEnter={() => setIsHover(true)}
       onMouseLeave={() => setIsHover(false)}
-      className="my-4 bg-gradient-to-r from-white to-gray-100 text-gray-700 border border-green-700 overflow-hidden hover:shadow-2xl hover:shadow-gray-500 duration-300"
+      className="my-4 bg-gradient-to-r h-[390px] from-white to-gray-100 text-gray-700 border border-green-700 overflow-hidden hover:shadow-2xl hover:shadow-gray-500 duration-300"
     >
-      <div className="relative h-1/2">
+      <div className="relative h-3/5">
         <img
           src={`${isHover ? image_change : image}`}
           alt="pitches"
-          className="w-full h-[190px] object-cover "
+          className="w-full h-full object-cover"
         />
         {/*Category tag */}
         <div class="absolute bottom-0 top-0 right-0 left-0 ">
@@ -122,108 +122,39 @@ const PitchCard = ({
         </div>
       </div>
       {/*Content */}
-      <div className="p-4 flex flex-col gap-3">
-        {/*Title */}
-        <h2 className="font-semibold text-2xl line-clamp-1" title={title}>
-          {title}
-        </h2>
-        {/*Address */}
-        <span className="font-bold text-sm">{address}</span>
-        {/*Rating */}
-        <span className="flex gap-1">
-          {renderStarFromNumber(totalRatings)?.map((el, index) => (
-            <span key={index}>{el}</span>
-          ))}
-        </span>
-        {/*Price */}
-        <div className="flex items-center gap-2">
-          <span className="text-base font-bold">
-            {getPrice(price_morning, price_afternoon, price_evening)?.price}
+      <div className="h-2/5 py-2 pl-4 pr-2">
+        {/*Container for Title and Address */}
+        <div className="h-2/3">
+          {/*Title */}
+          <span
+            className="font-bold text-xl text-black line-clamp-1"
+            title={title}
+          >
+            {title}
           </span>
-          <span className="bg-green-400 px-2 py-1 rounded-md text-xs tracking-tighter text-white">
-            {pitchcard1}
-          </span>
+          {/*Address */}
+          <span className="mt-2 line-clamp-2">{address}</span>
         </div>
-        {/* <div className="mt-5 flex gap-2">
-          <button
-            className="
-            text-white 
-            flex 
-            flex-grow 
-            items-center 
-            justify-center
-            gap-2
-            px-1 py-2
-            md:px-2
-            rounded-3xl
-            relative overflow-hidden 
-          bg-gray-800 
-            shadow-lg 
-            transition-all 
-            before:absolute 
-            before:bottom-0 
-            before:left-0 
-            before:top-0 
-            before:z-0 
-            before:h-full 
-            before:w-0
-          before:bg-blue-500 
-            before:transition-all 
-            before:duration-500 
-          hover:text-white 
-          hover:shadow-blue-400 
-            hover:before:left-0 
-            hover:before:w-full"
-            onClick={(e) =>
-              navigate(
-                `/${category.toLowerCase()}/${brand.toLowerCase()}/${pid}/${title}`
+        {/*Container for Rating and PRice */}
+        <div className="h-1/3">
+          {/*Rating */}
+          <span className="flex gap-1">
+            {renderStarFromNumber(totalRatings, "darkgreen")?.map(
+              (el, index) => (
+                <span key={index}>{el}</span>
               )
-            }
-          >
-            <span className="relative hidden lg:flex">{pitchcard2}</span>
-            <span className="relative">
-              <FaArrowRight />
+            )}
+          </span>
+          {/*Price */}
+          <div className="flex items-center gap-2 pt-2">
+            <span className="text-base font-bold">
+              {getPrice(price_morning, price_afternoon, price_evening)?.price}
             </span>
-          </button>
-          <button
-            className="relative flex flex-grow items-center justify-center rounded-3xl
-            overflow-hidden bg-gray-300 shadow-lg transition-all
-            before:absolute 
-            before:h-0 
-            before:w-0 
-            before:rounded-full 
-           before:bg-red-500 
-           before:duration-500 
-           before:ease-out 
-           hover:shadow-red-400
-           hover:text-white
-           hover:before:h-56 
-           hover:before:w-56"
-          >
-            <span className="relative z-10">
-              <BsFillSuitHeartFill />
+            <span className="bg-green-400 px-2 py-1 rounded-md text-xs tracking-tighter text-white">
+              {pitchcard1}
             </span>
-          </button>
-          <button
-            className="relative flex flex-grow items-center justify-center rounded-3xl
-            overflow-hidden bg-gray-300 shadow-lg transition-all
-            before:absolute 
-            before:h-0 
-            before:w-0 
-            before:rounded-full 
-           before:bg-yellow-500 
-           before:duration-500 
-           before:ease-out 
-           hover:shadow-yellow-400
-           hover:text-white
-           hover:before:h-56 
-           hover:before:w-56"
-          >
-            <span className="relative z-10">
-              <AiFillEye />
-            </span>
-          </button>
-        </div> */}
+          </div>
+        </div>
       </div>
     </div>
   );

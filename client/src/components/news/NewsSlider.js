@@ -8,7 +8,7 @@ const NewsSlider = ({ news }) => {
     dots: false,
     lazyLoad: true,
     infinite: false,
-    speed: 500,
+    speed: 850,
     slidesToShow: 3,
     slidesToScroll: 1,
     initialSlide: 0,

@@ -37,15 +37,52 @@ import { geocodeByAddress, getLatLng } from "react-google-places-autocomplete";
 import { updateCart } from "store/user/userSlice";
 import { useTranslation } from "react-i18next";
 
-const settings = {
-  infinite: false,
-  slidesToShow: 3,
+const settingsVertical = {
+  infinite: true,
+  arrows: false,
+  speed: 850,
+  slidesToShow: 4,
   slidesToScroll: 1,
+  initialSlide: 0,
   vertical: true,
   verticalSwiping: true,
-  arrows: false,
+  // responsive: [
+  //   {
+  //     breakpoint: 1200,
+  //     settings: {
+  //       slidesToShow: 2,
+  //     },
+  //   },
+  //   {
+  //     breakpoint: 800,
+  //     settings: {
+  //       slidesToShow: 1,
+  //     },
+  //   },
+  // ],
 };
-
+const settingsHorizontal = {
+  infinite: true,
+  arrows: false,
+  speed: 850,
+  slidesToShow: 4,
+  slidesToScroll: 1,
+  initialSlide: 0,
+  // responsive: [
+  //   {
+  //     breakpoint: 1200,
+  //     settings: {
+  //       slidesToShow: 2,
+  //     },
+  //   },
+  //   {
+  //     breakpoint: 800,
+  //     settings: {
+  //       slidesToShow: 1,
+  //     },
+  //   },
+  // ],
+};
 const { FaCalendarAlt, IoCalendarNumberOutline, IoTimeOutline, IoBagAddOutline, FiBox, IoHelpBuoyOutline } = icons;
 const DetailPitches = ({ isQuickView, data }) => {
   const { t } = useTranslation();
@@ -221,35 +258,56 @@ const DetailPitches = ({ isQuickView, data }) => {
     <div className="flex flex-col items-center justify-center w-full">
       {/*BreadCrumb*/}
       <div className="w-full py-2.5 px-4 text-white bg-button-color">
-        <Breadcrumb title={title} category={category} brand={brand} />
+        <div className="w-[85vw]">
+          <Breadcrumb title={title} category={category} brand={brand} />
+        </div>
       </div>
-      <div onClick={(e) => e.stopPropagation()} className="flex w-[85vw] py-12">
+      <div
+        onClick={(e) => e.stopPropagation()}
+        className="lg:flex lg:flex-row flex-col w-[85vw] py-12"
+      >
         {/*Img and Slider Image*/}
-        <div className="w-1/2 flex">
-          {/*Image Slider */}
-          <div className="w-1/4 h-[430px] flex items-center  overflow-hidden">
-            <Slider className="custom-slider-detail" {...settings}>
+        <div className="w-full lg:w-1/2 lg:flex lg:flex-row flex-col">
+          {/*Image Slider Vertical*/}
+          <div className="w-1/4 max-h-full h-full lg:block items-center hidden">
+            {/* <div className="">hello</div> */}
+            <Slider className="custom-slider-detail" {...settingsVertical}>
               {pitch?.images?.map((el) => (
                 <img
                   key={el}
                   onClick={(e) => handleClickimage(e, el)}
                   src={el}
                   alt="sub-pitch"
-                  className="h-[150px] cursor-pointer border border-green-500 object-cover"
+                  className="object-scale-down cursor-pointer border border-green-500 "
                 ></img>
               ))}
             </Slider>
           </div>
           {/*Image */}
-          <div className="w-3/4 h-full">
+          <div className="w-full lg:w-3/4 h-full bg-gray-500 ">
             <img
               src={currentImage}
               alt="pitch"
-              className="border h-[430px] object-cover"
+              className="border h-full w-full object-cover"
             />
           </div>
+          {/*Image Slider Horizontal*/}
+          <div className="w-full pt-2 lg:hidden items-center block">
+            {/* <div className="">hello</div> */}
+            <Slider className="" {...settingsHorizontal}>
+              {pitch?.images?.map((el) => (
+                <img
+                  key={el}
+                  onClick={(e) => handleClickimage(e, el)}
+                  src={el}
+                  alt="sub-pitch"
+                  className="object-cover cursor-pointer  pl-2"
+                ></img>
+              ))}
+            </Slider>
+          </div>
         </div>
-        <div className="w-1/2 pl-7">
+        <div className="w-full lg:w-1/2 lg:pl-7 pt-10 lg:pt-0">
           <div className="flex flex-col">
             {/*Tag */}
             <div className="flex gap-2 items-center">
@@ -311,8 +369,8 @@ const DetailPitches = ({ isQuickView, data }) => {
                   minDate={moment().toDate()}
                   dateFormat="dd/MM/yyyy"
                   placeholderText={detail9}
-                // showPopperArrow={false}
-                // popperClassName="datepicker-popper"
+                  // showPopperArrow={false}
+                  // popperClassName="datepicker-popper"
                 />
               </div>
               {/*Shift */}
@@ -397,20 +455,21 @@ const DetailPitches = ({ isQuickView, data }) => {
         </div>
       </div>
       {/*Map and Comment*/}
-      <div className="flex w-[85vw] h-[475px] gap-7 mt-20 mb-8">
+      <div className="lg:flex lg:flex-row flex-col w-[85vw] lg:h-[475px] h-[700px] lg:mt-10 mb-8">
         {/*Map*/}
-        <div className="w-1/2">
+        <div className="w-full h-1/2 lg:w-1/2 lg:h-full">
           <MapBox />
         </div>
         {/*Comment*/}
-        <div className="w-1/2 border-b border-green-600/30 overflow-hidden overflow-y-auto">
+        <div className="w-full h-1/2 lg:w-1/2 lg:h-full lg:pl-7 lg:mt-0 mt-10 overflow-hidden overflow-y-auto ">
           {/* Tabs List/> */}
           <div className="flex items-center border-b border-green-600 ">
             <div className="px-6 py-2 ">
               <button
                 onClick={() => setTabSelect(1)}
-                className={`relative block ${tabSelect === 1 ? "text-green-500" : "text-black"
-                  } hover:text-green-500 duration-300`}
+                className={`relative block ${
+                  tabSelect === 1 ? "text-green-500" : "text-black"
+                } hover:text-green-500 duration-300`}
               >
                 <span>Rating & Reviews</span>
               </button>
@@ -418,8 +477,9 @@ const DetailPitches = ({ isQuickView, data }) => {
             <div className="px-6 py-2 ">
               <button
                 onClick={() => setTabSelect(2)}
-                className={`relative block ${tabSelect === 2 ? "text-green-500" : "text-black"
-                  } hover:text-green-500 duration-300`}
+                className={`relative block ${
+                  tabSelect === 2 ? "text-green-500" : "text-black"
+                } hover:text-green-500 duration-300`}
               >
                 <span>Payments</span>
               </button>
@@ -428,7 +488,7 @@ const DetailPitches = ({ isQuickView, data }) => {
           {/* Tabs Content/> */}
           <div className="w-full h-full relative">
             {/* Tabs 1/> */}
-            <div className={`${tabSelect !== 1 && "hidden"}  `}>
+            <div className={`${tabSelect !== 1 && "hidden"} pt-10`}>
               {/* Rating/> */}
               <PitchInformation
                 totalRatings={pitch?.totalRatings}

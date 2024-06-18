@@ -19,7 +19,7 @@ const Breadcrumb = ({ title, category, brand, size }) => {
         ?.filter((el) => !el.match.route === false)
         .map(({ match, breadcrumb }, index, self) => (
           <Link
-            className="flex gap-1 items-center hover:text-main"
+            className="flex gap-1 items-center hover:text-green-700"
             key={match.pathname}
             to={match.pathname}
           >

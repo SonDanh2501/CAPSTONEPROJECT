@@ -6,7 +6,7 @@ const CommentSlider = ({ news }) => {
     dots: false,
     lazyLoad: true,
     infinite: true,
-    speed: 500,
+    speed: 850,
     slidesToShow: 4,
     slidesToScroll: 1,
     initialSlide: 0,

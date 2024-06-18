@@ -126,7 +126,7 @@ const UpdateBrand = ({ editBrand, render, setEditBrand }) => {
       <div className="ml-2 py-4 border-b-2 border-gray-300 flex justify-between items-center top-0 right-0">
         <h1 className="text-2xl font-bold tracking-tight">Update Brand</h1>
         <span
-          className="text-main hover:underline cursor-pointer"
+          className="text-green-700 hover:underline cursor-pointer"
           onClick={() => setEditBrand(null)}
         >
           Cancel

@@ -210,7 +210,7 @@ const ManageOwnerOrder = () => {
         </div>
         <div className="w-full flex justify-end my-8">
           <span className="mt-2.5 mr-2 font-bold"> Total Profit : </span>
-          <span className="text-main text-3xl font-semibold">
+          <span className="text-green-700 text-3xl font-semibold">
             {formatMoney(
               formatPrice(order?.reduce((sum, el) => sum + Number(el.total), 0))
             ) + "VND"}

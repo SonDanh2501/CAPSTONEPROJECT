@@ -69,7 +69,7 @@ const DetailBrand = () => {
       </div>
 
       <div className="flex flex-col w-main justify-center items-center">
-        <div className="text-[25px] text-main font-semibold">
+        <div className="text-[25px] text-green-700 font-semibold">
           {showBrand?.title}
         </div>
 

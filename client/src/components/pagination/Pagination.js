@@ -22,9 +22,10 @@ const Pagination = ({ totalCount, type = "pitches", perPage }) => {
                     Math.min để tránh trường hợp totalCount nhỏ hơn LIMIT, vd: Show pitchs 1 - 6 of 3   
                     */}
             {totalCount > 0
-              ? `Show ${type} 1 - ${
-                  Math.min(+process.env.REACT_APP_PITCH_LIMIT, totalCount) || 6
-                } of ${totalCount}`
+              ? `Show ${type} 1 - ${Math.min(
+                  +process.env.REACT_APP_PITCH_LIMIT,
+                  totalCount
+                ) || 6} of ${totalCount}`
               : `Show ${type} 0 - 0 of 0`}
           </span>
         ) : (
@@ -39,7 +40,7 @@ const Pagination = ({ totalCount, type = "pitches", perPage }) => {
         )}
       </div>
 
-      <div className={`flex items-center `}>
+      <div className={`flex items-center gap-2`}>
         {pagination?.map((el) => (
           <PaginationItem key={el}>{el}</PaginationItem>
         ))}

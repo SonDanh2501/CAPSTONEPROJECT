@@ -5,8 +5,6 @@ import { useDispatch, useSelector } from "react-redux";
 import { showModal } from "store/app/appSlice";
 import { DetailPitches } from "pages/public";
 import { renderStarFromNumber } from "ultils/helper";
-import label from "assets/label.png";
-import label2 from "assets/label2.png";
 import defaultt from "assets/default.png";
 import SelectOption from "components/search/SelectOption";
 import icons from "ultils/icons";
@@ -89,9 +87,9 @@ const Pitch = ({ pitchData, isNew, normal, navigate, dispatch, pid }) => {
           }/${pitchData?.title}`
         )
       }
-      className="bg-gradient-to-r from-white to-gray-100 text-gray-700 border border-green-700 overflow-hidden hover:shadow-2xl hover:shadow-gray-500 duration-300"
+      className="bg-gradient-to-r h-[390px] from-white to-gray-100 text-gray-700 border border-green-700 overflow-hidden hover:shadow-2xl hover:shadow-gray-500 duration-300"
     >
-      <div className="relative h-1/2">
+      <div className="relative h-3/5">
         {/*Hover Icon */}
         {isShowOption && (
           <div className="absolute bottom-[-10px] left-0 right-0 flex justify-center gap-2 animate-slide-top">
@@ -118,7 +116,7 @@ const Pitch = ({ pitchData, isNew, normal, navigate, dispatch, pid }) => {
         <img
           src={pitchData?.thumb || defaultt}
           alt="pitches"
-          className="w-full h-[190px] object-cover"
+          className="w-full h-full object-cover"
         />
         {/*Category tag */}
         <div class="absolute bottom-0 top-0 right-0 left-0 ">
@@ -147,6 +145,7 @@ const Pitch = ({ pitchData, isNew, normal, navigate, dispatch, pid }) => {
         >
           {/*Icon Heart*/}
           <button
+            onClick={(e) => handleClickOptions(e, "WISHLIST")}
             className="relative flex flex-grow items-center justify-center px-1 py-1
             overflow-hidden bg-button-color-hover shadow-lg transition-all
             before:absolute 
@@ -186,39 +185,44 @@ const Pitch = ({ pitchData, isNew, normal, navigate, dispatch, pid }) => {
         </div>
       </div>
       {/*Content */}
-      <div className="p-4 flex flex-col gap-3">
-        <h2
-          className="font-semibold text-2xl line-clamp-1"
-          title={pitchData?.title}
-        >
-          {pitchData?.title}
-        </h2>
-        {/*Address */}
-        <span className="font-bold text-sm line-clamp-2">
-          {pitchData?.address}
-        </span>
-        {/*Rating */}
-        <span className="flex gap-1">
-          {renderStarFromNumber(pitchData?.totalRatings)?.map((el, index) => (
-            <span key={index}>{el}</span>
-          ))}
-        </span>
-        {/*Price */}
-        <div className="flex items-center gap-3">
-          <span className="text-base font-bold">
-            {`${formatMoney(
-              formatPrice(
+      <div className="h-2/5 py-2 pl-4 pr-2">
+        {/*Container for Title and Address */}
+        <div className="h-2/3">
+          {/*Title */}
+          <span
+            className="font-bold text-xl text-black line-clamp-1"
+            title={pitchData?.title}
+          >
+            {pitchData?.title}
+          </span>
+          {/*Address */}
+          <span className="mt-2 line-clamp-2">{pitchData?.address}</span>
+        </div>
+        {/*Container for Rating and PRice */}
+        <div className="h-1/3">
+          {/*Rating */}
+          <span className="flex gap-1">
+            {renderStarFromNumber(pitchData?.totalRatings, "darkgreen")?.map(
+              (el, index) => (
+                <span key={index}>{el}</span>
+              )
+            )}
+          </span>
+          {/*Price */}
+          <div className="flex items-center gap-2 pt-2">
+            <span className="text-base font-bold">
+              {
                 getPrice(
                   pitchData?.price_morning,
                   pitchData?.price_afternoon,
                   pitchData?.price_evening
                 )?.price
-              )
-            )} VNĐ`}{" "}
-          </span>
-          <span className="bg-green-400 px-2 py-1 text-sm rounded-md tracking-tighter text-white">
-            {pitchcard1}
-          </span>
+              }
+            </span>
+            <span className="bg-green-400 px-2 py-1 rounded-md text-xs tracking-tighter text-white">
+              {pitchcard1}
+            </span>
+          </div>
         </div>
       </div>
     </div>

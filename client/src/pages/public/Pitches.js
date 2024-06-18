@@ -22,7 +22,7 @@ import { useSelector } from "react-redux";
 import { useTranslation } from "react-i18next";
 import icons from "ultils/icons";
 
-const { IoFilter } = icons;
+const { IoFilter, IoChevronDown } = icons;
 const Pitches = () => {
   const { t } = useTranslation();
   const { filter1, filter2, filter4, filter6, filter7, filter0 } = t("filter");
@@ -43,6 +43,10 @@ const Pitches = () => {
   const [searching, setSearching] = useState("");
   const [searchingFlag, setSearchingFlag] = useState(true);
   const [getCategory, setGetCategory] = useState("");
+  const [isHidingSelectAddress, setIsHidingSelectAddress] = useState(false);
+  const [isHidingSelectPrice, setIsHidingSelectPrice] = useState(false);
+  const [isHidingSelectCategory, setIsHidingSelectCategory] = useState(false);
+
   // const [category, setCategory] = useState("");
 
   const fetchProductsByCategory = async (queries) => {
@@ -128,9 +132,8 @@ const Pitches = () => {
   return (
     <div className="w-full dark:bg-medium">
       {/*Bread crumb*/}
-      <div className="h-[81px] flex justify-center items-center bg-gray-100 dark:bg-dark">
-        <div className="w-main dark:text-white">
-          <h3 className="font-semibold uppercase">{category}</h3>
+      <div className="w-full py-2.5 px-4 text-white bg-button-color flex items-center justify-center">
+        <div className="w-[85vw]">
           <Breadcrumb category={category}> </Breadcrumb>
         </div>
       </div>
@@ -138,16 +141,16 @@ const Pitches = () => {
       <div className="w-full flex items-center justify-center py-4">
         <div className="w-[85vw] flex gap-8">
           {/*Filter By Header*/}
-          <div className="w-1/4 flex items-center gap-2 border border-green-700 px-3 py-1">
+          <div className="w-1/4 items-center gap-2 border border-green-700 px-3 py-1 hidden md:flex">
             <span className="text-2xl">
               <IoFilter />
             </span>
             <span className="text-2xl font-bold ">Filter</span>
           </div>
           {/*Sort, Search Header*/}
-          <div className="w-3/4 flex justify-between border border-green-700 px-3 py-1">
+          <div className="w-full md:w-3/4 flex justify-between border border-green-700 px-3 py-1 gap-2">
             {/*Search*/}
-            <div className="flex flex-col">
+            <div className="w-1/2 sm:w-fit flex flex-col">
               <input
                 onChange={(e) => setSearching(e.target.value)}
                 placeholder="Searching..."
@@ -158,8 +161,8 @@ const Pitches = () => {
               />
             </div>
             {/*Sort*/}
-            <div className="w-fit flex items-center gap-2">
-              <span className="font-bold ">{filter7}</span>
+            <div className="w-1/2 sm:w-fit flex items-center gap-2">
+              <span className="font-bold hidden sm:flex">{filter7}</span>
               <InputSelect
                 changeValue={changeValue}
                 value={sort}
@@ -173,15 +176,30 @@ const Pitches = () => {
       <div className="w-full flex items-center justify-center">
         <div className="w-[85vw] flex gap-8">
           {/*Filter Select Option*/}
-          <div className="w-1/4 border border-green-700 h-fit">
+          <div className="w-1/4 border border-green-700 h-fit hidden md:flex md:flex-col">
             {/*Container Address*/}
             <div className="px-2 py-4 border-b border-gray-300">
               {/*Header Address Select Option*/}
-              <div className="bg-bg-light p-2 ">
+              <div className="bg-bg-light flex justify-between items-center p-2">
                 <span className="uppercase text-lg">Address</span>
+                <span
+                  onClick={() =>
+                    setIsHidingSelectAddress(!isHidingSelectAddress)
+                  }
+                  className="uppercase text-lg cursor-pointer"
+                >
+                  <IoChevronDown
+                    className={`${!isHidingSelectAddress &&
+                      "rotate-180"} duration-300`}
+                  />
+                </span>
               </div>
               {/*List Address Option*/}
-              <div className="flex flex-col gap-2">
+              <div
+                className={`${
+                  isHidingSelectAddress ? "hidden" : "flex"
+                } flex-col gap-2 `}
+              >
                 <SearchItem
                   name={filter4}
                   activeClick={activeClick}
@@ -190,13 +208,26 @@ const Pitches = () => {
               </div>
             </div>
             {/*Container Price*/}
-            <div className="px-2 py-4 ">
-              {/*Header Address Select Option*/}
-              <div className="bg-bg-light p-2 ">
+            <div className="px-2 py-4 border-b border-gray-300">
+              {/*Header Price Option*/}
+              <div className="bg-bg-light flex justify-between items-center p-2">
                 <span className="uppercase text-lg">Price</span>
+                <span
+                  onClick={() => setIsHidingSelectPrice(!isHidingSelectPrice)}
+                  className="uppercase text-lg cursor-pointer"
+                >
+                  <IoChevronDown
+                    className={`${!isHidingSelectPrice &&
+                      "rotate-180"} duration-300`}
+                  />
+                </span>
               </div>
-              {/*List Address Option*/}
-              <div className="flex flex-col gap-2">
+              {/*Price Input Option*/}
+              <div
+                className={`${
+                  isHidingSelectPrice ? "hidden" : "flex"
+                } flex-col gap-2`}
+              >
                 <SearchItem
                   name={filter2}
                   activeClick={activeClick}
@@ -205,9 +236,40 @@ const Pitches = () => {
                 ></SearchItem>
               </div>
             </div>
+            {/*Container Category*/}
+            <div className="px-2 py-4 ">
+              {/*Header Category Select Option*/}
+              <div className="bg-bg-light flex justify-between items-center p-2">
+                <span className="uppercase text-lg">Category</span>
+                <span
+                  onClick={() =>
+                    setIsHidingSelectCategory(!isHidingSelectCategory)
+                  }
+                  className="uppercase text-lg cursor-pointer"
+                >
+                  <IoChevronDown
+                    className={`${!isHidingSelectCategory &&
+                      "rotate-180"} duration-300`}
+                  />
+                </span>
+              </div>
+              {/*List Category Option*/}
+              <div
+                className={`${
+                  isHidingSelectCategory ? "hidden" : "flex"
+                } flex-col gap-2 `}
+              >
+                <SearchItem
+                  type="category"
+                  name={"Category"}
+                  activeClick={activeClick}
+                  changeActiveFilter={changeActiveFilter}
+                ></SearchItem>
+              </div>
+            </div>
           </div>
           {/*Pitches*/}
-          <div className="w-3/4">
+          <div className="w-full md:w-3/4 ">
             <Masonry
               breakpointCols={breakpointColumnsObj}
               className="my-masonry-grid"
@@ -223,61 +285,12 @@ const Pitches = () => {
                 </div>
               ))}
             </Masonry>
-            <div className="md:w-full w-main m-auto my-4 flex justify-end">
+            <div className="w-full m-auto my-4 flex justify-end ">
               <Pagination totalCount={pitches?.totalCount} />
             </div>
           </div>
         </div>
       </div>
-
-      {/* <div className="mt-8 w-full m-auto">
-        <div className="flex items-center justify-center gap-4 mb-12 ">
-          <button
-            onClick={() => {
-              setGetCategory("");
-            }}
-            className={`w-[140px] px-3 py-4 rounded-full border-2 border-black font-bold text-center duration-300 dark:text-white dark:border-white ${getCategory === ""
-              ? "text-white bg-orange border-orange"
-              : "text-black "
-              }`}
-          >
-            {filter0}
-          </button>
-          {categories?.map((el) => (
-            <button
-              onClick={() => {
-                setGetCategory(el.title);
-              }}
-              className={`w-[140px] px-3 py-4 rounded-full border-2 border-black font-bold text-center duration-300 dark:text-white dark:border-white ${getCategory === el.title
-                ? "text-white bg-orange border-orange"
-                : "text-black"
-                }`}
-            >
-              {el.title}
-            </button>
-          ))}
-        </div>
-        <div className="">
-          <Masonry
-            breakpointCols={breakpointColumnsObj}
-            className="my-masonry-grid"
-            columnClassName="my-masonry-grid_column"
-          >
-            {pitches?.pitches?.map((el) => (
-              <div key={el._id} className="cursor-pointer">
-                {loading ? (
-                  <Skeleton />
-                ) : (
-                  <Pitch pid={el._id} pitchData={el} normal={true} />
-                )}
-              </div>
-            ))}
-          </Masonry>
-        </div>
-      </div>
-      <div className="md:w-full w-main m-auto my-4 flex justify-end">
-        <Pagination totalCount={pitches?.totalCount} />
-      </div>  */}
     </div>
   );
 };

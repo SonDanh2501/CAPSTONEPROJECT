@@ -5,9 +5,29 @@ import Slider from "react-slick";
 const settings = {
   dots: false,
   infinite: false,
-  speed: 1000,
-  slidesToShow: 3,
-  slidesToScroll: 2,
+  speed: 850,
+  slidesToShow: 4,
+  slidesToScroll: 1,
+  responsive: [
+    {
+      breakpoint: 1200,
+      settings: {
+        slidesToShow: 3,
+      },
+    },
+    {
+      breakpoint: 800,
+      settings: {
+        slidesToShow: 2,
+      },
+    },
+    {
+      breakpoint: 600,
+      settings: {
+        slidesToShow: 1,
+      },
+    },
+  ],  
 };
 
 const CustomSlider = ({ pitches, activedTab, normal }) => {
@@ -22,13 +42,13 @@ const CustomSlider = ({ pitches, activedTab, normal }) => {
               pid={el.id}
               pitchData={el}
               isNew={activedTab === 1 ? false : true}
-              normal={normal}
+              // normal={normal}
             />
           ))}
         </Slider>
       </div>
       {/* Pitches slider for responsive (mobile screen)*/}
-      <div className="w-[90vw] m-auto md:hidden ">
+      <div className="w-[90vw] m-auto md:hidden">
         <Slider className="" {...settings}>
           {pitches?.map((el, index) => (
             <Pitch
@@ -36,7 +56,7 @@ const CustomSlider = ({ pitches, activedTab, normal }) => {
               pid={el.id}
               pitchData={el}
               isNew={activedTab === 1 ? false : true}
-              normal={normal}
+              // normal={normal}
             />
           ))}
         </Slider>

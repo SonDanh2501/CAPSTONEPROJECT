@@ -269,6 +269,7 @@ const TopHeader = () => {
                     <div className="w-60 bg-white shadow-xl">
                       <div className="flex flex-col font py-4 px-6 gap-2">
                         {/*Product Sub Link*/}
+
                         {el?.value === "Product" && (
                           // Pitch, News Sub Link
                           <div className="flex flex-col">
@@ -285,9 +286,7 @@ const TopHeader = () => {
                         {/*Page Sub Link*/}
                         {el?.value === "Pages" && (
                           <div className="flex flex-col gap-2">
-                            <span className=" text-lg">
-                              For Contact
-                            </span>
+                            <span className=" text-lg">For Contact</span>
 
                             <div className="flex flex-col gap-2">
                               {el?.submenu?.map((el) => (
@@ -470,8 +469,7 @@ const TopHeader = () => {
                           {/*Notfication How Long*/}
                           <div className="w-2/6 flex gap-1 mt-1.5">
                             <span className="text-xs text-blue-500 mt-0.5">
-                              <IoEllipse  size = {12}/>
-
+                              <IoEllipse size={12} />
                             </span>
                             <span className="text-black  text-xs font-semibold tracking-tighter">
                               {moment(el?.createdAt).fromNow("ago")}
