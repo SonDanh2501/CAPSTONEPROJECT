@@ -11,12 +11,16 @@ import { formatMoney, formatPrice } from "ultils/helper";
 import { Paypal, Congratulation, Button } from "components";
 import Swal from "sweetalert2";
 import { FaMoneyBillWave } from "react-icons/fa";
-
+import {
+  apiZalopay
+} from "apis";
 const Checkout = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const { current } = useSelector((state) => state.user);
   const [order, setOrder] = useState(null);
+  const [order2, setOrder2] = useState(null);
+
   // const [orderIds, setOrderIds] = useState(null);
   const [isSuccess, setIsSuccess] = useState(false);
   const [isChecked, setIsChecked] = useState(false);
@@ -31,6 +35,7 @@ const Checkout = () => {
         firstOrder && firstOrder.coupon ? firstOrder.coupon.price : null;
       setDiscount(fetchedDiscount);
       setOrder(response.Booking);
+      setOrder2(response.Booking);
     }
   };
   const handleCheckboxChange = () => {
@@ -60,6 +65,24 @@ const Checkout = () => {
       }, 500);
     }
   };
+
+  const handlePayByZaloPay = async () => {
+    const response = await apiZalopay(order2);
+    if (response) {
+      console.log(response)
+      window.location.href = response.order_url;
+    }
+    else {
+      console.log('abc')
+      console.log(order2)
+    }
+    for (const order of order2) {
+      const response2 = await apiStatusOrder({ _id: order._id, status: 'Pay by ZaloPay' });
+      if (response2) {
+        console.log(response2);
+      }
+    }
+  }
   useEffect(() => {
     fetchPitchData();
   }, []);
@@ -86,7 +109,7 @@ const Checkout = () => {
           <tbody>
             {order?.map((el) => (
               <tr className="border" key={el._id}>
-                <td className="text-left p-2">{el.total}</td>
+                <td className="text-left p-2">{el?.namePitch}</td>
                 <td className="text-center p-2">
                   {shifts.find((s) => s.value === +el.shift)?.time}
                 </td>
@@ -111,9 +134,9 @@ const Checkout = () => {
             <span className="text-green-700 text-3xl font-semibold">
               {discount
                 ? formatMoney(
-                    order?.reduce((sum, el) => sum + Number(el.total), 0) *
-                      (discount / 100)
-                  ) + ` VND`
+                  order?.reduce((sum, el) => sum + Number(el.total), 0) *
+                  (discount / 100)
+                ) + ` VND`
                 : "0 VND"}
             </span>
           </span>
@@ -122,10 +145,10 @@ const Checkout = () => {
             <span className="text-green-700 text-3xl font-semibold">
               {formatMoney(
                 order?.reduce((sum, el) => sum + Number(el.total), 0) -
-                  (discount
-                    ? order?.reduce((sum, el) => sum + Number(el.total), 0) *
-                      (discount / 100)
-                    : 0)
+                (discount
+                  ? order?.reduce((sum, el) => sum + Number(el.total), 0) *
+                  (discount / 100)
+                  : 0)
               ) + ` VND`}
             </span>
           </span>
@@ -138,15 +161,22 @@ const Checkout = () => {
             <span className="italic ">Pay By Cash</span>
             <FaMoneyBillWave className="ml-2" />
           </button>
-
+          <button
+            className="bg-blue-700 w-[200px] h-[35px] rounded-md font-bold flex items-center justify-center m-3 text-white hover:text-blue-800 hover:bg-blue-300 duration-300 "
+            onClick={() => handlePayByZaloPay()}
+          >
+            <span className="italic ">Zalopay</span>
+            <FaMoneyBillWave className="ml-2" />
+          </button>
           <Paypal
             payload={{ order: order }}
             setIsSuccess={setIsSuccess}
             amount={Math.round(
               order?.reduce((sum, el) => sum + Number(el.pitch?.price), 0) /
-                23500
+              23500
             )}
           />
+
         </div>
       </div>
     </div>
