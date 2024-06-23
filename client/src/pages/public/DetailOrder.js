@@ -35,7 +35,7 @@ const DetailOrder = () => {
   };
   useEffect(() => {
     fetchPitchData();
-  }, []);
+  }, [order, orderChanged]);
   console.log(discount)
   return (
     <div className="w-full dark:bg-medium">
