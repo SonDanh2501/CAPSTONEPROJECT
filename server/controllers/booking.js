@@ -9,6 +9,8 @@ const crypto = require('crypto');
 const moment = require('moment'); // npm install moment
 const CryptoJS = require('crypto-js'); // npm install crypto-js
 const axios = require('axios').default
+const { shifts } = require('../ultils/constant')
+
 
 const createBooking = asyncHandler(async (req, res) => {
   const { _id } = req.user;
@@ -343,6 +345,7 @@ const Momopayment = async (req, res) => {
 }
 
 const Zalopayment = async (req, res) => {
+  console.log(shifts)
 
   const order2 = req.body;
   const total = order2.reduce((sum, order) => {
@@ -375,11 +378,17 @@ const Zalopayment = async (req, res) => {
     itemquantity: 1,
   })); const transID = Math.floor(Math.random() * 1000000);
   const description = order2.map(order => {
-    // Check if order.coupon exists and order.coupon.price is not null or undefined
-    if (order.coupon && order.coupon.price != null) {
-      return `${order.namePitch} - ${order.shift} - ${order.total}, Coupon: ${order.coupon.price}%`;
+    // Find the shift that matches the order's shift value
+    const shift = shifts.find(s => s.value == order.shift);
+    if (shift) {
+      // Check if order.coupon exists and order.coupon.price is not null or undefined
+      if (order.coupon && order.coupon.price != null) {
+        return `${order.namePitch} - Shift: ${shift.time} - ${order.total} - Coupon: ${order.coupon.price}%`;
+      } else {
+        return `${order.namePitch} - Shift: ${shift.time} - ${order.total}`;
+      }
     } else {
-      return `${order.namePitch} - ${order.shift} - ${order.total}`;
+      return `${order.namePitch} - Unknown Shift - ${order.total}`;
     }
   }).join(', ');
   const order = {
