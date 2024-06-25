@@ -102,6 +102,7 @@ const TopHeader = () => {
   // Fetch Notification Data
   const fetchNotification = async () => {
     const response = await apiGetNotifications();
+    console.log("CHECK RESPONSE", response);
     if (response.success) {
       setNotification(response.notification);
     }
@@ -126,6 +127,11 @@ const TopHeader = () => {
     setisOpen(!isOpen);
   };
 
+  useEffect(() => {
+    setTimeout(() => {
+      fetchNotification();
+    }, 500);
+  }, []);
   useEffect(() => {
     if (isActiveNotificationTab === 1) {
       fetchNotification();

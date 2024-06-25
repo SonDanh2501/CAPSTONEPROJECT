@@ -23,8 +23,8 @@ const createNotfication = asyncHandler(async (req, res) => {
 
 const getAllNotification = asyncHandler(async (req,res) => {
   const queries = { ...req.query };
-  console.log("CHECK OWNER", queries.owner);
-    const response = await Notification.find({ owner: queries.owner }).populate({
+  console.log("CHECK OWNER", queries);
+    const response = await Notification.find().populate({
       path: "owner",
       select: "firstname lastname avatar",
     });      
@@ -78,6 +78,8 @@ const UpdateNotification = asyncHandler(async (req,res) => {
   });
 })
 module.exports = {
-  createNotfication,
-  getAllNotification,
+    createNotfication,
+    getAllNotification,
+    getAllFavoriteNotification,
+    UpdateNotification
 };
