@@ -167,7 +167,7 @@ const ManageOwnerOrder = () => {
                     )}
                   </div>
                 </td>
-                <td className="text-center px-2 py-2">{el.pitch?.title}</td>
+                <td className="text-center px-2 py-2">{el?.namePitch}</td>
                 <td className="text-center px-2 py-2">
                   {shifts.find((s) => +s.value === +el.shift)?.time}
                 </td>

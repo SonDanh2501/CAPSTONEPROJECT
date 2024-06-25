@@ -1,4 +1,5 @@
 const PitchCategory = require("../models/pitchCategory");
+const Pitch = require("../models/pitch");
 const asyncHandler = require("express-async-handler");
 
 const createCategory = asyncHandler(async (req, res) => {
@@ -100,7 +101,21 @@ const updateCategory = asyncHandler(async (req, res) => {
 });
 const deleteCategory = asyncHandler(async (req, res) => {
   const { pcid } = req.params;
+
+  const deletedCate = await PitchCategory.findById(pcid);
+  // Check if there are any pitches associated with the category
+  const pitches = await Pitch.findOne({ category: deletedCate.title });
+
+  if (pitches) {
+    // There are pitches associated with the category, so don't allow deletion
+    return res.status(400).json({
+      success: false,
+      mes: "Cannot delete pitch category, there are pitches associated.",
+    });
+  }
+
   const response = await PitchCategory.findByIdAndDelete(pcid);
+
   return res.json({
     success: response ? true : false,
     mes: response ? "Deleted" : "Can not delete pitch - category",
