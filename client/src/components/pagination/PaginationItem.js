@@ -28,14 +28,14 @@ const PaginationItem = ({ children }) => {
   return (
     <button
       className={clsx(
-        "w-10 h-10 flex justify-center ",
+        "w-10 h-10 flex justify-center duration-300",
         !Number(children) && "items-end pb-2",
-        Number(children) && "items-center hover:rounded-full hover:bg-gray-300",
+        Number(children) && "items-center hover:rounded-md hover:bg-green-400 hover:text-white",
         +params.get("page") === +children &&
-          "rounded-full bg-gray-300 text-red-500",
+          "rounded-md bg-green-500 text-white",
         !+params.get("page") &&
           +children === 1 &&
-          "rounded-full bg-gray-300 text-red-500"
+          "rounded-md bg-green-500 text-white"
       )}
       onClick={handelPagination}
       type="button"

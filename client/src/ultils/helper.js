@@ -106,7 +106,7 @@ export function getBase64(file) {
   });
 }
 
-export const formattedCategory = (category) => category?.replace(/-/g, " ");
+export const formattedCategory = (category) => category?.replace(/ /g, "+");
 
 export const convertToTitleCase = (inputString) => {
   return inputString

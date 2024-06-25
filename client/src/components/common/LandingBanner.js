@@ -40,6 +40,9 @@ const LandingBanner = () => {
   const handleNavigatePitches = () => {
     navigate(`/${path.PITCHES}`);
   };
+  const handleNavigateFAQ = () => {
+    navigate(`/${path.FAQ}`);
+  };
   return (
     <div>
       <div className="w-full h-[700px]">
@@ -67,9 +70,9 @@ const LandingBanner = () => {
                   <IoArrowForwardOutline />
                 </span>
               </button>
-              {/*Navigate Pitches Page*/}
+              {/*Navigate FAQ Page*/}
               <button
-                onClick={() => handleNavigatePitches()}
+                onClick={() => handleNavigateFAQ()}
                 className="flex items-center justify-center border border-gray-300 hover:border-transparent text-white py-2.5 px-8 bg-transparent hover:bg-gray-300/20 duration-300"
               >
                 <span className="relative text-sm font-semibold ">

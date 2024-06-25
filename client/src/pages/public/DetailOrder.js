@@ -35,7 +35,7 @@ const DetailOrder = () => {
   };
   useEffect(() => {
     fetchPitchData();
-  }, []);
+  }, [order, orderChanged]);
   console.log(discount)
   return (
     <div className="w-full dark:bg-medium">
@@ -66,7 +66,7 @@ const DetailOrder = () => {
             <span className="col-span-4 w-full flex items-center justify-center">
               <div className="flex gap-2">
                 <div className="flex flex-col gap-1 items-center justify-center dark:text-white">
-                  <span className="text-main text-xl">{el.pitch?.title}</span>
+                  <span className="text-green-700 text-xl">{el.pitch?.title}</span>
                   <span className="text-md">{el.pitch?.category}</span>
                   <span className="text-md">{el.pitch?.address}</span>
                 </div>
@@ -88,7 +88,7 @@ const DetailOrder = () => {
       <div className="w-main flex flex-col mb-12 gap-3 items-end mx-auto dark:text-white">
         <div className="flex items-center mx-4 gap-8 dark:text-white">
           <span> {detailorder5}:</span>
-          <span className="text-main">
+          <span className="text-green-700">
             {formatMoney(
               order?.reduce((sum, el) => sum + Number(el.total), 0)
             ) + ` VND`}
@@ -97,7 +97,7 @@ const DetailOrder = () => {
         {discount !== null && discount !== undefined && (
           <div className="flex items-center mx-4 gap-8 dark:text-white">
             <span>{detailorder6}: </span>
-            <span className="text-main">
+            <span className="text-green-700">
               {formatMoney(
                 order?.reduce((sum, el) => sum + Number(el.total), 0) *
                 (discount / 100)
@@ -108,7 +108,7 @@ const DetailOrder = () => {
         )}
         <div className="flex items-center mx-4 gap-8 font-bold dark:text-white">
           <span> {detailorder7}:</span>
-          <span className="text-main">
+          <span className="text-green-700">
             {formatMoney(
               order?.reduce((sum, el) => sum + Number(el.total), 0) -
               (discount

@@ -10,16 +10,22 @@ import path from "ultils/path";
 import icons from "ultils/icons";
 import { useTranslation } from "react-i18next";
 
-const { FaAngleRight, FaAngleDown, GoDotFill, BiSolidLogOut, LuArrowLeftToLine, LuSun, FaMoon } = icons;
+const {
+  FaAngleRight,
+  FaAngleDown,
+  IoEllipse,
+  LuArrowLeftToLine,
+  IoLogInOutline,
+} = icons;
 
 const activedStyle =
-  "px-4 py-2 flex items-center gap-2 bg-gradient-to-tr from-indigo-100 to-indigo-400 rounded-md text-indigo-700";
+  "px-4 py-2 flex items-center gap-2 bg-gradient-to-r from-emerald-700 to-green-400 rounded-md text-white";
 const notactivedStyle =
-  "px-4 py-2 flex items-center gap-2 hover:bg-indigo-50 hover:rounded-md hover:text-indigo-700 text-gray-400 duration-300";
+  "px-4 py-2 flex items-center gap-2 hover:bg-emerald-400 hover:rounded-md hover:text-white text-black duration-300";
 
 const PitchOwnerSidebar = ({ open, setOpen }) => {
   const { t } = useTranslation();
-  const { sidebar1, sidebar2, sidebar3 } = t("sidebar")
+  const { sidebar1, sidebar2, sidebar3 } = t("sidebar");
   const pitchOwnerSideBar = useGetpitchOwnerSideBar();
   const [darkModeSideBar, setdarkModeSideBar] = useState(true);
   const [actived, setActived] = useState([]);
@@ -39,7 +45,7 @@ const PitchOwnerSidebar = ({ open, setOpen }) => {
 
   return (
     <div
-      className={`bg-white overflow-y-auto h-full py-4 border-r shadow-lg flex flex-col justify-between  ${
+      className={`bg-bg-light overflow-y-auto h-full py-4 border-r shadow-lg flex flex-col justify-between  ${
         open ? "w-60" : "w-24"
       } duration-300`}
     >
@@ -89,8 +95,8 @@ const PitchOwnerSidebar = ({ open, setOpen }) => {
                   <span
                     className={`${
                       open
-                        ? "text-sm "
-                        : `absolute left-full text-center py-2 ml-4 bg-indigo-100 rounded-md text-indigo-800 text-sm w-[110px] transition-all ${
+                        ? "text-sm"
+                        : `absolute left-full text-center py-2 ml-4 bg-green-400 rounded-md text-white text-sm w-[110px] transition-all ${
                             hover === +el.id
                               ? "visible translate-x-0 opacity-100"
                               : "invisible -translate-x-3 opacity-20"
@@ -104,10 +110,10 @@ const PitchOwnerSidebar = ({ open, setOpen }) => {
               {el.type === "PARENT" && (
                 <div onClick={() => handleShowTabs(+el.id)}>
                   <div
-                    className={`flex items-center justify-between px-4 py-2 my-2 hover:bg-slidebar_active hover:text-indigo-700 rounded-md cursor-pointer duration-300 ${
+                    className={`flex items-center justify-between px-4 py-2 my-2 hover:bg-emerald-400 hover:text-white rounded-md cursor-pointer duration-300 ${
                       activedTab === +el.id
-                        ? "bg-gradient-to-tr from-indigo-100 to-indigo-400 text-indigo-700 duration-300"
-                        : "text-gray-400 "
+                        ? "bg-gradient-to-r from-emerald-700 to-green-400 text-white duration-300"
+                        : "text-black "
                     }`}
                     onMouseOver={() => setHover(+el.id)}
                     onMouseLeave={() => setHover([])}
@@ -119,8 +125,8 @@ const PitchOwnerSidebar = ({ open, setOpen }) => {
                       <span
                         className={`${
                           open
-                            ? "text-sm "
-                            : `absolute left-full text-center py-2 ml-4 bg-indigo-100 rounded-md text-indigo-800 text-sm w-[110px] transition-all ${
+                            ? "text-sm"
+                            : `absolute left-full text-center py-2 ml-4 bg-green-400 rounded-md text-white text-sm w-[110px] transition-all ${
                                 hover === +el.id
                                   ? "visible translate-x-0 opacity-100"
                                   : " invisible -translate-x-3 opacity-20"
@@ -154,15 +160,15 @@ const PitchOwnerSidebar = ({ open, setOpen }) => {
                           className={({ isActive }) =>
                             clsx(
                               isActive &&
-                                "px-4 py-2 flex items-center gap-2 rounded-md text-indigo-700",
+                                "px-4 py-2 flex items-center gap-2 rounded-md text-emerald-500",
                               !isActive &&
-                                "px-4 py-2 flex items-center gap-2 hover:text-blue-700 text-gray-400",
+                                "px-4 py-2 flex items-center gap-2 hover:text-emerald-500 text-black",
                               "px-4 py-2 my-2"
                             )
                           }
                         >
                           <span className="text-xs">
-                            <GoDotFill />
+                            <IoEllipse size={12} />
                           </span>
                           <span className="text-sm">{item.text}</span>
                         </NavLink>
@@ -192,46 +198,47 @@ const PitchOwnerSidebar = ({ open, setOpen }) => {
               <h4 className="font-semibold">
                 {current?.firstname} {current?.lastname}
               </h4>
-              <span className="text-xs text-gray-600">{current?.email}</span>
+              <span className="text-xs text-black">{current?.email}</span>
             </div>
           </div>
         </div>
-
-        <div className="h-[40px] hover:bg-slidebar_active flex items-center rounded-md text-gray-400 hover:text-indigo-700 ">
-          <Link to={path.PUBLIC}>
-            <div className=" flex ml-4 items-center">
-              <span className={`${open ? "text-xl" : "text-3xl"}`}>
-                <BiSolidLogOut />
-              </span>
-              <span
-                className={`text-sm duration-300 pl-2  ${!open && "hidden"}`}
-              >
-                {sidebar1}
-              </span>
-            </div>
-          </Link>
-        </div>
-        <div className="h-[40px] hover:bg-slidebar_active flex items-center rounded-md text-gray-400">
-          <div
-            className={`${
-              !open ? "ml-2" : "ml-4"
-            } flex ml-2 items-center gap-2`}
-          >
-            <span className={`text-sm duration-300 ${!open && "hidden"}`}>
+        <div className="h-[40px] hover:bg-emerald-400 hover:text-white flex items-center rounded-md white">
+          <div className={`${!open ? "ml-2" : "ml-4"} flex items-center`}>
+            <span className={`text-sm duration ${!open && "hidden"}`}>
               {darkModeSideBar ? (
-                <span className="flex items-center justify-center gap-2">
-                  <FaMoon /> {sidebar2}
-                </span>
+                <div className=" flex items-center">
+                  <span
+                    className={`text-sm duration-300 pl-2 ${!open && "hidden"}`}
+                  >
+                    {sidebar2}
+                  </span>
+                </div>
               ) : (
-                <span className="flex items-center justify-center gap-2">
-                  <LuSun /> {sidebar3}
-                </span>
+                <div className=" flex items-center">
+                  <span
+                    className={`text-sm duration-300 pl-2 ${!open && "hidden"}`}
+                  >
+                    {sidebar3}
+                  </span>
+                </div>
               )}
             </span>
             <div className={`${open && "pl-10"}`}>
               <ThemeToggle SideBar setdarkModeSideBar={setdarkModeSideBar} />
             </div>
           </div>
+        </div>
+        <div className="h-[40px] hover:bg-emerald-400 flex items-center rounded-md text-black hover:text-white duration-300">
+          <Link to={path.PUBLIC}>
+            <div className=" flex ml-4 items-center">
+              <span className={`${open ? "text-xl" : "text-3xl"}`}>
+                <IoLogInOutline />
+              </span>
+              <span className={`text-sm pl-2 ${!open && "hidden"}`}>
+                {sidebar1}
+              </span>
+            </div>
+          </Link>
         </div>
       </div>
     </div>

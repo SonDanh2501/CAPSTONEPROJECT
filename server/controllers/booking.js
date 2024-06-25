@@ -4,6 +4,14 @@ const Pitch = require("../models/pitch");
 const asyncHandler = require("express-async-handler");
 const booking = require("../models/booking");
 const mongoose = require("mongoose");
+const https = require('https');
+const crypto = require('crypto');
+const moment = require('moment'); // npm install moment
+const CryptoJS = require('crypto-js'); // npm install crypto-js
+const axios = require('axios').default
+const { shifts } = require('../ultils/constant')
+
+
 const createBooking = asyncHandler(async (req, res) => {
   const { _id } = req.user;
   const { coupon } = req.body;
@@ -243,6 +251,187 @@ const updateBookingWithCoupon = async (req, res) => {
 
 
 };
+const Momopayment = async (req, res) => {
+  //https://developers.momo.vn/#/docs/en/aiov2/?id=payment-method
+  //parameters
+  var accessKey = 'F8BBA842ECF85';
+  var secretKey = 'K951B6PE1waDMi640xX08PD3vg6EkVlz';
+  var orderInfo = 'pay with MoMo';
+  var partnerCode = 'MOMO';
+  var redirectUrl = 'https://webhook.site/b3088a6a-2d17-4f8d-a383-71389a6c600b';
+  var ipnUrl = 'https://webhook.site/b3088a6a-2d17-4f8d-a383-71389a6c600b';
+  var requestType = "payWithMethod";
+  var amount = '50000';
+  var orderId = partnerCode + new Date().getTime();
+  var requestId = orderId;
+  var extraData = '';
+  var paymentCode = 'T8Qii53fAXyUftPV3m9ysyRhEanUs9KlOPfHgpMR0ON50U10Bh+vZdpJU7VY4z+Z2y77fJHkoDc69scwwzLuW5MzeUKTwPo3ZMaB29imm6YulqnWfTkgzqRaion+EuD7FN9wZ4aXE1+mRt0gHsU193y+yxtRgpmY7SDMU9hCKoQtYyHsfFR5FUAOAKMdw2fzQqpToei3rnaYvZuYaxolprm9+/+WIETnPUDlxCYOiw7vPeaaYQQH0BF0TxyU3zu36ODx980rJvPAgtJzH1gUrlxcSS1HQeQ9ZaVM1eOK/jl8KJm6ijOwErHGbgf/hVymUQG65rHU2MWz9U8QUjvDWA==';
+  var orderGroupId = '';
+  var autoCapture = true;
+  var lang = 'vi';
+
+  //before sign HMAC SHA256 with format
+  //accessKey=$accessKey&amount=$amount&extraData=$extraData&ipnUrl=$ipnUrl&orderId=$orderId&orderInfo=$orderInfo&partnerCode=$partnerCode&redirectUrl=$redirectUrl&requestId=$requestId&requestType=$requestType
+  var rawSignature = `accessKey=${accessKey}&amount=${amount}&extraData=${extraData}&ipnUrl=${ipnUrl}&orderId=${orderId}&orderInfo=${orderInfo}&partnerCode=${partnerCode}&redirectUrl=${redirectUrl}&requestId=${requestId}&requestType=${requestType}`;
+  //puts raw signature
+  console.log("--------------------RAW SIGNATURE----------------");
+  console.log(rawSignature);
+
+  //signature
+  var signature = crypto.createHmac('sha256', secretKey)
+    .update(rawSignature)
+    .digest('hex');
+  console.log("--------------------SIGNATURE----------------");
+  console.log(signature);
+
+  //json object send to MoMo endpoint
+  const requestBody = JSON.stringify({
+    partnerCode: partnerCode,
+    partnerName: "Test",
+    storeId: "MomoTestStore",
+    requestId: requestId,
+    amount: amount,
+    orderId: orderId,
+    orderInfo: orderInfo,
+    redirectUrl: redirectUrl,
+    ipnUrl: ipnUrl,
+    lang: lang,
+    requestType: requestType,
+    autoCapture: autoCapture,
+    extraData: extraData,
+    orderGroupId: orderGroupId,
+    signature: signature
+  });
+
+  //Create the HTTPS objects
+  const options = {
+    hostname: 'test-payment.momo.vn',
+    port: 443,
+    path: '/v2/gateway/api/create',
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      'Content-Length': Buffer.byteLength(requestBody)
+    }
+  }
+
+  //Send the request and get the response
+  const request = https.request(options, (response) => {
+    console.log(`Status: ${response.statusCode}`);
+    console.log(`Headers: ${JSON.stringify(response.headers)}`);
+    response.setEncoding('utf8');
+    let body = '';
+    response.on('data', (chunk) => {
+      body += chunk;
+    });
+    response.on('end', () => {
+      console.log('Body: ');
+      console.log(body);
+      console.log('resultCode: ');
+      console.log(JSON.parse(body).resultCode);
+      res.send(body); // Send the response back to the client
+    });
+  });
+
+  request.on('error', (e) => {
+    console.log(`problem with request: ${e.message}`);
+    res.status(500).send(`problem with request: ${e.message}`);
+  });
+
+  // write data to request body
+  console.log("Sending....");
+  request.write(requestBody);
+  request.end();
+}
+
+const Zalopayment = async (req, res) => {
+  console.log(shifts)
+
+  const order2 = req.body;
+  const total = order2.reduce((sum, order) => {
+    // Check if order.coupon.price is null or undefined
+    if (order.coupon && order.coupon.price != null) {
+      // Calculate discounted total if coupon price is defined
+      const discountedTotal = order.total - (order.total * (order.coupon.price / 100));
+      return sum + discountedTotal;
+    } else {
+      // If order.coupon.price is null or undefined, do not apply discount
+      return sum + order.total;
+    }
+  }, 0);
+
+  const config = {
+    app_id: '2553',
+    key1: 'PcY4iZIKFCIdgZvA6ueMcMHHUbRLYjPL',
+    key2: 'kLtgPl8HHhfvMuDHPwKfgfsY4Ydm9eIz',
+    endpoint: 'https://sb-openapi.zalopay.vn/v2/create',
+  };
+  const embed_data = {
+    //sau khi hoàn tất thanh toán sẽ đi vào link này (thường là link web thanh toán thành công của mình)
+    redirecturl: 'http://localhost:3000/my-order',
+  };
+
+  const items = order2.map(order => ({
+    itemid: order._id,
+    itemname: order.pitch.title,
+    itemprice: order.total,
+    itemquantity: 1,
+  })); const transID = Math.floor(Math.random() * 1000000);
+  const description = order2.map(order => {
+    // Find the shift that matches the order's shift value
+    const shift = shifts.find(s => s.value == order.shift);
+    if (shift) {
+      // Check if order.coupon exists and order.coupon.price is not null or undefined
+      if (order.coupon && order.coupon.price != null) {
+        return `${order.namePitch} - Shift: ${shift.time} - ${order.total} - Coupon: ${order.coupon.price}%`;
+      } else {
+        return `${order.namePitch} - Shift: ${shift.time} - ${order.total}`;
+      }
+    } else {
+      return `${order.namePitch} - Unknown Shift - ${order.total}`;
+    }
+  }).join(', ');
+  const order = {
+    app_id: config.app_id,
+    app_trans_id: `${moment().format('YYMMDD')}_${transID}`, // translation missing: vi.docs.shared.sample_code.comments.app_trans_id
+    app_user: 'user123',
+    app_time: Date.now(), // miliseconds
+    item: JSON.stringify(items),
+    embed_data: JSON.stringify(embed_data),
+    amount: total,
+    //khi thanh toán xong, zalopay server sẽ POST đến url này để thông báo cho server của mình
+    //Chú ý: cần dùng ngrok để public url thì Zalopay Server mới call đến được
+    callback_url: 'https://b074-1-53-37-194.ngrok-free.app/callback',
+    description: description,
+    bank_code: '',
+  };
+
+  // appid|app_trans_id|appuser|amount|apptime|embeddata|item
+  const data =
+    config.app_id +
+    '|' +
+    order.app_trans_id +
+    '|' +
+    order.app_user +
+    '|' +
+    order.amount +
+    '|' +
+    order.app_time +
+    '|' +
+    order.embed_data +
+    '|' +
+    order.item;
+  order.mac = CryptoJS.HmacSHA256(data, config.key1).toString();
+
+  try {
+    const result = await axios.post(config.endpoint, null, { params: order });
+
+    return res.status(200).json(result.data);
+  } catch (error) {
+    console.log(error);
+  }
+}
+
 
 module.exports = {
   createBooking,
@@ -254,4 +443,6 @@ module.exports = {
   getBookingsOwner,
   getAllOrderByAdmin,
   updateBookingWithCoupon,
+  Momopayment,
+  Zalopayment
 };

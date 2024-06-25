@@ -42,7 +42,7 @@ const {
   IoMail,
   FaXmark,
   FaBars,
-  GoDotFill,
+  IoEllipse ,
   IoChevronDown,
 } = icons;
 
@@ -269,6 +269,7 @@ const TopHeader = () => {
                     <div className="w-60 bg-white shadow-xl">
                       <div className="flex flex-col font py-4 px-6 gap-2">
                         {/*Product Sub Link*/}
+
                         {el?.value === "Product" && (
                           // Pitch, News Sub Link
                           <div className="flex flex-col">
@@ -285,9 +286,7 @@ const TopHeader = () => {
                         {/*Page Sub Link*/}
                         {el?.value === "Pages" && (
                           <div className="flex flex-col gap-2">
-                            <span className=" text-lg">
-                              For Contact
-                            </span>
+                            <span className=" text-lg">For Contact</span>
 
                             <div className="flex flex-col gap-2">
                               {el?.submenu?.map((el) => (
@@ -470,7 +469,7 @@ const TopHeader = () => {
                           {/*Notfication How Long*/}
                           <div className="w-2/6 flex gap-1 mt-1.5">
                             <span className="text-xs text-blue-500 mt-0.5">
-                              <GoDotFill />
+                              <IoEllipse size={12} />
                             </span>
                             <span className="text-black  text-xs font-semibold tracking-tighter">
                               {moment(el?.createdAt).fromNow("ago")}
@@ -509,7 +508,7 @@ const TopHeader = () => {
                   <div className="w-52 bg-white shadow-xl ">
                     {/*User Select Option */}
                     <div className="flex flex-col gap-2 px-2 py-4">
-                      <div className="px-4 text-black hover:text-indigo-700 duration-300">
+                      <div className="px-4 text-black hover:text-green-700 duration-300">
                         <Link
                           className="flex items-center gap-2  font-semibold"
                           to={`/${path.MEMBER}/${path.PERSONAL}`}
@@ -521,7 +520,7 @@ const TopHeader = () => {
                         </Link>
                       </div>
                       {+current.role === 1 && (
-                        <div className="px-4 text-black hover:text-indigo-700 duration-300">
+                        <div className="px-4 text-black hover:text-green-700 duration-300">
                           <Link
                             className="flex items-center gap-2  font-semibold"
                             to={`/${path.ADMIN}/${path.DASHBOARD}`}
@@ -534,7 +533,7 @@ const TopHeader = () => {
                         </div>
                       )}
                       {+current.role === 2 && (
-                        <div className="px-4 text-black hover:text-indigo-700 duration-300">
+                        <div className="px-4 text-black hover:text-green-700 duration-300">
                           <Link
                             className="flex items-center gap-2  font-semibold"
                             to={`/${path.PITCHOWNER}/${path.MANAGE_PITCHOWN}`}
@@ -547,7 +546,7 @@ const TopHeader = () => {
                         </div>
                       )}
                       <div className="border-t">
-                        <div className="px-4 text-black hover:text-indigo-700 duration-300 cursor-pointer">
+                        <div className="px-4 text-black hover:text-green-700 duration-300 cursor-pointer">
                           <span
                             onClick={() => dispatch(logout())}
                             className="flex items-center gap-2  font-semibold"

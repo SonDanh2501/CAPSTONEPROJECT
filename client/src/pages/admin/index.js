@@ -16,4 +16,8 @@ export { default as CreateFAQ } from "./faq/CreateFAQ";
 export { default as ManageFAQ } from "./faq/ManageFAQ";
 export { default as CreateCoupon } from "./coupon/CreateCoupon";
 export { default as ManageCoupon } from "./coupon/ManageCoupon";
+// Notification
+export { default as CreateNotification } from "./notification/CreateNotification";
+export { default as ManageNotification } from "./notification/ManageNotification";
+export { default as UpdateNotification } from "./notification/UpdateNotification";
 

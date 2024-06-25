@@ -53,8 +53,8 @@ const MapBox = () => {
     <Map
       mapboxAccessToken="pk.eyJ1Ijoic29uZGFuaCIsImEiOiJjbHdybjV2b2owMm53MnFwcmpjbnE5OGZtIn0.0A1izf6qM7jX3iFkHt4_HQ"
       style={{
-        width: "41vw",
-        height: "70vh",
+      
+        width: "100%",
         // borderRadius: "",
       }}
       initialViewState={{

@@ -38,7 +38,7 @@ const DashboardOwner = () => {
         </div>
         <div className="mt-5">
           <span>Total Profit: </span>
-          <span className="text-main text-3xl font-semibold">
+          <span className="text-green-700 text-3xl font-semibold">
             {formatMoney(
               formatPrice(order?.reduce((sum, el) => sum + Number(el.total), 0))
             ) + "VND"}

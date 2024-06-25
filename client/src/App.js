@@ -30,8 +30,9 @@ import {
   CreateFAQ,
   ManageFAQ,
   CreateCoupon,
-  ManageCoupon
-
+  ManageCoupon,
+  CreateNotification,
+  ManageNotification,
 } from "pages/admin";
 import { MemberLayout, Personal, History, Wishlist } from "pages/member";
 import {
@@ -53,7 +54,7 @@ import { showOrder } from "store/app/appSlice";
 import DetailOrder from "pages/public/DetailOrder";
 import Checkout from "pages/member/CheckOut";
 import "react-toastify/dist/ReactToastify.css";
-import "./ultils/i18n.js"
+import "./ultils/i18n.js";
 function App() {
   const dispatch = useDispatch();
   const { isShowModal, modalChildren, isShowOrder } = useSelector(
@@ -101,8 +102,9 @@ function App() {
 
       <div
         onClick={() => dispatch(showOrder())}
-        className={`fixed top-0 bottom-0 left-auto z-50 flex transform duration-500 ${isShowOrder ? "right-0" : "-right-[450px]"
-          }`}
+        className={`fixed top-0 bottom-0 left-auto z-50 flex transform duration-500 ${
+          isShowOrder ? "right-0" : "-right-[450px]"
+        }`}
       >
         <Order />
       </div>
@@ -143,7 +145,15 @@ function App() {
           <Route path={path.MANAGE_FAQ} element={<ManageFAQ />} />
           <Route path={path.CREATE_COUPON} element={<CreateCoupon />} />
           <Route path={path.MANAGE_COUPON} element={<ManageCoupon />} />
-
+          {/*Notification*/}
+          <Route
+            path={path.CREATE_NOTIFICATION}
+            element={<CreateNotification />}
+          />
+          <Route
+            path={path.MANAGE_NOTIFICATION}
+            element={<ManageNotification />}
+          />
         </Route>
         {/*Member Route*/}
         <Route path={path.MEMBER} element={<MemberLayout />}>

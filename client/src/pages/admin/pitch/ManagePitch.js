@@ -120,7 +120,7 @@ const ManagePitch = () => {
         </div>
         <table className="table-auto w-full ">
           <thead className="text-md text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
-            <tr className="bg-sky-900 text-white py-2">
+            <tr className="bg-emerald-700 text-white py-2">
               <th className="text-center h-[60px] rounded-tl-lg">#</th>
               <th className="text-center">Thumb</th>
               <th className="text-center">Title</th>
@@ -173,15 +173,16 @@ const ManagePitch = () => {
                 <td className="text-center px-2 py-2">{el.brand}</td>
                 <td className="text-center px-2 py-2">
                   <span
-                    className={`${el?.category === "Sân 5 Người"
+                    className={`${
+                      el?.category === "Sân 5 Người"
                         ? "text-blue-500 bg-blue-300/25 rounded-md p-2"
                         : el?.category === "Sân 7 Người"
-                          ? "text-green-500 bg-green-300/25 rounded-md p-2"
-                          : el?.category === "Sân 11 Người"
-                            ? "text-yellow-500 bg-yellow-300/25 rounded-md p-2"
-                            : el?.category === "Sân Futsal" &&
-                            "text-red-500 bg-red-300/25 rounded-md p-2"
-                      }`}
+                        ? "text-green-500 bg-green-300/25 rounded-md p-2"
+                        : el?.category === "Sân 11 Người"
+                        ? "text-yellow-500 bg-yellow-300/25 rounded-md p-2"
+                        : el?.category === "Sân Futsal" &&
+                          "text-red-500 bg-red-300/25 rounded-md p-2"
+                    }`}
                   >
                     {el.category}
                   </span>

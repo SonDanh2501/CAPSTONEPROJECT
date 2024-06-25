@@ -24,10 +24,12 @@ const getAllNotification = asyncHandler(async (req,res) => {
     const response = await Notification.find().populate({
       path: "owner",
       select: "firstname lastname avatar",
-    });
+    });      
+    // const counts = await Notification.find(response).countDocuments();
     return res.json({
       success: response ? true : false,
       notification: response ? response : "Can not get data",
+      // totalCount: counts,
     });
 })
 

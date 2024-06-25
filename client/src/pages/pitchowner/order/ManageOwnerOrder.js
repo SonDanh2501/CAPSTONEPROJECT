@@ -126,7 +126,7 @@ const ManageOwnerOrder = () => {
 
         <table className="table-auto w-full ">
           <thead className="text-md text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
-            <tr className="bg-sky-900 text-white py-2">
+            <tr className="bg-emerald-700 text-white py-2">
               <th className="text-center h-[60px] rounded-tl-lg">#</th>
               <th className="text-center">Thumb</th>
               <th className="text-center">Pitch</th>
@@ -210,7 +210,7 @@ const ManageOwnerOrder = () => {
         </div>
         <div className="w-full flex justify-end my-8">
           <span className="mt-2.5 mr-2 font-bold"> Total Profit : </span>
-          <span className="text-main text-3xl font-semibold">
+          <span className="text-green-700 text-3xl font-semibold">
             {formatMoney(
               formatPrice(order?.reduce((sum, el) => sum + Number(el.total), 0))
             ) + "VND"}
