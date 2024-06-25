@@ -22,6 +22,7 @@ var pitchSchema = new mongoose.Schema(
       type: Array,
       required: true,
     },
+    address_code: [{ longitude: { type: String }, latitude: { type: String } }],
     brand: {
       type: String,
       // required: true,
@@ -65,6 +66,10 @@ var pitchSchema = new mongoose.Schema(
     status: {
       type: String,
       enum: ["Empty", "Booked", "Maintain"],
+    },
+    owner: {
+      type: mongoose.Types.ObjectId,
+      ref: "User",
     },
     owner: {
       type: mongoose.Types.ObjectId,
