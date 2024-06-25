@@ -58,13 +58,13 @@ const Footer = () => {
                 {/*Icon social media*/}
                 <div className="flex ">
                   <a
-                    href="#"
+                    href="https://www.facebook.com/profile.php?id=61554601046418"
                     className="w-6 h-6 flex items-center justify-center rounded-full text-lg hover:bg-blue-600 hover:text-white mx-1 text-black transition duration-300 hover:scale-125 cursor-pointer transform"
                   >
                     <FaFacebookF />
                   </a>
 
-                  <a
+                  {/* <a
                     href="#"
                     className="w-6 h-6 flex items-center justify-center rounded-full text-lg hover:bg-pink-600 hover:text-white mx-1 text-black transition duration-300 hover:scale-125 cursor-pointer transform"
                   >
@@ -75,19 +75,19 @@ const Footer = () => {
                     className="w-6 h-6 flex items-center justify-center rounded-full text-lg hover:bg-red-600 hover:text-white mx-1 text-black transition duration-300 hover:scale-125 cursor-pointer transform"
                   >
                     <FaYoutube />
-                  </a>
+                  </a> */}
                   <a
-                    href="#"
+                    href="https://github.com/SonDanh2501"
                     className="w-6 h-6 flex items-center justify-center rounded-full text-lg hover:bg-black hover:text-white mx-1 text-black transition duration-300 hover:scale-125 cursor-pointer transform"
                   >
                     <FaGithub />
                   </a>
-                  <a
+                  {/* <a
                     href="#"
                     className="w-6 h-6 flex items-center justify-center rounded-full text-lg hover:bg-gray-600 hover:text-white mx-1 text-black transition duration-300 hover:scale-125 cursor-pointer transform"
                   >
                     <FaDiscord />
-                  </a>
+                  </a> */}
                 </div>
               </div>
               {/*Shop now*/}
@@ -212,7 +212,7 @@ const Footer = () => {
             <img src={paypal} alt="logo" className="w-8 object-contain" />
             <img src={visa} alt="logo" className="w-8 object-contain" />
             <img src={master} alt="logo" className="w-8 object-contain" />
-            <img src={amex} alt="logo" className="w-8 object-contain" />
+            {/* <img src={amex} alt="logo" className="w-8 object-contain" /> */}
           </div>
         </div>
       </div>

@@ -49,8 +49,16 @@ const SearchItems = ({
     changeActiveFilter(null);
   };
   const fetchBestPricePitch = async () => {
-    const response = await apiGetPitches({ sort: "-price", limit: 1 });
-    if (response.success) setBestPrice(response.pitches[0]?.price);
+    const response = await apiGetPitches({ sort: "-price_morning", limit: 1 });
+    if (response.success) {
+      const {
+        price_afternoon,
+        price_evening,
+        price_morning,
+      } = response.pitches[0];
+      const bestPrice = Math.max(price_afternoon, price_evening, price_morning);
+      setBestPrice(bestPrice);
+    }
   };
   const debouncePriceFrom = useDebounce(price.from, 500);
   const debouncePriceTo = useDebounce(price.to, 500);
@@ -120,9 +128,6 @@ const SearchItems = ({
       if (price.from > price.to)
         alert("From price cannot greater than To price");
   }, [price]);
-  console.log("CHECK PARAMS >>> ", locationstest);
-  console.log("CHECK SELECT ADDRESS >>>", selectedAddress);
-  console.log("CHECK SELECT CATEGORY >>>", selectedCategory);
 
   return (
     <div

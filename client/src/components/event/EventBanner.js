@@ -2,12 +2,17 @@ import React, { useState } from "react";
 import icons from "ultils/icons";
 import { useTranslation } from "react-i18next";
 import backgroundImage from "assets/event_banner.jpg";
-
+import { apiGetCoupon } from "apis/pitch";
 const { IoArrowForwardOutline } = icons;
 const EventBanner = () => {
   const [hoverZoom, setHoverZoom] = useState(false);
   const { t } = useTranslation();
   const { event1, event2, event3, event4, event5 } = t("eventbanner");
+  // const fetchCoupon=()=>{
+  //   const response = await apiGetCoupon({
+      
+  //   });
+  // }
   return (
     <div
       style={{

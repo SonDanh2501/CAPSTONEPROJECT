@@ -97,7 +97,7 @@ const Contact = () => {
                   Monday - Sunday: 5am - 12pm
                 </span>
                 {/*Sub*/}
-                <span className="w-1/2 text-sm">Info@example</span>
+                <span className="w-1/2 text-sm">BookingPitch@gmail.com</span>
               </div>
             </div>
             <div className="w-1/2 flex items-center justify-center">
