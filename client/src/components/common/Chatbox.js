@@ -26,18 +26,60 @@ const steps = [
   {
     id: "issues",
     options: [
+      { value: "Booking", label: "Booking", trigger: "Booking" },
       { value: "Money", label: "Money", trigger: "Money" },
+      { value: "FAQ", label: "Question", trigger: "FAQ" },
       { value: "Checkout", label: "Checkout", trigger: "Checkout" },
     ],
   },
   {
-    id: "Money",
-    message: "Please contact to number 090909090",
+    id: "Booking",
+    message:
+      "Customers please place an order after selecting a certain course by going to that course's detail page and selecting the date and shift",
+    trigger: "Time",
+  },
+  {
+    id: "Time",
+    options: [
+      { value: "Date", label: "Date", trigger: "Date" },
+      { value: "Shift", label: "Shift", trigger: "Shift" },
+    ],
+  },
+  {
+    id: "Date",
+    message: "Select a available day then you can select a shift in that day",
     end: true,
   },
   {
+    id: "Shift",
+    message: "Select a available shift in the day you have shift, if shift haven't booked you can add that pitch to your cart",
+    end: true,
+  },
+  {
+    id: "Money",
+    message:
+      "All courts on the website will be divided into 3 prices corresponding to certain times of the day. Customers please review carefully before booking to avoid mistakes in the prices of the courts",
+    // end: true,
+    trigger: "Money_2",
+  },
+  {
+    id: "Money_2",
+    options: [
+      { value: "Money", label: "Money", trigger: "Money" },
+      { value: "FAQ", label: "Question", trigger: "FAQ" },
+      { value: "Checkout", label: "Checkout", trigger: "Checkout" },
+    ],
+    // trigger: "issues",
+  },
+  {
     id: "Checkout",
-    message: "Please contact to number 090909090",
+    message: "Current payment methods are: Cash or Zalo Pay",
+    end: true,
+  },
+  {
+    id: "FAQ",
+    message:
+      "Customers can visit the FAQ page to see some of the questions we have answered or can send questions directly to us via email.",
     end: true,
   },
 ];
