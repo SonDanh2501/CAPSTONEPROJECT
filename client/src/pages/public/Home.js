@@ -21,7 +21,7 @@ const Home = () => {
   const { newPitches } = useSelector((state) => state.pitch);
   const { categories } = useSelector((state) => state.app);
   return (
-    <div className="w-full">
+    <div className="w-full dark:bg-gray-700">
       {/* <div className="flex flex-col gap-5 w-[30%] flex-auto">
           <Sidebar></Sidebar>
         </div> */}

@@ -10,7 +10,7 @@ import Swal from "sweetalert2";
 import icons from "ultils/icons";
 import path from "ultils/path";
 import { useGetNavigation } from "ultils/constant";
-import { apiGetNotifications, apiGetUserOrderStatus } from "apis";
+import { apiGetFavoriteNotifications, apiGetNotifications, apiGetUserOrderStatus } from "apis";
 import { useTranslation } from "react-i18next";
 import { NavLink } from "react-router-dom";
 import avatar from "assets/avatarwhite.jpg";
@@ -33,7 +33,7 @@ const {
   IoReaderOutline,
   IoPersonOutline,
   IoNotificationsOutline,
-  IoNotifications ,
+  IoNotifications,
   IoMoonOutline,
   IoSunnyOutline,
   IoTimeOutline,
@@ -42,7 +42,7 @@ const {
   IoMail,
   FaXmark,
   FaBars,
-  IoEllipse ,
+  IoEllipse,
   IoChevronDown,
 } = icons;
 
@@ -99,8 +99,17 @@ const TopHeader = () => {
     }
   };
 
-  const fetnotification = async () => {
+  // Fetch Notification Data
+  const fetchNotification = async () => {
     const response = await apiGetNotifications();
+    console.log("CHECK RESPONSE", response);
+    if (response.success) {
+      setNotification(response.notification);
+    }
+  };
+  // Fetch Notification Favorite Data
+  const fetchNotificationFavorite = async () => {
+    const response = await apiGetFavoriteNotifications(current?._id);
     if (response.success) {
       setNotification(response.notification);
     }
@@ -119,8 +128,18 @@ const TopHeader = () => {
   };
 
   useEffect(() => {
-    fetnotification();
+    setTimeout(() => {
+      fetchNotification();
+    }, 500);
   }, []);
+  useEffect(() => {
+    if (isActiveNotificationTab === 1) {
+      fetchNotification();
+    }
+    if (isActiveNotificationTab === 2) {
+      fetchNotificationFavorite();
+    }
+  }, [isActiveNotificationTab]);
   useEffect(() => {
     // console.log("RERENDER ORDER")
     const setTimeoutId = setTimeout(() => {
@@ -149,7 +168,7 @@ const TopHeader = () => {
       localStorage.setItem("theme", "light");
     }
   }, [darkMode]);
-  console.log("CHECK >>> ", navigation);
+  console.log("CHECK >>> ", notification);
   return (
     <div
       className="w-full h-full justify-between flex min-h-[70px] duration-200	 
@@ -386,9 +405,19 @@ const TopHeader = () => {
           >
             <span className="text-green-700 ">
               {isHoverNotification ? (
-                <IoNotifications size={22} />
+                <span>
+                  <IoNotifications size={22} />
+                  {/* <span class="absolute flex items-center justify-center w-[18px] h-[18px] top-[15px] text-xs text-white bg-green-900  rounded-full ml-3">
+                    {order?.length || 0}
+                  </span> */}
+                </span>
               ) : (
-                <IoNotificationsOutline size={22} />
+                <span>
+                  <IoNotificationsOutline size={22} />
+                  {/* <span class="absolute flex items-center justify-center w-[18px] h-[18px] top-[15px] text-xs text-white bg-green-900  rounded-full ml-3">
+                    {order?.length || 0}
+                  </span> */}
+                </span>
               )}
             </span>
             {/*Notification Section*/}

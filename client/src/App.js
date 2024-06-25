@@ -44,6 +44,8 @@ import {
   DashboardOwner,
   CreateCouponOwn,
   ManageCouponOwn,
+  CreateNotificationOwn,
+  ManageNotificationOwn,
 } from "pages/pitchowner";
 import path from "ultils/path";
 import { getCategories } from "store/app/asyncAction";
@@ -175,6 +177,15 @@ function App() {
           <Route
             path={path.MANAGE_ORDER_PITCHOWNER}
             element={<ManageOwnerOrder />}
+          />
+          {/*Notification*/}
+          <Route
+            path={path.CREATE_NOTIFICATION_PITCHOWNER}
+            element={<CreateNotificationOwn />}
+          />
+          <Route
+            path={path.MANAGE_NOTIFICATION_PITCHOWNER}
+            element={<ManageNotificationOwn />}
           />
         </Route>
         <Route path={path.FINAL_REGISTER} element={<FinalRegister />} />

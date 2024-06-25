@@ -63,7 +63,7 @@ const Chatbox = () => {
           floating={true}
           headerTitle="Support"
         />
-      </ThemeProvider>{" "}
+      </ThemeProvider>
     </div>
   );
 };

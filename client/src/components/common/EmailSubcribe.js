@@ -4,7 +4,7 @@ const { IoIosArrowForward, FaPaperPlane } = icons;
 
 const EmailSubcribe = () => {
   return (
-    <div className="w-full flex items-center justify-center">
+    <div className="w-full flex items-center justify-center dark:bg-gray-700">
       <div className="w-[90vw] h-fit bg-bg-light py-8">
         <div className="flex flex-col items-center">
           {/*Header text*/}

@@ -34,11 +34,13 @@ const Pitch = ({ pitchData, isNew, normal, navigate, dispatch, pid }) => {
 
   const getPrice = (price_morning, price_afternoon, price_evening) => {
     if (currentHour >= 4 && currentHour < 11) {
-      return { price: price_morning };
+      // `${formatMoney(formatPrice(minPrice))} - ${formatMoney(
+      //   formatPrice(maxPrice)
+      return { price: `${formatMoney(formatPrice(price_morning))}` };
     } else if (currentHour >= 11 && currentHour < 16) {
-      return { price: price_afternoon };
+      return { price: `${formatMoney(formatPrice(price_afternoon))}` };
     } else {
-      return { price: price_evening };
+      return { price: `${formatMoney(formatPrice(price_evening))}` };
     }
   };
 
@@ -165,6 +167,7 @@ const Pitch = ({ pitchData, isNew, normal, navigate, dispatch, pid }) => {
           </button>
           {/*Icon Eyes*/}
           <button
+            onClick={(e) => handleClickOptions(e, "QUICK_VIEW")}
             className="relative flex flex-grow items-center justify-center px-1 py-1
             overflow-hidden bg-button-color-hover shadow-lg transition-all
             before:absolute 
@@ -210,7 +213,7 @@ const Pitch = ({ pitchData, isNew, normal, navigate, dispatch, pid }) => {
           </span>
           {/*Price */}
           <div className="flex items-center gap-2 pt-2">
-            <span className="text-base font-bold">
+            <span className="text-sm font-bold">
               {
                 getPrice(
                   pitchData?.price_morning,
@@ -218,6 +221,7 @@ const Pitch = ({ pitchData, isNew, normal, navigate, dispatch, pid }) => {
                   pitchData?.price_evening
                 )?.price
               }
+              <span className="ml-1">VNĐ</span>
             </span>
             <span className="bg-green-400 px-2 py-1 rounded-md text-xs tracking-tighter text-white">
               {pitchcard1}

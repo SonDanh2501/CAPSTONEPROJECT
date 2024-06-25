@@ -53,5 +53,7 @@ const path = {
   MANAGE_ORDER_PITCHOWNER: "manage-pitchowner-order",
   CREATE_COUPONOWN: "create-pitchowner-coupon",
   MANAGE_COUPONOWN: "manage-pitchowner-coupon",
+  CREATE_NOTIFICATION_PITCHOWNER: "create-pitchowner-notification",
+  MANAGE_NOTIFICATION_PITCHOWNER: "manage-pitchowner-notification",
 };
 export default path;

@@ -8,7 +8,8 @@ import { apiGetAllCategory, apiUpdateBrand, apiUpdateCouponAdmin, apiUpdateFAQ, 
 import { showModal } from "store/app/appSlice";
 import Select from "react-select";
 
-const UpdateNotification = ({ editNotification, render, setEditNotification }) => {
+
+const UpdateNotificationOwn = ({ editNotification, render, setEditNotification }) => {
   const dispatch = useDispatch();
   const [categories, setcategories] = useState(null);
   const [selectedCategories, setselectedCategories] = useState(null);
@@ -71,5 +72,4 @@ const UpdateNotification = ({ editNotification, render, setEditNotification }) =
   );
 };
 
-
-export default UpdateNotification
+export default UpdateNotificationOwn

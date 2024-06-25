@@ -1,5 +1,19 @@
 import axios from "../axios";
 
+export const apiGetNotifications = (params) =>
+  axios({
+    url: "/notification/",
+    method: "get",
+    params,
+  });
+
+
+export const apiGetFavoriteNotifications = (userId) =>
+  axios({
+    url: "/notification/favorite/" + userId,
+    method: "get",
+  });
+
 export const apiCreateNotifications = (data) =>
   axios({
     url: "/notification/",
@@ -7,15 +21,9 @@ export const apiCreateNotifications = (data) =>
     data,
   });
 
-export const apiGetNotifications = () =>
+export const apiUpdateNotification = (data, noid) =>
   axios({
-    url: "/notification/",
-    method: "get",
-  });
-
-export const apiGetFavoriteNotifications = (params) =>
-  axios({
-    url: "/notification/favorite/",
-    method: "get",
-    params,
+    url: "/notification/" + noid,
+    method: "put",
+    data,
   });
