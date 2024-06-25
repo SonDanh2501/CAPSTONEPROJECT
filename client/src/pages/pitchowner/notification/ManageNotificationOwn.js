@@ -19,11 +19,12 @@ import Swal from "sweetalert2";
 import { toast } from "react-toastify";
 // import UpdateBrand from "./UpdateBrand";
 import { FaRegEdit } from "react-icons/fa";
-import UpdateNotification from "./UpdateNotification";
-import { current } from "@reduxjs/toolkit";
+import UpdateNotificationOwn from "./UpdateNotificationOwn";
 const { AiFillStar, MdDeleteForever } = icons;
 
-const ManageNotification = () => {
+
+const ManageNotificationOwn= () => {
+  const { current } = useSelector((state) => state.user);
   const [open, setOpen] = useOutletContext();
   const navigate = useNavigate();
   const location = useLocation();
@@ -41,11 +42,11 @@ const ManageNotification = () => {
   const render = useCallback(() => {
     setUpdate(!update);
   });
-  const fetchNotification = async (params) => {
-    console.log(current);
+  const fetchNews = async (params) => {
     const response = await apiGetNotifications({
       ...params,
       limit: process.env.REACT_APP_PITCH_LIMIT,
+      owner: current._id,
     });
     console.log(response);
     if (response.success) {
@@ -82,7 +83,7 @@ const ManageNotification = () => {
 
   useEffect(() => {
     const searchParams = Object.fromEntries([...params]);
-    fetchNotification(searchParams);
+    fetchNews(searchParams);
   }, [params, update]);
 
   const handleDeleteCoupon = (fid) => {
@@ -108,7 +109,7 @@ const ManageNotification = () => {
     >
       {editNotification && (
         <div className="absolute inset-0 win-h-screen bg-gray-100 z-50">
-          <UpdateNotification
+          <UpdateNotificationOwn
              editNotification={editNotification}
              setEditNotification={setEditNotification}
              render={render}
@@ -185,4 +186,5 @@ const ManageNotification = () => {
   );
 };
 
-export default ManageNotification
+
+export default ManageNotificationOwn

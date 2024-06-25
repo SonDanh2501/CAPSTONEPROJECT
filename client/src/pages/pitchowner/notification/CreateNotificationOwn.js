@@ -7,7 +7,8 @@ import { toast } from "react-toastify";
 import { apiCreateNews, apiCreateNotifications } from "apis";
 import { showModal } from "store/app/appSlice";
 import { useOutletContext } from "react-router-dom";
-const CreateNotification = () => {
+
+const CreateNotificationOwn = () => {
   const { isLoggedIn, current, mes, isUpdateCart } = useSelector(
     (state) => state.user
   );
@@ -72,4 +73,4 @@ const CreateNotification = () => {
   );
 };
 
-export default CreateNotification;
+export default CreateNotificationOwn

@@ -9,7 +9,7 @@ import Map, {
 } from "react-map-gl";
 import "mapbox-gl/dist/mapbox-gl.css";
 
-const MapBox = () => {
+const MapBox = ({ longitude, latitude }) => {
   const [lng, setLng] = useState(106.77194528140673);
   const [lat, setLat] = useState(10.85082205553165);
 
@@ -21,7 +21,6 @@ const MapBox = () => {
       address:
         "01 Võ Văn Ngân, Linh Chiểu, Thủ Đức, Thành phố Hồ Chí Minh, Việt Nam",
     },
- 
   ];
   useEffect(() => {
     let newaddressdata = [];
@@ -53,13 +52,12 @@ const MapBox = () => {
     <Map
       mapboxAccessToken="pk.eyJ1Ijoic29uZGFuaCIsImEiOiJjbHdybjV2b2owMm53MnFwcmpjbnE5OGZtIn0.0A1izf6qM7jX3iFkHt4_HQ"
       style={{
-      
         width: "100%",
         // borderRadius: "",
       }}
       initialViewState={{
-        longitude: lng,
-        latitude: lat,
+        longitude: longitude ? longitude : lng,
+        latitude: latitude ? latitude : lat,
         zoom: 13,
       }}
       //   10.85082205553165, 106.77194528140673
@@ -67,22 +65,19 @@ const MapBox = () => {
     >
       *{" "}
       <Popup
-        longitude={lng}
-        latitude={lat}
+        longitude={longitude ? longitude : lng}
+        latitude={latitude ? latitude : lat}
         closeButton={true}
         closeOnClick={true}
         anchor="top-right"
       >
         <div>
-          <span>
+          <span className="font-bold">
             01 Võ Văn Ngân, Linh Chiểu, Thủ Đức, Thành phố Hồ Chí Minh, Việt Nam
           </span>
         </div>
       </Popup>
-      <Marker longitude={lng} latitude={lat}></Marker>
-      {/* {addressMarker?.map((el) => (
-        <Marker longitude={el?.longitude} latitude={el?.latitude}></Marker>
-      ))} */}
+      <Marker longitude={longitude ? longitude : lng} latitude={latitude ? latitude : lat}></Marker>
       <NavigationControl position="bottom-right" />
       <GeolocateControl />
       <FullscreenControl />

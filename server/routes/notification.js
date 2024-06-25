@@ -4,6 +4,7 @@ const { verifyAccessToken, isAdmin, isAdminAndPitchOwn } = require("../middlewar
 const uploader = require("../config/cloudinaryconfig");
 
 router.post("/", [verifyAccessToken, isAdminAndPitchOwn], ctrls.createNotfication);
-router.get("/", verifyAccessToken, ctrls.getAllNotification);
+router.get("/", [verifyAccessToken, isAdminAndPitchOwn], ctrls.getAllNotification);
+
 
 module.exports = router;

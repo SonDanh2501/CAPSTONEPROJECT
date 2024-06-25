@@ -45,6 +45,7 @@ const CreatePitch = () => {
       }
       dispatch(showModal({ isShowModal: true, modalChildren: <Loading /> }));
       window.scrollTo(0, 0);
+      console.log(formData);
       const response = await apiCreatePitch(formData);
       dispatch(showModal({ isShowModal: false, modalChildren: null }));
       if (response.success) {
@@ -241,6 +242,25 @@ const CreatePitch = () => {
               disable={true}
             />
           </div>
+          {/*Long and Last Location */}
+          <div className="w-full pb-5 mt-10 flex gap-4">
+            <InputForm
+              label="Longitude"
+              register={register}
+              errors={errors}
+              id="longitude"
+              style="flex-1"
+              placeholder="Longitude location"
+            />
+            <InputForm
+              label="Latitude"
+              register={register}
+              errors={errors}
+              id="latitude"
+              style="flex-1"
+              placeholder="Latitude location"
+            />
+          </div>
           <div className="w-full pt-10">
             <MarkDownEditor
               name="description"
@@ -250,7 +270,6 @@ const CreatePitch = () => {
               setInvalidFields={setInvalidFields}
             />
           </div>
-
           <div className="flex flex-col gap-2 mt-8">
             <label className="font-semibold" htmlFor="thumb">
               Upload thumb

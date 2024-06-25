@@ -104,6 +104,8 @@ const UpdatePitch = ({ editPitch, render, setEditPitch }) => {
       address: editPitch?.address || "",
       category: editPitch?.category || "",
       brand: editPitch?.brand || "",
+      longitude: editPitch?.longitude || "",
+      latitude: editPitch?.latitude || "",
     });
     setPayload({
       description:
@@ -201,6 +203,25 @@ const UpdatePitch = ({ editPitch, render, setEditPitch }) => {
               }}
               style="flex-1"
               placeholder="Address of new pitch"
+            />
+          </div>
+          {/*Long and Last Location */}
+          <div className="w-full pb-5 mt-10 flex gap-4">
+            <InputForm
+              label="Longitude"
+              register={register}
+              errors={errors}
+              id="longitude"
+              style="flex-1"
+              placeholder="Longitude location"
+            />
+            <InputForm
+              label="Latitude"
+              register={register}
+              errors={errors}
+              id="latitude"
+              style="flex-1"
+              placeholder="Latitude location"
             />
           </div>
           <div className="w-full pt-5 ">

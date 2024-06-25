@@ -16,7 +16,7 @@ const Wishlist = () => {
   }, [wishList]);
 
   return (
-    <div className="w-full relative px-6">
+    <div className="w-[80vw] relative px-6">
       <header className="ml-2 py-4 border-b-2 border-gray-300 text-2xl font-bold tracking-tight">
         Personal Wishlist
       </header>

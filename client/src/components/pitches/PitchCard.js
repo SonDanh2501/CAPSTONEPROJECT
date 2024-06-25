@@ -147,7 +147,7 @@ const PitchCard = ({
           </span>
           {/*Price */}
           <div className="flex items-center gap-2 pt-2">
-            <span className="text-base font-bold">
+            <span className="text-sm font-bold">
               {getPrice(price_morning, price_afternoon, price_evening)?.price}
             </span>
             <span className="bg-green-400 px-2 py-1 rounded-md text-xs tracking-tighter text-white">

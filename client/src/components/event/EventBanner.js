@@ -13,7 +13,7 @@ const EventBanner = () => {
       style={{
         background: "linear-gradient( #FFFFFF 50%, #EEF1E4 50%)",
       }}
-      className="w-full  flex items-center justify-center "
+      className="w-full  flex items-center justify-center dark:bg-gray-700"
     >
       <div className="w-[90vw] h-full overflow-hidden relative ">
         <img

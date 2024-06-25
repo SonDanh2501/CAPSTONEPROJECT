@@ -513,6 +513,22 @@ export const useGetpitchOwnerSideBar = () => {
         },
       ],
     },
+    {
+      id: 6,
+      type: "PARENT",
+      text: "Notification",
+      icon: <IoNotificationsOutline />,
+      submenu: [
+        {
+          text: "Create Notification",
+          path: `/${path.PITCHOWNER}/${path.CREATE_NOTIFICATION_PITCHOWNER}`,
+        },
+        {
+          text: "Manage Notification",
+          path: `/${path.PITCHOWNER}/${path.MANAGE_NOTIFICATION_PITCHOWNER}`,
+        },
+      ],
+    },
   ];
 };
 export const useGetmemberSidebar = () => {

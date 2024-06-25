@@ -8,6 +8,8 @@ const createPitch = asyncHandler(async (req, res) => {
     title,
     description,
     address,
+    longitude,
+    latitude,
     brand,
     price_morning,
     price_evening,
@@ -15,6 +17,7 @@ const createPitch = asyncHandler(async (req, res) => {
     category,
     owner,
   } = req.body;
+  console.log("CHECK DATA >>> ", req.body);
   const thumb = req?.files?.thumb[0]?.path;
   const images = req.files?.images?.map((el) => el.path);
   if (
@@ -22,21 +25,15 @@ const createPitch = asyncHandler(async (req, res) => {
     !description ||
     !address ||
     !price_morning ||
+    !longitude ||
+    !latitude ||
+    !price_evening ||
+    !price_afternoon ||
     !category ||
     !owner ||
     !brand
   )
     throw new Error("Missing inputs");
-  // const findingBrand = await Brand.find({ title: { $regex: brand, $options: "i" } })
-  const findingBrand = await Brand.find({
-    title: { $regex: brand, $options: "i" },
-  });
-
-  // const checktest = await Brand.findByIdAndUpdate(
-  //   findingBrand[0]?._id,
-  //   { totalPitch: findingBrand[0]?.totalPitch + 1 },
-  //   { new: true }
-  // );
   req.body.slug = slugify(title);
   if (thumb) req.body.thumb = thumb;
   if (images) req.body.images = images;

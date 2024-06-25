@@ -197,7 +197,7 @@ const Login = () => {
     <div className="grid grid-cols-1 md:grid-cols-2 h-screen w-full relative">
       {isVerifiedEmail && (
         <div className="absolute top-0 left-0 right-0 bottom-0 bg-overlay z-50 flex flex-col justify-center items-center">
-          <div className="bg-white w-[500px] rounded-md p-8">
+          <div className="bg-white w-[400px] rounded-md p-8">
             <h4 className="">Please check your mail and enter your code:</h4>
             <input
               type="text"
@@ -215,7 +215,7 @@ const Login = () => {
         </div>
       )}
       {isForgotPassword && (
-        <div className="absolute animate-slide-right top-0 left-0 bottom-0 right-0 bg-gradient-to-r from-login to-login-2 flex flex-col items-center py-8 z-50">
+        <div className="absolute animate-slide-right top-0 left-0 bottom-0 right-0 bg-gradient-to-r from-login-1 to-login-2 flex flex-col items-center py-8 z-50">
           <div className="flex flex-col gap-4">
             <label htmlFor="email" className="text-white">
               Enter your email:

@@ -17,7 +17,7 @@ const News = () => {
     fetchNews({ sort: "createdAt" });
   }, []);
   return (
-    <div className="w-full flex flex-col items-center">
+    <div className="w-full flex flex-col items-center dark:bg-gray-700">
       <div className="text-3xl md:text-[50px] font-semibold text-center">
         {/*Header */}
         <span className=" text-font-normal">

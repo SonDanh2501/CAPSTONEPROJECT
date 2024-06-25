@@ -243,7 +243,7 @@ const DetailPitches = ({ isQuickView, data }) => {
   useEffect(() => {
     fetchBooking();
   }, [selectedDate]);
-
+console.log("SAN", pitch);
   return (
     <div className="flex flex-col items-center justify-center w-full">
       {/*BreadCrumb*/}
@@ -448,7 +448,7 @@ const DetailPitches = ({ isQuickView, data }) => {
       <div className="flex w-[85vw] h-[475px] gap-7 mt-20 mb-8">
         {/*Map*/}
         <div className="w-1/2">
-          <MapBox />
+          <MapBox longitude={pitch?.longitude} latitude={pitch?.latitude} />
         </div>
         {/*Comment*/}
         <div className="w-1/2 border-b border-green-600/30 overflow-hidden overflow-y-auto">

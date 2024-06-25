@@ -22,6 +22,14 @@ var pitchSchema = new mongoose.Schema(
       type: Array,
       required: true,
     },
+    longitude: {
+      type: String,
+      required: true,
+    },
+    latitude: {
+      type: String,
+      required: true,
+    },
     brand: {
       type: String,
       // required: true,

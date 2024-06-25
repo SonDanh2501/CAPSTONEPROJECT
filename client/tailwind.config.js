@@ -19,7 +19,7 @@ module.exports = {
         "dark-purple": "#081A51",
         "light-white": "rgba(255,255,255,0.18)",
         orange: "#F28123",
-        "login-1": "#769D27",
+        "login-1": "#A2C765",
         "login-2": "#5B7B13",
         "dash-board": "#F1F5F9",
         io1: "#DBEAFE",
