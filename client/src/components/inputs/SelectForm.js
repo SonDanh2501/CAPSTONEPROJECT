@@ -1,7 +1,7 @@
 import React, { memo } from "react";
 import clsx from "clsx";
 
-const Select = ({
+const SelectForm = ({
   label,
   options = [],
   register,
@@ -48,4 +48,4 @@ const Select = ({
   );
 };
 
-export default memo(Select);
+export default memo(SelectForm);
