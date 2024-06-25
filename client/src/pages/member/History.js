@@ -128,7 +128,7 @@ const History = () => {
                 <td className="text-center px-2 py-2">{el.pitch.title}</td>
                 <td className="text-center px-2 py-2">
                   <span className="bg-gray-500/25 rounded-md p-2">
-                    {`${formatMoney(formatPrice(el.pitch.price))} VNĐ`}
+                    {`${formatMoney(formatPrice(el.total))} VNĐ`}
                   </span>
                 </td>
                 <td className="text-center px-2 py-2">
