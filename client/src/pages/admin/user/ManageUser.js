@@ -1,6 +1,6 @@
 import React, { useEffect, useState, useCallback } from "react";
 import { useTranslation } from "react-i18next";
-// import { Select as RoleSelect } from "react-select";
+import Select from "react-select";
 import {
   useSearchParams,
   createSearchParams,
@@ -21,7 +21,7 @@ import { roles, blockStatus } from "ultils/constant";
 import icons from "ultils/icons";
 import useDebounce from "hooks/useDebounce";
 
-import { Pagination, InputForm, Select, Button } from "components";
+import { Pagination, InputForm, SelectForm, Button } from "components";
 
 import moment from "moment";
 import Swal from "sweetalert2";
@@ -106,7 +106,10 @@ const ManageUser = () => {
     if (queryDebounce) {
       navigate({
         pathname: location.pathname,
-        search: createSearchParams({ q: queryDebounce }).toString(),
+        search: createSearchParams({
+          q: queryDebounce,
+          role: selectedRole,
+        }).toString(),
       });
     } else {
       if (!editUser)
@@ -114,7 +117,7 @@ const ManageUser = () => {
           pathname: location.pathname,
         });
     }
-  }, [queryDebounce]);
+  }, [queryDebounce, selectedRole]);
 
   useEffect(() => {
     const searchParams = Object.fromEntries([...params]);
@@ -123,8 +126,9 @@ const ManageUser = () => {
   }, [params, update, selectedRole]);
 
   const options = [
-    { code: 0, value: "Pitch Owner" },
-    { code: 1, value: "User" },
+    { value: 4, label: "All" },
+    { value: 0, label: "Pitch Owner" },
+    { value: 1, label: "User" },
   ];
   console.log(selectedRole);
   return (
@@ -144,17 +148,20 @@ const ManageUser = () => {
               errors={errors}
               fullWidth
               transform
-              placeholder={t(`Search user by email, name, ...`)}
+              placeholder={t(`Search user by email,name...`)}
             />
           </form>
 
-          {/* <div className="w-[300px]">
-            <RoleSelect
+          <div className="w-[300px]">
+            <Select
+              placeholder="All"
               defaultValue={selectedRole}
-              onChange={}
               options={options}
+              onChange={(selectedOptions) => {
+                setSelectedRole(selectedOptions.value);
+              }}
             />
-          </div> */}
+          </div>
         </div>
         <form onSubmit={handleSubmit(handleUpdate)}>
           <table className="table-auto w-full ">
@@ -238,7 +245,7 @@ const ManageUser = () => {
                    */}
                   <td className="text-center px-2 py-2">
                     {editUser?._id === el._id ? (
-                      <Select
+                      <SelectForm
                         register={register}
                         fullWidth
                         errors={errors}
@@ -254,7 +261,7 @@ const ManageUser = () => {
                   </td>
                   <td className="text-center">
                     {editUser?._id === el._id ? (
-                      <Select
+                      <SelectForm
                         register={register}
                         fullWidth
                         errors={errors}

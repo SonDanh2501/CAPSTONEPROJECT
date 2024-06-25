@@ -56,7 +56,6 @@ const ManagePitchOwn = () => {
 
   const queryDebounce = useDebounce(watch("q"), 800);
 
-
   useEffect(() => {
     if (queryDebounce) {
       navigate({
@@ -131,7 +130,9 @@ const ManagePitchOwn = () => {
               <th className="text-center">Address</th>
               <th className="text-center">Brand</th>
               <th className="text-center w-[170px]">Category</th>
-              <th className="text-center w-[110px]">Price</th>
+              <th className="text-center w-[110px]">Price Morning</th>
+              <th className="text-center w-[110px]">Price Afternoon</th>
+              <th className="text-center w-[110px]">Price Evening</th>
               <th className="text-center">Ratings</th>
               <th className="text-center">Create At</th>
               <th className="text-center rounded-tr-lg">Actions</th>
@@ -190,7 +191,13 @@ const ManagePitchOwn = () => {
                   </span>
                 </td>
                 <td className="text-center">
-                  {`${formatMoney(formatPrice(el?.price))} VNĐ`}
+                  {`${formatMoney(formatPrice(el?.price_morning))} `}
+                </td>
+                <td className="text-center">
+                  {`${formatMoney(formatPrice(el?.price_afternoon))} `}
+                </td>
+                <td className="text-center">
+                  {`${formatMoney(formatPrice(el?.price_evening))} `}
                 </td>
                 <td className="text-center">
                   <div className="flex items-center justify-center ">
