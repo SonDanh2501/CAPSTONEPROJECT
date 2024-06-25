@@ -168,14 +168,14 @@ const Checkout = () => {
             <span className="italic ">Zalopay</span>
             <FaMoneyBillWave className="ml-2" />
           </button>
-          <Paypal
+          {/* <Paypal
             payload={{ order: order }}
             setIsSuccess={setIsSuccess}
             amount={Math.round(
               order?.reduce((sum, el) => sum + Number(el.pitch?.price), 0) /
               23500
             )}
-          />
+          /> */}
         </div>
       </div>
     </div>

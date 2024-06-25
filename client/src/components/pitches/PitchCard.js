@@ -48,6 +48,11 @@ const PitchCard = ({
     <div
       onMouseEnter={() => setIsHover(true)}
       onMouseLeave={() => setIsHover(false)}
+      onClick={(e) =>
+        navigate(
+          `/${category?.toLowerCase()}/${brand?.toLowerCase()}/${pid}/${title}`
+        )
+      }
       className="my-4 bg-gradient-to-r h-[390px] from-white to-gray-100 text-gray-700 border border-green-700 overflow-hidden hover:shadow-2xl hover:shadow-gray-500 duration-300"
     >
       <div className="relative h-3/5">
@@ -69,9 +74,7 @@ const PitchCard = ({
           }`}
         >
           <button className="flex items-center justify-center w-5/6 gap-2 py-2.5 relative overflow-hidden bg-button-color text-white transition-all before:absolute before:bottom-0 before:left-0 before:top-0 before:z-0 before:h-full before:w-0 before:bg-button-color-hover before:transition-all before:duration-500 hover:text-black hover:before:left-0 hover:before:w-full">
-            <Link
-              to={`/${category}/${brand}/${pid}/${title}`}
-            >
+            <Link to={`/${category}/${brand}/${pid}/${title}`}>
               <span className="relative text-sm font-semibold">Detail</span>
             </Link>
             <span className="relative ">
