@@ -161,15 +161,21 @@ const Checkout = () => {
             <span className="italic ">Pay By Cash</span>
             <FaMoneyBillWave className="ml-2" />
           </button>
-
-          <Paypal
+          <button
+            className="bg-blue-700 w-[200px] h-[35px] rounded-md font-bold flex items-center justify-center m-3 text-white hover:text-blue-800 hover:bg-blue-300 duration-300 "
+            onClick={() => handlePayByZaloPay()}
+          >
+            <span className="italic ">Zalopay</span>
+            <FaMoneyBillWave className="ml-2" />
+          </button>
+          {/* <Paypal
             payload={{ order: order }}
             setIsSuccess={setIsSuccess}
             amount={Math.round(
               order?.reduce((sum, el) => sum + Number(el.pitch?.price), 0) /
               23500
             )}
-          />
+          /> */}
         </div>
       </div>
     </div>
