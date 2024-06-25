@@ -5,7 +5,7 @@ import { renderStarFromNumber } from "ultils/helper";
 import icons from "ultils/icons";
 import SelectOption from "components/search/SelectOption";
 import { useTranslation } from "react-i18next";
-
+import { Link } from "react-router-dom";
 const {
   BsFillSuitHeartFill,
   AiFillEye,
@@ -69,7 +69,11 @@ const PitchCard = ({
           }`}
         >
           <button className="flex items-center justify-center w-5/6 gap-2 py-2.5 relative overflow-hidden bg-button-color text-white transition-all before:absolute before:bottom-0 before:left-0 before:top-0 before:z-0 before:h-full before:w-0 before:bg-button-color-hover before:transition-all before:duration-500 hover:text-black hover:before:left-0 hover:before:w-full">
-            <span className="relative text-sm font-semibold">Add to Cart</span>
+            <Link
+              to={`/${category}/${brand}/${pid}/${title}`}
+            >
+              <span className="relative text-sm font-semibold">Detail</span>
+            </Link>
             <span className="relative ">
               <IoArrowForwardOutline />
             </span>
@@ -82,7 +86,7 @@ const PitchCard = ({
           }`}
         >
           {/*Icon Heart*/}
-          <button
+          {/* <button
             className="relative flex flex-grow items-center justify-center px-1 py-1
             overflow-hidden bg-button-color-hover shadow-lg transition-all
             before:absolute 
@@ -99,9 +103,9 @@ const PitchCard = ({
             <span className="relative z-10">
               <IoHeartOutline />
             </span>
-          </button>
+          </button> */}
           {/*Icon Eyes*/}
-          <button
+          {/* <button
             className="relative flex flex-grow items-center justify-center px-1 py-1
             overflow-hidden bg-button-color-hover shadow-lg transition-all
             before:absolute 
@@ -118,7 +122,7 @@ const PitchCard = ({
             <span className="relative z-10">
               <IoEyeOutline />
             </span>
-          </button>
+          </button> */}
         </div>
       </div>
       {/*Content */}

@@ -6,8 +6,7 @@ import { formatMoney } from "ultils/helper";
 import { renderStarFromNumber } from "ultils/helper";
 import CountDown from "components/common/CountDown";
 import ImageSlider from "components/common/ImageSlider";
-
-
+import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 
@@ -82,8 +81,8 @@ const DealDaily = () => {
       {/*Sub text */}
       <div className="w-full lg:w-[40vw] text-sm py-6 px-4 flex">
         <span className="text-font-normal text-center">
-          Don't miss our SALE: Save up to 50% on select items! This offer is for
-          a limited time only. Hurry and shop your favorite items now
+          Don't miss our OFFER:This offer is for a limited time only. Hurry and
+          book your favorite items now
         </span>
       </div>
       {/*Content*/}
@@ -108,7 +107,12 @@ const DealDaily = () => {
               {dealdaily?.address}
             </span>
             <button className="flex items-center justify-center gap-2 px-8 py-3 relative overflow-hidden bg-white text-black transition-all before:absolute before:bottom-0 before:left-0 before:top-0 before:z-0 before:h-full before:w-0 before:bg-emerald-800 before:transition-all before:duration-500 hover:text-white hover:before:left-0 hover:before:w-full">
-              <span className="relative uppercase text-sm">VIEW MORE</span>
+              <Link
+                to={`/${dealdaily?.category}/${dealdaily?.brand}/${dealdaily?._id}/${dealdaily?.title}`}
+              >
+                <span className="relative uppercase text-sm">VIEW MORE</span>
+              </Link>
+
               <span className="relative">
                 <IoArrowForwardOutline />
               </span>
