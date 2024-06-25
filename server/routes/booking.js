@@ -24,6 +24,8 @@ router.get("/get-order/:userId", verifyAccessToken, ctrls.getUserBookingStatus);
 router.delete("/:bid", verifyAccessToken, ctrls.deleteBooking);
 router.get("/:userId", verifyAccessToken, ctrls.getUserBooking);
 router.post("/update", verifyAccessToken, ctrls.updateBookingWithCoupon);
+router.post("/payment", ctrls.Zalopayment);
+
 
 
 

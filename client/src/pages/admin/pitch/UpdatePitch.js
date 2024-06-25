@@ -1,5 +1,5 @@
 import React, { useCallback, useEffect, useState, memo } from "react";
-import { Button, InputForm, MarkDownEditor, Select, Loading } from "components";
+import { Button, InputForm, MarkDownEditor, SelectForm, Loading } from "components";
 import { useForm } from "react-hook-form";
 import { useSelector, useDispatch } from "react-redux";
 import { validate, getBase64 } from "ultils/helper";
@@ -159,7 +159,7 @@ const UpdatePitch = ({ editPitch, render, setEditPitch }) => {
               placeholder="Price of new pitch"
               type="number"
             />
-            <Select
+            <SelectForm
               label="Category"
               options={categories?.map((el) => ({
                 code: el.title,
