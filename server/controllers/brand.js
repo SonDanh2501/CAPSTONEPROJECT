@@ -124,15 +124,18 @@ const updateBrand = asyncHandler(async (req, res) => {
 });
 const deleteBrand = asyncHandler(async (req, res) => {
   const { bid } = req.params;
-
   // find old title
   const deletedBrand = await Brand.findById(bid);
+
   // delete pitch
-  const deletedPitch = await Pitch.findOne({ brand: deleteBrand.title });
+  const deletedPitch = await Pitch.findOne({ brand: deletedBrand.title });
+
   if (deletedPitch) {
     await Pitch.deleteMany({ brand: deletedBrand.title });
   }
+
   const deletedTitle = deletedBrand.title;
+
   // update pitchCategory
   const categories = deletedBrand.categories;
   await Promise.all(
